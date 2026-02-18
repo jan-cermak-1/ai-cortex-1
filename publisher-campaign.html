@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Publisher Campaign — Cortex AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="soul-tokens.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="app" id="app">
+  <div class="screen active" id="screen-campaign-setup">
+
+    <div class="main-content" style="background: var(--color-layer-level-0);">
+      <!-- Dialog Bar — Figma: 7946:13490, 60px, white, border-bottom, px-24 -->
+      <div class="campaign-header">
+        <!-- Left: close button + name -->
+        <div class="campaign-header-left">
+          <button class="btn btn-m btn-ghost btn-icon" onclick="window.location.href='command-center.html'" title="Close">
+            <svg viewBox="0 0 36 36" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" clip-rule="evenodd" d="M18.0001 16.5859L26.293 8.29297L27.7072 9.70718L19.4143 18.0001L27.7072 26.293L26.293 27.7072L18.0001 19.4143L9.70718 27.7072L8.29297 26.293L16.5859 18.0001L8.29297 9.70718L9.70718 8.29297L18.0001 16.5859Z"/></svg>
+          </button>
+          <div class="campaign-header-info">
+            <div class="campaign-name">Labubu</div>
+            <div class="campaign-dates">Monday, Jan 12 - Monday, Jan 25, 2026</div>
+          </div>
+        </div>
+        <!-- Center: Tabs — border-bottom aligned with header bottom -->
+        <div class="campaign-tabs">
+          <div class="campaign-tab active">Setup</div>
+          <div class="campaign-tab">Brief</div>
+        </div>
+        <!-- Right: action buttons -->
+        <div class="campaign-header-right">
+          <button class="btn btn-m btn-invisible" onclick="void(0)">
+            <!-- Soul: Bin/Remove icon -->
+            <svg viewBox="0 0 36 36" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" clip-rule="evenodd" d="M13 4C12.4477 4 12 4.44772 12 5V7H8V9H9V28C9 29.6569 10.3431 31 12 31H24C25.6569 31 27 29.6569 27 28V9H28V7H24V5C24 4.44772 23.5523 4 23 4H13ZM14 7H22V6H14V7ZM11 9H25V28C25 28.5523 24.5523 29 24 29H12C11.4477 29 11 28.5523 11 28V9ZM15 13V25H17V13H15ZM19 13V25H21V13H19Z"/></svg>
+            <span class="btn-content">Delete campaign</span>
+          </button>
+          <button class="btn btn-m btn-primary"><span class="btn-content">Save and close</span></button>
+        </div>
+      </div>
+
+      <!-- Campaign Body — scrollable, centered 680px -->
+      <div class="campaign-body">
+        <div class="campaign-form">
+          <!-- CAMPAIGN section — Accordion box -->
+          <div class="form-section">
+            <div class="form-section-header">
+              <div class="form-section-title">
+                <!-- Soul: Campaign icon -->
+                <svg viewBox="0 0 36 36" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" clip-rule="evenodd" d="M7 6C5.34315 6 4 7.34315 4 9V25C4 26.6569 5.34315 28 7 28H29C30.6569 28 32 26.6569 32 25V13C32 11.3431 30.6569 10 29 10H19.2361C17.4869 10 15.8878 9.01173 15.1056 7.44721C14.6621 6.56027 13.7556 6 12.7639 6H7ZM2 9C2 6.23858 4.23858 4 7 4H12.7639C14.5131 4 16.1122 4.98827 16.8944 6.55279C17.3379 7.43973 18.2444 8 19.2361 8H29C31.7614 8 34 10.2386 34 13V25C34 27.7614 31.7614 30 29 30H7C4.23858 30 2 27.7614 2 25V9ZM12 10H6V8H12V10ZM22 16C22 14.8954 22.8954 14 24 14H28V16H24V22H28V24H24C22.8954 24 22 23.1046 22 22V16Z"/></svg>
+                CAMPAIGN
+              </div>
+            </div>
+            <div class="form-section-content">
+              <!-- Name + Color row -->
+              <div class="form-row">
+                <div class="input-field" style="flex:1;">
+                  <div class="input-title">
+                    <label class="field-label">Name</label>
+                    <span class="field-counter">85</span>
+                  </div>
+                  <div class="input-box">
+                    <input type="text" value="Labubu">
+                  </div>
+                </div>
+                <div class="input-field color-field">
+                  <div class="input-title">
+                    <label class="field-label">Color</label>
+                  </div>
+                  <div class="color-trigger">
+                    <div class="color-circle"></div>
+                    <svg viewBox="0 0 36 36" fill="var(--color-on-layer-secondary)" width="18" height="18"><path fill-rule="evenodd" clip-rule="evenodd" d="M28.7072 14.7072L18.0001 25.4143L7.29297 14.7072L8.70718 13.293L18.0001 22.5859L27.293 13.293L28.7072 14.7072Z"/></svg>
+                  </div>
+                </div>
+              </div>
+              <!-- Dates row -->
+              <div class="form-row">
+                <div class="input-field" style="flex:1;">
+                  <div class="input-title">
+                    <label class="field-label">Start date</label>
+                  </div>
+                  <div class="select-box">
+                    <span class="select-value">May 12, 2026</span>
+                    <!-- Soul: Calendar/Datepicker icon -->
+                    <svg viewBox="0 0 36 36" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2V6H24V2H26V6H29C31.2091 6 33 7.79086 33 10V29C33 31.2091 31.2091 33 29 33H7C4.79086 33 3 31.2091 3 29V10C3 7.79086 4.79086 6 7 6H10V2H12ZM24 8H12V10H10V8H7C5.89543 8 5 8.89543 5 10V14H31V10C31 8.89543 30.1046 8 29 8H26V10H24V8ZM31 16H5V29C5 30.1046 5.89543 31 7 31H29C30.1046 31 31 30.1046 31 29V16Z"/></svg>
+                  </div>
+                </div>
+                <div class="input-field" style="flex:1;">
+                  <div class="input-title">
+                    <label class="field-label">End date</label>
+                  </div>
+                  <div class="select-box">
+                    <span class="select-value">May 25, 2026</span>
+                    <svg viewBox="0 0 36 36" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2V6H24V2H26V6H29C31.2091 6 33 7.79086 33 10V29C33 31.2091 31.2091 33 29 33H7C4.79086 33 3 31.2091 3 29V10C3 7.79086 4.79086 6 7 6H10V2H12ZM24 8H12V10H10V8H7C5.89543 8 5 8.89543 5 10V14H31V10C31 8.89543 30.1046 8 29 8H26V10H24V8ZM31 16H5V29C5 30.1046 5.89543 31 7 31H29C30.1046 31 31 30.1046 31 29V16Z"/></svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- UNIQUE ID section — Figma: 7946:13494 -->
+          <div class="form-section form-section--padded">
+            <div class="form-section-title">
+              <!-- Soul: Value/UniqueID icon -->
+              <svg viewBox="0 0 36 36" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 6C7.34315 6 6 7.34315 6 9V10H30V9C30 7.34315 28.6569 6 27 6H9ZM30 12H6V27C6 28.6569 7.34315 30 9 30H27C28.6569 30 30 28.6569 30 27V12ZM4 9C4 6.23858 6.23858 4 9 4H27C29.7614 4 32 6.23858 32 9V27C32 29.7614 29.7614 32 27 32H9C6.23858 32 4 29.7614 4 27V9ZM24 16H28V18H24V16ZM16 21C16 19.6034 15.0449 18.4275 13.7507 18.0944L14.2493 16.1575C16.4056 16.7125 18 18.6688 18 21C18 23.7614 15.7614 26 13 26C10.2386 26 8 23.7614 8 21H10C10 22.6568 11.3431 24 13 24C14.6569 24 16 22.6568 16 21ZM22 20L28 20L28 22L22 22L22 20ZM24 24H28V26H24V24Z"/></svg>
+              UNIQUE ID
+              <!-- Help icon -->
+              <svg viewBox="0 0 36 36" fill="var(--color-on-layer-secondary)" width="18" height="18"><path fill-rule="evenodd" clip-rule="evenodd" d="M18 4C10.268 4 4 10.268 4 18C4 25.732 10.268 32 18 32C25.732 32 32 25.732 32 18C32 10.268 25.732 4 18 4ZM2 18C2 9.16344 9.16344 2 18 2C26.8366 2 34 9.16344 34 18C34 26.8366 26.8366 34 18 34C9.16344 34 2 26.8366 2 18ZM16 10C16 8.89543 16.8954 8 18 8C19.1046 8 20 8.89543 20 10C20 11.1046 19.1046 12 18 12C16.8954 12 16 11.1046 16 10ZM17 18H15V16H19V25H22V27H14V25H17V18Z"/></svg>
+            </div>
+            <div class="form-description">This unique ID cannot be changed once the campaign is created.</div>
+            <div class="input-box">
+              <input type="text" value="KJSJHGSFJHGFDJHGFHJDSG893">
+            </div>
+          </div>
+
+          <!-- CONTENT LABELS section — Figma: 7946:13495 -->
+          <div class="form-section form-section--padded">
+            <div class="content-labels-row">
+              <div class="form-section-title" style="margin-bottom:0;">
+                <!-- Soul: Label content icon -->
+                <svg viewBox="0 0 36 36" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" clip-rule="evenodd" d="M16.5858 1.99985C17.3668 1.2188 18.6332 1.2188 19.4142 1.99985L28.5355 11.1212C29.4732 12.0589 30 13.3306 30 14.6567V28.9998C30 31.7613 27.7614 33.9999 25 33.9999H11C8.23858 33.9999 6 31.7613 6 28.9998V14.6567C6 13.3306 6.52679 12.0588 7.46447 11.1212L16.5858 1.99985ZM18 3.41406L8.87868 12.5354C8.31607 13.098 8 13.8611 8 14.6567V28.9998C8 30.6567 9.34315 31.9998 11 31.9998H25C26.6569 31.9998 28 30.6567 28 28.9998V14.6567C28 13.8611 27.6839 13.098 27.1213 12.5354L18 3.41406ZM18 9.99985C19.1046 9.99985 20 10.8953 20 11.9998C20 13.1044 19.1046 13.9998 18 13.9998C16.8954 13.9998 16 13.1044 16 11.9998C16 10.8953 16.8954 9.99985 18 9.99985ZM24 25.9998V27.9998H12V25.9998H24Z"/></svg>
+                CONTENT LABELS
+                <!-- Help icon -->
+                <svg viewBox="0 0 36 36" fill="var(--color-on-layer-secondary)" width="18" height="18"><path fill-rule="evenodd" clip-rule="evenodd" d="M18 4C10.268 4 4 10.268 4 18C4 25.732 10.268 32 18 32C25.732 32 32 25.732 32 18C32 10.268 25.732 4 18 4ZM2 18C2 9.16344 9.16344 2 18 2C26.8366 2 34 9.16344 34 18C34 26.8366 26.8366 34 18 34C9.16344 34 2 26.8366 2 18ZM16 10C16 8.89543 16.8954 8 18 8C19.1046 8 20 8.89543 20 10C20 11.1046 19.1046 12 18 12C16.8954 12 16 11.1046 16 10ZM17 18H15V16H19V25H22V27H14V25H17V18Z"/></svg>
+              </div>
+              <a href="#" class="add-label-link">
+                <!-- Soul: Label content icon (smaller) -->
+                <svg viewBox="0 0 36 36" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" clip-rule="evenodd" d="M16.5858 1.99985C17.3668 1.2188 18.6332 1.2188 19.4142 1.99985L28.5355 11.1212C29.4732 12.0589 30 13.3306 30 14.6567V28.9998C30 31.7613 27.7614 33.9999 25 33.9999H11C8.23858 33.9999 6 31.7613 6 28.9998V14.6567C6 13.3306 6.52679 12.0588 7.46447 11.1212L16.5858 1.99985ZM18 3.41406L8.87868 12.5354C8.31607 13.098 8 13.8611 8 14.6567V28.9998C8 30.6567 9.34315 31.9998 11 31.9998H25C26.6569 31.9998 28 30.6567 28 28.9998V14.6567C28 13.8611 27.6839 13.098 27.1213 12.5354L18 3.41406ZM18 9.99985C19.1046 9.99985 20 10.8953 20 11.9998C20 13.1044 19.1046 13.9998 18 13.9998C16.8954 13.9998 16 13.1044 16 11.9998C16 10.8953 16.8954 9.99985 18 9.99985ZM24 25.9998V27.9998H12V25.9998H24Z"/></svg>
+                Add content label
+              </a>
+            </div>
+            <div class="content-labels-tags">
+              <span class="label-tag">Labubu</span>
+              <span class="label-tag">Toy</span>
+              <span class="label-tag">Europe</span>
+              <span class="label-tag label-tag--with-icon">
+                <!-- Soul: Label content group icon -->
+                <svg viewBox="0 0 36 36" fill="currentColor" width="14" height="14"><path fill-rule="evenodd" clip-rule="evenodd" d="M16.5858 1.99985C17.3668 1.2188 18.6332 1.2188 19.4142 1.99985L28.5355 11.1212C29.4732 12.0589 30 13.3306 30 14.6567V28.9998C30 31.7613 27.7614 33.9999 25 33.9999H11C8.23858 33.9999 6 31.7613 6 28.9998V14.6567C6 13.3306 6.52679 12.0588 7.46447 11.1212L16.5858 1.99985ZM18 3.41406L8.87868 12.5354C8.31607 13.098 8 13.8611 8 14.6567V28.9998C8 30.6567 9.34315 31.9998 11 31.9998H25C26.6569 31.9998 28 30.6567 28 28.9998V14.6567C28 13.8611 27.6839 13.098 27.1213 12.5354L18 3.41406ZM18 9.99985C19.1046 9.99985 20 10.8953 20 11.9998C20 13.1044 19.1046 13.9998 18 13.9998C16.8954 13.9998 16 13.1044 16 11.9998C16 10.8953 16.8954 9.99985 18 9.99985ZM24 25.9998V27.9998H12V25.9998H24Z"/></svg>
+                Trend
+              </span>
+            </div>
+          </div>
+
+          <!-- UTM BUILDER section — Figma: 7946:13496 collapsed accordion -->
+          <div class="form-section form-section--padded">
+            <div class="utm-section">
+              <div class="form-section-title" style="margin-bottom:0;">
+                <!-- Soul: Link icon -->
+                <svg viewBox="0 0 36 36" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" clip-rule="evenodd" d="M28.2426 7.75736C25.8994 5.41421 22.1004 5.41421 19.7573 7.75736L19.7484 7.76624L15.6982 11.7159L14.3018 10.284L18.3477 6.33857C21.4722 3.21895 26.5341 3.22048 29.6568 6.34315C32.7795 9.46582 32.781 14.5277 29.6613 17.6523L25.7159 21.6981L24.2841 20.3018L28.2425 16.2426C30.5857 13.8994 30.5857 10.1005 28.2426 7.75736ZM12.2928 22.2929L22.2928 12.2929L23.707 13.7071L13.707 23.7071L12.2928 22.2929ZM11.7159 15.6982L7.75742 19.7574C5.41427 22.1006 5.41421 25.8995 7.75736 28.2426C10.1005 30.5858 13.8995 30.5858 16.2426 28.2426L16.2515 28.2338L20.3017 24.2841L21.6981 25.7159L17.6523 29.6614C14.5277 32.781 9.46581 32.7795 6.34315 29.6569C3.22049 26.5342 3.21895 21.4723 6.33854 18.3478L10.284 14.3018L11.7159 15.6982Z"/></svg>
+                UTM BUILDER (UTM)
+              </div>
+              <div class="toggle-with-label">
+                <div class="toggle" onclick="this.classList.toggle('active')"></div>
+                <span class="toggle-label">OFF</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cortex Panel (injected by components.js) -->
+    <div id="cortex-slot" data-panel-id="campaign" data-highlight="campaign"></div>
+
+  </div>
+</div>
+
+<script src="components.js"></script>
+<script src="cortex-panel.js"></script>
+<script src="app.js"></script>
+<script>initCortexPanel();</script>
+</body>
+</html>

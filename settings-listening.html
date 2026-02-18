@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings / Listening — Cortex AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="soul-tokens.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="app" id="app">
+  <div class="screen active" id="screen-settings-listening">
+
+    <!-- Nav (injected by components.js) -->
+    <div id="nav-slot" data-active="settings"></div>
+
+    <!-- Settings Nav -->
+    <div class="settings-nav">
+      <div class="settings-nav-title">SETTINGS</div>
+      <div class="settings-nav-item">Personal settings</div>
+      <div class="settings-nav-item">Notifications</div>
+      <div class="settings-nav-divider"></div>
+      <div class="settings-nav-item">Profiles</div>
+      <div class="settings-nav-item">Users</div>
+      <div class="settings-nav-item">User groups</div>
+      <div class="settings-nav-item">Roles &amp; Permissions</div>
+      <div class="settings-nav-divider"></div>
+      <div class="settings-nav-item">Approval flows</div>
+      <div class="settings-nav-item">Data connections</div>
+      <div class="settings-nav-item">Integration &amp; API</div>
+      <div class="settings-nav-item">Labels</div>
+      <div class="settings-nav-item active" onclick="hideWizard()">Listening</div>
+      <div class="settings-nav-divider"></div>
+      <div class="settings-nav-item">Task automation</div>
+      <div class="settings-nav-item">Subscription plan</div>
+      <div class="settings-nav-item">Answer templates</div>
+      <div class="settings-nav-item">Social AI Chatbot</div>
+      <div class="settings-nav-item">Chatbot configuration</div>
+      <div class="settings-nav-item">Single sign-on</div>
+    </div>
+
+    <!-- Main content -->
+    <div style="flex:1; display:flex; overflow:hidden;">
+      <!-- Settings Content (base) -->
+      <div class="main-content" id="settings-base">
+        <div class="settings-content-header">Listening</div>
+        <div class="settings-content" style="flex:1; padding:24px;">
+          <p style="color: var(--color-on-layer-secondary); font-size:13px;">Click "Open Wizard" to configure a listening query.</p>
+          <button class="btn btn-s btn-primary" style="margin-top:12px;" onclick="showWizard()">Open Listening Wizard</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Wizard Overlay backdrop (covers entire page, click to close) -->
+    <div id="wizard-backdrop" class="wizard-overlay" onclick="hideWizard()"></div>
+
+    <!-- Wizard Panel container (above the overlay) -->
+    <div id="wizard-container" class="wizard-overlay-container">
+      <!-- Wizard Panel -->
+      <div class="wizard-panel">
+
+          <!-- Close button (positioned to left of panel) -->
+          <div class="wizard-close-btn" onclick="hideWizard()">
+            <svg viewBox="0 0 36 36" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" clip-rule="evenodd" d="M18.0001 16.5859L26.293 8.29297L27.7072 9.70718L19.4143 18.0001L27.7072 26.293L26.293 27.7072L18.0001 19.4143L9.70718 27.7072L8.29297 26.293L16.5859 18.0001L8.29297 9.70718L9.70718 8.29297L18.0001 16.5859Z"/></svg>
+          </div>
+
+          <!-- Wizard Header with step tabs -->
+          <div class="wizard-header">
+            <div class="wizard-tab completed">
+              <span class="wizard-tab-label">KEYWORDS</span>
+              <div class="wizard-tab-indicator">
+                <div class="wizard-tab-indicator-line"></div>
+                <div class="wizard-tab-indicator-bullet"></div>
+              </div>
+            </div>
+            <div class="wizard-tab-divider"></div>
+            <div class="wizard-tab active">
+              <span class="wizard-tab-label">SOURCES</span>
+              <div class="wizard-tab-indicator">
+                <div class="wizard-tab-indicator-line"></div>
+                <div class="wizard-tab-indicator-bullet"></div>
+              </div>
+            </div>
+            <div class="wizard-tab-divider"></div>
+            <div class="wizard-tab future">
+              <span class="wizard-tab-label">SUMMARY</span>
+              <div class="wizard-tab-indicator">
+                <div class="wizard-tab-indicator-line"></div>
+                <div class="wizard-tab-indicator-bullet"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Scroll area -->
+          <div class="wizard-scroll-area">
+            <div class="wizard-content-area">
+
+              <!-- Left: Keywords Setup -->
+              <div class="wizard-left">
+                <div class="wizard-left-intro">
+                  <div class="wizard-left-title">Set up what keywords, hashtags and mentions we'll collect</div>
+                  <div class="wizard-left-subtitle">Define what your query should monitor and use it later as a data source in Analytics, Content and Community.</div>
+                </div>
+
+                <!-- Condition Builder Card -->
+                <div class="condition-builder-card">
+                  <!-- Condition Group 1: IF -->
+                  <div class="condition-row">
+                    <div class="condition-header">
+                      <span class="condition-label">Gather content</span>
+                      <span class="condition-keyword-label if">IF</span>
+                      <div class="select-trigger"><span>includes</span><svg viewBox="0 0 16 16" fill="currentColor" width="16" height="16"><path d="M4 6l4 4 4-4"/></svg></div>
+                      <div class="select-trigger"><span>any</span><svg viewBox="0 0 16 16" fill="currentColor" width="16" height="16"><path d="M4 6l4 4 4-4"/></svg></div>
+                      <span class="condition-label">of the following</span>
+                      <div class="condition-close"><svg viewBox="0 0 36 36" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" clip-rule="evenodd" d="M18.0001 16.5859L26.293 8.29297L27.7072 9.70718L19.4143 18.0001L27.7072 26.293L26.293 27.7072L18.0001 19.4143L9.70718 27.7072L8.29297 26.293L16.5859 18.0001L8.29297 9.70718L9.70718 8.29297L18.0001 16.5859Z"/></svg></div>
+                    </div>
+                    <div class="keyword-row">
+                      <span class="keyword-chip"><span class="chip-text">Labubu</span><span class="chip-divider"></span><span class="chip-remove"><svg viewBox="0 0 12 12" fill="currentColor"><circle cx="6" cy="6" r="5.5" fill="none" stroke="currentColor" stroke-width="1"/><path d="M4 4l4 4M8 4l-4 4" stroke="currentColor" stroke-width="1.2" fill="none"/></svg></span></span>
+                      <span class="keyword-or">OR</span>
+                      <span class="keyword-chip"><span class="chip-text">Toy</span><span class="chip-divider"></span><span class="chip-remove"><svg viewBox="0 0 12 12" fill="currentColor"><circle cx="6" cy="6" r="5.5" fill="none" stroke="currentColor" stroke-width="1"/><path d="M4 4l4 4M8 4l-4 4" stroke="currentColor" stroke-width="1.2" fill="none"/></svg></span></span>
+                      <span class="keyword-or">OR</span>
+                      <span class="keyword-chip"><span class="chip-text">Trend</span><span class="chip-divider"></span><span class="chip-remove"><svg viewBox="0 0 12 12" fill="currentColor"><circle cx="6" cy="6" r="5.5" fill="none" stroke="currentColor" stroke-width="1"/><path d="M4 4l4 4M8 4l-4 4" stroke="currentColor" stroke-width="1.2" fill="none"/></svg></span></span>
+                    </div>
+                  </div>
+
+                  <!-- Condition Group 2: AND -->
+                  <div class="condition-row">
+                    <div class="condition-header">
+                      <span class="condition-keyword-label and">AND</span>
+                      <div class="select-trigger"><span>includes</span><svg viewBox="0 0 16 16" fill="currentColor" width="16" height="16"><path d="M4 6l4 4 4-4"/></svg></div>
+                      <div class="select-trigger"><span>any</span><svg viewBox="0 0 16 16" fill="currentColor" width="16" height="16"><path d="M4 6l4 4 4-4"/></svg></div>
+                      <span class="condition-label">of the following</span>
+                      <div class="condition-close"><svg viewBox="0 0 36 36" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" clip-rule="evenodd" d="M18.0001 16.5859L26.293 8.29297L27.7072 9.70718L19.4143 18.0001L27.7072 26.293L26.293 27.7072L18.0001 19.4143L9.70718 27.7072L8.29297 26.293L16.5859 18.0001L8.29297 9.70718L9.70718 8.29297L18.0001 16.5859Z"/></svg></div>
+                    </div>
+                    <div class="keyword-row">
+                      <span class="keyword-chip"><span class="chip-text">Europe</span><span class="chip-divider"></span><span class="chip-remove"><svg viewBox="0 0 12 12" fill="currentColor"><circle cx="6" cy="6" r="5.5" fill="none" stroke="currentColor" stroke-width="1"/><path d="M4 4l4 4M8 4l-4 4" stroke="currentColor" stroke-width="1.2" fill="none"/></svg></span></span>
+                      <span class="keyword-or">OR</span>
+                      <span class="keyword-chip"><span class="chip-text">influencers</span><span class="chip-divider"></span><span class="chip-remove"><svg viewBox="0 0 12 12" fill="currentColor"><circle cx="6" cy="6" r="5.5" fill="none" stroke="currentColor" stroke-width="1"/><path d="M4 4l4 4M8 4l-4 4" stroke="currentColor" stroke-width="1.2" fill="none"/></svg></span></span>
+                      <span class="keyword-or">OR</span>
+                      <span class="keyword-chip"><span class="chip-text">#labubu</span><span class="chip-divider"></span><span class="chip-remove"><svg viewBox="0 0 12 12" fill="currentColor"><circle cx="6" cy="6" r="5.5" fill="none" stroke="currentColor" stroke-width="1"/><path d="M4 4l4 4M8 4l-4 4" stroke="currentColor" stroke-width="1.2" fill="none"/></svg></span></span>
+                      <span class="keyword-or">OR</span>
+                      <span class="keyword-chip"><span class="chip-text">ads</span><span class="chip-divider"></span><span class="chip-remove"><svg viewBox="0 0 12 12" fill="currentColor"><circle cx="6" cy="6" r="5.5" fill="none" stroke="currentColor" stroke-width="1"/><path d="M4 4l4 4M8 4l-4 4" stroke="currentColor" stroke-width="1.2" fill="none"/></svg></span></span>
+                    </div>
+                  </div>
+
+                  <!-- Condition Group 3: AND -->
+                  <div class="condition-row">
+                    <div class="condition-header">
+                      <span class="condition-keyword-label and">AND</span>
+                      <div class="select-trigger"><span>includes</span><svg viewBox="0 0 16 16" fill="currentColor" width="16" height="16"><path d="M4 6l4 4 4-4"/></svg></div>
+                      <div class="select-trigger"><span>any</span><svg viewBox="0 0 16 16" fill="currentColor" width="16" height="16"><path d="M4 6l4 4 4-4"/></svg></div>
+                      <span class="condition-label">of the following</span>
+                      <div class="condition-close"><svg viewBox="0 0 36 36" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" clip-rule="evenodd" d="M18.0001 16.5859L26.293 8.29297L27.7072 9.70718L19.4143 18.0001L27.7072 26.293L26.293 27.7072L18.0001 19.4143L9.70718 27.7072L8.29297 26.293L16.5859 18.0001L8.29297 9.70718L9.70718 8.29297L18.0001 16.5859Z"/></svg></div>
+                    </div>
+                    <div class="keyword-row">
+                      <span class="keyword-chip"><span class="chip-text">game-winning</span><span class="chip-divider"></span><span class="chip-remove"><svg viewBox="0 0 12 12" fill="currentColor"><circle cx="6" cy="6" r="5.5" fill="none" stroke="currentColor" stroke-width="1"/><path d="M4 4l4 4M8 4l-4 4" stroke="currentColor" stroke-width="1.2" fill="none"/></svg></span></span>
+                      <span class="keyword-or">OR</span>
+                      <span class="keyword-chip"><span class="chip-text">moment of the game</span><span class="chip-divider"></span><span class="chip-remove"><svg viewBox="0 0 12 12" fill="currentColor"><circle cx="6" cy="6" r="5.5" fill="none" stroke="currentColor" stroke-width="1"/><path d="M4 4l4 4M8 4l-4 4" stroke="currentColor" stroke-width="1.2" fill="none"/></svg></span></span>
+                      <span class="keyword-or">OR</span>
+                      <span class="keyword-chip"><span class="chip-text">highlight</span><span class="chip-divider"></span><span class="chip-remove"><svg viewBox="0 0 12 12" fill="currentColor"><circle cx="6" cy="6" r="5.5" fill="none" stroke="currentColor" stroke-width="1"/><path d="M4 4l4 4M8 4l-4 4" stroke="currentColor" stroke-width="1.2" fill="none"/></svg></span></span>
+                    </div>
+                    <div class="keyword-row">
+                      <span class="keyword-chip"><span class="chip-text">wild</span><span class="chip-divider"></span><span class="chip-remove"><svg viewBox="0 0 12 12" fill="currentColor"><circle cx="6" cy="6" r="5.5" fill="none" stroke="currentColor" stroke-width="1"/><path d="M4 4l4 4M8 4l-4 4" stroke="currentColor" stroke-width="1.2" fill="none"/></svg></span></span>
+                      <span class="keyword-or">OR</span>
+                      <span class="keyword-chip"><span class="chip-text">best player</span><span class="chip-divider"></span><span class="chip-remove"><svg viewBox="0 0 12 12" fill="currentColor"><circle cx="6" cy="6" r="5.5" fill="none" stroke="currentColor" stroke-width="1"/><path d="M4 4l4 4M8 4l-4 4" stroke="currentColor" stroke-width="1.2" fill="none"/></svg></span></span>
+                      <span class="keyword-or">OR</span>
+                      <span class="keyword-chip"><span class="chip-text">MVP</span><span class="chip-divider"></span><span class="chip-remove"><svg viewBox="0 0 12 12" fill="currentColor"><circle cx="6" cy="6" r="5.5" fill="none" stroke="currentColor" stroke-width="1"/><path d="M4 4l4 4M8 4l-4 4" stroke="currentColor" stroke-width="1.2" fill="none"/></svg></span></span>
+                      <span class="keyword-or">OR</span>
+                      <span class="keyword-chip"><span class="chip-text">unreal</span><span class="chip-divider"></span><span class="chip-remove"><svg viewBox="0 0 12 12" fill="currentColor"><circle cx="6" cy="6" r="5.5" fill="none" stroke="currentColor" stroke-width="1"/><path d="M4 4l4 4M8 4l-4 4" stroke="currentColor" stroke-width="1.2" fill="none"/></svg></span></span>
+                    </div>
+                    <div class="keyword-row">
+                      <span class="keyword-chip"><span class="chip-text">goosebumps</span><span class="chip-divider"></span><span class="chip-remove"><svg viewBox="0 0 12 12" fill="currentColor"><circle cx="6" cy="6" r="5.5" fill="none" stroke="currentColor" stroke-width="1"/><path d="M4 4l4 4M8 4l-4 4" stroke="currentColor" stroke-width="1.2" fill="none"/></svg></span></span>
+                      <span class="keyword-or">OR</span>
+                      <span class="keyword-chip"><span class="chip-text">refs</span><span class="chip-divider"></span><span class="chip-remove"><svg viewBox="0 0 12 12" fill="currentColor"><circle cx="6" cy="6" r="5.5" fill="none" stroke="currentColor" stroke-width="1"/><path d="M4 4l4 4M8 4l-4 4" stroke="currentColor" stroke-width="1.2" fill="none"/></svg></span></span>
+                      <span class="keyword-or">OR</span>
+                      <span class="keyword-chip"><span class="chip-text">rigged</span><span class="chip-divider"></span><span class="chip-remove"><svg viewBox="0 0 12 12" fill="currentColor"><circle cx="6" cy="6" r="5.5" fill="none" stroke="currentColor" stroke-width="1"/><path d="M4 4l4 4M8 4l-4 4" stroke="currentColor" stroke-width="1.2" fill="none"/></svg></span></span>
+                      <span class="keyword-add-term">Add term</span>
+                    </div>
+                  </div>
+
+                  <div class="add-condition-link">
+                    <svg viewBox="0 0 36 36" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" clip-rule="evenodd" d="M17 17V7H19V17H29V19H19V29H17V19H7V17H17Z"/></svg>
+                    <span class="add-condition-text">Add AND condition</span>
+                  </div>
+                </div>
+
+                <!-- Add OR condition button with connector line -->
+                <div class="add-or-connector">
+                  <div class="add-or-line"></div>
+                  <button class="btn btn-m btn-light add-or-btn">Add OR condition</button>
+                </div>
+              </div>
+
+              <!-- Vertical dividers -->
+              <div class="wizard-divider-vertical"></div>
+
+              <!-- Right: Preview -->
+              <div class="wizard-preview">
+                <div class="wizard-preview-header">
+                  <span class="preview-title">Preview</span>
+                  <button class="btn btn-m btn-light">
+                    <svg viewBox="0 0 36 36" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" clip-rule="evenodd" d="M21.1058 6.40889C18.5542 5.7252 15.8483 5.90255 13.4078 6.91345C10.977 7.92032 8.94475 9.69807 7.62352 11.9727L7.61001 12H12V14H4V6.00001H6V10.7889C7.54307 8.22102 9.87066 6.2138 12.6424 5.06569C15.4897 3.88631 18.6466 3.67939 21.6235 4.47704C24.6003 5.27469 27.2308 7.03232 29.1069 9.47734C30.9831 11.9224 32 14.9181 32 18H30C30 15.3584 29.1283 12.7906 27.5202 10.6949C25.9121 8.59914 23.6574 7.09259 21.1058 6.40889ZM6 18C6 20.6416 6.87165 23.2094 8.47976 25.3051C10.0879 27.4009 12.3426 28.9074 14.8942 29.5911C17.4458 30.2748 20.1517 30.0975 22.5922 29.0866C25.023 28.0797 27.0552 26.3019 28.3765 24.0273L28.39 24H24V22H32V30H30V25.2111C28.4569 27.779 26.1293 29.7862 23.3576 30.9343C20.5103 32.1137 17.3534 32.3206 14.3765 31.523C11.3997 30.7253 8.76918 28.9677 6.89305 26.5227C5.01692 24.0776 4 21.0819 4 18H6Z"/></svg>
+                    Update preview
+                  </button>
+                </div>
+
+                <!-- Yearly mention limit -->
+                <div class="preview-limit-card">
+                  <div class="preview-limit-row">
+                    <div class="preview-limit-labels">
+                      <span class="preview-limit-heading">YEARLY MENTION LIMIT</span>
+                      <span class="preview-limit-value">110,5 k / 200 k</span>
+                    </div>
+                    <button class="btn btn-s btn-invisible preview-info-btn">
+                      <svg viewBox="0 0 36 36" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" clip-rule="evenodd" d="M18 4C10.268 4 4 10.268 4 18C4 25.732 10.268 32 18 32C25.732 32 32 25.732 32 18C32 10.268 25.732 4 18 4ZM2 18C2 9.16344 9.16344 2 18 2C26.8366 2 34 9.16344 34 18C34 26.8366 26.8366 34 18 34C9.16344 34 2 26.8366 2 18ZM16 10C16 8.89543 16.8954 8 18 8C19.1046 8 20 8.89543 20 10C20 11.1046 19.1046 12 18 12C16.8954 12 16 11.1046 16 10ZM17 18H15V16H19V25H22V27H14V25H17V18Z"/></svg>
+                    </button>
+                  </div>
+                  <div class="preview-progress-bar">
+                    <div class="preview-progress-track"></div>
+                    <div class="preview-progress-fill" style="width: 55%;"></div>
+                  </div>
+                </div>
+
+                <!-- Last 30 days stats -->
+                <div class="preview-stats-card">
+                  <div class="preview-stats-heading">LAST 30 DAYS - NUMBER OF MENTIONS</div>
+                  <div class="preview-stats-body">
+                    <div class="preview-stats-border"></div>
+                    <div class="preview-stats-col">
+                      <div class="preview-stats-number">20 623</div>
+                      <div class="preview-stats-sublabel">Last 30 days</div>
+                    </div>
+                    <div class="preview-stats-border"></div>
+                    <div class="preview-stats-col">
+                      <div class="preview-stats-number">687</div>
+                      <div class="preview-stats-sublabel">Daily average (last 30 days)</div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Mention cards -->
+                <div class="mention-card">
+                  <div class="mention-card-header">
+                    <div class="mention-avatars">
+                      <div class="mention-avatar-img" style="background: #e7e7e7; z-index:1;"></div>
+                      <div class="mention-avatar-img" style="background: #c4b5fd; margin-left:-12px;"></div>
+                    </div>
+                    <div class="mention-author">
+                      <div class="mention-author-name"><span class="bold">u/alzbeta123</span> in <span class="bold">r/subredditname</span></div>
+                      <div class="mention-platform-badge"><span class="platform-tag reddit">REDDIT</span></div>
+                    </div>
+                    <span class="mention-date">Thursday Apr 27, 2025</span>
+                  </div>
+                  <div class="mention-divider"></div>
+                  <div class="mention-text">The NHL is incredible! Every game is a wild ride of emotions. I love the skill and speed of players like Connor McDavid. When my team, the Frostbite Falcons, scored that last-minute goal, I was ecstatic! Hockey is a lifestyle that brings people together. Go, Falcons!</div>
+                </div>
+
+                <div class="mention-card">
+                  <div class="mention-card-header">
+                    <div class="mention-avatar-circle">
+                      <svg viewBox="0 0 36 36" fill="currentColor" width="18" height="18"><path d="M18 4C14.6863 4 12 6.68629 12 10C12 13.3137 14.6863 16 18 16C21.3137 16 24 13.3137 24 10C24 6.68629 21.3137 4 18 4ZM8 28C8 23.5817 11.5817 20 16 20H20C24.4183 20 28 23.5817 28 28V32H8V28Z"/></svg>
+                    </div>
+                    <div class="mention-author">
+                      <div class="mention-author-name bold">Sabrina Larson</div>
+                      <div class="mention-platform-badge">
+                        <span class="platform-tag tiktok">TIKTOK</span>
+                        <span class="mention-handle">/toutique</span>
+                      </div>
+                    </div>
+                    <span class="mention-date">Saturday Apr 01, 2023</span>
+                  </div>
+                  <div class="mention-divider"></div>
+                  <div class="mention-content-with-image">
+                    <div class="mention-thumbnail"></div>
+                    <div class="mention-text">OMG, can we just talk about how amazing the NHL is?! Like, every game is a rollercoaster of emotions! I can't get enough of the skill and speed these players bring to the ice. Watching my favorite team, the Frostbite Falcons, the score that last-minute ...</div>
+                  </div>
+                </div>
+
+                <div class="mention-card">
+                  <div class="mention-card-header">
+                    <div class="mention-avatar-photo" style="background: #94a3b8;"></div>
+                    <div class="mention-author">
+                      <div class="mention-author-name bold">Robert Fox</div>
+                      <div class="mention-platform-badge">
+                        <span class="platform-tag x">X</span>
+                        <span class="mention-handle">/robertfox</span>
+                      </div>
+                    </div>
+                    <span class="mention-date">Thursday Apr 27, 2023</span>
+                  </div>
+                  <div class="mention-divider"></div>
+                  <div class="mention-text">The NHL is incredible! Every game is a wild ride of emotions. I love the skill and speed of players like Ovechkin, whose goal-scoring leaves fans in awe. When my team, the Falcons, scored that last-minute goal, I was ecstatic! Hockey brings people together.</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Footer -->
+          <div class="wizard-footer">
+            <button class="btn btn-m btn-ghost" onclick="hideWizard()">Cancel</button>
+            <button class="btn btn-m btn-primary">Next <svg viewBox="0 0 36 36" fill="currentColor" width="14" height="14" style="margin-left:4px;"><path fill-rule="evenodd" clip-rule="evenodd" d="M19.293 7.293L29.586 17.586C29.9609 17.961 30.1716 18.4697 30.1716 19C30.1716 19.5303 29.9609 20.039 29.586 20.414L19.293 30.707L17.879 29.293L26.172 21H6V17H26.172L17.879 8.707L19.293 7.293Z"/></svg></button>
+          </div>
+        </div>
+      </div>
+
+    <!-- Cortex Panel (injected by components.js) -->
+    <div id="cortex-slot" data-panel-id="settings" data-highlight="listening"></div>
+
+  </div>
+</div>
+
+<script src="components.js"></script>
+<script src="cortex-panel.js"></script>
+<script src="app.js"></script>
+<script>
+  initNav();
+  initCortexPanel();
+
+  // Wizard show/hide
+  function showWizard() {
+    document.getElementById('wizard-backdrop').style.display = 'block';
+    document.getElementById('wizard-container').style.display = 'flex';
+  }
+  function hideWizard() {
+    document.getElementById('wizard-backdrop').style.display = 'none';
+    document.getElementById('wizard-container').style.display = 'none';
+  }
+
+  // Keep wizard panel snapped to the Cortex panel edge
+  (function() {
+    var wrapper = document.querySelector('.cortex-panel-wrapper');
+    var wizard = document.getElementById('wizard-container');
+    if (wrapper && wizard) {
+      function sync() { wizard.style.paddingRight = wrapper.offsetWidth + 'px'; }
+      sync();
+      new ResizeObserver(sync).observe(wrapper);
+    }
+  })();
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unified Analytics — Cortex AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="soul-tokens.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="app" id="app">
+  <div class="screen active" id="screen-analytics-board">
+
+    <!-- Nav (injected by components.js) -->
+    <div id="nav-slot" data-active="unified-analytics"></div>
+
+    <!-- Analytics Navigation — Figma: 7951:10025 -->
+    <div class="section-nav">
+      <div class="section-nav-header">
+        <span class="nav-title">UNIFIED ANALYTICS</span>
+        <button class="nav-close-btn" title="Collapse sidebar">
+          <!-- Soul: menu-close icon -->
+          <svg viewBox="0 0 36 36" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" clip-rule="evenodd" d="M18.0002 6H30.0002V8H18.0002V6ZM12.293 9.29291L13.7073 10.7071L7.41438 17H30.0002V19H7.41435L13.7073 25.2929L12.293 26.7071L3.58594 18L12.293 9.29291ZM18.0002 28H30.0002V30H18.0002V28Z"/></svg>
+        </button>
+      </div>
+      <div class="section-nav-content">
+        <div class="section-nav-inner">
+          <!-- Search + New buttons — Figma: Search=shrink-0, New wrapper=flex-1 -->
+          <div class="nav-search-area">
+            <button class="btn btn-m btn-ghost">
+              <svg viewBox="0 0 36 36" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" clip-rule="evenodd" d="M14 4C8.47715 4 4 8.47715 4 14C4 19.5228 8.47715 24 14 24C19.5228 24 24 19.5228 24 14C24 8.47715 19.5228 4 14 4ZM2 14C2 7.37258 7.37258 2 14 2C20.6274 2 26 7.37258 26 14C26 16.9537 24.9328 19.6582 23.163 21.7489L31.7071 30.2929L30.2929 31.7072L21.7488 23.1631C19.6581 24.9328 16.9537 26 14 26C7.37258 26 2 20.6274 2 14Z"/></svg>
+              <span class="btn-content">Search ...</span>
+            </button>
+            <div class="nav-search-create">
+              <button class="btn btn-m btn-ghost">
+<svg viewBox="0 0 36 36" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" clip-rule="evenodd" d="M17 17V7H19V17H29V19H19V29H17V19H7V17H17Z"/></svg>
+              <span class="btn-content">New</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Home & Objectives -->
+          <div class="nav-section">
+            <div class="nav-link">
+              <div class="nav-link-content">
+                <!-- Soul: Overview icon -->
+                <svg viewBox="0 0 36 36" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M4 8C4 5.79086 5.79086 4 8 4H12C14.2091 4 16 5.79086 16 8V12C16 14.2091 14.2091 16 12 16H8C5.79086 16 4 14.2091 4 12V8ZM8 6C6.89543 6 6 6.89543 6 8V12C6 13.1046 6.89543 14 8 14H12C13.1046 14 14 13.1046 14 12V8C14 6.89543 13.1046 6 12 6H8ZM20 8C20 5.79086 21.7909 4 24 4H28C30.2091 4 32 5.79086 32 8V12C32 14.2091 30.2091 16 28 16H24C21.7909 16 20 14.2091 20 12V8ZM24 6C22.8954 6 22 6.89543 22 8V12C22 13.1046 22.8954 14 24 14H28C29.1046 14 30 13.1046 30 12V8C30 6.89543 29.1046 6 28 6H24ZM4 24C4 21.7909 5.79086 20 8 20H12C14.2091 20 16 21.7909 16 24V28C16 30.2091 14.2091 32 12 32H8C5.79086 32 4 30.2091 4 28V24ZM8 22C6.89543 22 6 22.8954 6 24V28C6 29.1046 6.89543 30 8 30H12C13.1046 30 14 29.1046 14 28V24C14 22.8954 13.1046 22 12 22H8ZM20 24C20 21.7909 21.7909 20 24 20H28C30.2091 20 32 21.7909 32 24V28C32 30.2091 30.2091 32 28 32H24C21.7909 32 20 30.2091 20 28V24ZM24 22C22.8954 22 22 22.8954 22 24V28C22 29.1046 22.8954 30 24 30H28C29.1046 30 30 29.1046 30 28V24C30 22.8954 29.1046 22 28 22H24Z"/></svg>
+                <span>Home</span>
+              </div>
+              <button class="nav-link-action" title="Expand"><svg viewBox="0 0 36 36" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M28.7072 14.7072L18.0001 25.4143L7.29297 14.7072L8.70718 13.293L18.0001 22.5859L27.293 13.293L28.7072 14.7072Z"/></svg></button>
+            </div>
+            <div class="nav-link">
+              <div class="nav-link-content">
+                <!-- Soul: Campaign objective icon -->
+                <svg viewBox="0 0 36 36" fill="currentColor"><path d="M12.6425 5.06569C15.4897 3.88631 18.6466 3.6794 21.6235 4.47704L22.1411 2.54519C18.739 1.63359 15.1311 1.87007 11.8771 3.21793C8.62305 4.5658 5.90469 6.94973 4.14362 10C2.38254 13.0503 1.67717 16.5964 2.1369 20.0884C2.59664 23.5804 4.19578 26.8232 6.68631 29.3137C9.17685 31.8042 12.4196 33.4034 15.9116 33.8631C19.4036 34.3229 22.9498 33.6175 26 31.8564C29.0503 30.0953 31.4342 27.377 32.7821 24.1229C34.13 20.8689 34.3664 17.261 33.4548 13.8589L31.523 14.3765C32.3206 17.3534 32.1137 20.5103 30.9343 23.3576C29.7549 26.2049 27.669 28.5834 25 30.1244C22.331 31.6653 19.2282 32.2825 16.1727 31.8802C13.1171 31.478 10.2797 30.0787 8.10053 27.8995C5.92131 25.7203 4.52206 22.8829 4.11979 19.8274C3.71753 16.7719 4.33473 13.669 5.87567 11C7.41661 8.33102 9.79517 6.24508 12.6425 5.06569Z"/><path d="M28.0001 2V6.58579L17.293 17.2929L18.7072 18.7071L29.4143 8H34.0001V6H30.0001V2H28.0001Z"/><path d="M16.5858 16.5858C16.4001 16.7716 16.2528 16.992 16.1522 17.2347C16.0517 17.4773 16 17.7374 16 18.0001C16 18.2627 16.0517 18.5228 16.1522 18.7654C16.2528 19.0081 16.4001 19.2286 16.5858 19.4143C16.7715 19.6 16.992 19.7473 17.2346 19.8478C17.4773 19.9483 17.7374 20.0001 18 20.0001C18.2626 20.0001 18.5227 19.9483 18.7654 19.8478C19.008 19.7473 19.2285 19.6 19.4142 19.4143L20.8284 20.8285C20.457 21.1999 20.016 21.4946 19.5307 21.6956C19.0454 21.8966 18.5253 22.0001 18 22.0001C17.4747 22.0001 16.9546 21.8966 16.4693 21.6956C15.984 21.4946 15.543 21.1999 15.1716 20.8285C14.8001 20.4571 14.5055 20.0161 14.3045 19.5308C14.1035 19.0455 14 18.5253 14 18.0001C14 17.4748 14.1035 16.9546 14.3045 16.4693C14.5055 15.984 14.8001 15.5431 15.1716 15.1716L16.5858 16.5858Z"/><path d="M14.9385 10.609C16.5656 9.93503 18.3695 9.8168 20.0706 10.2726L20.5882 8.34075C18.4619 7.771 16.207 7.91879 14.1732 8.76121C12.1394 9.60362 10.4404 11.0936 9.33976 13C8.23909 14.9064 7.79823 17.1228 8.08557 19.3053C8.3729 21.4878 9.37236 23.5145 10.9289 25.0711C12.4855 26.6277 14.5122 27.6271 16.6947 27.9145C18.8773 28.2018 21.0936 27.7609 23 26.6603C24.9064 25.5596 26.3964 23.8606 27.2388 21.8268C28.0812 19.7931 28.229 17.5381 27.6593 15.4118L25.7274 15.9295C26.1832 17.6305 26.065 19.4345 25.391 21.0615C24.7171 22.6885 23.5251 24.0477 22 24.9282C20.4749 25.8087 18.7018 26.1614 16.9558 25.9316C15.2098 25.7017 13.5884 24.9021 12.3432 23.6569C11.0979 22.4116 10.2983 20.7902 10.0685 19.0442C9.83859 17.2982 10.1913 15.5251 11.0718 14C11.9523 12.4749 13.3115 11.2829 14.9385 10.609Z"/></svg>
+                <span>Objectives</span>
+              </div>
+              <button class="nav-link-action" title="Expand"><svg viewBox="0 0 36 36" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M28.7072 14.7072L18.0001 25.4143L7.29297 14.7072L8.70718 13.293L18.0001 22.5859L27.293 13.293L28.7072 14.7072Z"/></svg></button>
+            </div>
+          </div>
+
+          <!-- Divider -->
+          <div class="nav-divider"></div>
+
+          <!-- My boards section -->
+          <div class="nav-section">
+            <div class="nav-link">
+              <div class="nav-link-content">
+                <!-- Soul: Dashboard icon -->
+                <svg viewBox="0 0 36 36" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 6C7.34315 6 6 7.34315 6 9V10H30V9C30 7.34315 28.6569 6 27 6H9ZM30 12H6V27C6 28.6569 7.34315 30 9 30H27C28.6569 30 30 28.6569 30 27V12ZM4 9C4 6.23858 6.23858 4 9 4H27C29.7614 4 32 6.23858 32 9V27C32 29.7614 29.7614 32 27 32H9C6.23858 32 4 29.7614 4 27V9ZM24 16H28V18H24V16ZM16 21C16 19.6034 15.0449 18.4275 13.7507 18.0944L14.2493 16.1575C16.4056 16.7125 18 18.6688 18 21C18 23.7614 15.7614 26 13 26C10.2386 26 8 23.7614 8 21H10C10 22.6568 11.3431 24 13 24C14.6569 24 16 22.6568 16 21ZM22 20L28 20L28 22L22 22L22 20ZM24 24H28V26H24V24Z"/></svg>
+                <span>My boards</span>
+              </div>
+              <div style="display:flex; align-items:center;">
+                <button class="nav-link-action" title="New board">
+                  <svg viewBox="0 0 36 36" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M17 17V7H19V17H29V19H19V29H17V19H7V17H17Z"/></svg>
+                </button>
+                <button class="nav-link-action" title="Expand">
+                  <svg viewBox="0 0 36 36" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M28.7072 14.7072L18.0001 25.4143L7.29297 14.7072L8.70718 13.293L18.0001 22.5859L27.293 13.293L28.7072 14.7072Z"/></svg>
+                </button>
+              </div>
+            </div>
+            <!-- Sub items -->
+            <div class="nav-link-sub active">
+              <div class="nav-link-content">
+                <span class="nav-dot"></span>
+                <span>Labubu</span>
+              </div>
+            </div>
+            <div class="nav-link-sub">
+              <div class="nav-link-content">
+                <span class="nav-dot"></span>
+                <span>Sentiment analysis</span>
+              </div>
+            </div>
+            <div class="nav-link-sub">
+              <div class="nav-link-content">
+                <span class="nav-dot"></span>
+                <span>Trends</span>
+              </div>
+            </div>
+            <div class="nav-link">
+              <div class="nav-link-content">
+                <!-- Soul: Shared view icon -->
+                <svg viewBox="0 0 36 36" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 6C7.34315 6 6 7.34315 6 9V10H30V9C30 7.34315 28.6569 6 27 6H9ZM30 12H6V27C6 28.6569 7.34315 30 9 30H18V32H9C6.23858 32 4 29.7614 4 27V9C4 6.23858 6.23858 4 9 4H27C29.7614 4 32 6.23858 32 9V16H30V12ZM14.2493 16.1575C16.4056 16.7125 18 18.6688 18 21C18 23.7614 15.7614 26 13 26C10.2386 26 8 23.7614 8 21H10C10 22.6568 11.3431 24 13 24C14.6569 24 16 22.6568 16 21C16 19.6034 15.0449 18.4275 13.7507 18.0944L14.2493 16.1575ZM34 20C32.9357 20 32.0655 20.8314 32.0035 21.8802L29.0169 23.3735C28.2836 22.5319 27.2039 22 26 22C23.7909 22 22 23.7909 22 26C22 28.2091 23.7909 30 26 30C27.2039 30 28.2836 29.4681 29.0169 28.6265L32.0035 30.1198C32.0655 31.1686 32.9357 32 34 32C35.1046 32 36 31.1046 36 30C36 28.8954 35.1046 28 34 28C33.5927 28 33.2138 28.1218 32.8978 28.3309L29.9121 26.838C29.9697 26.5678 30 26.2874 30 26C30 25.7126 29.9697 25.4322 29.9121 25.162L32.8978 23.6691C33.2138 23.8782 33.5927 24 34 24C35.1046 24 36 23.1046 36 22C36 20.8954 35.1046 20 34 20ZM24 26C24 24.8954 24.8954 24 26 24C27.1046 24 28 24.8954 28 26C28 27.1046 27.1046 28 26 28C24.8954 28 24 27.1046 24 26Z"/></svg>
+                <span>Shared with me</span>
+              </div>
+              <button class="nav-link-action" title="Expand">
+                <svg viewBox="0 0 36 36" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M28.7072 14.7072L18.0001 25.4143L7.29297 14.7072L8.70718 13.293L18.0001 22.5859L27.293 13.293L28.7072 14.7072Z"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Divider -->
+          <div class="nav-divider"></div>
+
+          <!-- DISCOVER section -->
+          <div class="nav-section">
+            <div class="nav-group-title">DISCOVER</div>
+            <div class="nav-link">
+              <div class="nav-link-content">
+                <!-- Soul: Profile icon -->
+                <svg viewBox="0 0 36 36" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M6 4H4V6H6V22H4V24H6V34H8V24H32.0114L26.4558 14L32.0114 4H8V2H6V4ZM8 22V6H28.6124L24.1679 14L28.6124 22H8Z"/></svg>
+                <span>Social profiles</span>
+              </div>
+              <button class="nav-link-action"><svg viewBox="0 0 36 36" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M28.7072 14.7072L18.0001 25.4143L7.29297 14.7072L8.70718 13.293L18.0001 22.5859L27.293 13.293L28.7072 14.7072Z"/></svg></button>
+            </div>
+            <div class="nav-link">
+              <div class="nav-link-content">
+                <!-- Soul: Ad account icon -->
+                <svg viewBox="0 0 36 36" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M32 10.9082C32 8.78586 29.8564 7.33458 27.8858 8.12282L18.5502 11.8571C18.314 11.9516 18.0619 12.0001 17.8074 12.0001H9C7.67392 12.0001 6.40215 12.5269 5.46447 13.4646C4.52678 14.4023 4 15.674 4 17.0001C4 18.3262 4.52678 19.598 5.46447 20.5357C6.40215 21.4733 7.67392 22.0001 9 22.0001H10.5815L15.9917 31.5055L14.2535 32.4948L9.41854 24.0001H9C7.14348 24.0001 5.36301 23.2626 4.05025 21.9499C2.7375 20.6371 2 18.8566 2 17.0001C2 15.1436 2.7375 13.3631 4.05025 12.0504C5.36301 10.7376 7.14348 10.0001 9 10.0001L17.8074 10.0001L27.143 6.26587C30.4274 4.95214 34 7.37093 34 10.9082V23.092C34 26.6293 30.4274 29.0481 27.143 27.7344L17.8074 24.0001H16V22.0001H17.8074C18.0619 22.0001 18.314 22.0487 18.5502 22.1432L27.8858 25.8774C29.8564 26.6657 32 25.2144 32 23.092V10.9082Z"/></svg>
+                <span>Paid</span>
+              </div>
+              <button class="nav-link-action"><svg viewBox="0 0 36 36" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M28.7072 14.7072L18.0001 25.4143L7.29297 14.7072L8.70718 13.293L18.0001 22.5859L27.293 13.293L28.7072 14.7072Z"/></svg></button>
+            </div>
+            <div class="nav-link">
+              <div class="nav-link-content">
+                <!-- Soul: Campaign icon -->
+                <svg viewBox="0 0 36 36" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M7 6C5.34315 6 4 7.34315 4 9V25C4 26.6569 5.34315 28 7 28H29C30.6569 28 32 26.6569 32 25V13C32 11.3431 30.6569 10 29 10H19.2361C17.4869 10 15.8878 9.01173 15.1056 7.44721C14.6621 6.56027 13.7556 6 12.7639 6H7ZM2 9C2 6.23858 4.23858 4 7 4H12.7639C14.5131 4 16.1122 4.98827 16.8944 6.55279C17.3379 7.43973 18.2444 8 19.2361 8H29C31.7614 8 34 10.2386 34 13V25C34 27.7614 31.7614 30 29 30H7C4.23858 30 2 27.7614 2 25V9ZM12 10H6V8H12V10ZM22 16C22 14.8954 22.8954 14 24 14H28V16H24V22H28V24H24C22.8954 24 22 23.1046 22 22V16Z"/></svg>
+                <span>Campaigns &amp; labels</span>
+              </div>
+              <button class="nav-link-action"><svg viewBox="0 0 36 36" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M28.7072 14.7072L18.0001 25.4143L7.29297 14.7072L8.70718 13.293L18.0001 22.5859L27.293 13.293L28.7072 14.7072Z"/></svg></button>
+            </div>
+            <div class="nav-link">
+              <div class="nav-link-content">
+                <!-- Soul: Listening query icon -->
+                <svg viewBox="0 0 36 36" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.6424 5.06569C14.341 4.36212 16.1615 4 18 4C19.8385 4 21.659 4.36212 23.3576 5.06569C25.0561 5.76925 26.5995 6.80048 27.8995 8.1005C29.1995 9.40053 30.2307 10.9439 30.9343 12.6424C31.6379 14.341 32 16.1615 32 18V27C32 29.7614 29.7614 32 27 32H24C22.8954 32 22 31.1046 22 30V22C22 20.8954 22.8954 20 24 20H30V18C30 16.4241 29.6896 14.8637 29.0866 13.4078C28.4835 11.9519 27.5996 10.629 26.4853 9.51472C25.371 8.40042 24.0481 7.5165 22.5922 6.91345C21.1363 6.31039 19.5759 6 18 6C16.4241 6 14.8637 6.31039 13.4078 6.91345C11.9519 7.5165 10.629 8.40042 9.51472 9.51472C8.40041 10.629 7.5165 11.9519 6.91345 13.4078C6.31039 14.8637 6 16.4241 6 18V20H12C13.1046 20 14 20.8954 14 22V30C14 31.1046 13.1046 32 12 32H9C6.23858 32 4 29.7614 4 27V18C4 16.1615 4.36212 14.341 5.06569 12.6424C5.76925 10.9439 6.80048 9.40053 8.1005 8.10051C9.40052 6.80049 10.9439 5.76925 12.6424 5.06569ZM30 27V22H24V30H27C28.6569 30 30 28.6569 30 27ZM6 22V27C6 28.6569 7.34315 30 9 30H12V22H6Z"/></svg>
+                <span>Listening</span>
+              </div>
+              <button class="nav-link-action"><svg viewBox="0 0 36 36" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M28.7072 14.7072L18.0001 25.4143L7.29297 14.7072L8.70718 13.293L18.0001 22.5859L27.293 13.293L28.7072 14.7072Z"/></svg></button>
+            </div>
+            <div class="nav-link">
+              <div class="nav-link-content">
+                <!-- Soul: Care app icon -->
+                <svg viewBox="0 0 36 36" fill="currentColor"><path d="M28 3C28 2.44772 28.4477 2 29 2C29.5523 2 30 2.44772 30 3V6H33C33.5523 6 34 6.44772 34 7C34 7.55228 33.5523 8 33 8H30V11C30 11.5523 29.5523 12 29 12C28.4477 12 28 11.5523 28 11V8H25C24.4477 8 24 7.55228 24 7C24 6.44772 24.4477 6 25 6H28V3Z"/><path d="M22 6C20.952 6 19.9115 6.20595 18.9385 6.60897C17.7231 7.11243 16.6505 7.90788 15.8159 8.92486C14.9813 9.94183 14.4104 11.149 14.1537 12.4393C13.8971 13.7296 13.9626 15.0633 14.3445 16.3223L14.3543 16.3543L14.3223 16.3445C13.0633 15.9626 11.7296 15.8971 10.4393 16.1537C9.14895 16.4104 7.94183 16.9813 6.92486 17.8159C5.90788 18.6505 5.11243 19.7231 4.60897 20.9385C4.1055 22.154 3.90957 23.4749 4.03852 24.7841C4.16748 26.0934 4.61733 27.3507 5.34825 28.4446C6.07916 29.5385 7.06857 30.4352 8.22883 31.0554C9.38909 31.6755 10.6844 32 12 32H30V14H28V30H12C11.0133 30 10.0418 29.7567 9.17162 29.2915C8.30142 28.8264 7.55937 28.1538 7.01118 27.3334C6.463 26.513 6.12561 25.5701 6.02889 24.5881C5.93218 23.6061 6.07913 22.6155 6.45672 21.7039C6.83432 20.7923 7.43091 19.9879 8.19364 19.3619C8.95638 18.736 9.86171 18.3078 10.8295 18.1153C11.7972 17.9228 12.7975 17.9719 13.7417 18.2584C14.6665 18.5389 15.5095 19.0386 16.1993 19.7145C16.6142 20.121 17.2868 20.1274 17.7071 19.7071C18.1274 19.2868 18.121 18.6142 17.7145 18.1993C17.0386 17.5095 16.5389 16.6665 16.2584 15.7417C15.9719 14.7975 15.9228 13.7972 16.1153 12.8295C16.3078 11.8617 16.736 10.9564 17.3619 10.1936C17.9879 9.43091 18.7923 8.83432 19.7039 8.45672C20.4336 8.15447 21.214 8 22 8V6Z"/></svg>
+                <span>Care</span>
+              </div>
+              <button class="nav-link-action"><svg viewBox="0 0 36 36" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M28.7072 14.7072L18.0001 25.4143L7.29297 14.7072L8.70718 13.293L18.0001 22.5859L27.293 13.293L28.7072 14.7072Z"/></svg></button>
+            </div>
+            <div class="nav-link">
+              <div class="nav-link-content">
+                <!-- Soul: Bot icon -->
+                <svg viewBox="0 0 36 36" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M18 6C16.8954 6 16 6.89543 16 8C16 9.10457 16.8954 10 18 10C19.1046 10 20 9.10457 20 8C20 6.89543 19.1046 6 18 6ZM14 8C14 5.79086 15.7909 4 18 4C20.2091 4 22 5.79086 22 8C22 9.86384 20.7252 11.4299 19 11.874V14H25C28.866 14 32 17.134 32 21V25C32 28.866 28.866 32 25 32H11C7.13401 32 4 28.866 4 25V21C4 17.134 7.13401 14 11 14H17V11.874C15.2748 11.4299 14 9.86384 14 8ZM11 16C8.23858 16 6 18.2386 6 21V25C6 27.7614 8.23858 30 11 30H25C27.7614 30 30 27.7614 30 25V21C30 18.2386 27.7614 16 25 16H11ZM13 22C12.4477 22 12 22.4477 12 23C12 23.5523 12.4477 24 13 24C13.5523 24 14 23.5523 14 23C14 22.4477 13.5523 22 13 22ZM10 23C10 21.3431 11.3431 20 13 20C14.6569 20 16 21.3431 16 23C16 24.6569 14.6569 26 13 26C11.3431 26 10 24.6569 10 23ZM23 22C22.4477 22 22 22.4477 22 23C22 23.5523 22.4477 24 23 24C23.5523 24 24 23.5523 24 23C24 22.4477 23.5523 22 23 22ZM20 23C20 21.3431 21.3431 20 23 20C24.6569 20 26 21.3431 26 23C26 24.6569 24.6569 26 23 26C21.3431 26 20 24.6569 20 23Z"/></svg>
+                <span>Bot</span>
+              </div>
+              <button class="nav-link-action"><svg viewBox="0 0 36 36" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M28.7072 14.7072L18.0001 25.4143L7.29297 14.7072L8.70718 13.293L18.0001 22.5859L27.293 13.293L28.7072 14.7072Z"/></svg></button>
+            </div>
+            <div class="nav-link">
+              <div class="nav-link-content">
+                <!-- Soul: Community icon -->
+                <svg viewBox="0 0 36 36" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M11 4C9.34315 4 8 5.34315 8 7C8 8.65685 9.34315 10 11 10C12.6569 10 14 8.65685 14 7C14 5.34315 12.6569 4 11 4ZM6 7C6 4.23858 8.23858 2 11 2C13.7614 2 16 4.23858 16 7C16 9.76142 13.7614 12 11 12C8.23858 12 6 9.76142 6 7ZM27 4C25.3431 4 24 5.34315 24 7C24 8.65685 25.3431 10 27 10C28.6569 10 30 8.65685 30 7C30 5.34315 28.6569 4 27 4ZM22 7C22 4.23858 24.2386 2 27 2C29.7614 2 32 4.23858 32 7C32 9.76142 29.7614 12 27 12C24.2386 12 22 9.76142 22 7ZM2 21C2 17.134 5.13401 14 9 14H10V16H9C6.23858 16 4 18.2386 4 21V22H2V21ZM18 16C16.3431 16 15 17.3431 15 19C15 20.6569 16.3431 22 18 22C19.6569 22 21 20.6569 21 19C21 17.3431 19.6569 16 18 16ZM13 19C13 16.2386 15.2386 14 18 14C20.7614 14 23 16.2386 23 19C23 21.7614 20.7614 24 18 24C15.2386 24 13 21.7614 13 19ZM27 16H26V14H27C30.866 14 34 17.134 34 21V22H32V21C32 18.2386 29.7614 16 27 16ZM9 33C9 29.134 12.134 26 16 26H20C23.866 26 27 29.134 27 33V34H25V33C25 30.2386 22.7614 28 20 28H16C13.2386 28 11 30.2386 11 33V34H9V33Z"/></svg>
+                <span>Community</span>
+              </div>
+              <button class="nav-link-action"><svg viewBox="0 0 36 36" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M28.7072 14.7072L18.0001 25.4143L7.29297 14.7072L8.70718 13.293L18.0001 22.5859L27.293 13.293L28.7072 14.7072Z"/></svg></button>
+            </div>
+            <div class="nav-link">
+              <div class="nav-link-content">
+                <!-- Soul: Link in Bio icon -->
+                <svg viewBox="0 0 36 36" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M7.60059 7C7.60059 4.23858 9.83916 2 12.6006 2H22.6006C24.2364 2 25.6887 2.78555 26.601 4H22.6006H17.6006H12.6006C10.9437 4 9.60059 5.34315 9.60059 7V8H17.6006V10H9.60059V29C9.60059 30.6569 10.9437 32 12.6006 32H22.6006C24.2574 32 25.6006 30.6569 25.6006 29V26H27.6006V29C27.6006 31.7614 25.362 34 22.6006 34H12.6006C9.83916 34 7.60059 31.7614 7.60059 29V7ZM33.6003 8H23.6003V10H30.1861L21.6084 18.5777L23.0226 19.992L31.6003 11.4142V18H33.6003V8ZM19.6006 30H15.6006V28H19.6006V30Z"/></svg>
+                <span>Link In Bio</span>
+              </div>
+              <button class="nav-link-action"><svg viewBox="0 0 36 36" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M28.7072 14.7072L18.0001 25.4143L7.29297 14.7072L8.70718 13.293L18.0001 22.5859L27.293 13.293L28.7072 14.7072Z"/></svg></button>
+            </div>
+            <div class="nav-link">
+              <div class="nav-link-content">
+                <!-- Soul: Live Commerce icon -->
+                <svg viewBox="0 0 36 36" fill="currentColor"><path d="M22.4488 15.9202C23.5236 16.481 23.5236 18.019 22.4488 18.5798L15.6935 22.105C14.6948 22.6262 13.4995 21.9017 13.4995 20.7752L13.4995 13.7247C13.4995 12.5982 14.6948 11.8737 15.6935 12.3949L22.4488 15.9202Z"/><path d="M15 28C14.4477 28 14 28.4477 14 29C14 29.5523 14.4477 30 15 30H21C21.5523 30 22 29.5523 22 29C22 28.4477 21.5523 28 21 28H15Z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M6 7C6 4.23858 8.23858 2 11 2H25C27.7614 2 30 4.23858 30 7V29C30 31.7614 27.7614 34 25 34H11C8.23858 34 6 31.7614 6 29V7ZM11 4C9.34315 4 8 5.34315 8 7V29C8 30.6569 9.34315 32 11 32H25C26.6569 32 28 30.6569 28 29V7C28 5.34315 26.6569 4 25 4H11Z"/></svg>
+                <span>Live Commerce</span>
+              </div>
+              <button class="nav-link-action"><svg viewBox="0 0 36 36" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M28.7072 14.7072L18.0001 25.4143L7.29297 14.7072L8.70718 13.293L18.0001 22.5859L27.293 13.293L28.7072 14.7072Z"/></svg></button>
+            </div>
+            <div class="nav-link">
+              <div class="nav-link-content">
+                <!-- Soul: User Generated Content app icon -->
+                <svg viewBox="0 0 36 36" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M11 12C13.2004 12 15.0688 10.5786 15.7372 8.60396L22.0087 9.40968C22.0858 10.3605 22.4289 11.2361 22.9635 11.9619L20.601 14.5384C19.8587 14.1019 18.9937 13.8516 18.0703 13.8516C15.3089 13.8516 13.0703 16.0901 13.0703 18.8516C13.0703 20.298 13.6845 21.601 14.6663 22.5139C11.3621 23.5632 8.73419 26.131 7.6025 29.3977C7.4766 29.7611 7.59538 30.1622 7.89341 30.4053C10.6486 32.6524 14.1665 34 17.9991 34C21.8317 34 25.3496 32.6524 28.1048 30.4053C28.4028 30.1622 28.5216 29.7611 28.3957 29.3977C27.2761 26.1658 24.692 23.618 21.4373 22.548C22.4407 21.6335 23.0703 20.3161 23.0703 18.8516C23.0703 17.7366 22.7054 16.7069 22.0885 15.8754L24.4463 13.3042C25.192 13.7462 26.0624 14 26.9922 14C29.7536 14 31.9922 11.7614 31.9922 9C31.9922 6.23858 29.7536 4 26.9922 4C24.7815 4 22.906 5.43465 22.2457 7.42369L15.9857 6.61946C15.7913 4.03581 13.6334 2 11 2C8.23858 2 6 4.23858 6 7C6 9.76142 8.23858 12 11 12ZM14 7C14 8.65685 12.6569 10 11 10C9.34315 10 8 8.65685 8 7C8 5.34315 9.34315 4 11 4C12.6569 4 14 5.34315 14 7ZM17.9991 32C14.9247 32 12.0858 31.0112 9.77709 29.3327C11.1819 26.188 14.3372 24 17.9991 24C21.661 24 24.8163 26.188 26.2211 29.3327C23.9123 31.0112 21.0735 32 17.9991 32ZM18.0703 21.8516C19.7272 21.8516 21.0703 20.5084 21.0703 18.8516C21.0703 17.1947 19.7272 15.8516 18.0703 15.8516C16.4135 15.8516 15.0703 17.1947 15.0703 18.8516C15.0703 20.5084 16.4135 21.8516 18.0703 21.8516ZM29.9922 9C29.9922 10.6569 28.649 12 26.9922 12C25.3353 12 23.9922 10.6569 23.9922 9C23.9922 7.34315 25.3353 6 26.9922 6C28.649 6 29.9922 7.34315 29.9922 9Z"/></svg>
+                <span>UGC</span>
+              </div>
+              <button class="nav-link-action"><svg viewBox="0 0 36 36" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M28.7072 14.7072L18.0001 25.4143L7.29297 14.7072L8.70718 13.293L18.0001 22.5859L27.293 13.293L28.7072 14.7072Z"/></svg></button>
+            </div>
+            <div class="nav-link">
+              <div class="nav-link-content">
+                <!-- Soul: Rating & Reviews app icon -->
+                <svg viewBox="0 0 36 36" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M17.9978 4.01758L20.4445 8.20603L25.0367 9.24221L21.9632 12.8388L22.6321 17.9975L17.9978 16.0446L13.3635 17.9975L14.0324 12.8384L10.9639 9.24222L15.551 8.20614L17.9978 4.01758ZM17.9978 7.98265L16.8395 9.96549L14.635 10.4634L16.1299 12.2154L15.7945 14.8028L17.9978 13.8743L20.2011 14.8028L19.8655 12.2149L21.3623 10.4634L19.1561 9.96561L17.9978 7.98265Z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M26.9578 18.0176L29.4045 22.206L33.9967 23.2422L30.9232 26.8388L31.5921 31.9975L26.9578 30.0446L22.3235 31.9975L22.9924 26.8384L19.9239 23.2422L24.511 22.2061L26.9578 18.0176ZM26.9578 21.9827L25.7995 23.9655L23.595 24.4634L25.0899 26.2154L24.7545 28.8028L26.9578 27.8743L29.1611 28.8028L28.8255 26.2149L30.3223 24.4634L28.1161 23.9656L26.9578 21.9827Z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M9.03776 18.0176L11.4845 22.206L16.0767 23.2422L13.0032 26.8388L13.6721 31.9975L9.03776 30.0446L4.40348 31.9975L5.07242 26.8384L2.00391 23.2422L6.59097 22.2061L9.03776 18.0176ZM9.03776 21.9827L7.87946 23.9655L5.67504 24.4634L7.16994 26.2154L6.83445 28.8028L9.03776 27.8743L11.2411 28.8028L10.9055 26.2149L12.4023 24.4634L10.1961 23.9656L9.03776 21.9827Z"/></svg>
+                <span>Ratings &amp; Reviews</span>
+              </div>
+              <button class="nav-link-action"><svg viewBox="0 0 36 36" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M28.7072 14.7072L18.0001 25.4143L7.29297 14.7072L8.70718 13.293L18.0001 22.5859L27.293 13.293L28.7072 14.7072Z"/></svg></button>
+            </div>
+            <div class="nav-link">
+              <div class="nav-link-content">
+                <!-- Soul: Knowledge app icon -->
+                <svg viewBox="0 0 36 36" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 4H10C8.89543 4 8 4.89543 8 6L8 26.9986L8 27L8 28H28V6C28 4.89543 27.1046 4 26 4H24V16.4757V18.0868L22.5563 17.3719L18 15.1159L13.4437 17.3719L12 18.0868V16.4757V4ZM12 2H10C7.79086 2 6 3.79086 6 6V27V28V29C6 31.7614 8.23858 34 11 34L29 34C29.5523 34 30 33.5523 30 33C30 32.4477 29.5523 32 29 32L11 32C9.69378 32 8.58254 31.1652 8.17071 30H28C29.1046 30 30 29.1046 30 28V6C30 3.79086 28.2091 2 26 2H24H23H13H12ZM14 4V14.8647L17.5563 13.1038L18 12.8841L18.4437 13.1038L22 14.8647V4H14Z"/></svg>
+                <span>Knowledge</span>
+              </div>
+              <button class="nav-link-action"><svg viewBox="0 0 36 36" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M28.7072 14.7072L18.0001 25.4143L7.29297 14.7072L8.70718 13.293L18.0001 22.5859L27.293 13.293L28.7072 14.7072Z"/></svg></button>
+            </div>
+            <div class="nav-link">
+              <div class="nav-link-content">
+                <!-- Soul: Agent app icon -->
+                <svg viewBox="0 0 36 36" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M19.6 12H16.4L13 24H15.0364L15.5819 22H20.4179L20.9634 24H23L19.6 12ZM19.8725 20H16.1274L17.7637 14H18.2361L19.8725 20Z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M32.9733 8.18843C32.9205 6.98035 32.1139 5.97442 30.9482 5.65313C28.5435 4.9904 23.9556 4 18.012 4C12.0564 4 7.46517 4.98931 5.05771 5.65204C3.88933 5.97367 3.08191 6.98253 3.03157 8.19333C2.81718 13.3508 3.53426 27.3399 16.7753 33.466C17.5556 33.827 18.4683 33.8272 19.2488 33.4666C32.5109 27.3388 33.1988 13.3421 32.9733 8.18843ZM18.012 6C23.7373 6 28.1434 6.9547 30.4168 7.58124C30.7517 7.67354 30.9606 7.94019 30.9752 8.27584C31.1964 13.3327 30.452 26.087 18.41 31.651C18.1619 31.7656 17.8629 31.7655 17.6151 31.6508C5.59061 26.0876 4.81947 13.3371 5.02985 8.27639C5.04383 7.94003 5.25277 7.67274 5.58853 7.58031C7.86445 6.95379 12.2741 6 18.012 6Z"/></svg>
+                <span>Agent</span>
+              </div>
+              <button class="nav-link-action"><svg viewBox="0 0 36 36" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M28.7072 14.7072L18.0001 25.4143L7.29297 14.7072L8.70718 13.293L18.0001 22.5859L27.293 13.293L28.7072 14.7072Z"/></svg></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Analytics Main -->
+    <div class="main-content" style="background:var(--color-layer-level-1);">
+      <div class="analytics-header">
+        <div class="analytics-header-left">
+          <span class="analytics-board-title">Labubu</span>
+        </div>
+        <div class="analytics-header-right">
+          <button class="btn btn-m btn-invisible">
+            <svg viewBox="0 0 36 36" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" clip-rule="evenodd" d="M17 17V7H19V17H29V19H19V29H17V19H7V17H17Z"/></svg>
+            <span class="btn-content">Add widget</span>
+          </button>
+          <button class="btn btn-m btn-invisible">
+            <svg viewBox="0 0 36 36" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.823 2.05779C14.7869 1.86436 16.7682 2.15826 18.5914 2.91345C20.4146 3.66864 22.0234 4.86182 23.2753 6.38728C24.5272 7.91275 25.3836 9.72343 25.7686 11.6589C26.1536 13.5944 26.0553 15.595 25.4825 17.4834C25.0067 19.0518 24.2158 20.5026 23.1621 21.7487L31.7063 30.2929L30.2921 31.7072L20.3632 21.7782L21.0703 21.0711C22.2331 19.9082 23.0912 18.4765 23.5686 16.9028C24.046 15.3292 24.1279 13.662 23.8071 12.0491C23.4862 10.4362 22.7726 8.92729 21.7293 7.65607C20.686 6.38485 19.3454 5.39053 17.826 4.76121C16.3067 4.13188 14.6556 3.88697 13.019 4.04816C11.3824 4.20935 9.81086 4.77167 8.4435 5.68531C7.07614 6.59895 5.95521 7.83571 5.17999 9.28603C4.69329 10.1966 4.35229 11.1737 4.16588 12.1818L2.19922 11.8182C2.42291 10.6084 2.83211 9.43591 3.41615 8.34324C4.34641 6.60285 5.69153 5.11874 7.33236 4.02237C8.9732 2.926 10.8591 2.25121 12.823 2.05779ZM3.9992 18C3.9992 16.8954 4.89464 16 5.9992 16H13.9992C15.1038 16 15.9992 16.8954 15.9992 18V32.0868L9.9992 29.1159L3.9992 32.0868V18ZM13.9992 18L5.9992 18V28.8647L9.9992 26.8841L13.9992 28.8647V18Z"/></svg>
+            <span class="btn-content">Saved views</span>
+          </button>
+          <button class="btn btn-m btn-invisible">
+            <svg viewBox="0 0 36 36" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" clip-rule="evenodd" d="M19 2V23.5858L27.2929 15.2929L28.7071 16.7071L18 27.4142L7.29289 16.7071L8.70711 15.2929L17 23.5858V2H19ZM6 29V28H8V29C8 30.6569 9.34315 32 11 32H25C26.6569 32 28 30.6569 28 29V28H30V29C30 31.7614 27.7614 34 25 34H11C8.23858 34 6 31.7614 6 29Z"/></svg>
+            <span class="btn-content">Export</span>
+          </button>
+          <button class="btn btn-m btn-invisible">
+            <svg viewBox="0 0 36 36" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" clip-rule="evenodd" d="M28 4C25.7909 4 24 5.79086 24 8C24 10.2091 25.7909 12 28 12C30.2091 12 32 10.2091 32 8C32 5.79086 30.2091 4 28 4ZM22 8C22 4.68629 24.6863 2 28 2C31.3137 2 34 4.68629 34 8C34 11.3137 31.3137 14 28 14C26.0104 14 24.2469 13.0316 23.1553 11.5404L13.7402 16.248C13.9091 16.8022 14 17.3905 14 18C14 18.6095 13.9091 19.1978 13.7402 19.752L23.1553 24.4596C24.2469 22.9684 26.0104 22 28 22C31.3137 22 34 24.6863 34 28C34 31.3137 31.3137 34 28 34C24.6863 34 22 31.3137 22 28C22 27.3905 22.0909 26.8022 22.2598 26.248L12.8447 21.5404C11.7531 23.0316 9.98963 24 8 24C4.68629 24 2 21.3137 2 18C2 14.6863 4.68629 12 8 12C9.98963 12 11.7531 12.9684 12.8447 14.4596L22.2598 9.75205C22.0909 9.1978 22 8.60951 22 8ZM8 14C5.79086 14 4 15.7909 4 18C4 20.2091 5.79086 22 8 22C10.2091 22 12 20.2091 12 18C12 15.7909 10.2091 14 8 14ZM28 24C25.7909 24 24 25.7909 24 28C24 30.2091 25.7909 32 28 32C30.2091 32 32 30.2091 32 28C32 25.7909 30.2091 24 28 24Z"/></svg>
+            <span class="btn-content">Share</span>
+          </button>
+          <div class="avatar-group">
+            <div class="avatar-circle" style="background:#c8e6c9;"></div>
+            <div class="avatar-circle" style="background:#bbdefb;"></div>
+            <div class="avatar-overflow">+3</div>
+          </div>
+          <button class="btn btn-m btn-invisible btn-icon">
+            <svg viewBox="0 0 36 36" fill="currentColor" width="18" height="18"><path d="M10 18C10 19.6569 8.65685 21 7 21C5.34315 21 4 19.6569 4 18C4 16.3431 5.34315 15 7 15C8.65685 15 10 16.3431 10 18Z"/><path d="M21 18C21 19.6569 19.6569 21 18 21C16.3431 21 15 19.6569 15 18C15 16.3431 16.3431 15 18 15C19.6569 15 21 16.3431 21 18Z"/><path d="M32 18C32 19.6569 30.6569 21 29 21C27.3431 21 26 19.6569 26 18C26 16.3431 27.3431 15 29 15C30.6569 15 32 16.3431 32 18Z"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="analytics-filters">
+        <div class="analytics-filters-left">
+          <button class="btn btn-m btn-ghost">
+            <svg viewBox="0 0 36 36" fill="currentColor" width="18" height="18"><path d="M10 16H14V18H10V16Z"/><path d="M10 22H14V24H10V22Z"/><path d="M16 16H20V18H16V16Z"/><path d="M16 22H20V24H16V22Z"/><path d="M22 16H26V18H22V16Z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M10 4V2H12V4H24V2H26V4H27C29.7614 4 32 6.23858 32 9V27C32 29.7614 29.7614 32 27 32H9C6.23858 32 4 29.7614 4 27V9C4 6.23858 6.23858 4 9 4H10ZM10 8V6H9C7.34315 6 6 7.34315 6 9V10H30V9C30 7.34315 28.6569 6 27 6H26V8H24V6H12V8H10ZM6 12V27C6 28.6569 7.34315 30 9 30H27C28.6569 30 30 28.6569 30 27V12H6Z"/></svg>
+            <span class="btn-content">Last 30 days</span>
+          </button>
+          <button class="btn btn-m btn-ghost">
+            <svg viewBox="0 0 36 36" fill="currentColor" width="18" height="18"><path d="M10 16H14V18H10V16Z"/><path d="M10 22H14V24H10V22Z"/><path d="M16 16H20V18H16V16Z"/><path d="M16 22H20V24H16V22Z"/><path d="M22 16H26V18H22V16Z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M10 4V2H12V4H24V2H26V4H27C29.7614 4 32 6.23858 32 9V27C32 29.7614 29.7614 32 27 32H9C6.23858 32 4 29.7614 4 27V9C4 6.23858 6.23858 4 9 4H10ZM10 8V6H9C7.34315 6 6 7.34315 6 9V10H30V9C30 7.34315 28.6569 6 27 6H26V8H24V6H12V8H10ZM6 12V27C6 28.6569 7.34315 30 9 30H27C28.6569 30 30 28.6569 30 27V12H6Z"/></svg>
+            <span class="btn-content">Week</span>
+          </button>
+          <button class="btn btn-m btn-ghost btn-applied">
+            <svg viewBox="0 0 36 36" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" clip-rule="evenodd" d="M14 4C8.47715 4 4 8.47715 4 14C4 19.5228 8.47715 24 14 24C19.5228 24 24 19.5228 24 14C24 8.47715 19.5228 4 14 4ZM2 14C2 7.37258 7.37258 2 14 2C20.6274 2 26 7.37258 26 14C26 16.9537 24.9328 19.6582 23.163 21.7489L31.7071 30.2929L30.2929 31.7072L21.7488 23.1631C19.6581 24.9328 16.9537 26 14 26C7.37258 26 2 20.6274 2 14Z"/></svg>
+            <span class="btn-content">Labubu query</span>
+          </button>
+        </div>
+        <div class="analytics-filters-right">
+          <a class="analytics-reset-link" href="#">Reset</a>
+          <button class="btn btn-m btn-ghost">
+            <span class="btn-content">Save as view</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="analytics-body">
+        <div class="analytics-widgets">
+
+          <!-- ═══════════════════════════════════════════════════
+               ROW 1: Total followers (value + tip) | Bar chart
+               ═══════════════════════════════════════════════════ -->
+          <div class="analytics-widget-row">
+            <div class="analytics-widget-col" style="width:374px; flex:none;">
+              <div class="analytics-widget" style="flex:1;">
+                <div class="widget-header"><span class="widget-title">Total followers</span><svg viewBox="0 0 36 36" fill="var(--color-on-layer-secondary)" width="18" height="18"><path d="M10 18C10 19.6569 8.65685 21 7 21C5.34315 21 4 19.6569 4 18C4 16.3431 5.34315 15 7 15C8.65685 15 10 16.3431 10 18Z"/><path d="M21 18C21 19.6569 19.6569 21 18 21C16.3431 21 15 19.6569 15 18C15 16.3431 16.3431 15 18 15C19.6569 15 21 16.3431 21 18Z"/><path d="M32 18C32 19.6569 30.6569 21 29 21C27.3431 21 26 19.6569 26 18C26 16.3431 27.3431 15 29 15C30.6569 15 32 16.3431 32 18Z"/></svg></div>
+                <div class="widget-subtitle">Dec 01, 2026 - Dec 31, 2026</div>
+                <div class="widget-value-area">
+                  <div class="widget-value">588k</div>
+                  <div class="widget-label">Total followers</div>
+                </div>
+              </div>
+              <div class="widget-tip">
+                <p><strong>Tip:</strong> Follower count indicates how popular your profile is compared to competitors. But keep in mind that <strong>a high follower count should not be the sole KPI</strong>, as this does not guarantee reach or post impressions.</p>
+              </div>
+            </div>
+            <div class="analytics-widget" style="flex:1;">
+              <div class="widget-header"><span class="widget-title">Total followers</span><svg viewBox="0 0 36 36" fill="var(--color-on-layer-secondary)" width="18" height="18"><path d="M10 18C10 19.6569 8.65685 21 7 21C5.34315 21 4 19.6569 4 18C4 16.3431 5.34315 15 7 15C8.65685 15 10 16.3431 10 18Z"/><path d="M21 18C21 19.6569 19.6569 21 18 21C16.3431 21 15 19.6569 15 18C15 16.3431 16.3431 15 18 15C19.6569 15 21 16.3431 21 18Z"/><path d="M32 18C32 19.6569 30.6569 21 29 21C27.3431 21 26 19.6569 26 18C26 16.3431 27.3431 15 29 15C30.6569 15 32 16.3431 32 18Z"/></svg></div>
+              <div class="widget-subtitle">Dec 01, 2026 - Dec 31, 2026 <span class="widget-badge" style="float:right;">PROFILE LEVEL</span></div>
+              <div class="bar-chart">
+                <div class="bar-chart-row"><div class="bar-chart-label"><span class="platform-badge" style="background:#1877F2;">Fb</span><span>Toutique</span></div><div class="bar-chart-track"><div class="bar-chart-bar" style="width:93%;background:#3F51B5;"></div></div><span class="bar-chart-value">37,365</span></div>
+                <div class="bar-chart-row"><div class="bar-chart-label"><span class="platform-badge" style="background:#000;">Tt</span><span>Toutique</span></div><div class="bar-chart-track"><div class="bar-chart-bar" style="width:85%;background:#2196F3;"></div></div><span class="bar-chart-value">33,885</span></div>
+                <div class="bar-chart-row"><div class="bar-chart-label"><span class="platform-badge" style="background:#FFFC00;color:#000;">Sc</span><span>Toutique</span></div><div class="bar-chart-track"><div class="bar-chart-bar" style="width:71%;background:#00BCD4;"></div></div><span class="bar-chart-value">28,524</span></div>
+                <div class="bar-chart-row"><div class="bar-chart-label"><span class="platform-badge" style="background:#FFFC00;color:#000;">Sc</span><span>Toutique</span></div><div class="bar-chart-track"><div class="bar-chart-bar" style="width:66%;background:#009688;"></div></div><span class="bar-chart-value">26,350</span></div>
+                <div class="bar-chart-row"><div class="bar-chart-label"><span class="platform-badge" style="background:#1877F2;">Fb</span><span>Toutique US</span></div><div class="bar-chart-track"><div class="bar-chart-bar" style="width:54%;background:#4CAF50;"></div></div><span class="bar-chart-value">21,500</span></div>
+                <div class="bar-chart-row"><div class="bar-chart-label"><span class="platform-badge" style="background:#1877F2;">Fb</span><span>Toutique CS</span></div><div class="bar-chart-track"><div class="bar-chart-bar" style="width:48%;background:#8BC34A;"></div></div><span class="bar-chart-value">19,280</span></div>
+                <div class="bar-chart-row"><div class="bar-chart-label"><span class="platform-badge" style="background:#D73676;">Ig</span><span>Toutique</span></div><div class="bar-chart-track"><div class="bar-chart-bar" style="width:40%;background:#8BC34A;"></div></div><span class="bar-chart-value">15,120</span></div>
+              </div>
+              <div class="bar-chart-axis"><span>0</span><span>10K</span><span>20K</span><span>30K</span><span>40K</span></div>
+              <div class="bar-chart-axis-label">Total followers</div>
+            </div>
+          </div>
+
+          <!-- ═══════════════════════════════════════════════════
+               ROW 2: Follower growth — full-width line chart
+               ═══════════════════════════════════════════════════ -->
+          <div class="analytics-widget-row">
+            <div class="analytics-widget" style="min-height:416px;">
+              <div class="widget-header"><span class="widget-title">Follower growth</span><svg viewBox="0 0 36 36" fill="var(--color-on-layer-secondary)" width="18" height="18"><path d="M10 18C10 19.6569 8.65685 21 7 21C5.34315 21 4 19.6569 4 18C4 16.3431 5.34315 15 7 15C8.65685 15 10 16.3431 10 18Z"/><path d="M21 18C21 19.6569 19.6569 21 18 21C16.3431 21 15 19.6569 15 18C15 16.3431 16.3431 15 18 15C19.6569 15 21 16.3431 21 18Z"/><path d="M32 18C32 19.6569 30.6569 21 29 21C27.3431 21 26 19.6569 26 18C26 16.3431 27.3431 15 29 15C30.6569 15 32 16.3431 32 18Z"/></svg></div>
+              <div class="widget-subtitle">Dec 01, 2021 - Dec 31, 2022 <span class="widget-badge" style="float:right;">PROFILE LEVEL</span></div>
+              <div style="display:flex; gap:6px; flex:1;">
+                <div style="display:flex; flex-direction:column; justify-content:space-between; padding:4px 0; min-width:36px; text-align:right;">
+                  <span style="font-size:11px; color:var(--color-on-layer-primary);">360k</span>
+                  <span style="font-size:11px; color:var(--color-on-layer-primary);">270k</span>
+                  <span style="font-size:11px; color:var(--color-on-layer-primary);">180k</span>
+                  <span style="font-size:11px; color:var(--color-on-layer-primary);">90k</span>
+                  <span style="font-size:11px; color:var(--color-on-layer-primary);">0</span>
+                </div>
+                <div style="writing-mode:vertical-rl; transform:rotate(180deg); font-size:11px; color:var(--color-on-layer-primary); display:flex; align-items:center; justify-content:center;">Total followers</div>
+                <div class="line-chart-placeholder" style="flex:1;">
+                  <svg viewBox="0 0 500 150" preserveAspectRatio="none">
+                    <line x1="0" y1="0" x2="500" y2="0" stroke="rgba(0,0,0,0.05)" stroke-width="1"/><line x1="0" y1="37" x2="500" y2="37" stroke="rgba(0,0,0,0.05)" stroke-width="1"/><line x1="0" y1="75" x2="500" y2="75" stroke="rgba(0,0,0,0.05)" stroke-width="1"/><line x1="0" y1="112" x2="500" y2="112" stroke="rgba(0,0,0,0.05)" stroke-width="1"/><line x1="0" y1="150" x2="500" y2="150" stroke="rgba(0,0,0,0.08)" stroke-width="1"/>
+                    <polyline points="0,60 40,55 80,48 120,30 160,25 200,15 240,20 280,28 320,18 360,22 400,15 440,20 500,25" fill="none" stroke="#3F51B5" stroke-width="2"/>
+                    <polyline points="0,80 40,75 80,68 120,55 160,60 200,45 240,50 280,42 320,48 360,40 400,35 440,38 500,30" fill="none" stroke="#2196F3" stroke-width="2"/>
+                    <polyline points="0,95 40,90 80,85 120,75 160,72 200,65 240,70 280,62 320,68 360,55 400,60 440,58 500,52" fill="none" stroke="#00BCD4" stroke-width="2"/>
+                    <polyline points="0,105 40,100 80,95 120,88 160,85 200,80 240,82 280,78 320,82 360,75 400,72 440,70 500,65" fill="none" stroke="#009688" stroke-width="2"/>
+                    <polyline points="0,120 40,118 80,115 120,110 160,108 200,105 240,107 280,103 320,108 360,100 400,98 440,95 500,90" fill="none" stroke="#4CAF50" stroke-width="2"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="widget-dates" style="margin-top:6px; padding-left:60px;"><span>Jan 2026</span><span>Mar 2026</span><span>May 2026</span><span>Jul 2026</span><span>Sep 2026</span><span>Nov 2026</span></div>
+              <div class="widget-legend">
+                <div class="widget-legend-item"><div class="widget-legend-color" style="background:#3F51B5;"></div><span class="platform-badge" style="background:#1877F2;">Fb</span><span class="widget-legend-label">Toutique</span></div>
+                <div class="widget-legend-item"><div class="widget-legend-color" style="background:#2196F3;"></div><span class="platform-badge" style="background:#D73676;">Ig</span><span class="widget-legend-label">Toutique</span></div>
+                <div class="widget-legend-item"><div class="widget-legend-color" style="background:#00BCD4;"></div><span class="platform-badge" style="background:#FFFC00;color:#000;">Sc</span><span class="widget-legend-label">Toutique</span></div>
+                <div class="widget-legend-item"><div class="widget-legend-color" style="background:#009688;"></div><span class="platform-badge" style="background:#1877F2;">Fb</span><span class="widget-legend-label">Toutique</span></div>
+                <div class="widget-legend-item"><div class="widget-legend-color" style="background:#4CAF50;"></div><span class="platform-badge" style="background:#59ADEB;">Tw</span><span class="widget-legend-label">Toutique</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ═══════════════════════════════════════════════════
+               ROW 3: Follower growth value (vs down) | Vertical bar chart
+               ═══════════════════════════════════════════════════ -->
+          <div class="analytics-widget-row">
+            <div class="analytics-widget" style="width:244px; flex:none;">
+              <div class="widget-header"><span class="widget-title">Follower growth</span><svg viewBox="0 0 36 36" fill="var(--color-on-layer-secondary)" width="18" height="18"><path d="M10 18C10 19.6569 8.65685 21 7 21C5.34315 21 4 19.6569 4 18C4 16.3431 5.34315 15 7 15C8.65685 15 10 16.3431 10 18Z"/><path d="M21 18C21 19.6569 19.6569 21 18 21C16.3431 21 15 19.6569 15 18C15 16.3431 16.3431 15 18 15C19.6569 15 21 16.3431 21 18Z"/><path d="M32 18C32 19.6569 30.6569 21 29 21C27.3431 21 26 19.6569 26 18C26 16.3431 27.3431 15 29 15C30.6569 15 32 16.3431 32 18Z"/></svg></div>
+              <div class="widget-subtitle">Dec 01, 2021 - Dec 31, 2022</div>
+              <div class="widget-value-area">
+                <div class="widget-value">-3,5K</div>
+                <div class="widget-label">Total followers</div>
+                <div class="widget-comparison">
+                  <div class="widget-comparison-change negative"><svg viewBox="0 0 36 36" fill="currentColor" width="12" height="12"><path d="M18 28L6 14h24L18 28z"/></svg> -252%</div>
+                  <div class="widget-comparison-vs">vs Dec 01, 2021 - Dec 31, 2022</div>
+                </div>
+              </div>
+            </div>
+            <div class="analytics-widget" style="flex:1;">
+              <div class="widget-header"><span class="widget-title">Follower growth</span><svg viewBox="0 0 36 36" fill="var(--color-on-layer-secondary)" width="18" height="18"><path d="M10 18C10 19.6569 8.65685 21 7 21C5.34315 21 4 19.6569 4 18C4 16.3431 5.34315 15 7 15C8.65685 15 10 16.3431 10 18Z"/><path d="M21 18C21 19.6569 19.6569 21 18 21C16.3431 21 15 19.6569 15 18C15 16.3431 16.3431 15 18 15C19.6569 15 21 16.3431 21 18Z"/><path d="M32 18C32 19.6569 30.6569 21 29 21C27.3431 21 26 19.6569 26 18C26 16.3431 27.3431 15 29 15C30.6569 15 32 16.3431 32 18Z"/></svg></div>
+              <div class="widget-subtitle">Dec 01, 2021 - Dec 31, 2022 <span class="widget-badge" style="float:right;">POST LEVEL</span></div>
+              <div style="display:flex; flex:1; padding:12px;">
+                <div style="display:flex; flex-direction:column; justify-content:space-between; min-width:36px; text-align:right; padding-right:6px;">
+                  <span style="font-size:11px; color:var(--color-on-layer-primary);">3K</span>
+                  <span style="font-size:11px; color:var(--color-on-layer-primary);">1.5K</span>
+                  <span style="font-size:11px; color:var(--color-on-layer-primary);">0</span>
+                  <span style="font-size:11px; color:var(--color-on-layer-primary);">-1.5K</span>
+                  <span style="font-size:11px; color:var(--color-on-layer-primary);">-3K</span>
+                </div>
+                <div style="writing-mode:vertical-rl; transform:rotate(180deg); font-size:11px; color:var(--color-on-layer-primary); display:flex; align-items:center; justify-content:center;">Total follower growth</div>
+                <div style="flex:1; display:flex; align-items:center; gap:4px; padding:8px 0;">
+                  <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:2px;">
+                    <div style="width:70%; height:60px; background:#3F51B5; border-radius:2px 2px 0 0;"></div>
+                    <span style="font-size:10px; writing-mode:vertical-lr; transform:rotate(180deg); max-height:60px; overflow:hidden;">Miami Dolphins</span>
+                    <span class="platform-badge" style="background:#1877F2;">Fb</span>
+                  </div>
+                  <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:2px;">
+                    <div style="width:70%; height:80px; background:#2196F3; border-radius:2px 2px 0 0;"></div>
+                    <span style="font-size:10px; writing-mode:vertical-lr; transform:rotate(180deg); max-height:60px; overflow:hidden;">Miami Dolphins</span>
+                    <span class="platform-badge" style="background:#000;">Tt</span>
+                  </div>
+                  <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:2px;">
+                    <div style="width:70%; height:30px; background:#00BCD4; border-radius:0 0 2px 2px; margin-top:auto;"></div>
+                    <span style="font-size:10px; writing-mode:vertical-lr; transform:rotate(180deg); max-height:60px; overflow:hidden;">Miami Dolphins</span>
+                    <span class="platform-badge" style="background:#FFFC00;color:#000;">Sc</span>
+                  </div>
+                  <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:2px;">
+                    <div style="width:70%; height:35px; background:#009688; border-radius:0 0 2px 2px; margin-top:auto;"></div>
+                    <span style="font-size:10px; writing-mode:vertical-lr; transform:rotate(180deg); max-height:60px; overflow:hidden;">Miami Dolphins</span>
+                    <span class="platform-badge" style="background:#FF0000;">Yt</span>
+                  </div>
+                  <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:2px;">
+                    <div style="width:70%; height:40px; background:#4CAF50; border-radius:0 0 2px 2px; margin-top:auto;"></div>
+                    <span style="font-size:10px; writing-mode:vertical-lr; transform:rotate(180deg); max-height:60px; overflow:hidden;">Miami Dolphins</span>
+                    <span class="platform-badge" style="background:#1877F2;">Fb</span>
+                  </div>
+                  <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:2px;">
+                    <div style="width:70%; height:38px; background:#8BC34A; border-radius:0 0 2px 2px; margin-top:auto;"></div>
+                    <span style="font-size:10px; writing-mode:vertical-lr; transform:rotate(180deg); max-height:60px; overflow:hidden;">Miami Dolphins</span>
+                    <span class="platform-badge" style="background:#BB0F23;">Pi</span>
+                  </div>
+                  <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:2px;">
+                    <div style="width:70%; height:50px; background:#CDDC39; border-radius:0 0 2px 2px; margin-top:auto;"></div>
+                    <span style="font-size:10px; writing-mode:vertical-lr; transform:rotate(180deg); max-height:60px; overflow:hidden;">Miami Dolphins</span>
+                    <span class="platform-badge" style="background:#1078B3;">Li</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ═══════════════════════════════════════════════════
+               ROW 4: Follower growth — full-width line chart with legend
+               ═══════════════════════════════════════════════════ -->
+          <div class="analytics-widget-row">
+            <div class="analytics-widget" style="min-height:416px;">
+              <div class="widget-header"><span class="widget-title">Follower growth</span><svg viewBox="0 0 36 36" fill="var(--color-on-layer-secondary)" width="18" height="18"><path d="M10 18C10 19.6569 8.65685 21 7 21C5.34315 21 4 19.6569 4 18C4 16.3431 5.34315 15 7 15C8.65685 15 10 16.3431 10 18Z"/><path d="M21 18C21 19.6569 19.6569 21 18 21C16.3431 21 15 19.6569 15 18C15 16.3431 16.3431 15 18 15C19.6569 15 21 16.3431 21 18Z"/><path d="M32 18C32 19.6569 30.6569 21 29 21C27.3431 21 26 19.6569 26 18C26 16.3431 27.3431 15 29 15C30.6569 15 32 16.3431 32 18Z"/></svg></div>
+              <div class="widget-subtitle">Dec 01, 2021 - Dec 31, 2022 <span class="widget-badge" style="float:right;">PROFILE LEVEL</span></div>
+              <div style="display:flex; gap:6px; flex:1;">
+                <div style="display:flex; flex-direction:column; justify-content:space-between; padding:4px 0; min-width:36px; text-align:right;">
+                  <span style="font-size:11px; color:var(--color-on-layer-primary);">3K</span>
+                  <span style="font-size:11px; color:var(--color-on-layer-primary);">1.5K</span>
+                  <span style="font-size:11px; color:var(--color-on-layer-primary);">0</span>
+                  <span style="font-size:11px; color:var(--color-on-layer-primary);">-1.5K</span>
+                  <span style="font-size:11px; color:var(--color-on-layer-primary);">-3K</span>
+                </div>
+                <div style="writing-mode:vertical-rl; transform:rotate(180deg); font-size:11px; color:var(--color-on-layer-primary); display:flex; align-items:center; justify-content:center;">Total follower growth</div>
+                <div class="line-chart-placeholder" style="flex:1;">
+                  <svg viewBox="0 0 500 150" preserveAspectRatio="none">
+                    <line x1="0" y1="0" x2="500" y2="0" stroke="rgba(0,0,0,0.05)" stroke-width="1"/><line x1="0" y1="37" x2="500" y2="37" stroke="rgba(0,0,0,0.05)" stroke-width="1"/><line x1="0" y1="75" x2="500" y2="75" stroke="rgba(0,0,0,0.08)" stroke-width="1"/><line x1="0" y1="112" x2="500" y2="112" stroke="rgba(0,0,0,0.05)" stroke-width="1"/><line x1="0" y1="150" x2="500" y2="150" stroke="rgba(0,0,0,0.05)" stroke-width="1"/>
+                    <polyline points="0,50 40,55 80,65 120,60 160,75 200,70 240,50 280,55 320,60 360,65 400,55 440,60 500,50" fill="none" stroke="#3F51B5" stroke-width="2"/>
+                    <polyline points="0,65 40,60 80,70 120,80 160,85 200,90 240,75 280,80 320,85 360,90 400,80 440,85 500,75" fill="none" stroke="#2196F3" stroke-width="2"/>
+                    <polyline points="0,80 40,85 80,90 120,95 160,100 200,105 240,95 280,100 320,105 360,110 400,105 440,100 500,95" fill="none" stroke="#00BCD4" stroke-width="2"/>
+                    <polyline points="0,95 40,100 80,105 120,110 160,115 200,120 240,110 280,115 320,120 360,125 400,120 440,115 500,110" fill="none" stroke="#009688" stroke-width="2"/>
+                    <polyline points="0,110 40,115 80,120 120,125 160,130 200,135 240,125 280,130 320,135 360,140 400,135 440,130 500,125" fill="none" stroke="#4CAF50" stroke-width="2"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="widget-dates" style="margin-top:6px; padding-left:60px;"><span>Jan 2021</span><span>Mar 2021</span><span>May 2021</span><span>Jul 2021</span><span>Sep 2021</span><span>Dec 2021</span></div>
+              <div class="widget-legend">
+                <div class="widget-legend-item"><div class="widget-legend-color" style="background:#3F51B5;"></div><span class="platform-badge" style="background:#1877F2;">Fb</span><span class="widget-legend-label">Toutique</span></div>
+                <div class="widget-legend-item"><div class="widget-legend-color" style="background:#2196F3;"></div><span class="platform-badge" style="background:#D73676;">Ig</span><span class="widget-legend-label">Toutique</span></div>
+                <div class="widget-legend-item"><div class="widget-legend-color" style="background:#00BCD4;"></div><span class="platform-badge" style="background:#FFFC00;color:#000;">Sc</span><span class="widget-legend-label">Toutique</span></div>
+                <div class="widget-legend-item"><div class="widget-legend-color" style="background:#009688;"></div><span class="platform-badge" style="background:#1877F2;">Fb</span><span class="widget-legend-label">Toutique US</span></div>
+                <div class="widget-legend-item"><div class="widget-legend-color" style="background:#4CAF50;"></div><span class="platform-badge" style="background:#59ADEB;">Tw</span><span class="widget-legend-label">Toutique</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ═══════ SECTION DIVIDER ═══════ -->
+          <div class="analytics-section-divider"></div>
+
+          <!-- ═══════════════════════════════════════════════════
+               ROW 5: Total posted (value + vs) | Bar chart
+               ═══════════════════════════════════════════════════ -->
+          <div class="analytics-widget-row">
+            <div class="analytics-widget" style="width:244px; flex:none;">
+              <div class="widget-header"><span class="widget-title">Total posted</span><svg viewBox="0 0 36 36" fill="var(--color-on-layer-secondary)" width="18" height="18"><path d="M10 18C10 19.6569 8.65685 21 7 21C5.34315 21 4 19.6569 4 18C4 16.3431 5.34315 15 7 15C8.65685 15 10 16.3431 10 18Z"/><path d="M21 18C21 19.6569 19.6569 21 18 21C16.3431 21 15 19.6569 15 18C15 16.3431 16.3431 15 18 15C19.6569 15 21 16.3431 21 18Z"/><path d="M32 18C32 19.6569 30.6569 21 29 21C27.3431 21 26 19.6569 26 18C26 16.3431 27.3431 15 29 15C30.6569 15 32 16.3431 32 18Z"/></svg></div>
+              <div class="widget-subtitle">Dec 01, 2021 - Dec 31, 2022</div>
+              <div class="widget-value-area">
+                <div class="widget-value">1.7K</div>
+                <div class="widget-label">Total posted</div>
+                <div class="widget-comparison">
+                  <div class="widget-comparison-change negative"><svg viewBox="0 0 36 36" fill="currentColor" width="12" height="12"><path d="M18 28L6 14h24L18 28z"/></svg> -11%</div>
+                  <div class="widget-comparison-vs">vs Jun 01, 2021 - Jun 30, 2021</div>
+                </div>
+              </div>
+            </div>
+            <div class="analytics-widget" style="flex:1;">
+              <div class="widget-header"><span class="widget-title">Total posted</span><svg viewBox="0 0 36 36" fill="var(--color-on-layer-secondary)" width="18" height="18"><path d="M10 18C10 19.6569 8.65685 21 7 21C5.34315 21 4 19.6569 4 18C4 16.3431 5.34315 15 7 15C8.65685 15 10 16.3431 10 18Z"/><path d="M21 18C21 19.6569 19.6569 21 18 21C16.3431 21 15 19.6569 15 18C15 16.3431 16.3431 15 18 15C19.6569 15 21 16.3431 21 18Z"/><path d="M32 18C32 19.6569 30.6569 21 29 21C27.3431 21 26 19.6569 26 18C26 16.3431 27.3431 15 29 15C30.6569 15 32 16.3431 32 18Z"/></svg></div>
+              <div class="widget-subtitle">Jun 01, 2021 - Jun 30, 2021 <span class="widget-badge" style="float:right;">PROFILE LEVEL</span></div>
+              <div class="bar-chart">
+                <div class="bar-chart-row"><div class="bar-chart-label"><span class="platform-badge" style="background:#1877F2;">Fb</span><span>Toutique</span></div><div class="bar-chart-track"><div class="bar-chart-bar" style="width:88%;background:#3F51B5;"></div></div><span class="bar-chart-value">524</span></div>
+                <div class="bar-chart-row"><div class="bar-chart-label"><span class="platform-badge" style="background:#D73676;">Ig</span><span>Toutique</span></div><div class="bar-chart-track"><div class="bar-chart-bar" style="width:72%;background:#2196F3;"></div></div><span class="bar-chart-value">428</span></div>
+                <div class="bar-chart-row"><div class="bar-chart-label"><span class="platform-badge" style="background:#FFFC00;color:#000;">Sc</span><span>Toutique</span></div><div class="bar-chart-track"><div class="bar-chart-bar" style="width:55%;background:#00BCD4;"></div></div><span class="bar-chart-value">327</span></div>
+                <div class="bar-chart-row"><div class="bar-chart-label"><span class="platform-badge" style="background:#000;">Tt</span><span>Toutique</span></div><div class="bar-chart-track"><div class="bar-chart-bar" style="width:42%;background:#009688;"></div></div><span class="bar-chart-value">250</span></div>
+                <div class="bar-chart-row"><div class="bar-chart-label"><span class="platform-badge" style="background:#1877F2;">Fb</span><span>Toutique US</span></div><div class="bar-chart-track"><div class="bar-chart-bar" style="width:30%;background:#4CAF50;"></div></div><span class="bar-chart-value">178</span></div>
+              </div>
+              <div class="bar-chart-axis"><span>0</span><span>150</span><span>300</span><span>450</span><span>600</span></div>
+              <div class="bar-chart-axis-label">Total posted</div>
+            </div>
+          </div>
+
+          <!-- ═══════════════════════════════════════════════════
+               ROW 6: Content evolution — full-width stacked area chart
+               ═══════════════════════════════════════════════════ -->
+          <div class="analytics-widget-row">
+            <div class="analytics-widget" style="min-height:416px;">
+              <div class="widget-header"><span class="widget-title">Content evolution</span><svg viewBox="0 0 36 36" fill="var(--color-on-layer-secondary)" width="18" height="18"><path d="M10 18C10 19.6569 8.65685 21 7 21C5.34315 21 4 19.6569 4 18C4 16.3431 5.34315 15 7 15C8.65685 15 10 16.3431 10 18Z"/><path d="M21 18C21 19.6569 19.6569 21 18 21C16.3431 21 15 19.6569 15 18C15 16.3431 16.3431 15 18 15C19.6569 15 21 16.3431 21 18Z"/><path d="M32 18C32 19.6569 30.6569 21 29 21C27.3431 21 26 19.6569 26 18C26 16.3431 27.3431 15 29 15C30.6569 15 32 16.3431 32 18Z"/></svg></div>
+              <div class="widget-subtitle">Jun 01, 2021 - Jun 30, 2021 <span class="widget-badge" style="float:right;">PROFILE LEVEL</span></div>
+              <div style="display:flex; gap:6px; flex:1;">
+                <div style="display:flex; flex-direction:column; justify-content:space-between; padding:4px 0; min-width:36px; text-align:right;">
+                  <span style="font-size:11px; color:var(--color-on-layer-primary);">200</span>
+                  <span style="font-size:11px; color:var(--color-on-layer-primary);">150</span>
+                  <span style="font-size:11px; color:var(--color-on-layer-primary);">100</span>
+                  <span style="font-size:11px; color:var(--color-on-layer-primary);">50</span>
+                  <span style="font-size:11px; color:var(--color-on-layer-primary);">0</span>
+                </div>
+                <div style="writing-mode:vertical-rl; transform:rotate(180deg); font-size:11px; color:var(--color-on-layer-primary); display:flex; align-items:center; justify-content:center;">Number of posts</div>
+                <div class="line-chart-placeholder" style="flex:1;">
+                  <svg viewBox="0 0 500 150" preserveAspectRatio="none">
+                    <line x1="0" y1="0" x2="500" y2="0" stroke="rgba(0,0,0,0.05)" stroke-width="1"/><line x1="0" y1="37" x2="500" y2="37" stroke="rgba(0,0,0,0.05)" stroke-width="1"/><line x1="0" y1="75" x2="500" y2="75" stroke="rgba(0,0,0,0.05)" stroke-width="1"/><line x1="0" y1="112" x2="500" y2="112" stroke="rgba(0,0,0,0.05)" stroke-width="1"/><line x1="0" y1="150" x2="500" y2="150" stroke="rgba(0,0,0,0.08)" stroke-width="1"/>
+                    <polygon points="0,150 0,80 50,75 100,70 150,65 200,60 250,55 300,50 350,45 400,50 450,55 500,50 500,150" fill="rgba(63,81,181,0.3)" stroke="none"/>
+                    <polygon points="0,150 0,95 50,90 100,85 150,80 200,75 250,70 300,65 350,60 400,65 450,70 500,65 500,150" fill="rgba(33,150,243,0.3)" stroke="none"/>
+                    <polygon points="0,150 0,110 50,105 100,100 150,95 200,90 250,85 300,80 350,75 400,80 450,85 500,80 500,150" fill="rgba(0,188,212,0.3)" stroke="none"/>
+                    <polygon points="0,150 0,120 50,115 100,110 150,105 200,100 250,95 300,92 350,88 400,92 450,96 500,92 500,150" fill="rgba(0,150,136,0.3)" stroke="none"/>
+                    <polygon points="0,150 0,130 50,125 100,120 150,118 200,115 250,112 300,108 350,105 400,108 450,112 500,108 500,150" fill="rgba(76,175,80,0.3)" stroke="none"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="widget-dates" style="margin-top:6px; padding-left:60px;"><span>Jun 01</span><span>Jun 05</span><span>Jun 09</span><span>Jun 12</span><span>Jun 16</span><span>Jun 20</span><span>Jun 24</span><span>Jun 28</span></div>
+              <div class="widget-legend">
+                <div class="widget-legend-item"><div class="widget-legend-color" style="background:#3F51B5;"></div><span class="platform-badge" style="background:#1877F2;">Fb</span><span class="widget-legend-label">Toutique</span></div>
+                <div class="widget-legend-item"><div class="widget-legend-color" style="background:#2196F3;"></div><span class="platform-badge" style="background:#D73676;">Ig</span><span class="widget-legend-label">Toutique</span></div>
+                <div class="widget-legend-item"><div class="widget-legend-color" style="background:#00BCD4;"></div><span class="platform-badge" style="background:#FFFC00;color:#000;">Sc</span><span class="widget-legend-label">Toutique</span></div>
+                <div class="widget-legend-item"><div class="widget-legend-color" style="background:#009688;"></div><span class="platform-badge" style="background:#000;">Tt</span><span class="widget-legend-label">Toutique</span></div>
+                <div class="widget-legend-item"><div class="widget-legend-color" style="background:#4CAF50;"></div><span class="platform-badge" style="background:#1877F2;">Fb</span><span class="widget-legend-label">Toutique US</span></div>
+                <div class="widget-legend-item"><div class="widget-legend-color" style="background:#8BC34A;"></div><span class="platform-badge" style="background:#D73676;">Ig</span><span class="widget-legend-label">Toutique another</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ═══════ SECTION DIVIDER ═══════ -->
+          <div class="analytics-section-divider"></div>
+
+          <!-- ═══════════════════════════════════════════════════
+               ROW 7: Total interactions (value + vs) | Bar chart
+               ═══════════════════════════════════════════════════ -->
+          <div class="analytics-widget-row">
+            <div class="analytics-widget" style="width:244px; flex:none;">
+              <div class="widget-header"><span class="widget-title">Total interactions</span><svg viewBox="0 0 36 36" fill="var(--color-on-layer-secondary)" width="18" height="18"><path d="M10 18C10 19.6569 8.65685 21 7 21C5.34315 21 4 19.6569 4 18C4 16.3431 5.34315 15 7 15C8.65685 15 10 16.3431 10 18Z"/><path d="M21 18C21 19.6569 19.6569 21 18 21C16.3431 21 15 19.6569 15 18C15 16.3431 16.3431 15 18 15C19.6569 15 21 16.3431 21 18Z"/><path d="M32 18C32 19.6569 30.6569 21 29 21C27.3431 21 26 19.6569 26 18C26 16.3431 27.3431 15 29 15C30.6569 15 32 16.3431 32 18Z"/></svg></div>
+              <div class="widget-subtitle">Dec 01, 2021 - Dec 31, 2022</div>
+              <div class="widget-value-area">
+                <div class="widget-value">2.5K</div>
+                <div class="widget-label">Total interactions</div>
+                <div class="widget-comparison">
+                  <div class="widget-comparison-change negative"><svg viewBox="0 0 36 36" fill="currentColor" width="12" height="12"><path d="M18 28L6 14h24L18 28z"/></svg> -8%</div>
+                  <div class="widget-comparison-vs">vs Jun 01, 2021 - Jun 30, 2021</div>
+                </div>
+              </div>
+            </div>
+            <div class="analytics-widget" style="flex:1;">
+              <div class="widget-header"><span class="widget-title">Total interactions</span><svg viewBox="0 0 36 36" fill="var(--color-on-layer-secondary)" width="18" height="18"><path d="M10 18C10 19.6569 8.65685 21 7 21C5.34315 21 4 19.6569 4 18C4 16.3431 5.34315 15 7 15C8.65685 15 10 16.3431 10 18Z"/><path d="M21 18C21 19.6569 19.6569 21 18 21C16.3431 21 15 19.6569 15 18C15 16.3431 16.3431 15 18 15C19.6569 15 21 16.3431 21 18Z"/><path d="M32 18C32 19.6569 30.6569 21 29 21C27.3431 21 26 19.6569 26 18C26 16.3431 27.3431 15 29 15C30.6569 15 32 16.3431 32 18Z"/></svg></div>
+              <div class="widget-subtitle">Jun 01, 2021 - Jun 30, 2021 <span class="widget-badge" style="float:right;">PROFILE LEVEL</span></div>
+              <div class="bar-chart">
+                <div class="bar-chart-row"><div class="bar-chart-label"><span class="platform-badge" style="background:#D73676;">Ig</span><span>Toutique</span></div><div class="bar-chart-track"><div class="bar-chart-bar" style="width:95%;background:#3F51B5;"></div></div><span class="bar-chart-value">892</span></div>
+                <div class="bar-chart-row"><div class="bar-chart-label"><span class="platform-badge" style="background:#1877F2;">Fb</span><span>Toutique</span></div><div class="bar-chart-track"><div class="bar-chart-bar" style="width:78%;background:#2196F3;"></div></div><span class="bar-chart-value">735</span></div>
+                <div class="bar-chart-row"><div class="bar-chart-label"><span class="platform-badge" style="background:#000;">Tt</span><span>Toutique</span></div><div class="bar-chart-track"><div class="bar-chart-bar" style="width:55%;background:#00BCD4;"></div></div><span class="bar-chart-value">518</span></div>
+                <div class="bar-chart-row"><div class="bar-chart-label"><span class="platform-badge" style="background:#FFFC00;color:#000;">Sc</span><span>Toutique</span></div><div class="bar-chart-track"><div class="bar-chart-bar" style="width:38%;background:#009688;"></div></div><span class="bar-chart-value">355</span></div>
+              </div>
+              <div class="bar-chart-axis"><span>0</span><span>250</span><span>500</span><span>750</span><span>1K</span></div>
+              <div class="bar-chart-axis-label">Total interactions</div>
+            </div>
+          </div>
+
+          <!-- ═══════════════════════════════════════════════════
+               ROW 8: Total interactions - evolution — full-width
+               ═══════════════════════════════════════════════════ -->
+          <div class="analytics-widget-row">
+            <div class="analytics-widget" style="min-height:416px;">
+              <div class="widget-header"><span class="widget-title">Total interactions - evolution</span><svg viewBox="0 0 36 36" fill="var(--color-on-layer-secondary)" width="18" height="18"><path d="M10 18C10 19.6569 8.65685 21 7 21C5.34315 21 4 19.6569 4 18C4 16.3431 5.34315 15 7 15C8.65685 15 10 16.3431 10 18Z"/><path d="M21 18C21 19.6569 19.6569 21 18 21C16.3431 21 15 19.6569 15 18C15 16.3431 16.3431 15 18 15C19.6569 15 21 16.3431 21 18Z"/><path d="M32 18C32 19.6569 30.6569 21 29 21C27.3431 21 26 19.6569 26 18C26 16.3431 27.3431 15 29 15C30.6569 15 32 16.3431 32 18Z"/></svg></div>
+              <div class="widget-subtitle">Jun 01, 2021 - Jun 30, 2021 <span class="widget-badge" style="float:right;">PROFILE LEVEL</span></div>
+              <div style="display:flex; gap:6px; flex:1;">
+                <div style="display:flex; flex-direction:column; justify-content:space-between; padding:4px 0; min-width:36px; text-align:right;">
+                  <span style="font-size:11px; color:var(--color-on-layer-primary);">1.8K</span>
+                  <span style="font-size:11px; color:var(--color-on-layer-primary);">1.35K</span>
+                  <span style="font-size:11px; color:var(--color-on-layer-primary);">900</span>
+                  <span style="font-size:11px; color:var(--color-on-layer-primary);">450</span>
+                  <span style="font-size:11px; color:var(--color-on-layer-primary);">0</span>
+                </div>
+                <div style="writing-mode:vertical-rl; transform:rotate(180deg); font-size:11px; color:var(--color-on-layer-primary); display:flex; align-items:center; justify-content:center;">Total interactions</div>
+                <div class="line-chart-placeholder" style="flex:1;">
+                  <svg viewBox="0 0 500 150" preserveAspectRatio="none">
+                    <line x1="0" y1="0" x2="500" y2="0" stroke="rgba(0,0,0,0.05)" stroke-width="1"/><line x1="0" y1="37" x2="500" y2="37" stroke="rgba(0,0,0,0.05)" stroke-width="1"/><line x1="0" y1="75" x2="500" y2="75" stroke="rgba(0,0,0,0.05)" stroke-width="1"/><line x1="0" y1="112" x2="500" y2="112" stroke="rgba(0,0,0,0.05)" stroke-width="1"/><line x1="0" y1="150" x2="500" y2="150" stroke="rgba(0,0,0,0.08)" stroke-width="1"/>
+                    <polygon points="0,150 0,60 50,55 100,65 150,50 200,40 250,55 300,45 350,35 400,50 450,40 500,45 500,150" fill="rgba(63,81,181,0.3)" stroke="none"/>
+                    <polygon points="0,150 0,80 50,75 100,85 150,70 200,65 250,75 300,68 350,58 400,72 450,65 500,68 500,150" fill="rgba(33,150,243,0.3)" stroke="none"/>
+                    <polygon points="0,150 0,100 50,95 100,105 150,92 200,88 250,98 300,90 350,82 400,95 450,88 500,90 500,150" fill="rgba(0,188,212,0.3)" stroke="none"/>
+                    <polygon points="0,150 0,115 50,110 100,118 150,108 200,105 250,112 300,106 350,100 400,110 450,105 500,108 500,150" fill="rgba(0,150,136,0.3)" stroke="none"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="widget-dates" style="margin-top:6px; padding-left:60px;"><span>Jun 01</span><span>Jun 05</span><span>Jun 09</span><span>Jun 12</span><span>Jun 16</span><span>Jun 20</span><span>Jun 24</span><span>Jun 28</span></div>
+              <div class="widget-legend">
+                <div class="widget-legend-item"><div class="widget-legend-color" style="background:#3F51B5;"></div><span class="platform-badge" style="background:#1877F2;">Fb</span><span class="widget-legend-label">Toutique</span></div>
+                <div class="widget-legend-item"><div class="widget-legend-color" style="background:#2196F3;"></div><span class="platform-badge" style="background:#D73676;">Ig</span><span class="widget-legend-label">Toutique</span></div>
+                <div class="widget-legend-item"><div class="widget-legend-color" style="background:#00BCD4;"></div><span class="platform-badge" style="background:#000;">Tt</span><span class="widget-legend-label">Toutique</span></div>
+                <div class="widget-legend-item"><div class="widget-legend-color" style="background:#009688;"></div><span class="platform-badge" style="background:#FFFC00;color:#000;">Sc</span><span class="widget-legend-label">Toutique</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ═══════ SECTION DIVIDER ═══════ -->
+          <div class="analytics-section-divider"></div>
+
+          <!-- ═══════════════════════════════════════════════════
+               ROW 9: Total impressions (value + vs) | Bar chart
+               ═══════════════════════════════════════════════════ -->
+          <div class="analytics-widget-row">
+            <div class="analytics-widget" style="width:244px; flex:none;">
+              <div class="widget-header"><span class="widget-title">Total impressions</span><svg viewBox="0 0 36 36" fill="var(--color-on-layer-secondary)" width="18" height="18"><path d="M10 18C10 19.6569 8.65685 21 7 21C5.34315 21 4 19.6569 4 18C4 16.3431 5.34315 15 7 15C8.65685 15 10 16.3431 10 18Z"/><path d="M21 18C21 19.6569 19.6569 21 18 21C16.3431 21 15 19.6569 15 18C15 16.3431 16.3431 15 18 15C19.6569 15 21 16.3431 21 18Z"/><path d="M32 18C32 19.6569 30.6569 21 29 21C27.3431 21 26 19.6569 26 18C26 16.3431 27.3431 15 29 15C30.6569 15 32 16.3431 32 18Z"/></svg></div>
+              <div class="widget-subtitle">Dec 01, 2021 - Dec 31, 2022</div>
+              <div class="widget-value-area">
+                <div class="widget-value">2.5M</div>
+                <div class="widget-label">Total impressions</div>
+                <div class="widget-comparison">
+                  <div class="widget-comparison-change negative"><svg viewBox="0 0 36 36" fill="currentColor" width="12" height="12"><path d="M18 28L6 14h24L18 28z"/></svg> -5%</div>
+                  <div class="widget-comparison-vs">vs Dec 01, 2021 - Dec 31, 2022</div>
+                </div>
+              </div>
+            </div>
+            <div class="analytics-widget" style="flex:1;">
+              <div class="widget-header"><span class="widget-title">Total impressions</span><svg viewBox="0 0 36 36" fill="var(--color-on-layer-secondary)" width="18" height="18"><path d="M10 18C10 19.6569 8.65685 21 7 21C5.34315 21 4 19.6569 4 18C4 16.3431 5.34315 15 7 15C8.65685 15 10 16.3431 10 18Z"/><path d="M21 18C21 19.6569 19.6569 21 18 21C16.3431 21 15 19.6569 15 18C15 16.3431 16.3431 15 18 15C19.6569 15 21 16.3431 21 18Z"/><path d="M32 18C32 19.6569 30.6569 21 29 21C27.3431 21 26 19.6569 26 18C26 16.3431 27.3431 15 29 15C30.6569 15 32 16.3431 32 18Z"/></svg></div>
+              <div class="widget-subtitle">Dec 01, 2021 - Dec 31, 2022 <span class="widget-badge" style="float:right;">PROFILE LEVEL</span></div>
+              <div class="bar-chart">
+                <div class="bar-chart-row"><div class="bar-chart-label"><span class="platform-badge" style="background:#1877F2;">Fb</span><span>Toutique</span></div><div class="bar-chart-track"><div class="bar-chart-bar" style="width:92%;background:#3F51B5;"></div></div><span class="bar-chart-value">1.2M</span></div>
+                <div class="bar-chart-row"><div class="bar-chart-label"><span class="platform-badge" style="background:#D73676;">Ig</span><span>Toutique</span></div><div class="bar-chart-track"><div class="bar-chart-bar" style="width:65%;background:#2196F3;"></div></div><span class="bar-chart-value">845K</span></div>
+                <div class="bar-chart-row"><div class="bar-chart-label"><span class="platform-badge" style="background:#000;">Tt</span><span>Toutique</span></div><div class="bar-chart-track"><div class="bar-chart-bar" style="width:35%;background:#00BCD4;"></div></div><span class="bar-chart-value">455K</span></div>
+              </div>
+              <div class="bar-chart-axis"><span>0</span><span>400K</span><span>800K</span><span>1.2M</span></div>
+              <div class="bar-chart-axis-label">Total impressions</div>
+            </div>
+          </div>
+
+          <!-- ═══════════════════════════════════════════════════
+               ROW 10: Total impressions - evolution — full-width
+               ═══════════════════════════════════════════════════ -->
+          <div class="analytics-widget-row">
+            <div class="analytics-widget" style="min-height:416px;">
+              <div class="widget-header"><span class="widget-title">Total impressions - evolution</span><svg viewBox="0 0 36 36" fill="var(--color-on-layer-secondary)" width="18" height="18"><path d="M10 18C10 19.6569 8.65685 21 7 21C5.34315 21 4 19.6569 4 18C4 16.3431 5.34315 15 7 15C8.65685 15 10 16.3431 10 18Z"/><path d="M21 18C21 19.6569 19.6569 21 18 21C16.3431 21 15 19.6569 15 18C15 16.3431 16.3431 15 18 15C19.6569 15 21 16.3431 21 18Z"/><path d="M32 18C32 19.6569 30.6569 21 29 21C27.3431 21 26 19.6569 26 18C26 16.3431 27.3431 15 29 15C30.6569 15 32 16.3431 32 18Z"/></svg></div>
+              <div class="widget-subtitle">Dec 01, 2021 - Dec 31, 2022 <span class="widget-badge" style="float:right;">PROFILE LEVEL</span></div>
+              <div style="display:flex; gap:6px; flex:1;">
+                <div style="display:flex; flex-direction:column; justify-content:space-between; padding:4px 0; min-width:36px; text-align:right;">
+                  <span style="font-size:11px; color:var(--color-on-layer-primary);">1.8M</span>
+                  <span style="font-size:11px; color:var(--color-on-layer-primary);">1.35M</span>
+                  <span style="font-size:11px; color:var(--color-on-layer-primary);">900K</span>
+                  <span style="font-size:11px; color:var(--color-on-layer-primary);">450K</span>
+                  <span style="font-size:11px; color:var(--color-on-layer-primary);">0</span>
+                </div>
+                <div style="writing-mode:vertical-rl; transform:rotate(180deg); font-size:11px; color:var(--color-on-layer-primary); display:flex; align-items:center; justify-content:center;">Total impressions</div>
+                <div class="line-chart-placeholder" style="flex:1;">
+                  <svg viewBox="0 0 500 150" preserveAspectRatio="none">
+                    <line x1="0" y1="0" x2="500" y2="0" stroke="rgba(0,0,0,0.05)" stroke-width="1"/><line x1="0" y1="37" x2="500" y2="37" stroke="rgba(0,0,0,0.05)" stroke-width="1"/><line x1="0" y1="75" x2="500" y2="75" stroke="rgba(0,0,0,0.05)" stroke-width="1"/><line x1="0" y1="112" x2="500" y2="112" stroke="rgba(0,0,0,0.05)" stroke-width="1"/><line x1="0" y1="150" x2="500" y2="150" stroke="rgba(0,0,0,0.08)" stroke-width="1"/>
+                    <polyline points="0,50 40,45 80,55 120,40 160,35 200,50 240,45 280,30 320,40 360,35 400,25 440,30 500,20" fill="none" stroke="#3F51B5" stroke-width="2"/>
+                    <polyline points="0,70 40,65 80,75 120,60 160,55 200,70 240,65 280,50 320,60 360,55 400,45 440,50 500,40" fill="none" stroke="#2196F3" stroke-width="2"/>
+                    <polyline points="0,90 40,85 80,95 120,80 160,78 200,88 240,82 280,72 320,80 360,75 400,68 440,72 500,65" fill="none" stroke="#00BCD4" stroke-width="2"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="widget-dates" style="margin-top:6px; padding-left:60px;"><span>Jan 2021</span><span>Mar 2021</span><span>May 2021</span><span>Jul 2021</span><span>Sep 2021</span><span>Dec 2021</span></div>
+              <div class="widget-legend">
+                <div class="widget-legend-item"><div class="widget-legend-color" style="background:#3F51B5;"></div><span class="platform-badge" style="background:#1877F2;">Fb</span><span class="widget-legend-label">Toutique</span></div>
+                <div class="widget-legend-item"><div class="widget-legend-color" style="background:#2196F3;"></div><span class="platform-badge" style="background:#D73676;">Ig</span><span class="widget-legend-label">Toutique</span></div>
+                <div class="widget-legend-item"><div class="widget-legend-color" style="background:#00BCD4;"></div><span class="platform-badge" style="background:#000;">Tt</span><span class="widget-legend-label">Toutique</span></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Cortex Panel (injected by components.js) -->
+    <div id="cortex-slot" data-panel-id="analytics" data-highlight="analytics"></div>
+
+  </div>
+</div>
+
+<script src="components.js"></script>
+<script src="cortex-panel.js"></script>
+<script src="app.js"></script>
+<script>initNav(); initCortexPanel();</script>
+</body>
+</html>

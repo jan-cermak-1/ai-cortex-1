@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Command Center — Cortex AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="soul-tokens.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="app" id="app">
+  <div class="screen active">
+    <!-- Persistent: Platform Navigation -->
+    <div id="nav-root"></div>
+
+    <!-- Dynamic: Page Content (swapped on navigation) -->
+    <div id="page-content"></div>
+
+    <!-- Persistent: Cortex AI Panel -->
+    <div id="cortex-panel-root"></div>
+  </div>
+</div>
+
+<!-- Scripts: order matters (router first, then components, then panel, then page logic) -->
+<script src="router.js"></script>
+<script src="main-navigation.js"></script>
+<script src="cortex-panel.js"></script>
+<script src="app.js"></script>
+<script src="drag-drop.js"></script>
+<script>
+  (function() {
+    // Determine the initial page from the URL
+    var path = location.pathname;
+    var page = path.split('/').pop() || 'command-center.html';
+    
+    // If we're at index.html or root, default to command-center
+    if (!page || page === 'index.html' || page === '') {
+      page = 'command-center.html';
+    }
+
+    var config = ROUTE_CONFIG[page];
+    if (!config) {
+      page = 'command-center.html';
+      config = ROUTE_CONFIG[page];
+    }
+
+    // 1. Initialize persistent nav
+    initNav(config.nav);
+
+    // 2. Initialize persistent Cortex panel
+    initCortexPanel();
+
+    // 3. Load initial page content via router
+    initRouter(page);
+    navigateTo(page, false).then(function() {
+      // 4. Initialize drag and drop after first page loads
+      initDragDrop();
+    });
+  })();
+</script>
+</body>
+</html>

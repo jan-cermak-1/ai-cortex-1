@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Command Center — Cortex AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="soul-tokens.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="app" id="app">
+  <div class="screen active" id="screen-command-center">
+
+    <!-- Nav (injected by components.js) -->
+    <div id="nav-slot" data-active="command-center"></div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Command Center Header -->
+      <div class="content-header">
+        <span class="content-header-title">Command center</span>
+        <button class="btn btn-s btn-invisible btn-icon" title="Expand">
+          <svg viewBox="0 0 36 36" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M22 4H32V14H30V7.41421L21.7071 15.7071L20.2929 14.2929L28.5858 6H22V4ZM15.7071 21.7071L7.41421 30H14V32H4V22H6V28.5858L14.2929 20.2929L15.7071 21.7071Z"/></svg>
+        </button>
+      </div>
+
+      <div class="cc-page-scroll">
+        <!-- Upper: Widgets + Trending side by side -->
+        <div class="cc-upper-wrap">
+          <div class="cc-widgets-col">
+            <!-- Profile bar card -->
+            <div class="cc-profiles-card">
+              <div class="profile-chip">
+                <div class="avatar green"></div>
+                <div>
+                  <div class="profile-chip-name">Raleigh Raptors Pra...</div>
+                  <div class="profile-chip-url"><span class="platform-label fb">Facebook</span> /social-url</div>
+                </div>
+              </div>
+              <div class="cc-profiles-divider"></div>
+              <div class="profile-chip">
+                <div class="avatar pink"></div>
+                <div>
+                  <div class="profile-chip-name">Spartan Stingers Pr...</div>
+                  <div class="profile-chip-url"><span class="platform-label ig">Instragram</span> /social-url</div>
+                </div>
+              </div>
+              <div class="cc-profiles-divider"></div>
+              <div class="profile-chip">
+                <div class="avatar green"></div>
+                <div>
+                  <div class="profile-chip-name">Bison Brigade Prag...</div>
+                  <div class="profile-chip-url"><span class="platform-label fb">Facebook</span> /social-url</div>
+                </div>
+              </div>
+              <div class="cc-profiles-divider"></div>
+              <div class="profile-chip-more">+8</div>
+              <div style="flex:1;"></div>
+              <button class="btn-edit-sources">
+                <svg viewBox="0 0 36 36" fill="currentColor" width="18" height="18"><path fill-rule="evenodd" clip-rule="evenodd" d="M18 2H29C31.7614 2 34 4.23858 34 7V16H32V7C32 5.34315 30.6569 4 29 4H18V2ZM10 13C10 10.2386 12.2386 8 15 8H23C25.7614 8 28 10.2386 28 13V21C28 23.7614 25.7614 26 23 26H15C12.2386 26 10 23.7614 10 21V13ZM15 10C13.3431 10 12 11.3431 12 13V21C12 22.6569 13.3431 24 15 24H23C24.6569 24 26 22.6569 26 21V13C26 11.3431 24.6569 10 23 10H15ZM4 27V18H6V27C6 28.6569 7.34315 30 9 30H20V32H9C6.23858 32 4 29.7614 4 27Z"/></svg>
+                Edit data sources
+              </button>
+            </div>
+
+            <!-- Widgets Grid 2x2 -->
+            <div class="widgets-grid">
+              <div class="widget">
+                <div class="widget-header">
+                  <span class="widget-title">Number of engagements evolution</span>
+                  <svg class="widget-menu-icon" viewBox="0 0 36 36" fill="var(--color-on-layer-secondary)" width="18" height="18"><path d="M10 18C10 19.6569 8.65685 21 7 21C5.34315 21 4 19.6569 4 18C4 16.3431 5.34315 15 7 15C8.65685 15 10 16.3431 10 18Z"/><path d="M21 18C21 19.6569 19.6569 21 18 21C16.3431 21 15 19.6569 15 18C15 16.3431 16.3431 15 18 15C19.6569 15 21 16.3431 21 18Z"/><path d="M32 18C32 19.6569 30.6569 21 29 21C27.3431 21 26 19.6569 26 18C26 16.3431 27.3431 15 29 15C30.6569 15 32 16.3431 32 18Z"/></svg>
+                </div>
+                <div class="widget-subtitle"><span>Last 30 Days</span> <span class="widget-badge">POST LEVEL</span></div>
+                <div class="widget-value-wrap">
+                  <div class="widget-value">931</div>
+                  <div class="widget-label">Engagements</div>
+                </div>
+                <div class="widget-trend up">
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 14V4M4.5 8.5L9 4l4.5 4.5" stroke="#15a43e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <span class="trend-pct">+26%</span>
+                  <span class="trend-vs">vs previous period</span>
+                </div>
+                <div class="widget-chart">
+                  <svg viewBox="0 0 420 80" preserveAspectRatio="none" class="widget-chart-svg">
+                    <defs><linearGradient id="cf1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0F62FE" stop-opacity="0.08"/><stop offset="100%" stop-color="#0F62FE" stop-opacity="0"/></linearGradient></defs>
+                    <path d="M0,60 C30,55 60,50 100,45 C140,40 170,52 200,48 C230,44 260,30 300,35 C340,40 370,25 420,20 L420,80 L0,80Z" fill="url(#cf1)"/>
+                    <polyline points="0,60 40,55 80,50 120,45 160,48 200,48 240,38 280,32 320,35 360,28 420,20" fill="none" stroke="#0F62FE" stroke-width="1.5"/>
+                  </svg>
+                </div>
+                <div class="widget-dates"><span>Jan 01</span><span>Jan 31</span></div>
+              </div>
+
+              <div class="widget">
+                <div class="widget-header">
+                  <span class="widget-title">Number of impressions evolution</span>
+                  <svg class="widget-menu-icon" viewBox="0 0 36 36" fill="var(--color-on-layer-secondary)" width="18" height="18"><path d="M10 18C10 19.6569 8.65685 21 7 21C5.34315 21 4 19.6569 4 18C4 16.3431 5.34315 15 7 15C8.65685 15 10 16.3431 10 18Z"/><path d="M21 18C21 19.6569 19.6569 21 18 21C16.3431 21 15 19.6569 15 18C15 16.3431 16.3431 15 18 15C19.6569 15 21 16.3431 21 18Z"/><path d="M32 18C32 19.6569 30.6569 21 29 21C27.3431 21 26 19.6569 26 18C26 16.3431 27.3431 15 29 15C30.6569 15 32 16.3431 32 18Z"/></svg>
+                </div>
+                <div class="widget-subtitle"><span>Last 30 Days</span> <span class="widget-badge">POST LEVEL</span></div>
+                <div class="widget-value-wrap">
+                  <div class="widget-value">40 734</div>
+                  <div class="widget-label">Content Impressions</div>
+                </div>
+                <div class="widget-trend up">
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 14V4M4.5 8.5L9 4l4.5 4.5" stroke="#15a43e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <span class="trend-pct">+26%</span>
+                  <span class="trend-vs">vs previous period</span>
+                </div>
+                <div class="widget-chart">
+                  <svg viewBox="0 0 420 80" preserveAspectRatio="none" class="widget-chart-svg">
+                    <defs><linearGradient id="cf2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0F62FE" stop-opacity="0.08"/><stop offset="100%" stop-color="#0F62FE" stop-opacity="0"/></linearGradient></defs>
+                    <path d="M0,55 C40,48 80,44 120,40 C160,36 200,42 240,38 C280,34 320,28 360,24 L420,22 L420,80 L0,80Z" fill="url(#cf2)"/>
+                    <polyline points="0,55 50,48 100,44 150,40 200,42 250,38 300,34 350,28 420,22" fill="none" stroke="#0F62FE" stroke-width="1.5"/>
+                  </svg>
+                </div>
+                <div class="widget-dates"><span>Jan 01</span><span>Jan 31</span></div>
+              </div>
+
+              <div class="widget">
+                <div class="widget-header">
+                  <span class="widget-title">Cross platform followers evolution</span>
+                  <svg class="widget-menu-icon" viewBox="0 0 36 36" fill="var(--color-on-layer-secondary)" width="18" height="18"><path d="M10 18C10 19.6569 8.65685 21 7 21C5.34315 21 4 19.6569 4 18C4 16.3431 5.34315 15 7 15C8.65685 15 10 16.3431 10 18Z"/><path d="M21 18C21 19.6569 19.6569 21 18 21C16.3431 21 15 19.6569 15 18C15 16.3431 16.3431 15 18 15C19.6569 15 21 16.3431 21 18Z"/><path d="M32 18C32 19.6569 30.6569 21 29 21C27.3431 21 26 19.6569 26 18C26 16.3431 27.3431 15 29 15C30.6569 15 32 16.3431 32 18Z"/></svg>
+                </div>
+                <div class="widget-subtitle"><span>Last 38 Days</span> <span class="widget-badge">PROFILE LEVEL</span></div>
+                <div class="widget-value-wrap">
+                  <div class="widget-value">138.04 M</div>
+                  <div class="widget-label">Followers</div>
+                </div>
+                <div class="widget-trend up">
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 14V4M4.5 8.5L9 4l4.5 4.5" stroke="#15a43e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <span class="trend-pct">+26%</span>
+                  <span class="trend-vs">vs previous period</span>
+                </div>
+                <div class="widget-chart">
+                  <svg viewBox="0 0 420 80" preserveAspectRatio="none" class="widget-chart-svg">
+                    <defs><linearGradient id="cf3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0F62FE" stop-opacity="0.08"/><stop offset="100%" stop-color="#0F62FE" stop-opacity="0"/></linearGradient></defs>
+                    <path d="M0,65 C50,58 100,50 150,42 C200,34 250,38 300,30 C350,24 380,20 420,18 L420,80 L0,80Z" fill="url(#cf3)"/>
+                    <polyline points="0,65 50,58 100,50 150,42 200,38 250,34 300,30 350,24 420,18" fill="none" stroke="#0F62FE" stroke-width="1.5"/>
+                  </svg>
+                </div>
+                <div class="widget-dates"><span>Jan 01</span><span>Jan 31</span></div>
+              </div>
+
+              <div class="widget">
+                <div class="widget-header">
+                  <span class="widget-title">Number of content evolution</span>
+                  <svg class="widget-menu-icon" viewBox="0 0 36 36" fill="var(--color-on-layer-secondary)" width="18" height="18"><path d="M10 18C10 19.6569 8.65685 21 7 21C5.34315 21 4 19.6569 4 18C4 16.3431 5.34315 15 7 15C8.65685 15 10 16.3431 10 18Z"/><path d="M21 18C21 19.6569 19.6569 21 18 21C16.3431 21 15 19.6569 15 18C15 16.3431 16.3431 15 18 15C19.6569 15 21 16.3431 21 18Z"/><path d="M32 18C32 19.6569 30.6569 21 29 21C27.3431 21 26 19.6569 26 18C26 16.3431 27.3431 15 29 15C30.6569 15 32 16.3431 32 18Z"/></svg>
+                </div>
+                <div class="widget-subtitle"><span>Last 30 Days</span> <span class="widget-badge">POST LEVEL</span></div>
+                <div class="widget-value-wrap">
+                  <div class="widget-value">203</div>
+                  <div class="widget-label">Content pieces</div>
+                </div>
+                <div class="widget-trend up">
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 14V4M4.5 8.5L9 4l4.5 4.5" stroke="#15a43e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <span class="trend-pct">+26%</span>
+                  <span class="trend-vs">vs previous period</span>
+                </div>
+                <div class="widget-chart">
+                  <svg viewBox="0 0 420 80" preserveAspectRatio="none" class="widget-chart-svg">
+                    <defs><linearGradient id="cf4" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0F62FE" stop-opacity="0.08"/><stop offset="100%" stop-color="#0F62FE" stop-opacity="0"/></linearGradient></defs>
+                    <path d="M0,62 C40,56 80,52 120,46 C160,42 200,44 240,40 C280,36 320,30 360,26 L420,24 L420,80 L0,80Z" fill="url(#cf4)"/>
+                    <polyline points="0,62 50,56 100,52 150,46 200,44 250,40 300,36 350,30 420,24" fill="none" stroke="#0F62FE" stroke-width="1.5"/>
+                  </svg>
+                </div>
+                <div class="widget-dates"><span>Jan 01</span><span>Jan 31</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Trending Widget Card -->
+          <div class="cc-trending-wrapper">
+          <div class="cc-trending-card">
+            <div class="trending-header">
+              <!-- X/Twitter icon -->
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" fill="var(--color-on-layer-primary)"/></svg>
+              <span class="trending-label">Trending in</span>
+              <span class="trending-location">Germany</span>
+              <svg viewBox="0 0 36 36" fill="var(--color-button-primary)" width="14" height="14" style="flex-shrink:0;"><path fill-rule="evenodd" clip-rule="evenodd" d="M28.7072 14.7072L18.0001 25.4143L7.29297 14.7072L8.70718 13.293L18.0001 22.5859L27.293 13.293L28.7072 14.7072Z"/></svg>
+            </div>
+            <div class="trending-body">
+              <div class="trending-item">
+                <div class="trending-item-title">Labubu</div>
+                <div class="trending-item-text">
+                  Labubu is a phenomenon that has recently captured attention on social media. This unique type of toy, which blends fun and education, has become popular among both children and parents. Labubu toys encourage creativity and the development of motor skills, making them ideal for various age groups. On platforms like Instagram and TikTok, videos are emerging where kids showcase how they play with Labubu and share their own game ideas. This trend highlights the importance for parents to find toys that not only entertain but also contribute to their children's development.
+                </div>
+                <div class="trending-keywords">
+                  <span class="keyword-tag">Innovation</span>
+                  <span class="keyword-tag">Keywords</span>
+                  <span class="keyword-tag">Keywords</span>
+                  <span class="keyword-tag">Keywords</span>
+                  <span class="keyword-tag">Keywords</span>
+                  <span class="keyword-tag">Keywords</span>
+                  <span class="keyword-tag">Keywords</span>
+                </div>
+              </div>
+              <div class="trending-item">
+                <div class="trending-item-title">Sports Therapy</div>
+                <div class="trending-item-text">
+                  Sports therapy plays a crucial role in helping athletes recover from injuries and enhance their performance. By combining physical rehabilitation with specialized training techniques, sports therapists ensure that individuals can safely return to their favorite activities while minimizing the risk of future injuries.
+                </div>
+                <div class="trending-keywords">
+                  <span class="keyword-tag">Joint Mobility</span>
+                  <span class="keyword-tag">Muscle Recovery</span>
+                  <span class="keyword-tag">Pain Reduction</span>
+                  <span class="keyword-tag">Injury Prevention</span>
+                  <span class="keyword-tag">Stress Management</span>
+                  <span class="keyword-tag">Core Stability</span>
+                  <span class="keyword-tag">Endurance Training</span>
+                </div>
+              </div>
+              <div class="trending-item">
+                <div class="trending-item-title">Cultural Beats</div>
+                <div class="trending-item-text">
+                  Cultural Beats during Memorial Day weekend brought communities together through vibrant parades, lively parties, and heartfelt family gatherings. It was a time to celebrate freedom while honoring the courageous individuals who...
+                </div>
+              </div>
+            </div>
+          </div>
+          </div><!-- /cc-trending-wrapper -->
+        </div>
+
+        <!-- Lower: Full-width sections -->
+        <div class="cc-lower-wrap">
+
+          <!-- ===== Social Listening Summary ===== -->
+          <div class="summary-section">
+            <div class="summary-title">Social listening summary</div>
+            <div class="summary-grid">
+              <!-- Brand insights -->
+              <div class="summary-card summary-card--brand">
+                <div class="summary-card-title">Brand insights
+                  <svg viewBox="0 0 36 36" fill="var(--color-on-layer-secondary)" width="16" height="16"><path fill-rule="evenodd" clip-rule="evenodd" d="M18 4C10.268 4 4 10.268 4 18C4 25.732 10.268 32 18 32C25.732 32 32 25.732 32 18C32 10.268 25.732 4 18 4ZM2 18C2 9.16344 9.16344 2 18 2C26.8366 2 34 9.16344 34 18C34 26.8366 26.8366 34 18 34C9.16344 34 2 26.8366 2 18ZM16 10C16 8.89543 16.8954 8 18 8C19.1046 8 20 8.89543 20 10C20 11.1046 19.1046 12 18 12C16.8954 12 16 11.1046 16 10ZM17 18H15V16H19V25H22V27H14V25H17V18Z"/></svg>
+                </div>
+                <div class="summary-card-text"><strong>1. Fan sentiment during key moments</strong></div>
+                <div class="summary-card-text" style="margin-top:12px;">
+                  Most of the conversation clusters around live game moments, especially touchdowns, turnovers, 4th down decisions, and last-minute scoring drives. When games are close, fans post in rapid bursts and sentiment becomes extremely reactive &mdash; shifting from hype to frustration (or celebration to outrage) within minutes. Post-game discussion stays active for hours, with fans replaying key moments, debating coaching decisions, and sharing clips, memes, and &ldquo;hot takes&rdquo; that keep engagement high beyond the final whistle.
+                </div>
+                <div class="post-examples-row">
+                  Post examples: <span class="post-example-page active">1</span> <span class="post-example-page">2</span> <span class="post-example-page">3</span>
+                </div>
+                <div class="summary-card-text" style="margin-top:18px;"><strong>1. Fan sentiment during key moments</strong></div>
+                <div class="summary-card-text" style="margin-top:12px;">
+                  Most of the conversation clusters around live game moments, especially touchdowns, turnovers, 4th down decisions, and last-minute scoring drives. When games are close, fans post in rapid bursts and sentiment becomes extremely reactive &mdash; shifting from hype to frustration (or celebration to outrage) within minutes. Post-game discussion stays active for hours, with fans replaying key moments, debating coaching decisions, and sharing clips, memes, and &ldquo;hot takes&rdquo; that keep engagement high beyond the final whistle.
+                </div>
+                <!-- Post example popup -->
+                <div class="post-example-popup">
+                  <div class="post-example-profile">
+                    <div class="post-example-avatar"></div>
+                    <div class="post-example-meta">
+                      <span class="post-example-handle">@FourthQuarterFire</span>
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" fill="#505057"/></svg>
+                      <span class="post-example-dot">&middot;</span>
+                      <span class="post-example-date">10 days ago</span>
+                    </div>
+                  </div>
+                  <div class="post-example-text">That 4th down call is going to be debated all week. Coach got too aggressive and it cost them the game. #NFL #SundayNightFootball</div>
+                </div>
+              </div>
+              <!-- Competitive insights -->
+              <div class="summary-card">
+                <div class="summary-card-title">Competitive insights
+                  <svg viewBox="0 0 36 36" fill="var(--color-on-layer-secondary)" width="16" height="16"><path fill-rule="evenodd" clip-rule="evenodd" d="M18 4C10.268 4 4 10.268 4 18C4 25.732 10.268 32 18 32C25.732 32 32 25.732 32 18C32 10.268 25.732 4 18 4ZM2 18C2 9.16344 9.16344 2 18 2C26.8366 2 34 9.16344 34 18C34 26.8366 26.8366 34 18 34C9.16344 34 2 26.8366 2 18ZM16 10C16 8.89543 16.8954 8 18 8C19.1046 8 20 8.89543 20 10C20 11.1046 19.1046 12 18 12C16.8954 12 16 11.1046 16 10ZM17 18H15V16H19V25H22V27H14V25H17V18Z"/></svg>
+                </div>
+                <div class="summary-card-text"><strong>1. Fan sentiment during key moments</strong></div>
+                <div class="summary-card-text" style="margin-top:12px;">
+                  Most of the conversation clusters around live game moments, especially touchdowns, turnovers, 4th down decisions, and last-minute scoring drives. When games are close, fans post in rapid bursts and sentiment becomes extremely reactive &mdash; shifting from hype to frustration (or celebration to outrage) within minutes. Post-game discussion stays active for hours, with fans replaying key moments, debating coaching decisions, and sharing clips, memes, and &ldquo;hot takes&rdquo; that keep engagement high beyond the final whistle.
+                </div>
+                <div class="post-examples-row">
+                  Post examples: <span class="post-example-page active">1</span> <span class="post-example-page">2</span> <span class="post-example-page">3</span>
+                </div>
+                <div class="summary-card-text" style="margin-top:18px;"><strong>1. Fan sentiment during key moments</strong></div>
+                <div class="summary-card-text" style="margin-top:12px;">
+                  Most of the conversation clusters around live game moments, especially touchdowns, turnovers, 4th down decisions, and last-minute scoring drives. When games are close, fans post in rapid bursts and sentiment becomes extremely reactive &mdash; shifting from hype to frustration (or celebration to outrage) within minutes. Post-game discussion stays active for hours, with fans replaying key moments, debating coaching decisions, and sharing clips, memes, and &ldquo;hot takes&rdquo; that keep engagement high beyond the final whistle.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ===== Objectives ===== -->
+          <div class="objectives-section">
+            <div class="objectives-header">
+              <span class="objectives-title">Objectives</span>
+              <div style="flex:1;"></div>
+              <a href="#" class="objectives-link">Start with new objective</a>
+              <span class="objectives-divider"></span>
+              <a href="#" class="objectives-link">Go to the board <svg viewBox="0 0 36 36" fill="currentColor" width="18" height="18" style="vertical-align:middle;"><path fill-rule="evenodd" clip-rule="evenodd" d="M24.5858 17.0001L18.2929 10.7072L19.7071 9.29297L28.4142 18.0001L19.7071 26.7072L18.2929 25.293L24.5858 19.0001H8V17.0001H24.5858Z"/></svg></a>
+            </div>
+            <div class="objectives-grid">
+              <!-- Chart widget 1 – ON TRACK -->
+              <div class="obj-chart-widget">
+                <div class="obj-widget-header">
+                  <div class="obj-widget-title">Performance Measurement &amp; ROI Optimization</div>
+                  <svg class="widget-menu-icon" viewBox="0 0 36 36" fill="var(--color-on-layer-secondary)" width="18" height="18"><path d="M10 18C10 19.6569 8.65685 21 7 21C5.34315 21 4 19.6569 4 18C4 16.3431 5.34315 15 7 15C8.65685 15 10 16.3431 10 18Z"/><path d="M21 18C21 19.6569 19.6569 21 18 21C16.3431 21 15 19.6569 15 18C15 16.3431 16.3431 15 18 15C19.6569 15 21 16.3431 21 18Z"/><path d="M32 18C32 19.6569 30.6569 21 29 21C27.3431 21 26 19.6569 26 18C26 16.3431 27.3431 15 29 15C30.6569 15 32 16.3431 32 18Z"/></svg>
+                </div>
+                <div class="obj-widget-sub">
+                  <span>Last 30 Days</span>
+                  <span class="obj-badge on-track">ON TRACK</span>
+                </div>
+                <div class="obj-value-row">
+                  <span class="obj-value">48.3</span>
+                  <span class="obj-change up">
+                    <svg width="14" height="14" viewBox="0 0 18 18" fill="none"><path d="M9 14V4M4.5 8.5L9 4l4.5 4.5" stroke="#15a43e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    +21%
+                  </span>
+                </div>
+                <div class="obj-metric-label">Customer Acquisition Efficiency Index (CAEI)</div>
+                <div class="obj-goal-row">
+                  <svg viewBox="0 0 36 36" fill="var(--color-on-layer-secondary)" width="18" height="18"><path fill-rule="evenodd" clip-rule="evenodd" d="M18 4C10.268 4 4 10.268 4 18C4 25.732 10.268 32 18 32C25.732 32 32 25.732 32 18C32 10.268 25.732 4 18 4ZM2 18C2 9.16344 9.16344 2 18 2C26.8366 2 34 9.16344 34 18C34 26.8366 26.8366 34 18 34C9.16344 34 2 26.8366 2 18ZM17 7.99999L19 7.99999L19 17.5858L23.7071 22.2929L22.2929 23.7071L17 18.4142L17 7.99999Z"/></svg>
+                  <span>Below 50 CAEI</span>
+                </div>
+                <!-- Bar chart -->
+                <div class="obj-bar-chart">
+                  <svg viewBox="0 0 320 120" preserveAspectRatio="none" class="obj-bar-svg">
+                    <!-- Bars  -->
+                    <rect x="4"   y="20"  width="7" height="100" rx="1" fill="#e53935"/>
+                    <rect x="15"  y="60"  width="7" height="60"  rx="1" fill="#e53935"/>
+                    <rect x="26"  y="40"  width="7" height="80"  rx="1" fill="#e53935"/>
+                    <rect x="37"  y="50"  width="7" height="70"  rx="1" fill="#e53935"/>
+                    <rect x="48"  y="70"  width="7" height="50"  rx="1" fill="#e53935"/>
+                    <rect x="59"  y="30"  width="7" height="90"  rx="1" fill="#e53935"/>
+                    <rect x="70"  y="15"  width="7" height="105" rx="1" fill="#e53935"/>
+                    <rect x="81"  y="25"  width="7" height="95"  rx="1" fill="#e53935"/>
+                    <rect x="92"  y="55"  width="7" height="65"  rx="1" fill="#e53935"/>
+                    <rect x="103" y="35"  width="7" height="85"  rx="1" fill="#e53935"/>
+                    <rect x="114" y="45"  width="7" height="75"  rx="1" fill="#e53935"/>
+                    <rect x="125" y="65"  width="7" height="55"  rx="1" fill="#e53935"/>
+                    <rect x="136" y="50"  width="7" height="70"  rx="1" fill="#e53935"/>
+                    <rect x="147" y="40"  width="7" height="80"  rx="1" fill="#e53935"/>
+                    <rect x="158" y="20"  width="7" height="100" rx="1" fill="#e53935"/>
+                    <rect x="169" y="30"  width="7" height="90"  rx="1" fill="#15a43e"/>
+                    <rect x="180" y="10"  width="7" height="110" rx="1" fill="#15a43e"/>
+                    <rect x="191" y="5"   width="7" height="115" rx="1" fill="#15a43e"/>
+                    <rect x="202" y="15"  width="7" height="105" rx="1" fill="#15a43e"/>
+                    <rect x="213" y="20"  width="7" height="100" rx="1" fill="#15a43e"/>
+                    <rect x="224" y="25"  width="7" height="95"  rx="1" fill="#15a43e"/>
+                    <rect x="235" y="35"  width="7" height="85"  rx="1" fill="#15a43e"/>
+                    <rect x="246" y="18"  width="7" height="102" rx="1" fill="#15a43e"/>
+                    <rect x="257" y="8"   width="7" height="112" rx="1" fill="#15a43e"/>
+                    <rect x="268" y="12"  width="7" height="108" rx="1" fill="#15a43e"/>
+                    <rect x="279" y="22"  width="7" height="98"  rx="1" fill="#15a43e"/>
+                    <rect x="290" y="28"  width="7" height="92"  rx="1" fill="#15a43e"/>
+                    <rect x="301" y="16"  width="7" height="104" rx="1" fill="#15a43e"/>
+                    <!-- AVG line -->
+                    <line x1="0" y1="62" x2="320" y2="62" stroke="#15a43e" stroke-width="1" stroke-dasharray="4 3"/>
+                    <rect x="0" y="56" width="30" height="16" rx="3" fill="#15a43e"/>
+                    <text x="15" y="67" fill="white" font-size="9" text-anchor="middle" font-weight="700">AVG</text>
+                  </svg>
+                </div>
+                <div class="widget-dates"><span>Jan 01</span><span>Jan 29</span></div>
+              </div>
+
+              <!-- Chart widget 2 – OFF TRACK -->
+              <div class="obj-chart-widget">
+                <div class="obj-widget-header">
+                  <div class="obj-widget-title">Performance Measurement &amp; ROI Optimization</div>
+                  <svg class="widget-menu-icon" viewBox="0 0 36 36" fill="var(--color-on-layer-secondary)" width="18" height="18"><path d="M10 18C10 19.6569 8.65685 21 7 21C5.34315 21 4 19.6569 4 18C4 16.3431 5.34315 15 7 15C8.65685 15 10 16.3431 10 18Z"/><path d="M21 18C21 19.6569 19.6569 21 18 21C16.3431 21 15 19.6569 15 18C15 16.3431 16.3431 15 18 15C19.6569 15 21 16.3431 21 18Z"/><path d="M32 18C32 19.6569 30.6569 21 29 21C27.3431 21 26 19.6569 26 18C26 16.3431 27.3431 15 29 15C30.6569 15 32 16.3431 32 18Z"/></svg>
+                </div>
+                <div class="obj-widget-sub">
+                  <span>Last 30 Days</span>
+                  <span class="obj-badge off-track">OFF TRACK</span>
+                </div>
+                <div class="obj-value-row">
+                  <span class="obj-value">12.2</span>
+                  <span class="obj-change down">
+                    <svg width="14" height="14" viewBox="0 0 18 18" fill="none"><path d="M9 4v10M4.5 9.5L9 14l4.5-4.5" stroke="#e53935" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    -74%
+                  </span>
+                </div>
+                <div class="obj-metric-label">Customer Acquisition Efficiency Index (CAEI)</div>
+                <div class="obj-goal-row">
+                  <svg viewBox="0 0 36 36" fill="var(--color-on-layer-secondary)" width="18" height="18"><path fill-rule="evenodd" clip-rule="evenodd" d="M18 4C10.268 4 4 10.268 4 18C4 25.732 10.268 32 18 32C25.732 32 32 25.732 32 18C32 10.268 25.732 4 18 4ZM2 18C2 9.16344 9.16344 2 18 2C26.8366 2 34 9.16344 34 18C34 26.8366 26.8366 34 18 34C9.16344 34 2 26.8366 2 18ZM17 7.99999L19 7.99999L19 17.5858L23.7071 22.2929L22.2929 23.7071L17 18.4142L17 7.99999Z"/></svg>
+                  <span>Below 50 CAEI</span>
+                </div>
+                <!-- Bar chart -->
+                <div class="obj-bar-chart">
+                  <svg viewBox="0 0 320 120" preserveAspectRatio="none" class="obj-bar-svg">
+                    <rect x="4"   y="60"  width="7" height="60"  rx="1" fill="#e53935"/>
+                    <rect x="15"  y="50"  width="7" height="70"  rx="1" fill="#e53935"/>
+                    <rect x="26"  y="70"  width="7" height="50"  rx="1" fill="#e53935"/>
+                    <rect x="37"  y="40"  width="7" height="80"  rx="1" fill="#e53935"/>
+                    <rect x="48"  y="30"  width="7" height="90"  rx="1" fill="#e53935"/>
+                    <rect x="59"  y="55"  width="7" height="65"  rx="1" fill="#e53935"/>
+                    <rect x="70"  y="45"  width="7" height="75"  rx="1" fill="#e53935"/>
+                    <rect x="81"  y="20"  width="7" height="100" rx="1" fill="#e53935"/>
+                    <rect x="92"  y="10"  width="7" height="110" rx="1" fill="#15a43e"/>
+                    <rect x="103" y="5"   width="7" height="115" rx="1" fill="#15a43e"/>
+                    <rect x="114" y="15"  width="7" height="105" rx="1" fill="#15a43e"/>
+                    <rect x="125" y="25"  width="7" height="95"  rx="1" fill="#15a43e"/>
+                    <rect x="136" y="35"  width="7" height="85"  rx="1" fill="#15a43e"/>
+                    <rect x="147" y="20"  width="7" height="100" rx="1" fill="#15a43e"/>
+                    <rect x="158" y="8"   width="7" height="112" rx="1" fill="#15a43e"/>
+                    <rect x="169" y="12"  width="7" height="108" rx="1" fill="#15a43e"/>
+                    <rect x="180" y="22"  width="7" height="98"  rx="1" fill="#15a43e"/>
+                    <rect x="191" y="18"  width="7" height="102" rx="1" fill="#15a43e"/>
+                    <rect x="202" y="30"  width="7" height="90"  rx="1" fill="#15a43e"/>
+                    <rect x="213" y="15"  width="7" height="105" rx="1" fill="#15a43e"/>
+                    <rect x="224" y="10"  width="7" height="110" rx="1" fill="#15a43e"/>
+                    <rect x="235" y="5"   width="7" height="115" rx="1" fill="#15a43e"/>
+                    <rect x="246" y="12"  width="7" height="108" rx="1" fill="#15a43e"/>
+                    <rect x="257" y="20"  width="7" height="100" rx="1" fill="#15a43e"/>
+                    <rect x="268" y="8"   width="7" height="112" rx="1" fill="#15a43e"/>
+                    <rect x="279" y="14"  width="7" height="106" rx="1" fill="#15a43e"/>
+                    <rect x="290" y="18"  width="7" height="102" rx="1" fill="#15a43e"/>
+                    <rect x="301" y="10"  width="7" height="110" rx="1" fill="#15a43e"/>
+                    <!-- AVG line -->
+                    <line x1="0" y1="50" x2="320" y2="50" stroke="#15a43e" stroke-width="1" stroke-dasharray="4 3"/>
+                    <rect x="130" y="44" width="30" height="16" rx="3" fill="#15a43e"/>
+                    <text x="145" y="55" fill="white" font-size="9" text-anchor="middle" font-weight="700">AVG</text>
+                  </svg>
+                </div>
+                <div class="widget-dates"><span>Jan 01</span><span>Jan 29</span></div>
+              </div>
+
+              <!-- Your top objectives -->
+              <div class="obj-top-card">
+                <div class="obj-top-title">Your top objectives</div>
+                <div class="obj-group-label">YOU ARE ALMOST THERE</div>
+                <div class="obj-item">
+                  <span class="obj-item-text">Maximizing Audience Engagement through Social Media Strategies in the Evolving Landscape of Entertainment</span>
+                  <span class="obj-item-pct">89%</span>
+                  <div class="obj-progress"><div class="obj-progress-bar green" style="width:89%"></div></div>
+                </div>
+                <div class="obj-item">
+                  <span class="obj-item-text">Maximizing Audience Engagement through Social Media Strategies in the Evolving Landscape of Entertainment</span>
+                  <span class="obj-item-pct">89%</span>
+                  <div class="obj-progress"><div class="obj-progress-bar green" style="width:89%"></div></div>
+                </div>
+                <div class="obj-group-label">IN PROGRESS</div>
+                <div class="obj-item">
+                  <span class="obj-item-text">Maximizing Audience Engagement through Social Media Strategies in the Evolving Landscape of Entertainment</span>
+                  <span class="obj-item-pct">56%</span>
+                  <div class="obj-progress"><div class="obj-progress-bar yellow" style="width:56%"></div></div>
+                </div>
+                <div class="obj-item">
+                  <span class="obj-item-text">Maximizing Audience Engagement through Social Media Strategies in the Evolving Landscape of Entertainment</span>
+                  <span class="obj-item-pct">56%</span>
+                  <div class="obj-progress"><div class="obj-progress-bar yellow" style="width:56%"></div></div>
+                </div>
+                <div class="obj-item">
+                  <span class="obj-item-text">Maximizing Audience Engagement through Social Media Strategies in the Evolving Landscape of Entertainment</span>
+                  <span class="obj-item-pct">56%</span>
+                  <div class="obj-progress"><div class="obj-progress-bar orange" style="width:56%"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Cortex Panel (injected from cortex-panel.js — mode="initial" for Command Center) -->
+    <div id="cortex-slot" data-panel-id="cc" data-highlight="" data-mode="initial"></div>
+
+  </div>
+</div>
+
+<script src="components.js"></script>
+<script src="cortex-panel.js"></script>
+<script src="app.js"></script>
+<script>
+  initNav();
+  initCortexPanel();
+  updateExecuteButton();
+</script>
+</body>
+</html>

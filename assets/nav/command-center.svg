@@ -1,0 +1,5 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g transform="translate(3, 3)">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M9 1.125L1.5 7.125V14.625C1.5 15.6605 2.33947 16.5 3.375 16.5H6.75V10.875C6.75 10.2537 7.25368 9.75 7.875 9.75H10.125C10.7463 9.75 11.25 10.2537 11.25 10.875V16.5H14.625C15.6605 16.5 16.5 15.6605 16.5 14.625V7.125L9 1.125Z" fill="var(--fill-0, #9D9DA0)"/>
+</g>
+</svg>

@@ -1,0 +1,335 @@
+/* ============================================================
+   SOUL DESIGN SYSTEM — DESIGN TOKENS
+   Source: https://soul.dev.emplifi.io / https://soul.emplifi.io
+   ============================================================
+
+   These CSS custom properties define the canonical SOUL design
+   tokens. Import this file BEFORE project-specific styles so
+   that any overrides in styles.css take precedence.
+
+   Usage:
+     <link rel="stylesheet" href="soul-tokens.css">
+     <link rel="stylesheet" href="styles.css">
+   ============================================================ */
+
+:root {
+  /* ==========================================================
+     COLORS — Layout
+     ========================================================== */
+  --color-layer-level-0: #f3f3f5;
+  --color-layer-level-1: #ffffff;
+  --color-layer-level-2: #f3f3f5;
+  --color-layer-hover: rgba(0, 0, 0, 0.05);
+
+  /* ==========================================================
+     COLORS — On Layer (text / icons on surfaces)
+     ========================================================== */
+  --color-on-layer-primary: #24242b;
+  --color-on-layer-secondary: #505057;
+  --color-on-layer-tertiary: #9d9da0;
+
+  /* ==========================================================
+     COLORS — Border
+     ========================================================== */
+  --color-border-primary: rgba(0, 0, 0, 0.2);
+  --color-border-secondary: rgba(0, 0, 0, 0.1);
+  --color-border-success-emphasis: #20c54f;
+  --color-border-error-emphasis: #da1e28;
+  --color-border-warning-emphasis: #f5a623;
+  --color-border-info-emphasis: #0f62fe;
+
+  /* ==========================================================
+     COLORS — Button
+     ========================================================== */
+  --color-button-primary: #0f62fe;
+  --color-button-primary-hover: #0353e9;
+  --color-button-ghost: rgba(255, 255, 255, 0);
+  --color-button-ghost-hover: rgba(0, 0, 0, 0.05);
+  --color-button-invisible: rgba(255, 255, 255, 0);
+  --color-button-invisible-hover: rgba(0, 0, 0, 0.05);
+  --color-button-invisible-active: rgba(0, 0, 0, 0.1);
+
+  /* ==========================================================
+     COLORS — Status / Semantic
+     ========================================================== */
+  --color-status-success: #20c54f;
+  --color-status-success-light: #e8f5e9;
+  --color-status-success-text: #15a43e;
+  --color-status-error: #da1e28;
+  --color-status-error-light: #ffebee;
+  --color-status-error-text: #e53935;
+  --color-status-warning: #f5a623;
+  --color-status-warning-light: #fff8e1;
+  --color-status-info: #0f62fe;
+  --color-status-info-light: #d0e2ff;
+
+  /* ==========================================================
+     COLORS — Navigation
+     ========================================================== */
+  --color-nav-dark: #111114;
+  --color-nav-item-hover: rgba(255, 255, 255, 0.1);
+  --color-nav-item-active: rgba(255, 255, 255, 0.12);
+
+  /* ==========================================================
+     COLORS — AI Gradient
+     ========================================================== */
+  --color-ai-gradient-start: rgb(0, 161, 154);
+  --color-ai-gradient-end: rgb(124, 45, 240);
+
+  /* ==========================================================
+     COLORS — Shadow Components
+     ========================================================== */
+  --color-shadow-drop-10: rgba(0, 0, 0, 0.1);
+  --color-shadow-drop-20: rgba(0, 0, 0, 0.2);
+  --color-shadow-drop-30: rgba(0, 0, 0, 0.3);
+  --color-shadow-inner: rgba(0, 0, 0, 0.05);
+
+  /* ==========================================================
+     COLORS — Grays (explicit hex scale)
+     ========================================================== */
+  --color-gray-100: #f3f3f5;
+  --color-gray-200: #e7e7e9;
+  --color-gray-300: #d7d8d9;
+  --color-gray-400: #b4b4b6;
+  --color-gray-500: #9d9da0;
+  --color-gray-600: #717578;
+  --color-gray-700: #505057;
+  --color-gray-800: #24242b;
+  --color-gray-900: #111114;
+
+  /* ==========================================================
+     COLORS — Overlay
+     ========================================================== */
+  --color-overlay: rgba(0, 0, 0, 0.3);
+  --color-overlay-heavy: rgba(0, 0, 0, 0.5);
+
+  /* ==========================================================
+     COLORS — Link
+     ========================================================== */
+  --color-link: #0f62fe;
+  --color-link-hover: #0353e9;
+  --color-link-visited: #8a3ffc;
+
+  /* ==========================================================
+     COLORS — On Button (text on filled buttons)
+     ========================================================== */
+  --color-on-button-primary: #ffffff;
+  --color-on-button-ghost: #24242b;
+  --color-on-button-invisible: #24242b;
+
+  /* ==========================================================
+     COLORS — Message (background of status banners)
+     ========================================================== */
+  --color-message-success: #e8f5e9;
+  --color-message-error: #ffebee;
+  --color-message-warning: #fff8e1;
+  --color-message-info: #d0e2ff;
+
+  /* ==========================================================
+     COLORS — Tooltip
+     ========================================================== */
+  --color-tooltip-background: #24242b;
+  --color-tooltip-text: #ffffff;
+
+  /* ==========================================================
+     COLORS — Scrollbar
+     ========================================================== */
+  --color-scrollbar-thumb: rgba(0, 0, 0, 0.15);
+  --color-scrollbar-thumb-hover: rgba(0, 0, 0, 0.25);
+  --color-scrollbar-track: transparent;
+
+  /* ==========================================================
+     COLORS — Badge
+     ========================================================== */
+  --color-badge-error: #e53935;
+  --color-badge-text: #ffffff;
+
+  /* ==========================================================
+     COLORS — Platform brand
+     ========================================================== */
+  --color-platform-facebook: #0866ff;
+  --color-platform-instagram: #d73676;
+  --color-platform-twitter: #24242b;
+  --color-platform-youtube: #ff0000;
+
+  /* ==========================================================
+     SPACING
+     Storybook: Styles > Variables > Spacing
+     ========================================================== */
+  --space-0: 0px;
+  --space-1: 3px;
+  --space-2: 6px;
+  --space-3: 9px;
+  --space-4: 12px;
+  --space-5: 18px;
+  --space-6: 24px;
+  --space-7: 30px;
+  --space-8: 36px;
+  --space-9: 48px;
+  --space-10: 60px;
+  --space-11: 72px;
+  --space-12: 96px;
+  --space-13: 120px;
+
+  /* ==========================================================
+     BORDER RADIUS
+     Storybook: Styles > Variables > Border radius
+     ========================================================== */
+  --border-radius-small: 2px;
+  --border-radius-medium: 6px;
+  --border-radius-large: 8px;
+  --border-radius-pill: 999px;
+  --border-radius-full: 50%;
+
+  /* Legacy aliases — keep while styles.css migrates */
+  --radius-small: var(--border-radius-small);
+  --radius-medium: var(--border-radius-medium);
+  --radius-large: var(--border-radius-large);
+  --radius-pill: var(--border-radius-pill);
+  --radius-full: var(--border-radius-full);
+
+  /* ==========================================================
+     SHADOWS
+     Storybook: Styles > Variables > Shadows
+     CSS variable names: --box-shadow-100 … --box-shadow-400
+     Values derived from Figma source file.
+     ========================================================== */
+  --box-shadow-100: 0px 0px 0.5px 0px var(--color-shadow-drop-30),
+                    0px 1px 3px 0px var(--color-shadow-drop-20);
+
+  --box-shadow-200: 0px 0px 0.5px 0px var(--color-shadow-drop-30),
+                    0px 1px 3px 0px var(--color-shadow-drop-20),
+                    0px 5px 12px 0px var(--color-shadow-drop-10);
+
+  --box-shadow-300: 0px 0px 0.5px 0px var(--color-shadow-drop-30),
+                    0px 1px 5px 0px var(--color-shadow-drop-20),
+                    0px 10px 16px 0px var(--color-shadow-drop-10);
+
+  --box-shadow-400: 0px 0px 0.5px 0px var(--color-shadow-drop-30),
+                    0px 2px 8px 0px var(--color-shadow-drop-20),
+                    0px 16px 24px 0px var(--color-shadow-drop-10);
+
+  --box-shadow-inner: inset 0px 0.25px 0px 0.25px var(--color-shadow-inner),
+                      inset 0px 0px 1px 0px var(--color-shadow-inner);
+
+  /* Legacy aliases — keep while styles.css migrates */
+  --shadow-100: var(--box-shadow-100);
+  --shadow-200: var(--box-shadow-200);
+  --shadow-300: var(--box-shadow-300);
+  --shadow-inner: var(--box-shadow-inner);
+
+  /* ==========================================================
+     MOTION — Duration
+     Storybook: Styles > Variables > Motion
+     ========================================================== */
+  --motion-duration-instant: 0ms;
+  --motion-duration-quick-1: 80ms;
+  --motion-duration-quick-2: 120ms;
+  --motion-duration-moderate-1: 180ms;
+  --motion-duration-moderate-2: 270ms;
+
+  /* ==========================================================
+     MOTION — Easing
+     ========================================================== */
+  --motion-easing-ease: ease;
+  --motion-easing-entry: ease-out;
+  --motion-easing-exit: ease-in;
+  --motion-easing-linear: linear;
+
+  /* ==========================================================
+     MOTION — Position (slide transforms)
+     ========================================================== */
+  --motion-slide-up: translateY(-12px);
+  --motion-slide-down: translateY(12px);
+
+  /* ==========================================================
+     TYPOGRAPHY — Font
+     ========================================================== */
+  --font-family: 'Inter', sans-serif;
+  --font-feature-settings: 'zero' 1, 'ss04' 1, 'cv08' 1, 'cv05' 1;
+
+  /* ==========================================================
+     TYPOGRAPHY — Scale
+     Format: --text-{name}-{property}
+     ========================================================== */
+
+  /* Headline 1 */
+  --text-headline-1-size: 26px;
+  --text-headline-1-weight: 500;
+  --text-headline-1-line-height: 36px;
+  --text-headline-1-letter-spacing: -0.021px;
+
+  /* Headline 2 */
+  --text-headline-2-size: 20px;
+  --text-headline-2-weight: 500;
+  --text-headline-2-line-height: 30px;
+  --text-headline-2-letter-spacing: -0.017px;
+
+  /* Headline 3 */
+  --text-headline-3-size: 16px;
+  --text-headline-3-weight: 500;
+  --text-headline-3-line-height: 24px;
+  --text-headline-3-letter-spacing: -0.011px;
+
+  /* Headline 4 */
+  --text-headline-4-size: 13px;
+  --text-headline-4-weight: 700;
+  --text-headline-4-line-height: 18px;
+  --text-headline-4-letter-spacing: 0px;
+
+  /* Headline 5 */
+  --text-headline-5-size: 10px;
+  --text-headline-5-weight: 700;
+  --text-headline-5-line-height: 12px;
+  --text-headline-5-letter-spacing: 0.01px;
+
+  /* Body Medium */
+  --text-body-medium-size: 13px;
+  --text-body-medium-weight: 400;
+  --text-body-medium-line-height: 18px;
+  --text-body-medium-letter-spacing: 0px;
+
+  /* Body Medium Bold */
+  --text-body-medium-bold-weight: 700;
+
+  /* Body Small */
+  --text-body-small-size: 11px;
+  --text-body-small-weight: 400;
+  --text-body-small-line-height: 16px;
+  --text-body-small-letter-spacing: 0.005px;
+
+  /* Body Small Bold */
+  --text-body-small-bold-weight: 700;
+
+  /* Helper Text */
+  --text-helper-size: 10px;
+  --text-helper-weight: 400;
+  --text-helper-line-height: 12px;
+  --text-helper-letter-spacing: 0.01px;
+
+  /* Button Label */
+  --text-button-size: 13px;
+  --text-button-weight: 600;
+  --text-button-line-height: 18px;
+
+  /* Field Label */
+  --text-field-label-size: 11px;
+  --text-field-label-weight: 600;
+  --text-field-label-line-height: 18px;
+
+  /* Badge Label */
+  --text-badge-size: 10px;
+  --text-badge-weight: 700;
+  --text-badge-line-height: 12px;
+  --text-badge-letter-spacing: 0.01px;
+
+  /* ==========================================================
+     LAYOUT — App-specific widths
+     (Project-specific, not from SOUL core)
+     ========================================================== */
+  --platform-nav-width: 60px;
+  --platform-nav-width-expanded: 204px;
+  --section-nav-width: 240px;
+  --cortex-panel-width: 360px;
+  --cortex-bar-width: 60px;
+}
