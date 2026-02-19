@@ -1,274 +1,257 @@
 # Emplifi Platform -- Product Context Knowledge
 
-> This file serves as persistent context for AI assistance. It documents the Emplifi platform,
-> its product modules, cross-module relationships, the SOUL design system, and the Cortex AI layer
-> being prototyped in this repository.
+> This file provides general Emplifi platform context.
+> For Senior PM/Designer work, the AI will automatically use the 
+> **emplifi-senior-pm skill** (`.cursor/skills/emplifi-senior-pm/`) which provides 
+> specialized PM workflows, integration patterns, and comprehensive product knowledge.
 >
-> **Sources:** [emplifi.io](https://emplifi.io/), [docs.emplifi.io](https://docs.emplifi.io/platform/latest/home/) (official documentation - extensively mined), [soul.emplifi.io](https://soul.emplifi.io/), [Emplifi Academy](https://emplifi.app.bigtincan.com/), [Live Product](https://app.emplifi.io/)
+> **Last updated:** 2026-02-19  
+> **Coverage:** 100+ documentation pages, live product exploration, official docs  
+> **Sources:** [emplifi.io](https://emplifi.io/), [docs.emplifi.io](https://docs.emplifi.io/platform/latest/home/), [soul.emplifi.io](https://soul.emplifi.io/), [Live Product](https://app.emplifi.io/)
 
 ---
 
 ## 1. Platform Overview
 
-**Emplifi** is a unified customer experience (CX) and social media marketing platform used by 20,000+ brands (Spotify, Cartier, Toyota, Heineken, etc.). It was formed by the merger/acquisition of multiple companies:
+**Emplifi** is a unified customer experience (CX) platform formed from mergers of Socialbakers (social marketing), Astute (customer service), TurnTo (reviews), Pixlee (UGC), and KAWO (Chinese social).
 
 | Legacy Company | Became | Domain |
 |----------------|--------|--------|
-| **Socialbakers** | Social Marketing Cloud | Social media management, analytics, listening |
-| **Astute** | Service Cloud | Customer care, case management, chatbots |
-| **TurnTo** | Commerce Cloud (R&R) | Ratings & reviews, social commerce |
-| **Pixlee** | Commerce Cloud (UGC) | User-generated content, visual commerce (runs on `pixlee.svc.emplifi.io`) |
-| **KAWO** | Chinese Social Module | Chinese social network management (WeChat, Weibo, etc.) |
+| Socialbakers | Social Marketing Cloud | Social media, analytics, listening |
+| Astute | Service Cloud | Customer care, chatbots |
+| TurnTo | Commerce Cloud (R&R) | Ratings & reviews |
+| Pixlee | Commerce Cloud (UGC) | User-generated content (`pixlee.svc.emplifi.io`) |
+| KAWO | Chinese Social | WeChat, Weibo management |
 
-**Core value proposition:** Closing the "Customer Experience Gap" by unifying social media management, customer service, and social commerce into one interface.
+**Three Clouds:** Social Marketing, Service, Commerce + cross-cloud modules (Command Center, Unified Analytics, Flow Automations, Librarian, VoC, Teams).
 
-The platform is organized into three clouds/pillars:
-
-- **Social Marketing Cloud** -- content creation, publishing, analytics, listening, influencer management
-- **Commerce Cloud** -- UGC, ratings & reviews, shoppable content, live advisor
-- **Service Cloud** -- community engagement, case management, chatbots, live agents
-
-**Emplifi Fuel** is the overarching unified platform layer and intelligence engine that ties all modules together into a single command center, providing a shared real-time view of customer interactions across marketing, commerce, and care. It powers AI features across the platform (generative AI, sentiment analysis, image recognition).
-
-Emplifi was named a **Leader** in the Forrester Wave for social suite solutions.
+**Emplifi Fuel:** Unified platform layer + intelligence engine powering AI features (generative AI, sentiment analysis, image recognition).
 
 ---
 
-## 2. Product Modules
+## 2. Quick Reference (PM/Designer)
 
-### 2.0 Command Center (Emplifi Fuel)
+### Module Capability Matrix
 
-The Fuel strategic Command Center is the landing page/home screen of the platform. When Fuel is activated, it becomes the default homepage. Guides users through organizational business objectives, recommended tactics, and actionable steps.
+| Module | Core Function | Primary Input | Primary Output | Integrates With | Key Constraint |
+|--------|--------------|---------------|----------------|-----------------|----------------|
+| **Command Center** | Strategic dashboard | Objectives, KPIs | Tactical recommendations | All modules | — |
+| **Dashboard** | Legacy analytics | Social profiles | Customizable reports | All data sources | 700+ widgets, separate from UA |
+| **Unified Analytics** | Next-gen analytics | All platform data | Boards, insights, predictions | All modules | AI features in early access |
+| **Publisher** | Content scheduling | Media, text, campaigns | Published posts | Approval Flows, Content, UA | Platform API limits, 24h cancel window |
+| **Community** | Social inbox | Social messages, reviews | Responses, escalations | Care, Bot, Listening, Salesforce | 90-day retention, 10K+ scale |
+| **Care** | Case management | Escalated messages | Resolved cases | Community, Salesforce, Bot | Grace period 5d, max 5 cases/agent |
+| **Content Hub** | Content discovery | Published content, ads, listening | Collections, insights | Publisher, Listening, Paid | 21B+ inspiration content |
+| **UGC** | User content curation | Social UGC, uploads | Galleries, widgets | Influencers, eCommerce | Pixlee-powered, max 500 collections |
+| **Influencers** | Influencer marketing | Discovery, campaigns | Creator relationships, content | UGC, Content | 30M+ profiles, fake detection |
+| **Listening** | Social monitoring | Keywords, queries | Mentions, insights, alerts | Community, Care, Content, UA | Annual mention limit, platform-specific coverage |
+| **Ratings & Reviews** | Review management | Product reviews | Widgets, syndication | eCommerce platforms | TurnTo-powered, separate UI |
+| **Bot** | AI chatbot | Customer inquiries | Automated responses | Agent, Community, Knowledge | NLP-powered, multi-channel |
+| **Agent** | Contact center | Escalated conversations | B2C support | Bot, Care | Separate docs site |
+| **Flow Automations** | Workflow automation | Community/Care events | Automated actions | Community, Care | Max 100 flows, PIE-powered |
+| **Live Commerce** | Video shopping | Video calls | Sales conversions | Products, Advisors | 1-to-1 video + chat |
+| **VoC** | Survey management | Customer feedback | NPS, CSAT, insights | All channels | 2.3M+ respondents |
+| **Paid** | Ad analytics | Ad accounts | Campaign performance | Content Hub (Ads) | Meta, TikTok, X accounts |
 
-- **KPI Summaries** -- 4 widgets for the last 30 days: Number of followers, Total content, Engagements, Impressions; each shows data level (Profile-level or Post-level) and trend vs. previous period
-- **Objectives & Tactics** -- highlights top strategic objectives and most frequently completed tactics; connects with live Platform data (posts, impressions, engagements); turns strategic goals into daily workflows; same objectives as in Unified Analytics > Objectives
-- **Frequently visited** -- shortcuts to most commonly opened parts of the platform
-- **Notifications panel** -- right-side panel with unread/historical Platform Notifications (configurable in Settings > Notifications)
-- **Fuel Labels** -- categorization system for organizing Fuel objectives
-- **Data source selector** -- choose which connected profiles to view
+### Product Domain Glossary
 
-### 2.1 Dashboard
+**Core Concepts:**
+- **Profile** -- Connected social account; Owned (full control) vs Public (competitor monitoring)
+- **Case** -- Aggregated customer thread per profile; unlimited retention unless deleted
+- **Message** -- Single social interaction; 90-day retention across all platforms
+- **Post-level vs Profile-level** -- Aggregation by publish date vs engagement date
+- **Escalation** -- Promotion from Community → Care; locks original message until resolved
+- **Grace period** -- 5-day window for automatic case reopening on customer reply
 
-The analytical hub of the platform. Allows defining, creating, processing, and displaying data from social media activities using a single tool. Comes with pre-defined widgets and templates so analysis can start immediately after connecting social media accounts.
+**AI & Automation:**
+- **PIE (Platform Intelligence Engine)** -- Automation backbone powering Flow Automations
+- **Priority Score** -- ML-based urgency: Urgent (81-100), High (51-80), Medium (21-50), Low (0-20)
+- **Performance Prediction** -- AI content grading (A+ to D) for Facebook and Instagram
+- **Brand Voice** -- AI learns writing style from last 100 posts over 90 days (Enterprise)
+- **PrimeTime** -- AI optimal posting times for FB, IG, TikTok only
 
-- **Dashboard wizard** -- create from templates (select one social media profile) or start from scratch (add widgets and configure manually)
-- **700+ widgets** across social, paid, listening, care, bot, Live Commerce, UGC modules
-- **Widget characteristics** -- each widget has: Platform reach (cross-platform/multi-platform/single), Organic/Boosted scope, Private/Public data, Post-level vs Profile-level aggregation, Ads-only flag
-- **Widget visualization types** -- Value, Column, Pie, Line, Area, Table
-- **Widget configuration** -- chart type, widget name, data source, filters, breakdown options, widget-specific options
-- **Post-level vs Profile-level** -- Post-level = lifetime data from individual posts published during period, aggregated by publish date; Profile-level = data attributed to profile, aggregated by when engagement happened regardless of post date
-- **Templates** -- pre-defined dashboards: "Care: Case Analysis", "Community: Labels & Sentiment", "Community: Team Performance", "LinkedIn Growth & Engagement"
-- **Organization** -- "My Dashboards" (personal) and "Shared Dashboards" (team-visible)
-- **Duplicate** -- duplicate dashboards to create variants (e.g., same layout with different date ranges)
-- **Date range** -- global date range for all widgets; overrides individual widget settings
-- **Timezone** -- determined by Localization preferences in account settings
-- **Note:** Dashboard widgets are separate from Unified Analytics widgets
+**Technical Terms:**
+- **SLA (Service Level Agreement)** -- Case resolution time targets with milestones and breach alerts
+- **Spike Alert** -- Anomaly detection for mention volume spikes (AI or threshold-based)
+- **Query Set** -- Grouped listening queries by geography, brand, or topic
+- **Shared Insights** -- Instagram feature enabling collaboration post detection
+- **Syndication** -- Review distribution: Source (origin) vs Recipient (displays)
 
-### 2.2 Unified Analytics
+### Critical Data Flows (PM Perspective)
 
-Cross-module analytics environment that aggregates data from across the entire platform into a single view. "Gain a 360° view of performance across all platforms." Transforms social data into actionable insights by aggregating social media, listening, UGC, VoC, and social customer care data.
+**1. Content Ideation → Execution:**
+```
+Listening (trends) → Content Hub Inspiration (discover) → Collections (curate) 
+→ Publisher (schedule) → Social Platforms (publish) → UA (analyze performance)
+```
 
-- **Pre-loaded boards** with hundreds of ready-made data visualizations
-- **Interactive widgets** -- drill-down, timeframe setting, cross-account/platform comparisons
-- **DISCOVER data sources** (live product) -- see full board hierarchy below
-- **AI features** -- "Generate charts" [EARLY ACCESS] (ask AI to recommend visualizations), "Search metrics and more" (ask AI for assistance), **Performance Prediction** for Facebook and Instagram (AI-based content optimization, grades A+ to D)
-- **Organization** -- My boards, Shared with me, Professional services (pre-made demo/template boards like "Competitors Benchmarking", "Crisis Management", "KPI Scorecard", "VoC Aggregated Overview")
-- **Saved views** -- persist specific board configurations with filters, shared across team
-- **Custom Boards** -- hand-pick widgets to create custom analytical views
-- **Transition from Legacy Analytics** -- Legacy Analytics discontinued; connected profiles, permissions, connections preserved; scheduled reports must be recreated; API unchanged
-- **Objectives** -- goal tracking integrated into UA
-- **Board URL format** -- boards have numeric IDs (e.g., `/ua/6173` for Care > Case management > Volume)
-- **Board structure** -- each board can have tabs (e.g., Volume | Backlog | Case processing), a toolbar with profile/date/filter selectors, and multiple widget rows
-- **Widget types** -- KPI cards (absolute number + % change period-over-period), trend line/bar charts (aggregated by day/week/month), contextual tip boxes
-- Enables team collaboration across marketing, commerce, and care departments
-- **Product owner:** Antongiulio Migliacci (Group Product Manager)
+**2. Customer Issue → Resolution:**
+```
+Social Platform → Community (Priority Score + AI Reply) → Care (SLA + case management) 
+→ Agent (complex) → Salesforce (CRM sync)
+```
 
-**DISCOVER Board Hierarchy (from live product):**
+**3. Crisis Management:**
+```
+Listening (spike alert) → Community (surface mentions) → Care (triage) 
+→ Publisher (coordinate response) → UA (measure impact)
+```
 
-- **Social profiles** -- Data sources: OWNED SOCIAL PROFILES, PUBLIC PROFILES, PROFILE LABELS
-  - **Cross-platform:** Profiles summary, Overview, Content performance
-  - **Facebook:** Profiles summary, Profile insights (page likes, followers, impressions), Content performance, Public profiles (competitor benchmarking)
-  - **Instagram (deepest analytics -- 8 boards):** Profiles summary, Overview, Content performance, Story engagement, Earned media, Public profiles, People insights (audience demographics), Performance prediction (AI-powered forecast)
-  - **X:** Profiles summary, Overview, Content performance, Earned media, Public profiles
-  - **YouTube:** Profiles summary, Overview, Video insights, Public profiles
-  - **LinkedIn:** Profiles summary, Overview, Content performance
-  - **Pinterest:** Profiles summary, Overview
-  - **TikTok:** Profiles summary, Overview, Video insights
-  - **Snapchat:** Overview (minimal support)
-- **Paid:** Paid insight overview
-- **Campaigns & labels:** Cross-platform overview + per-platform (Facebook, Instagram, X, YouTube, LinkedIn, Pinterest, TikTok, Snapchat)
-- **Listening** -- Data sources: LISTENING QUERIES; Also monitors: Blogs, Forums, News (beyond social)
-  - Aggregated overview, AI Query highlights (select a listening query + sentiment + platform + language to get AI analysis), Audience (author demographics & reach), Crisis Management (spike alerts), Key topics (keywords, emojis, hashtags), Platforms (per-platform metrics), Sentiment (across mentions), Volume (detailed breakdowns)
-- **Care** -- Data source: AGENTS AND SUPERVISORS; "Boost your Care team's performance with advanced analytics"
-  - Case management (tabs: Volume, Backlog, Case processing -- KPI cards: Created/Reopened/Resolved/Unresolved cases with % changes), Service level agreement, Agents performance
-- **Bot:** Bot overview, Bot performance
-- **Community** (single board)
-- **Link in Bio:** Link in Bio Performance
-- **Live Commerce (11 boards):** Executive summary, Network performance, Advisor performance, Operational performance, Appointments, Chat First, Pool Performance, Account overview, Store Performance, Call by URL, Call feedback
-- **UGC:** Gallery interactions
-- **Ratings & Reviews** (single board)
-- **Knowledge** (single board)
-- **Agent** (single board)
+**4. Influencer Campaign:**
+```
+Influencers (discovery) → Campaigns (manage) → UGC (collect content) 
+→ Collections (curate) → Publisher (amplify) → UA (track ROI)
+```
 
-**Deep-dive details (from live product):**
+### Technical Constraints (Design Impact)
 
-- **Home page** -- personalized greeting ("Hi, Jan"); three action cards: "Generate charts" [EARLY ACCESS], "Create a board" [EARLY ACCESS], "Search metrics and more" (with AI assistance)
-- **Saved views table** -- columns: Name, Board (path hierarchy e.g., "Social profiles / Cross-platform / Content performance"), Last edited, Creator; filterable by "Created by: Anyone"
-- **Board examples** -- "Volume" (Care / Case management), "Profiles summary" (Social profiles / Cross-platform), "People insights" (Social profiles / Facebook / Owned profiles), "Profile vs. profile label", "Content performance", "Amelia's Team Metrics!"
-- **Objectives page** -- grid of KPI objective cards, each showing: objective name, time period ("Last 30 Days"), metric value with change % (green ↑ or red ↓), metric name (Engagement rate, Content impressions, Interactions, Link clicks), target comparison ("Above X"), mini sparkline/bar chart with AVG line; "+ Create Objective" button; up to many objectives visible (scrollable grid)
-- **"+ New" button** -- quick creation of boards from the sidebar
-- **Care > Case management > Volume board** -- toolbar: profile selector ("emplifi_demo_shop"), "Select case fields" dropdown, "Last 30 Days", Day granularity, Filter; actions: Reset, "Save as new view", "Update view"; 4 KPI cards at top (Created/Reopened/Resolved/Unresolved with period comparison), contextual tip box explaining the metrics, "Created cases by status trend" line chart below
-- **Professional services boards** -- pre-made boards: Color Tests (Cross-Platform/Instagram Overview), Content Overview, DEMO LATAM Airlines Group, Audience Analysis, Brand Awareness & Perception, Competitors Benchmarking, Crisis Management, Trend Analysis, Overview by Platform, Profile/Profile Label Performance, Organic & Paid performance, VoC Aggregated/Survey Comparison/Survey Deep Dive, KPI Scorecard, Leaderboard DEMO, Q1 Trend Analysis
+| Constraint Type | Value | Affects | Workaround/Notes |
+|----------------|-------|---------|------------------|
+| **Data Retention** | 90 days | Community, Listening | Care has unlimited if not deleted |
+| **Session Timeout** | 7 days | All modules | Auto re-auth on activity |
+| **Flow Automations** | Max 100/account | Automation | Request increase via Professional Services |
+| **Collections** | Max 500/account | Content Hub | Archive old collections before creating new |
+| **Agent Capacity** | Default 5 cases | Care | Configurable per agent |
+| **Custom Feeds** | 30 global, 15 private | Community | Hard limits |
+| **Bulk Operations** | Max 50 items | Community | Per-operation limit |
+| **Labeling Rules** | ~300/account | Automation | Hard limit |
+| **Historical Backfill** | 365 days | Listening | Varies by platform; none for Reddit, TikTok, IG hashtags |
+| **Annual Mentions** | Billing-based quota | Listening | All queries suspended when reached |
+| **Instagram Products** | 5/photo, 20/carousel | Publisher | Platform API limit |
+| **YouTube Cancel** | <1h before publish | Publisher | Cannot cancel within 1 hour |
 
-### 2.3 Publisher
+---
 
-Content creation, scheduling, and publishing engine for social media. "Maximize performance, streamline collaboration, and enhance efficiency."
+---
 
-- **Multi-platform publishing** -- schedule posts across multiple profiles and platforms simultaneously (Facebook, Instagram, TikTok, YouTube, X, LinkedIn, Threads, Pinterest)
-- **AI Composer** -- OpenAI-powered text generation; generates 4 suggestions at a time; Brand Voice feature (Enterprise: analyzes last 100 posts over 90 days); tone options: Educational/Energetic/Excited/Happy/Inspirational/Neutral/Optimistic/Professional/Recommended/Sad/Sales pitch; format: General/News; "Amplify emotions"/"Relax tone" quick tweaks; 30+ languages with auto-detection; human moderation mandatory
-- **PrimeTime** -- analyzes user behavioral patterns to recommend optimal publish times (24h/48h/7-day windows, with visibility improvement percentages)
-- **Link in Bio (Emplifi Link)** -- built-in microsite builder (similar to Linktree); custom URL, page title/bio, GDPR compliant, 90-day data retention; Global or Specific Users visibility; integrated into Publisher workflows; analytics available
-- **Content types** -- Photos, videos, GIFs, documents (PPT/DOC/PDF for LinkedIn), links, carousel posts
-- **Supported platforms** -- Instagram (Stories, Reels, product tags: 5 per photo, 20 per carousel), Facebook (Stories, Dark Posts), Threads, YouTube (custom thumbnails, playlists, age restrictions, subtitles, categories), TikTok, LinkedIn, Pinterest, X
-- **Targeting** -- demographics (age, language, country, interests), feed targeting, geo-gating (Facebook)
-- **Calendar views** -- Month, Week, Day views; drag-and-drop rescheduling; NOTES row for team annotations
-- **Workflow statuses** -- Scheduled, Waiting for Approval, Rejected, Publishing Error, Assigned to You, Sent, Drafts
-- **Approval workflows** -- Standard (simple: creator → approvers) vs Flexible (multi-stage: roles = Content Creator, Page Admin, Client/External); configurable in Settings
-- **Emergency Stop Publishing** -- Account Admin action converts all posts scheduled in next 24h to drafts; requires security phrase; irreversible
-- **Generate Post ID** (Facebook) -- pre-generate post link for ad campaigns before publishing
-- **Link Shortener** -- Bit.ly integration (enabled by default); clicks tracked in Emplifi analytics
-- **Mobile Suite** -- publish from mobile browser to FB, IG, X, LinkedIn; upload from cloud or device
-- **Sub-features** -- Instagram grid preview, Link in Bio (microsite builder), Dark Posts (Facebook), Preset Templates
-- **Industry-specific value** -- publisher value positioning varies by industry (restaurants, retail, etc.)
-- **Product owner:** Michal Kadak (Group Product Manager)
+## 4. Product Modules
 
-**Publisher Sidebar Navigation (complete):**
+### 4.0 Command Center (Cross-Cloud)
 
-1. **Calendar** -- Month/Week/Day views; main publishing overview
-2. **Instagram grid** -- visual grid planner
-3. **Link in Bio** -- landing page builder
-4. *(separator)*
-5. **Scheduled** -- upcoming scheduled posts
-6. **Waiting for Approval** -- posts in approval pipeline (connects to Settings > Approval flows)
-7. **Rejected** -- posts rejected during approval
-8. **Publishing Error** -- failed publish attempts
-9. **Assigned to You** -- posts assigned to the current user
-10. *(separator)*
-11. **Sent** -- published post history
-12. **Dark Posts** -- Facebook dark/unpublished posts
-13. *(separator)*
-14. **Drafts** -- draft posts
-15. **Preset Templates** -- reusable post templates
-16. *(separator)*
-17. **+ Create post** -- new post creation action
+**Function:** Strategic homepage with KPI summaries and tactical guidance  
+**Input:** Objectives, connected profiles, user activity patterns  
+**Output:** Tactical recommendations, frequently visited shortcuts  
+**Capabilities:**
+- KPI widgets: Followers, Content, Engagements, Impressions (last 30 days, Profile/Post-level)
+- Objectives & Tactics: connects strategic goals to daily workflows
+- Fuel Labels for categorizing objectives
+- Frequently visited shortcuts
+- Notifications panel (configurable in Settings)
+**Integrations:** Data from all modules; same Objectives as Unified Analytics  
+**Constraints:** Requires Fuel activation to become default homepage
 
-**Deep-dive details (from live product):**
+### 4.1 Dashboard (Cross-Cloud)
 
-- **Calendar Month view** -- shows date grid (Mon-Sun, week starts Monday); posts appear as platform-colored badges (blue = FB, pink = IG, etc.); "Draft" yellow badges with count (e.g., "12 Drafts", "8 Drafts"); multi-day colored spans (blue/pink horizontal bars) for campaigns or date ranges; today highlighted with blue circle; NOTES row visible; header: "Calendar | Today | < > nav | date range | Month/Week/Day | Filter | + Create post"
-- **Instagram Grid** -- visual grid planner that previews how posts will appear on an Instagram profile feed; select a profile and target date (current or future); "Show posts waiting for approval" toggle
-- **Link in Bio** -- landing page builder (similar to Linktree); each page has brand logo, name, description, shareable link ("Copy link"); pages can be Global or profile-specific; "+ Create a page" action
-- **Scheduled view** -- list of upcoming posts with filters: Platform icons (FB, IG, X, LinkedIn, Pinterest, YouTube, TikTok, Threads), Status circles, Advanced filters (Labels, Content Type, Media Type, Assignment, Mentioned user in internal chat, Created by); "Stop publishing" action; two tabs "Scheduled" vs. "Scheduled on Facebook"; "Default view" option
-- **Sent view** -- published post history with the same filter structure; each post shows assigned user avatar, social media post ID, "No Status" default post-publish status dropdown
-- **Post cards** -- show profile name/handle, date/time, content type badge (e.g., "Stories", "DRAFT"), content preview, media thumbnails; "Publishing Notes" are separate from the actual caption; collaboration indicators (message count, team count); status dropdown ("In progress", "No Status")
-- **Stories flow** -- manual "Confirm: Stories Published" action for Stories content; warnings when scheduled time has passed
-- **Approval workflow connection** -- "Waiting for Approval" posts flow through multi-step approval pipelines defined in Settings > Approval flows; rejected posts appear in "Rejected" section
+**Function:** Legacy analytics with customizable widget-based dashboards  
+**Input:** Social profiles, ad accounts, listening queries, care data  
+**Output:** Custom dashboards with 700+ widget types  
+**Capabilities:**
+- 700+ widgets across social, paid, listening, care, bot, Live Commerce, UGC
+- Widget types: Value, Column, Pie, Line, Area, Table
+- Post-level vs Profile-level aggregation
+- Templates: Care Case Analysis, Community Performance, Team Performance
+- Duplicate dashboards for variants
+- Global date range control
+**Integrations:** Separate data pipeline from Unified Analytics  
+**Constraints:** Dashboard widgets ≠ UA widgets (different systems); timezone from account settings
 
-### 2.4 Community
+### 4.2 Unified Analytics (Cross-Cloud)
 
-Unified inbox for **social media and review channels** -- streamlines communication for both social engagement and review response management.
+**Function:** Next-gen cross-module analytics with AI-powered insights  
+**Input:** All platform data (social, listening, care, UGC, VoC)  
+**Output:** Pre-loaded boards, custom visualizations, performance predictions  
+**Capabilities:**
+- **AI features:** Generate charts [EARLY ACCESS], Search metrics, Performance Prediction (FB/IG: A+ to D grades)
+- Pre-loaded board hierarchy (DISCOVER):
+  - Social profiles: Cross-platform, FB, IG (8 boards incl. Performance Prediction), X, YouTube, LinkedIn, Pinterest, TikTok, Snapchat
+  - Paid: Paid insight overview
+  - Campaigns & labels: Cross-platform + per-platform
+  - Listening: Aggregated, AI Query highlights, Audience, Crisis, Key topics, Platforms, Sentiment, Volume
+  - Care: Case management (Volume, Backlog, Processing), SLA, Agent performance [EARLY ACCESS]
+  - Bot, Community, Link in Bio, Live Commerce (11 boards), UGC, R&R, Knowledge, Agent
+- Saved views (persist filters, team-shared)
+- Custom Boards (hand-pick widgets)
+- Objectives (goal tracking)
+**Integrations:** Feeds from all modules  
+**Constraints:** Legacy Analytics discontinued (no migration tools, must recreate scheduled reports); Threads API in development; API unchanged  
+**Product owner:** Antongiulio Migliacci
 
-- **Channels** -- Facebook, Instagram, X, LinkedIn (company pages only), YouTube, TikTok, Google Business, WhatsApp (individual chats only, no group chats/communities)
-- **Scale** -- handles 10,000+ messages in the inbox
-- **Preset feeds** -- "All incoming", "Assigned to you", "Mentioned you", "For approval", "Sent", "Publishing problems" + custom Global feeds (up to 30 per account) and My feeds (up to 15 per user)
-- **AI features** -- automated prioritization, sorting, sentiment analysis (5 emoji levels), **AI Reply Assistant** (Rephrase, Make longer, Make longer & add context, Make shorter, Simplify, Change tone: Empathetic/Friendly/Persuasive/Professional, Translate to; 30+ languages; human moderation required)
-- **Priority Score** -- ML-trained on historical Community user actions: 81-100 Urgent (from hidden/banned/deleted), 51-80 High (from replies), 21-50 Medium (from likes), 0-20 Low (no action); 90+ languages; not available for DMs
-- **Listening integration** -- messages from Listening appear directly in Community (tagged as "Listening - Comment"); Spike Alert filter available
-- **Workflow** -- answer templates (macros), user role assignment, task assignments, "Mark as Done", collision detection
-- **Sort options** -- Date, Priority, Number of comments, Number of followers (X only), Engagement rate, Number of likes
-- **Filters** -- Platform, Sentiment, Status, Message type, Chatter (Mentions/GIF/Emoji/Hashtag), Priority, Media type, Date/time range, "Show done messages" toggle (global setting)
-- **Search** -- scoped to current feed; operators: AND, OR, NOT/-, "exact phrase", * (wildcard), () for precedence; case-insensitive; UPPERCASE for operators
-- **Multi-selection & bulk operations** -- select up to 50 items at once; apply sentiment, labels, assignments, notes, status changes in bulk
-- **Escalation to Care** -- manual or automatic (via rules/flow automations); escalation locks message in Community until resolved in Care; status mapping: New/Open/Pending/On hold = locked; Done (after grace period)/Spam/Deleted = unlocked
-- **Translations** -- 84 languages, 827 translation pairs; disabled for messages >3,000 characters; user-level setting; shared with Care
-- **Salesforce integration** -- ONE-WAY only (create Salesforce case/lead from Community); token-based; agent name/email mapping
-- **Export** -- XLSX format; max 10,000 messages recommended; up to 500 comments/DMs per message; scheduled email delivery
-- **Data retention** -- 90 days of historical data across all platforms
-- **Edit sent reply** -- only for Facebook comments and Google Business reviews; not if part of Care case, deleted, or >90 days old
-- **Direct Conversation vs Direct Message** -- DC = full thread (technically endless); DM = single message in a DC; feeds work with conversations
-- **Reporting** -- dashboard templates: Labels & Sentiment, Team Performance, Community Performance; business hours for accurate response time metrics; listening mentions NOT included in Community widget data
-- **Product owner:** Petr Landsman (Sr. Product Manager)
+### 4.3 Publisher (Social Marketing Cloud)
 
-**Deep-dive details (from live product):**
+**Function:** Content scheduling and multi-platform publishing  
+**Input:** Media, text, campaigns; approval workflows  
+**Output:** Published posts across 8 social platforms  
+**Capabilities:**
+- **AI Composer:** OpenAI-powered; 4 suggestions; Brand Voice (last 100 posts/90d, Enterprise); 11 tones; 30+ languages
+- **PrimeTime:** AI scheduling for FB, IG, TikTok only; 24h/48h/7d windows
+- **Link in Bio (Emplifi Link):** Microsite builder; Buttons + Social Grid; Smart/Integrate packages
+- Multi-platform: FB, IG, TikTok, YouTube, X, LinkedIn, Threads, Pinterest
+- Calendar views: Month/Week/Day; drag-and-drop rescheduling
+- Approval workflows: Standard (creator→approvers) vs Flexible (multi-stage with roles)
+- Emergency Stop Publishing: converts next 24h scheduled posts to drafts (irreversible)
+- Generate Post ID (FB): pre-generate link for ad campaigns
+**Platform-specific:**
+- Instagram: Stories (manual/auto), Reels, Product tags (5/photo, 20/carousel), grid preview
+- Facebook: Dark Posts, Stories, geo-gating, demographics, Generate Post ID
+- YouTube: Custom thumbnails, playlists, age restrictions, subtitles; NO end screens; <1h cancel lock
+- TikTok: PrimeTime only
+- LinkedIn: Documents (PPT/DOC/PDF), tagging with API limits
+- Threads: Images, carousels, videos, links; business profile required
+**Integrations:** 
+- → Social Platforms (publish)
+- → Approval Flows (governance)
+- ← Content Hub Collections (schedule from collections)
+- → UA (performance analytics)
+**Constraints:** Platform API limits; cannot cancel YouTube <1h before publish; IG product tags require approved Instagram Shop; Link in Bio only IG assets in multi-network posts  
+**Product owner:** Michal Kadak
 
-- **Message count** -- "51 out of 10000+" format; pagination through message set
-- **Sorting** -- "Sort by: Highest priority" dropdown, plus refresh/sync icon
-- **Action bar per message** -- Reply, Like, Repost, Profile view, Team collaboration, Assign, Assign special, "Mark as Done" (green), "..." more options; brand logo icon at start
-- **Custom Global feeds** -- configurable named feeds beyond built-in ones (e.g., "Volantis DMs and C... (36)", "Complaint related... (0)", "SC TEST (67)", "Comments & posts (33)", "DMs (15)", "DMs (escalated to c... (18)", "Listening - travel int... (990)")
-- **"active only" toggle** in filter panel; OFF toggle at top (keyboard shortcuts or display mode)
-- **Platform filter icons** -- FB, IG, X, LinkedIn, YouTube, TikTok, WhatsApp, plus one additional icon
-- **Sentiment filter** -- 5 emoji levels plus a hidden/blocked icon (6 total sentiment states)
-- **Status filter** -- 5 colored circle indicators
-- **Community features** and **Reports** sections in sidebar (expandable)
-- **Agent status** -- "Status: Offline" at bottom left; agents toggle Online/Offline availability
-- **Message metadata per message** -- author name + follower count (e.g., "2k"), date/time, source type badge ("Listening - Comment" in blue), priority badge ("URGENT" in red), platform reference ("commented to [Platform] [Profile]"), video/media thumbnails inline
-- **Chatter filter types** -- Mentions only, GIF/GIF only, Emoji only, Hashtag only -- filters by message content characteristics
+### 4.4 Community (Service Cloud)
 
-### 2.5 Care
+**Function:** Unified social inbox for messages and reviews  
+**Input:** Social messages from 8 platforms + review channels  
+**Output:** Responses, escalations to Care, Salesforce cases  
+**Capabilities:**
+- **Priority Score:** ML-based (Urgent 81-100, High 51-80, Medium 21-50, Low 0-20); 90+ languages; not for DMs
+- **AI Reply Assistant:** 6 actions (Rephrase, Make longer, longer+context, shorter, Simplify) + 4 tones + Translate; 30+ languages
+- Custom feeds: max 30 global, 15 private
+- Search: AND/OR/NOT, wildcards, "exact phrase"
+- Bulk operations: max 50 items
+- Escalation to Care: locks message until resolved
+- Translations: 84 languages, 827 pairs
+- Export: XLSX, max 10K messages, up to 500 comments/DMs per message
+**Platform support:** FB, IG, X, LinkedIn (company pages only), YouTube, TikTok, Google Business, WhatsApp (individual chats only)  
+**Integrations:**
+- → Care (escalation locks message)
+- → Salesforce ONE-WAY (create case/lead)
+- ← Listening (FB/IG/X mentions appear as "Listening - Comment")
+- ← Bot ("Handled by Bot" tracking)
+**Constraints:** 90-day retention; WhatsApp individual only (no groups); LinkedIn company pages only; edit reply only FB comments + GB reviews (<90d, not in Care case)  
+**Product owner:** Petr Landsman
 
-Comprehensive case management for escalated customer interactions (Service Cloud). "Provide timely support, resolve issues quickly, and create meaningful connections."
+### 4.5 Care (Service Cloud)
 
-- **Scale** -- 6,998+ cases in a typical inbox
-- **Three-panel layout** -- left: case list with search/filter, middle: conversation thread, right: case details panel
-- **Case aggregation** -- all messages between an individual customer and each owned profile are grouped into one case; one open case per customer per profile at any time; unlimited data retention (unless deleted)
-- **Case statuses** -- New, Open, Pending, On hold, Done, Spam; auto-transitions: New→Open on assignment, Pending→Open on customer reply, Done→grace period
-- **Grace period** -- default 5 days (configurable in Settings > Care > Workflows); customer reply reopens case; after period, new messages create new cases; Spam = immediate close, no grace period
-- **Agent capacity** -- default max 5 cases per agent (configurable); display: x/y format; auto-assignment stops at max; manual assignment still allowed
-- **Skills system** -- assigned to users/groups for auto-assignment and workload distribution; group membership updates skills automatically
-- **Case fields** -- types: Single-select, Multi-select, Text, Number (9 digits), Date; visibility: Global (editable), Read-only (metadata), Hidden (automation only); "Recommended" fields prompt when marking Done
-- **Case management** -- case numbers (#9463 etc.), response time monitoring, watcher assignments; last 500 messages visible per DM conversation
-- **AI Reply Assistant** -- same as Community: Rephrase, Make longer, Make longer & add context, Make shorter, Simplify, Change tone, Translate to; requires assignment to case
-- **"Summarize case"** -- AI-powered case summarization feature
-- **Public + private messages** -- manages both without losing continuity across channels
-- **Case details panel** -- tabs: Case, Customer, History, Salesforce; ASSIGNEE with assign/unassign; custom fields per customer; CSAT score; sentiment (5 levels)
-- **SLA system** -- configurable SLA policies with conditions (message text, channel, platform, sentiment, language); milestones per priority: Time to assign, First response time, Next response time, Total resolution time; format: "1d 12h 30m"; breach notifications to agent + supervisors; policies evaluated in order, first match assigned permanently
-- **SLA Milestone indicators** -- red dot = overdue, orange = approaching, blue = info; visible in case header and detail panel
-- **Custom fields** -- per-brand fields (e.g., "Telefono - Arajet", "Nombre - Arajet", "Case Reason - Arajet" with dropdown)
-- **Proactive engagement** -- enables marketing teams and customer-facing departments to proactively connect
-- **Salesforce integration** -- BI-DIRECTIONAL (unlike Community's one-way); case status sync (condition-based or bi-directional mapping); message propagation: sync (last 100 + ongoing) or one-time copy; requires custom SocialPost object in Salesforce
-- **Other integrations** -- Zendesk, Microsoft Dynamics
-- **Actions** -- "Assign me to this case", "Add note" (internal notes), "Mark as Done" dropdown
-- **Cross-module case sources** -- cases can originate from Community (escalated messages), Bot (escalated conversations), AND Listening (listening mentions tagged as "Listening - Comment")
-- Handles the "second tier" of customer service after Community's front-line engagement
-- **Product owner:** Giovanni Romano (Director of Product)
+**Function:** Case management for escalated customer interactions  
+**Input:** Escalated messages from Community/Bot/Listening  
+**Output:** Resolved cases with SLA tracking  
+**Capabilities:**
+- **Case aggregation:** All messages per customer per profile = 1 case; unlimited retention
+- **Grace period:** 5 days default (configurable); customer reply reopens; Spam = no grace period
+- **Agent capacity:** Default max 5 cases/agent (configurable); x/y display; auto-assignment stops at max
+- **Skills system:** Auto-assignment + workload distribution; group membership = auto-update
+- **Case fields:** 5 types (Single/Multi-select, Text, Number, Date); 3 visibilities (Global, Read-only, Hidden)
+- **AI Reply Assistant:** Same as Community (requires assignment to case)
+- **"Summarize case":** AI-powered case summarization
+- **SLA system:** Configurable policies with conditions; 4 milestones (Time to assign, First response, Next response, Total resolution); format: 1d 12h 30m; breach = notify agent + supervisors
+**Case statuses:** New, Open, Pending, On hold, Done, Spam; auto-transitions: New→Open on assignment, Pending→Open on reply  
+**Integrations:**
+- ← Community (escalation unlocks after Done/Spam/grace period)
+- ↔ Salesforce BI-DIRECTIONAL (status sync, message propagation; requires SocialPost object)
+- ← Bot (escalated conversations)
+- Zendesk, Microsoft Dynamics
+**Constraints:** Grace period 5d; default max 5 cases/agent; last 500 messages visible per DM; Salesforce needs custom SocialPost object  
+**Product owner:** Giovanni Romano
 
-**Left Panel -- Case Inbox (from live product):**
-
-- **Search bar** -- "Search names, m..." for finding specific cases
-- **Built-in inbox tabs** with counts:
-  - Inbox (999+), New cases (999+), My open (1), My pending (0), My on hold (0), Done (999+), My mentions (2), Spam (11)
-- **Custom VIEWS** -- user-created segment views with case counts:
-  - Examples: "México", "Cancelaciones Arajet (4)", "Modificaciones Arajet (3)", "New view (66)"
-  - Creates focused workspaces for specific markets, issue types, or workflows
-- **Case card** shows: case number, OPEN badge, green sentiment indicator, platform icon (X), author name with follower count (e.g., "2k"), content preview, date/time, SLA countdown (red when overdue)
-- **Counter** -- "6998 CASES SHOWN"
-- **Bottom sections** -- "Care features" (expandable), "Reports" (arrow), **"Status: Offline"** (agent online/offline status)
-
-**Middle Panel -- Conversation Thread:**
-
-- Case header: "#9463 OPEN | Listening" | "First response within -134 d 13 h" | MEDIUM priority badge | "Mark as Done" dropdown | "..."
-- Date dividers between messages
-- Message source tag: "Listening - Comment · Grok · 19:58"
-- **"Summarize case"** sparkle icon
-- Assignment gate: "Another person has been assigned to the case. To respond, you need to be assigned instead." → "Assign me" (blue) + "Add note"
-
-**Right Panel -- Case Details:**
-
-- Customer header: name, avatar, handle (@grok16), CSAT button
-- **4 tabs:** Case | Customer | History | Salesforce
-- **Case tab:** ASSIGNEE (unassign action, user dropdown), CASE INFO with CSAT label, Priority dropdown (Medium), Sentiment (5 emoji levels), custom text fields, custom dropdown fields
-- **MILESTONES:** red dot = overdue, orange = approaching, blue = info; "Mark as Done due", "First response due", "Assigned at", "Case created at"
-
-### 2.6 Content (Content Hub)
+### 4.6 Content Hub (Social Marketing Cloud)
 
 Content discovery, analysis, and collaboration hub. "Discover the best content in your all-in-one hub." Organized into four sections plus Collections:
 
@@ -331,7 +314,7 @@ Additional capabilities:
 - **"Top Recommended Interests"** -- personalized recommendations based on monitored profiles (e.g., "Association football: 2,259", "American football: 1,629")
 - **Date range selector** -- "Last 30 days" with export option at top level
 
-### 2.7 UGC (User-Generated Content)
+### 4.7 UGC (User-Generated Content)
 
 Platform for collecting, curating, and deploying authentic customer content (Commerce Cloud). Powered by **Pixlee** (acquired, runs on `pixlee.svc.emplifi.io` -- has its own distinct UI). "Build authentic, shoppable social proof that drives engagement across social channels."
 
@@ -353,7 +336,7 @@ Platform for collecting, curating, and deploying authentic customer content (Com
 - **Influencers & Top Content** -- built-in influencer tracking within UGC module
 - **Connected platforms** -- Facebook, Instagram, TikTok, Pinterest, X
 
-### 2.8 Influencers
+### 4.8 Influencers
 
 End-to-end influencer marketing management.
 
@@ -371,7 +354,7 @@ End-to-end influencer marketing management.
 - **Search options** -- filter by specific country, language, and more
 - **Campaigns** -- Creator Portal hosted on `pixlee.me` domain (e.g., `pixlee.me/emp30`); campaign table with: Campaign Name, shareable link, Start/End dates, Active influencers (X/Y format e.g., "4/16"), cost metrics ($), edit/delete per campaign; "Upload Logo" for campaign branding; "Create New Campaign" action
 
-### 2.9 Listening
+### 4.9 Listening
 
 Social listening across digital conversations. "Turn insights into action with AI analysis, unified reporting, & full-platform integration."
 
@@ -404,7 +387,7 @@ Social listening across digital conversations. "Turn insights into action with A
 - **Volume examples** -- Netflix: 795,520 mentions, Disney Plus: 110,022, HBO Max: 122,661, Prime Video: 180,714 in a single billing period
 - **"Codeless-LLM"** -- experimental AI/LLM-related listening query by product owner Adam Vejrych
 
-### 2.10 Ratings & Reviews
+### 4.10 Ratings & Reviews
 
 Review management for eCommerce (Commerce Cloud). "The Power of Social Proof" -- helps turn customer voices into powerful sales drivers. Claims the most review sources in the industry.
 
@@ -432,7 +415,7 @@ Review management for eCommerce (Commerce Cloud). "The Power of Social Proof" --
 - **Moderation states** -- Hidden vs. Published content
 - **Product Coverage** -- tracks % of products with reviews, visual content, and checkout comments
 
-### 2.11 Emplifi Bot
+### 4.11 Emplifi Bot
 
 Conversational AI chatbot for customer self-service (Service Cloud). Award-winning conversational concierge driven by narrow AI and NLP.
 
@@ -456,7 +439,7 @@ Conversational AI chatbot for customer self-service (Service Cloud). Award-winni
 - **Naming convention** -- standardized naming like "A1_Retail Bot", "A2_Help Bot", "A3_Social Bot", "A4_Agent Travel Bot", "A5_Volantis Bot", "A6_Commerce Bot" for template/demo bots
 - **Conversations page** -- dedicated view for reviewing bot conversation logs
 
-### 2.12 Emplifi Agent
+### 4.12 Emplifi Agent
 
 Contact center automation solution focusing on B2C contact (Service Cloud, formerly Astute Agent). Separate documentation at `agent-docs.emplifi.io` (Production + Training versions).
 
@@ -467,7 +450,7 @@ Contact center automation solution focusing on B2C contact (Service Cloud, forme
 - **All channels** -- supports customer engagement across all channels and digital touchpoints
 - **Legacy** -- previously known as Astute Agent; old docs at `agenthelp.myastutesolutions.com`
 
-### 2.13 Flow Automations (Early Access)
+### 4.13 Flow Automations (Early Access)
 
 Configurable automation flows powered by the Emplifi **Platform Intelligence Engine (PIE)**. Each flow is a visual flowchart with trigger → condition → action logic. Available for Community, Care cases, and Care messages only.
 
@@ -492,7 +475,7 @@ Configurable automation flows powered by the Emplifi **Platform Intelligence Eng
 - **Permissions** -- VIEW-ONLY badge for shared/read-only flows; only Administrators access Flow Automations homepage; filter by component type
 - **Location** -- Settings > Automation > Flow Automations
 
-### 2.14 Librarian
+### 4.14 Librarian
 
 AI-powered in-app assistant for platform help. Language-model AI designed specifically for Emplifi questions.
 
@@ -505,7 +488,7 @@ AI-powered in-app assistant for platform help. Language-model AI designed specif
 - Direct support ticket creation (with subject, description, issue type, up to 5 attachments) if the question is not resolved
 - Not a live chat, but unlimited questions allowed
 
-### 2.15 Live Advisor
+### 4.15 Live Advisor
 
 1-to-1 video shopping capability (Commerce Cloud). "Bring the in-store experience to your customers at home."
 
@@ -515,7 +498,7 @@ AI-powered in-app assistant for platform help. Language-model AI designed specif
 - Part of the social commerce toolkit alongside shoppable posts and ShopLink (Link in Bio)
 - **Product owner:** Jason Magrane (Senior Manager, GTM)
 
-### 2.16 Voice of Customer (VoC) / 360 VoC
+### 4.16 Voice of Customer (VoC) / 360 VoC
 
 "Every customer voice, one platform." Goes beyond simple surveys -- unifies fragmented customer feedback across all touchpoints to surface clear priorities, resolve individual issues fast, and reveal journey-level problems demanding attention.
 
@@ -539,7 +522,7 @@ AI-powered in-app assistant for platform help. Language-model AI designed specif
 - **Multi-language support** -- languages with ON/OFF toggle, one set as "Default" (e.g., English: 29,221 respondents, Portuguese: OFF, Spanish Latin America: OFF)
 - **Managed vs. Self-Serve** -- two tabs for different project types
 
-### 2.17 Emplifi Teams
+### 4.17 Emplifi Teams
 
 Governance and access control layer for the platform. "Seamless Governance with Emplifi Teams."
 
@@ -548,7 +531,7 @@ Governance and access control layer for the platform. "Seamless Governance with 
 - **Team structure** -- Headquarters, regional teams (Japan, France, Portugal, Germany, etc.), functional teams (Global support, Content Creators, Automation)
 - **Resource control** -- defines which social profiles, features, and data each team can access
 
-### 2.18 Paid Social / Paid Analytics
+### 4.18 Paid Social / Paid Analytics
 
 Dedicated module for paid advertising oversight across ad accounts. "Get advanced metrics across ads and campaigns."
 
@@ -563,7 +546,7 @@ Dedicated module for paid advertising oversight across ad accounts. "Get advance
 - **Cross-platform** -- Meta, TikTok, X ad accounts
 - Works together with Content Hub (Ads section) and Publisher
 
-### 2.19 Social FAQ Bot
+### 4.19 Social FAQ Bot
 
 Lighter-weight chatbot specifically for social media channels, distinct from the full Emplifi Bot.
 
@@ -572,7 +555,7 @@ Lighter-weight chatbot specifically for social media channels, distinct from the
 - **Generate with AI** -- AI-assisted creation of bot responses and user utterance training
 - Scales support with fast, personalized automation
 
-### 2.20 Live Video Calling
+### 4.20 Live Video Calling
 
 Personalized one-to-one video calls from websites (related to but distinct from Live Advisor).
 
@@ -581,7 +564,7 @@ Personalized one-to-one video calls from websites (related to but distinct from 
 - **Multi-modal** -- combines high-quality video + audio + text chat in a single session
 - Boosts online conversions with personalized video interactions that match or exceed in-store conversion rates
 
-### 2.21 Knowledge Base
+### 4.21 Knowledge Base
 
 Internal or external-facing help article repository (Service Cloud).
 
@@ -589,7 +572,7 @@ Internal or external-facing help article repository (Service Cloud).
 - Available to agents for reference during case handling
 - Listed as a data source in Unified Analytics
 
-### 2.22 Live Commerce
+### 4.22 Live Commerce
 
 Full sub-platform for live video commerce (Commerce Cloud). Encompasses Live Advisor and Live Video Calling with rich operational management.
 
@@ -612,7 +595,7 @@ Full sub-platform for live video commerce (Commerce Cloud). Encompasses Live Adv
 - **Summary overview** -- Time zone display (e.g., "Europe/Prague"); Opportunity graph (Y: Page views, X: Hours) with opportunity loss metric; Call summary with three KPI cards: Total calls, Accepted calls, Customer rating -- each showing value with day-over-day comparison ("More than Day before")
 - **Date controls** -- "Show: Yesterday" dropdown for date selection with refresh
 
-### 2.23 KAWO (Chinese Social)
+### 4.23 KAWO (Chinese Social)
 
 Dedicated module for managing Chinese social networks (acquired company, separate branding and UI).
 
@@ -623,7 +606,7 @@ Dedicated module for managing Chinese social networks (acquired company, separat
 - **Language** -- English and Chinese (中文) UI
 - **Shanghai-based** -- KAWO is registered in Shanghai, China
 
-### 2.24 Labs (Experimental Features)
+### 4.24 Labs (Experimental Features)
 
 Preview of upcoming smart product features. "Experience the future of Emplifi platform."
 
@@ -636,7 +619,7 @@ Preview of upcoming smart product features. "Experience the future of Emplifi pl
 
 ---
 
-## 3. Cloud Organization
+## 5. Cloud Organization
 
 The platform modules map to three clouds targeting different user personas:
 
@@ -661,7 +644,50 @@ Emplifi packages modules into solution bundles that span multiple individual pro
 
 ---
 
-## 4. Cross-Module Relationships
+## 6. Cross-Module Relationships
+
+### 6.1 Product Design Scenarios
+
+**Scenario 1: Brand Crisis Response**
+- **User need:** React fast to negative spike in social mentions
+- **Module flow:** Listening (spike alert) → Community (surface FB/IG/X mentions) → Care (triage urgent cases with SLA) → Publisher (coordinate response) → UA (measure impact)
+- **Key integration points:** 
+  - Listening mentions auto-appear in Community with "Listening - Comment" tag
+  - Priority Score helps triage (Urgent 81-100)
+  - Escalation to Care locks messages
+  - Publisher can reference listening keywords for response
+- **Design considerations:** 90-day retention means limited historical context; spike alerts need tuning per brand; Care SLA breach notifications to supervisors
+
+**Scenario 2: Influencer Campaign Execution**
+- **User need:** Find influencer → create content → amplify → measure ROI
+- **Module flow:** Influencers (discovery 30M+ profiles) → Influencers Campaigns (Creator Portal) → UGC (collect content in Albums) → Content Collections (curate + vote) → Publisher (schedule amplification) → UA (track performance)
+- **Key integration points:**
+  - Influencer content auto-flows to UGC Albums
+  - Collections can pull from UGC (max 500 collections)
+  - Publisher can schedule collection items directly
+  - UA boards show influencer performance
+- **Design considerations:** Instagram Shared Insights required for full metrics; collaboration post detection needs managed content API; add influencers before products in campaigns (cannot reverse)
+
+**Scenario 3: Customer Complaint Escalation**
+- **User need:** Social complaint → human agent → permanent CRM record
+- **Module flow:** Social Platform → Community (Priority Score + AI Reply Assistant) → Care (case management + SLA tracking) → Agent (complex B2C issues) → Salesforce (permanent record)
+- **Key integration points:**
+  - Community-to-Care escalation LOCKS message until resolved (Done/Spam/grace period)
+  - Care-to-Salesforce is BI-DIRECTIONAL (status sync + message propagation; requires custom SocialPost object)
+  - Bot can pre-screen before Community (escalates with full context)
+- **Design considerations:** Grace period 5 days for reopening; max 5 cases per agent (configurable); Community assignment NOT required, Care assignment IS required; Salesforce ONE-WAY from Community, BI-DIRECTIONAL from Care
+
+**Scenario 4: Content Performance Optimization**
+- **User need:** Understand what content works → create more of it
+- **Module flow:** Publisher (publish with PrimeTime) → Social Platforms → UA Performance Prediction (A+ to D grades, FB/IG only) → Content Hub Feed (analyze A/A+ rating) → Collections (save winners, team vote) → Publisher (replicate with AI Composer Brand Voice)
+- **Key integration points:**
+  - UA predicts performance before/after publish
+  - Content Hub filters by A/A+ rating + sentiment
+  - Collections support voting/discussion (max 500, archive before delete)
+  - AI Composer Brand Voice learns from top content (needs min 100 posts/90 days, Enterprise)
+- **Design considerations:** Performance Prediction only FB/IG; Brand Voice Enterprise-only, needs 100 posts/90d; PrimeTime only FB/IG/TikTok; Content Hub posts <4 comments = "No Sentiment"
+
+### 6.2 Data Flow Diagram
 
 ```
              ┌──────────────────────────────────────────┐
@@ -813,7 +839,7 @@ The platform organizes data around three key entity types:
 
 ---
 
-## 5. Technical Architecture & Terminology
+## 7. Technical Architecture & Terminology
 
 ### PIE (Platform Intelligence Engine)
 
@@ -852,7 +878,7 @@ When encountering legacy code or references in the Emplifi ecosystem:
 
 ---
 
-## 6. Emplifi AI ("Emplifi Fuel" Intelligence)
+## 8. Emplifi AI ("Emplifi Fuel" Intelligence)
 
 The AI layer powers features across all three clouds:
 
@@ -875,7 +901,7 @@ The AI layer powers features across all three clouds:
 
 ---
 
-## 7. Technical Details from Documentation (docs.emplifi.io)
+## 9. Integration & Data Architecture (docs.emplifi.io)
 
 > Source: [Emplifi Documentation Center](https://docs.emplifi.io/platform/latest/home/)
 
@@ -955,13 +981,75 @@ The Community Priority Score uses machine learning trained on historical Communi
 
 ### API & Integration Details
 
-- **Public API:** RESTful, documented migration path from Socialbakers API 1.0 to 3.0
-- **Looker Studio connector** for external BI integration
-- **Cloud storage integration** (connect Emplifi with cloud storage providers)
-- **Salesforce integration** for both Community (direct) and Care (per-case)
+- **Public API:** RESTful; auth: Basic HTTP (token+secret) or OAuth 2.0 (authorization code flow); not enabled by default
+- **API migration:** documented path from Socialbakers API 1.0 to 3.0; new metric names (e.g. `comments` → `number_of_comments`), new dimensions (`date.day`, `media_type`); v3 adds Content Hub metrics
+- **Looker Studio connector** for external BI; prerequisites: Emplifi Public API access + API credentials; only monitored profiles; excludes Assets API and Community Content
+- **Cloud storage:** Google Drive, OneDrive, Box, Gmail, Dropbox, Bynder, Adobe Experience Manager; used in Publisher, Community, Content Collections; auth tokens expire after hours
+- **Salesforce integration:**
+  - Community: ONE-WAY (create case/lead); token-based; agent name/email mapping; supports production and sandbox
+  - Care: BI-DIRECTIONAL; case status sync (condition-based or bi-directional mapping); message propagation: sync (last 100 + ongoing) or one-time copy; requires custom SocialPost object
 - **Webhooks** for R&R (real-time review notifications)
-- **SpeedFlex widgets** for R&R (low-code JavaScript, themed)
+- **SpeedFlex widgets** for R&R (low-code JavaScript, themed, Design Editor with Setup Wizard)
 - **TurnTo API** for programmatic R&R access
+- **Link Shortener** -- Bit.ly integration in Publisher (enabled by default); clicks tracked in Emplifi
+- **E-commerce platforms** -- Magento 2.1-2.4, Salesforce Commerce (SiteGenesis, SFRA), Shopify
+
+### AI Reply Assistant (Community & Care)
+
+Both Community and Care share the same AI Reply Assistant capabilities:
+- **Rephrase** -- reword the reply
+- **Make longer** -- expand the text
+- **Make longer & add context** -- expand with contextual details
+- **Make shorter** -- condense the text
+- **Simplify** -- simplify language
+- **Change tone** -- Empathetic, Friendly, Persuasive, Professional
+- **Translate to** -- available when translations enabled; 30+ languages
+- Human moderation required; blocks hate, harassment, violence, spam content
+- In Community: assignment NOT required to reply; in Care: assignment IS required
+
+### Publisher Platform-Specific Capabilities
+
+| Platform | Key Capabilities | Limitations |
+|----------|-----------------|-------------|
+| Facebook | Dark Posts, Stories, Generate Post ID for ads, geo-gating, demographics | Natively published stories not visible; story mentions not supported |
+| Instagram | Reels, Stories (manual/automatic), Product tags (5/photo, 20/carousel), Collaboration posts | Business account required; manual deletion in app; video carousels no user tagging |
+| YouTube | Custom thumbnails, playlists, age restrictions, subtitles, categories, visibility | No end screens support; posts within 1h of publish cannot be cancelled |
+| TikTok | PrimeTime scheduling | — |
+| LinkedIn | Documents (PPT/DOC/PDF), business/personal tagging | API limits on tagging |
+| Threads | Images, carousels, videos, links, AI Composer | Business profile required |
+| Pinterest | Standard publishing | — |
+| X | Standard publishing | — |
+
+### R&R Data Feed Architecture
+
+**Inbound feeds (to Emplifi):**
+- Catalog feed (required) -- product data
+- JavaScript Order feed -- order data for solicitation
+- Historical Order feed -- past orders
+- Knowledge Base, Cancelled Order, Email Opt-Out, Historical Reviews/Q&A (optional)
+
+**Outbound feeds (from Emplifi):**
+- SKU Average Rating feed
+- UGC Feed (XML/JSON)
+- Email Opt-Out feed
+- Google Shopping Feed
+
+**Syndication model:**
+- Source site (origin of reviews) vs Recipient site (displays reviews)
+- Product matching: GTIN, Brand+MPN, or Virtual Parent Code (VPC) for product families
+- Internal syndication: both on Emplifi (one-way or bi-directional)
+- Inbound/Open Review Syndication: external sources via data feed
+- Migration from Bazaarvoice and PowerReviews supported
+
+### Sentiment Analysis Technical Details
+
+- **Technology:** Deep learning / NLP
+- **Classes:** Positive, Negative, Neutral, No sentiment (4 for automation); 7 levels in Content Hub (Strongly Positive to Strongly Negative)
+- **Accuracy:** ~65-80% by language (English ~80%, Portuguese ~65%)
+- **Languages:** 100+ supported
+- **Platforms:** Facebook (comments, replies, user posts, DM), Instagram (comments, DM), LinkedIn, Reddit, TikTok, WhatsApp, YouTube, X (mentions, replies), Google Business (reviews)
+- **Indicators:** "A" icon when automatically classified; manual overrides take precedence
+- **Scope:** Content Hub posts with <4 comments = "No Sentiment"
 
 ### Documentation Navigation Structure
 
@@ -988,7 +1076,7 @@ The official documentation (docs.emplifi.io) covers these top-level sections:
 
 ---
 
-## 8. Design System: SOUL
+## 10. Design System: SOUL
 
 **SOUL** is Emplifi's design system for creating consistent products and digital experiences.
 
@@ -1035,7 +1123,7 @@ The file `soul-tokens.css` defines SOUL design tokens as CSS custom properties:
 
 ---
 
-## 9. AI Layer: Cortex (Prototype Context)
+## 11. AI Layer: Cortex (Prototype Context)
 
 **Cortex** is the AI assistant being prototyped in this repository (`ai-cortex-1`). It represents a new intelligence layer across the Emplifi platform, building on top of Emplifi Fuel's AI capabilities.
 
@@ -1077,7 +1165,28 @@ Persistent right-side panel with:
 
 ---
 
-## 10. Supported Social Platforms
+## 12. Extended Documentation (skills2)
+
+For **roadmap, strategy, and detailed workflows**, see the `skills2/` folder:
+
+| Topic | Location |
+|-------|----------|
+| **Positioning, architecture, ROI** | `skills2/emplifi-roadmap-strategy/` |
+| **2024–2026 releases, vision** | `skills2/emplifi-roadmap-strategy/4-RELEASES-2024-2026.md`, `5-VISION-2026.md` |
+| **UA dashboard blueprints** (Social, Care) | `skills2/emplifi-workflow-scenarios/1-UA-DASHBOARDS.md` |
+| **E2E scenarios** (negative tweet, UGC, campaign) | `skills2/emplifi-workflow-scenarios/2-E2E-SCENARIOS.md` |
+| **Listening query examples** | `skills2/emplifi-workflow-scenarios/3-LISTENING-SCENARIOS.md` |
+| **Internal links** (Google Docs, Atlassian) | `skills2/emplifi-roadmap-strategy/6-INTERNAL-LINKS.md` |
+
+### 2024–2026 Timeline (Summary)
+
+- **2024:** UA expansion (Snapchat, Listening, UGC), R&R in Suite, AI in Community/Care, Google Business, WhatsApp moderation, Threads publishing
+- **2025:** R&R in UA, AI features in R&R, Fuel verticalization (CMS for tactics, industry categorization)
+- **2026:** Fuel AI Copilot, AI Copilot for Care, AI-powered UA widgets, Workflow & Bot automations, Emplifi Teams, Full Reddit integration
+
+---
+
+## 13. Platform Behavior & Constraints
 
 | Platform | Publisher | Community | Listening | Content Hub | Influencers | UA Analytics |
 |----------|-----------|-----------|-----------|-------------|-------------|-------------|
@@ -1098,6 +1207,3 @@ Persistent right-side panel with:
 
 ---
 
-## 11. Target Industries
-
-Agencies, Consumer Packaged Goods, Higher Education, Media & Entertainment, Restaurants, Retail & eCommerce, Sports, Travel & Hospitality.

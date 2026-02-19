@@ -324,6 +324,7 @@ input, select, textarea {
 /* ── Blue Add button ── */
 .platform-nav .nav-add-btn {
   width: 100%;
+  min-width: 28px;
   height: 36px;
   border-radius: var(--border-radius-pill);
   background: var(--color-button-primary);
@@ -335,7 +336,7 @@ input, select, textarea {
   flex-shrink: 0;
   transition: opacity 0.15s;
   overflow: hidden;
-  padding: 3px;
+  padding: 0;
 }
 
 .platform-nav .nav-add-btn:hover {
@@ -343,19 +344,10 @@ input, select, textarea {
 }
 
 .platform-nav .nav-add-icon {
-  width: 18px;
-  height: 18px;
-  min-width: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 14px;
+  height: 14px;
+  min-width: 14px;
   flex-shrink: 0;
-  overflow: hidden;
-}
-
-.platform-nav .nav-add-btn img {
-  width: 11px;
-  height: 11px;
   display: block;
 }
 
@@ -3385,6 +3377,7 @@ input, select, textarea {
 .wizard-close-btn svg {
   width: 18px;
   height: 18px;
+  fill: white;
 }
 
 /* --- Header (step tabs) --- */
@@ -4964,15 +4957,20 @@ input, select, textarea {
 /* ============================================================
    FLOW SWITCHER - Demo flow selection panel
    ============================================================ */
-.flow-switcher {
+#flow-switcher-root {
   position: fixed;
   left: calc(var(--platform-nav-width) + 20px);
   bottom: 24px;
-  z-index: 150;
+  z-index: 10001;
+  pointer-events: none;
+}
+
+.flow-switcher {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;
+  pointer-events: auto;
 }
 
 .flow-switcher-buttons {

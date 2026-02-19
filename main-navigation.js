@@ -56,9 +56,7 @@ function renderNav(options = {}) {
 
         <div class="nav-bottom">
           <div class="nav-add-btn" title="Add Data Sources">
-            <div class="nav-add-icon">
-              <img src="assets/nav/plus.svg" alt="+">
-            </div>
+            <img class="nav-add-icon" src="assets/nav/plus.svg" alt="+">
             <span class="nav-add-label">ADD DATA SOURCES</span>
           </div>
 
