@@ -42,77 +42,77 @@ input, select, textarea {
 
 /* --- Typography --- */
 .headline-2 {
-  font-size: 20px;
-  font-weight: 500;
-  line-height: 30px;
-  letter-spacing: -0.017px;
+  font-size: var(--text-headline-2-size);
+  font-weight: var(--text-headline-2-weight);
+  line-height: var(--text-headline-2-line-height);
+  letter-spacing: var(--text-headline-2-letter-spacing);
 }
 
 .headline-3 {
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 24px;
-  letter-spacing: -0.011px;
+  font-size: var(--text-headline-3-size);
+  font-weight: var(--text-headline-3-weight);
+  line-height: var(--text-headline-3-line-height);
+  letter-spacing: var(--text-headline-3-letter-spacing);
 }
 
 .headline-5 {
-  font-size: 10px;
-  font-weight: 700;
-  line-height: 12px;
-  letter-spacing: 0.01px;
+  font-size: var(--text-headline-5-size);
+  font-weight: var(--text-headline-5-weight);
+  line-height: var(--text-headline-5-line-height);
+  letter-spacing: var(--text-headline-5-letter-spacing);
   text-transform: uppercase;
 }
 
 .body-medium {
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 18px;
+  font-size: var(--text-body-medium-size);
+  font-weight: var(--text-body-medium-weight);
+  line-height: var(--text-body-medium-line-height);
 }
 
 .body-medium-bold {
-  font-size: 13px;
-  font-weight: 700;
-  line-height: 18px;
+  font-size: var(--text-body-medium-size);
+  font-weight: var(--text-body-medium-bold-weight);
+  line-height: var(--text-body-medium-line-height);
 }
 
 .body-small {
-  font-size: 11px;
-  font-weight: 400;
-  line-height: 16px;
-  letter-spacing: 0.005px;
+  font-size: var(--text-body-small-size);
+  font-weight: var(--text-body-small-weight);
+  line-height: var(--text-body-small-line-height);
+  letter-spacing: var(--text-body-small-letter-spacing);
 }
 
 .body-small-bold {
-  font-size: 11px;
-  font-weight: 700;
-  line-height: 16px;
-  letter-spacing: 0.005px;
+  font-size: var(--text-body-small-size);
+  font-weight: var(--text-body-small-bold-weight);
+  line-height: var(--text-body-small-line-height);
+  letter-spacing: var(--text-body-small-letter-spacing);
 }
 
 .helper-text {
-  font-size: 10px;
-  font-weight: 400;
-  line-height: 12px;
-  letter-spacing: 0.01px;
+  font-size: var(--text-helper-size);
+  font-weight: var(--text-helper-weight);
+  line-height: var(--text-helper-line-height);
+  letter-spacing: var(--text-helper-letter-spacing);
 }
 
 .button-label {
-  font-size: 13px;
-  font-weight: 600;
-  line-height: 18px;
+  font-size: var(--text-button-size);
+  font-weight: var(--text-button-weight);
+  line-height: var(--text-button-line-height);
 }
 
 .field-label {
-  font-size: 11px;
-  font-weight: 600;
-  line-height: 18px;
+  font-size: var(--text-field-label-size);
+  font-weight: var(--text-field-label-weight);
+  line-height: var(--text-field-label-line-height);
 }
 
 .badge-label {
-  font-size: 10px;
-  font-weight: 700;
-  line-height: 12px;
-  letter-spacing: 0.01px;
+  font-size: var(--text-badge-size);
+  font-weight: var(--text-badge-weight);
+  line-height: var(--text-badge-line-height);
+  letter-spacing: var(--text-badge-letter-spacing);
 }
 
 /* --- Screen Container --- */
@@ -184,7 +184,7 @@ input, select, textarea {
 .platform-nav .nav-logo-link {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: var(--space-2);
   text-decoration: none;
   overflow: hidden;
   flex: 1;
@@ -203,7 +203,7 @@ input, select, textarea {
   font-family: var(--font-family);
   font-size: 18px;
   font-weight: 600;
-  color: #ffffff;
+  color: var(--color-on-button-primary);
   white-space: nowrap;
   opacity: 0;
   transition: opacity var(--motion-duration-moderate-1) var(--motion-easing-ease);
@@ -247,7 +247,7 @@ input, select, textarea {
   border-radius: var(--border-radius-medium);
   display: flex;
   align-items: center;
-  gap: 9px;
+  gap: var(--space-3);
   padding: 6px;
   cursor: pointer;
   transition: background 0.15s;
@@ -330,7 +330,7 @@ input, select, textarea {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: var(--space-2);
   cursor: pointer;
   flex-shrink: 0;
   transition: opacity 0.15s;
@@ -366,7 +366,7 @@ input, select, textarea {
   line-height: 12px;
   letter-spacing: 0.01px;
   text-transform: uppercase;
-  color: #ffffff;
+  color: var(--color-on-button-primary);
   white-space: nowrap;
   opacity: 0;
   transition: opacity var(--motion-duration-moderate-1) var(--motion-easing-ease);
@@ -385,7 +385,7 @@ input, select, textarea {
   border-radius: var(--border-radius-medium);
   display: flex;
   align-items: center;
-  gap: 9px;
+  gap: var(--space-3);
   padding: 6px;
   cursor: pointer;
   flex-shrink: 0;
@@ -418,7 +418,7 @@ input, select, textarea {
   position: absolute;
   top: 15px;
   left: 9px;
-  background: #da2828;
+  background: var(--color-status-error);
   border-radius: var(--border-radius-pill);
   padding: 0 2px;
   display: flex;
@@ -448,7 +448,7 @@ input, select, textarea {
   border-right: 1px solid var(--color-border-primary);
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: var(--space-4);
 }
 
 /* Header — Figma: pl-24 pr-12 py-12 */
@@ -466,7 +466,7 @@ input, select, textarea {
   line-height: 12px;
   letter-spacing: 0.01px;
   text-transform: uppercase;
-  color: #2F3744;
+  color: var(--color-on-layer-primary);
   font-feature-settings: var(--font-feature-settings);
 }
 
@@ -508,7 +508,7 @@ input, select, textarea {
 .section-nav-inner {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: var(--space-2);
   flex: 1 0 0;
   height: 100%;
   min-height: 0;
@@ -530,7 +530,7 @@ input, select, textarea {
 /* Search area — Figma: flex, gap-6, pb-6 */
 .nav-search-area {
   display: flex;
-  gap: 6px;
+  gap: var(--space-2);
   padding-bottom: 6px;
   flex-shrink: 0;
 }
@@ -575,7 +575,7 @@ input, select, textarea {
 .nav-link-content {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: var(--space-2);
   overflow: clip;
   flex-shrink: 1;
   min-width: 0;
@@ -712,11 +712,11 @@ input, select, textarea {
   height: 60px;
   min-height: 60px;
   background: white;
-  border-bottom: 1px solid #D7D8D9;
+  border-bottom: 1px solid var(--color-gray-300);
   display: flex;
   align-items: center;
   padding: 0 24px;
-  gap: 12px;
+  gap: var(--space-4);
   overflow: clip;
   flex-shrink: 0;
 }
@@ -726,7 +726,7 @@ input, select, textarea {
   font-weight: 500;
   line-height: 30px;
   letter-spacing: -0.017px;
-  color: #2F3744;
+  color: var(--color-on-layer-primary);
   font-feature-settings: 'zero' 1, 'ss04' 1, 'cv05' 1, 'cv08' 1;
   white-space: nowrap;
 }
@@ -738,7 +738,7 @@ input, select, textarea {
 /* Header actions group — Figma: flex, gap 6px */
 .header-actions-group {
   display: flex;
-  gap: 6px;
+  gap: var(--space-2);
   align-items: center;
   flex-shrink: 0;
 }
@@ -759,11 +759,11 @@ input, select, textarea {
 .header-select-field {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: var(--space-2);
   width: 210px;
   padding: 9px 6px 9px 9px;
   background: white;
-  border: 1px solid #D7D8D9;
+  border: 1px solid var(--color-gray-300);
   border-radius: 6px;
   overflow: clip;
   cursor: pointer;
@@ -773,12 +773,12 @@ input, select, textarea {
 .header-select-content {
   display: flex;
   flex: 1 0 0;
-  gap: 6px;
+  gap: var(--space-2);
   align-items: center;
   min-width: 0;
   font-size: 13px;
   line-height: 18px;
-  color: #2F3744;
+  color: var(--color-on-layer-primary);
   font-feature-settings: 'zero' 1, 'ss04' 1, 'cv05' 1, 'cv08' 1;
 }
 
@@ -872,15 +872,15 @@ input, select, textarea {
 }
 
 .btn-light {
-  background: linear-gradient(to bottom, #feffff, #f2f4f7);
-  border: 1px solid #d7d8d9;
-  color: #2f3744;
-  font-size: 12px;
-  font-weight: 600;
+  background: linear-gradient(to bottom, var(--color-layer-level-1), var(--color-layer-level-2));
+  border: 1px solid var(--color-gray-300);
+  color: var(--color-on-layer-primary);
+  font-size: var(--text-button-size);
+  font-weight: var(--text-button-weight);
 }
 
 .btn-light:hover {
-  background: linear-gradient(to bottom, #f8f9fb, #eceef2);
+  background: linear-gradient(to bottom, var(--color-gray-100), var(--color-gray-200));
 }
 
 .btn-invisible {
@@ -1047,7 +1047,7 @@ input, select, textarea {
 }
 
 .checkbox.indeterminate .checkbox-box {
-  background: #0C4BFF;
+  background: var(--color-button-primary);
   border-color: transparent;
 }
 
@@ -1404,7 +1404,7 @@ input, select, textarea {
 .decision-item {
   display: flex;
   align-items: flex-start;
-  gap: 6px;
+  gap: var(--space-2);
   cursor: pointer;
   transition: opacity 0.15s;
 }
@@ -1896,10 +1896,10 @@ input, select, textarea {
   border: 1.5px solid var(--color-layer-level-1);
 }
 
-.profile-chip .avatar.green  { background: #c8e6c9; }
-.profile-chip .avatar.pink   { background: #f8bbd0; }
-.profile-chip .avatar.blue   { background: #bbdefb; }
-.profile-chip .avatar.yellow { background: #fff9c4; }
+.profile-chip .avatar.green  { background: var(--color-status-success-light); }
+.profile-chip .avatar.pink   { background: var(--color-status-error-light); }
+.profile-chip .avatar.blue   { background: var(--color-status-info-light); }
+.profile-chip .avatar.yellow { background: var(--color-status-warning-light); }
 
 .profile-chip-name {
   font-weight: 700;
@@ -1955,9 +1955,9 @@ input, select, textarea {
   gap: var(--space-1);
   padding: var(--space-2) var(--space-4);
   border-radius: var(--border-radius-medium);
-  border: 1px solid #56a0ff;
-  background: rgba(208, 226, 255, 0.5);
-  color: #003beb;
+  border: 1px solid var(--color-border-info);
+  background: var(--color-message-info);
+  color: var(--color-on-layer-interactive);
   font-family: var(--font-family);
   font-size: 13px;
   font-weight: 600;
@@ -1969,7 +1969,7 @@ input, select, textarea {
 .btn-edit-sources svg {
   width: 18px;
   height: 18px;
-  stroke: #003beb;
+  stroke: var(--color-on-layer-interactive);
 }
 
 /* -- Widgets Grid 2x2 -- */
@@ -2176,7 +2176,7 @@ input, select, textarea {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: #c8e6c9;
+  background: var(--color-status-success-light);
   flex-shrink: 0;
 }
 
@@ -2595,7 +2595,7 @@ input, select, textarea {
 .campaign-header-left {
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: var(--space-6);
   flex-shrink: 0;
 }
 
@@ -2620,13 +2620,13 @@ input, select, textarea {
   line-height: 0;  /* Figma: leading-[0] on the wrapper */
 }
 
-/* Campaign name — Figma: Headline 3 (16px/500/#2F3744) */
+/* Campaign name — Figma: Headline 3 (16px/500/var(--color-on-layer-primary)) */
 .campaign-header-info .campaign-name {
   font-size: var(--text-headline-3-size);
   font-weight: var(--text-headline-3-weight);
   line-height: var(--text-headline-3-line-height);
   letter-spacing: var(--text-headline-3-letter-spacing);
-  color: #2F3744;
+  color: var(--color-on-layer-primary);
   white-space: nowrap;
   font-feature-settings: var(--font-feature-settings);
 }
@@ -2646,7 +2646,7 @@ input, select, textarea {
 .campaign-tabs {
   display: flex;
   align-items: flex-end;
-  gap: 24px;
+  gap: var(--space-6);
   align-self: stretch;          /* fill header height */
   padding: 0 24px;
   border-bottom: 1px solid var(--color-border-primary);
@@ -2667,8 +2667,8 @@ input, select, textarea {
 }
 
 .campaign-tab.active {
-  color: #003beb;
-  border-bottom-color: #003beb;
+  color: var(--color-on-layer-interactive);
+  border-bottom-color: var(--color-on-layer-interactive);
 }
 
 /* Campaign Body — scrollable, centered content */
@@ -2777,7 +2777,7 @@ input, select, textarea {
   font-size: var(--text-body-small-size);
   line-height: var(--text-body-small-line-height);
   letter-spacing: var(--text-body-small-letter-spacing);
-  color: #717578;
+  color: var(--color-on-layer-secondary);
   padding-top: var(--space-2);
 }
 
@@ -2950,8 +2950,8 @@ input, select, textarea {
 
 /* "Add content label" link — Figma: link-primary color, underlined */
 .add-label-link {
-  font-size: 13px;
-  color: #003beb;
+  font-size: var(--text-body-medium-size);
+  color: var(--color-on-layer-interactive);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -3038,10 +3038,10 @@ input, select, textarea {
   width: 240px;
   min-width: 240px;
   background: var(--color-layer-level-1);
-  border-right: 1px solid #D7D8D9;
+  border-right: 1px solid var(--color-gray-300);
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: var(--space-4);
 }
 
 /* Header row: "CONTENT" title + collapse button */
@@ -3060,7 +3060,7 @@ input, select, textarea {
   text-transform: uppercase;
   letter-spacing: 0.01px;
   line-height: 12px;
-  color: #2F3744;
+  color: var(--color-on-layer-primary);
   font-feature-settings: 'zero' 1, 'ss04' 1, 'cv05' 1, 'cv08' 1;
 }
 
@@ -3117,7 +3117,7 @@ input, select, textarea {
 .content-sidebar-nav-inner {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: var(--space-2);
   width: 216px;
   flex-shrink: 0;
 }
@@ -3184,7 +3184,7 @@ input, select, textarea {
 .content-nav-item .nav-item-content {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: var(--space-2);
   overflow: hidden;
 }
 
@@ -3234,7 +3234,7 @@ input, select, textarea {
 .content-cards-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 24px;
+  gap: var(--space-6);
 }
 
 /* Card — Figma: rounded-8px, shadow-100, 400px height */
@@ -3280,7 +3280,7 @@ input, select, textarea {
 .content-card-footer .icon-group {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--space-4);
 }
 
 .content-card-footer svg {
@@ -3366,8 +3366,8 @@ input, select, textarea {
   position: absolute;
   left: -36px;
   top: 12px;
-  background: #24242b;
-  color: #fff;
+  background: var(--color-tooltip-background);
+  color: var(--color-on-layer-inverse);
   z-index: 11;
 }
 .wizard-close-btn svg {
@@ -3426,7 +3426,7 @@ input, select, textarea {
   right: 0;
   top: 0;
   bottom: 0;
-  background: #d7d8d9;
+  background: var(--color-gray-300);
 }
 
 /* 6px bullet centered on the indicator */
@@ -3434,7 +3434,7 @@ input, select, textarea {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #d7d8d9;
+  background: var(--color-gray-300);
   position: relative;
   z-index: 1;
   flex-shrink: 0;
@@ -3442,16 +3442,16 @@ input, select, textarea {
 
 /* --- Tab state: Completed (green) --- */
 .wizard-tab.completed {
-  background: var(--color-layer-success, #dcfce4);
+  background: var(--color-status-success-light);
 }
 .wizard-tab.completed .wizard-tab-label {
   color: var(--color-on-layer-primary);
 }
 .wizard-tab.completed .wizard-tab-indicator-line {
-  background: #24a148;
+  background: var(--color-status-success);
 }
 .wizard-tab.completed .wizard-tab-indicator-bullet {
-  background: #24a148;
+  background: var(--color-status-success);
 }
 
 /* --- Tab state: Active (current step) --- */
@@ -3462,10 +3462,10 @@ input, select, textarea {
   color: var(--color-on-layer-secondary);
 }
 .wizard-tab.active .wizard-tab-indicator-line {
-  background: #24a148;
+  background: var(--color-status-success);
 }
 .wizard-tab.active .wizard-tab-indicator-bullet {
-  background: #24a148;
+  background: var(--color-status-success);
 }
 
 /* --- Tab state: Future --- */
@@ -3491,7 +3491,7 @@ input, select, textarea {
   bottom: 0;
   left: -0.5px;
   right: -0.5px;
-  background: #d7d8d9;
+  background: var(--color-gray-300);
 }
 
 /* --- Scroll area --- */
@@ -3514,7 +3514,7 @@ input, select, textarea {
   padding: 24px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: var(--space-6);
 }
 
 .wizard-left-intro {
@@ -3530,19 +3530,19 @@ input, select, textarea {
   font-weight: 500;
   line-height: 30px;
   letter-spacing: -0.017px;
-  color: #2f3744;
+  color: var(--color-on-layer-primary);
 }
 
 .wizard-left-subtitle {
   font-size: 13px;
   line-height: 18px;
-  color: #717578;
+  color: var(--color-on-layer-secondary);
 }
 
 /* --- Condition builder card --- */
 .condition-builder-card {
-  background: #f9f9fa;
-  border: 1px solid #d7d8d9;
+  background: var(--color-gray-100);
+  border: 1px solid var(--color-gray-300);
   border-radius: 8px;
   padding: 24px;
   display: flex;
@@ -3554,13 +3554,13 @@ input, select, textarea {
 .condition-row {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: var(--space-4);
 }
 
 .condition-header {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--space-4);
   flex-wrap: nowrap;
 }
 
@@ -3568,7 +3568,7 @@ input, select, textarea {
   font-size: 13px;
   font-weight: 400;
   line-height: 18px;
-  color: #2f3744;
+  color: var(--color-on-layer-primary);
 }
 
 .condition-keyword-label {
@@ -3584,24 +3584,24 @@ input, select, textarea {
 
 .condition-keyword-label.if {
   background: rgba(15, 157, 88, 0.1);
-  color: #0f9d58;
+  color: var(--color-status-success-text);
 }
 
 .condition-keyword-label.and {
   background: rgba(15, 157, 88, 0.1);
-  color: #0f9d58;
+  color: var(--color-status-success-text);
 }
 
 .select-trigger {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: var(--space-2);
   padding: 6px 6px 6px 9px;
-  background: #fff;
-  border: 1px solid #d7d8d9;
+  background: var(--color-layer-level-1);
+  border: 1px solid var(--color-gray-300);
   border-radius: 6px;
   font-size: 13px;
-  color: #717578;
+  color: var(--color-on-layer-secondary);
   cursor: pointer;
   min-width: 80px;
   line-height: 18px;
@@ -3636,10 +3636,10 @@ input, select, textarea {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 6px;
+  gap: var(--space-2);
   padding: 3px;
-  background: #fff;
-  border: 1px solid #d7d8d9;
+  background: var(--color-layer-level-1);
+  border: 1px solid var(--color-gray-300);
   border-radius: 6px;
   min-height: 42px;
 }
@@ -3649,12 +3649,12 @@ input, select, textarea {
   align-items: stretch;
   gap: 0;
   padding: 0;
-  background: #f3f3f5;
+  background: var(--color-layer-level-0);
   border-radius: 6px;
   font-size: 13px;
   font-weight: 700;
   line-height: 18px;
-  color: #2f3744;
+  color: var(--color-on-layer-primary);
 }
 
 .keyword-chip .chip-text {
@@ -3666,7 +3666,7 @@ input, select, textarea {
 .keyword-chip .chip-divider {
   width: 1px;
   align-self: stretch;
-  background: #d7d8d9;
+  background: var(--color-gray-300);
   flex-shrink: 0;
 }
 
@@ -3688,7 +3688,7 @@ input, select, textarea {
 .keyword-or {
   font-size: 10px;
   font-weight: 700;
-  color: #8a3ffc;
+  color: var(--color-link-visited);
   text-transform: uppercase;
   padding: 0 6px;
   letter-spacing: 0.01px;
@@ -3696,7 +3696,7 @@ input, select, textarea {
 
 .keyword-add-term {
   font-size: 13px;
-  color: #a3a3a3;
+  color: var(--color-on-layer-tertiary);
   padding: 0 6px;
   cursor: text;
 }
@@ -3705,7 +3705,7 @@ input, select, textarea {
 .add-condition-link {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: var(--space-2);
   cursor: pointer;
   padding: 3px 0;
 }
@@ -3716,7 +3716,7 @@ input, select, textarea {
 }
 .add-condition-text {
   font-size: 13px;
-  color: #0038e5;
+  color: var(--color-on-layer-interactive);
   position: relative;
 }
 .add-condition-text::after {
@@ -3726,7 +3726,7 @@ input, select, textarea {
   right: 0;
   bottom: -1px;
   height: 1px;
-  background: #0038e5;
+  background: var(--color-button-primary);
   opacity: 0.3;
 }
 
@@ -3764,7 +3764,7 @@ input, select, textarea {
   padding: 24px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: var(--space-4);
   overflow-y: auto;
 }
 
@@ -3784,18 +3784,18 @@ input, select, textarea {
 
 /* --- Preview: Yearly mention limit card --- */
 .preview-limit-card {
-  background: #fff;
+  background: var(--color-layer-level-1);
   border-radius: 8px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
   padding: 18px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: var(--space-2);
 }
 .preview-limit-row {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--space-4);
 }
 .preview-limit-labels {
   flex: 1;
@@ -3808,11 +3808,11 @@ input, select, textarea {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.01px;
-  color: #717578;
+  color: var(--color-on-layer-secondary);
 }
 .preview-limit-value {
   font-size: 11px;
-  color: #717578;
+  color: var(--color-on-layer-secondary);
   letter-spacing: 0.005px;
 }
 .preview-info-btn {
@@ -3827,7 +3827,7 @@ input, select, textarea {
 .preview-progress-track {
   position: absolute;
   inset: 0;
-  background: #d7d8d9;
+  background: var(--color-gray-300);
   border-radius: 3px;
 }
 .preview-progress-fill {
@@ -3835,7 +3835,7 @@ input, select, textarea {
   top: 0;
   left: 0;
   bottom: 0;
-  background: #24a148;
+  background: var(--color-status-success);
   border-radius: 3px 0 0 3px;
 }
 
@@ -3869,7 +3869,7 @@ input, select, textarea {
 .preview-stats-body {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--space-4);
 }
 .preview-stats-border {
   width: 2px;
@@ -3881,7 +3881,7 @@ input, select, textarea {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: var(--space-2);
 }
 .preview-stats-number {
   font-size: 13px;
@@ -3918,7 +3918,7 @@ input, select, textarea {
 .mention-card-header {
   display: flex;
   align-items: center;
-  gap: 9px;
+  gap: var(--space-3);
 }
 
 .mention-divider {
@@ -3945,7 +3945,7 @@ input, select, textarea {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background: #e7e7e7;
+  background: var(--color-gray-200);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -3996,14 +3996,14 @@ input, select, textarea {
   line-height: 12px;
   letter-spacing: 0.4px;
   text-transform: uppercase;
-  color: #f9f9fa;
+  color: var(--color-on-layer-inverse);
   border-radius: 3px;
 }
-.platform-tag.reddit { background: #ff5700; }
-.platform-tag.tiktok { background: #000; }
-.platform-tag.x { background: #000; }
-.platform-tag.facebook { background: #0866ff; }
-.platform-tag.instagram { background: #d73676; }
+.platform-tag.reddit { background: var(--color-platform-reddit); }
+.platform-tag.tiktok { background: var(--color-gray-900); }
+.platform-tag.x { background: var(--color-gray-900); }
+.platform-tag.facebook { background: var(--color-platform-facebook); }
+.platform-tag.instagram { background: var(--color-platform-instagram); }
 
 .mention-handle {
   font-size: 11px;
@@ -4037,7 +4037,7 @@ input, select, textarea {
 .mention-thumbnail {
   width: 72px;
   height: 72px;
-  background: #c4b5fd;
+  background: var(--color-status-info-light);
   border-radius: 4px;
   flex-shrink: 0;
 }
@@ -4209,9 +4209,9 @@ input, select, textarea {
 
 /* Applied button style (blue border + light blue bg) */
 .btn-applied {
-  background: rgba(208, 226, 255, 0.5) !important;
-  border-color: #56a0ff !important;
-  color: #003beb !important;
+  background: var(--color-message-info) !important;
+  border-color: var(--color-border-info) !important;
+  color: var(--color-on-layer-interactive) !important;
 }
 
 .analytics-reset-link {
@@ -4250,7 +4250,7 @@ input, select, textarea {
 .analytics-widgets {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: var(--space-4);
   width: 100%;
   max-width: 1778px;              /* content max-width */
   min-width: 932px;               /* content min-width */
@@ -4259,14 +4259,14 @@ input, select, textarea {
 
 .analytics-widget-row {
   display: flex;
-  gap: 12px;
+  gap: var(--space-4);
   min-width: 0;
 }
 
 .analytics-widget-col {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: var(--space-4);
 }
 
 .analytics-widget {
@@ -4316,14 +4316,14 @@ input, select, textarea {
 .bar-chart-row {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: var(--space-2);
   padding: 6px 0;
 }
 
 .bar-chart-label {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: var(--space-2);
   min-width: 110px;
   flex-shrink: 0;
 }
@@ -4424,11 +4424,11 @@ input, select, textarea {
 }
 
 .widget-comparison-change.negative {
-  color: #DA1E28;
+  color: var(--color-status-error);
 }
 
 .widget-comparison-change.positive {
-  color: #198038;
+  color: var(--color-status-success-text);
 }
 
 .widget-comparison-vs {
@@ -4449,7 +4449,7 @@ input, select, textarea {
 /* ── Widget legend (horizontal) ── */
 .widget-legend {
   display: flex;
-  gap: 6px;
+  gap: var(--space-2);
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;

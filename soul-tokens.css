@@ -36,6 +36,7 @@
   --color-border-success-emphasis: #20c54f;
   --color-border-error-emphasis: #da1e28;
   --color-border-warning-emphasis: #f5a623;
+  --color-border-info: #0f62fe;
   --color-border-info-emphasis: #0f62fe;
 
   /* ==========================================================
@@ -151,6 +152,7 @@
   --color-platform-instagram: #d73676;
   --color-platform-twitter: #24242b;
   --color-platform-youtube: #ff0000;
+  --color-platform-reddit: #ff5700;
 
   /* ==========================================================
      SPACING

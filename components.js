@@ -23,7 +23,7 @@ function renderNav(options = {}) {
     { id: 'community', icon: 'community.svg', title: 'Community', label: 'COMMUNITY', href: null },
     { id: 'care', icon: 'care.svg', title: 'Care', label: 'CARE', href: null },
     { id: 'content', icon: 'content.svg', title: 'Content', label: 'CONTENT', href: 'content-collection.html' },
-    { id: 'ucg', icon: 'ucg.svg', title: 'UGC', label: 'UCG', href: null },
+    { id: 'ugc', icon: 'ucg.svg', title: 'UGC', label: 'UGC', href: null },
     { id: 'bot', icon: 'bot.svg', title: 'Bot', label: 'BOT', href: null },
     { id: 'rating-reviews', icon: 'rating-reviews.svg', title: 'Rating & Reviews', label: 'RATING & REVIEWS', href: null },
     { id: 'agent', icon: 'agent.svg', title: 'Agent', label: 'AGENT', href: null },
