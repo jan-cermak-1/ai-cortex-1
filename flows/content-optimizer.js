@@ -67,7 +67,7 @@ const FLOW_CONTENT_OPTIMIZER = {
   ],
 
   playbackSteps: [
-    { type: 'navigate', page: 'command-center.html', delay: 1500 },
+    { type: 'navigate', page: 'command-center.html', cursorTarget: '[data-nav-id="command-center"]', delay: 1500 },
     { type: 'message', sender: 'ai', text: 'I analyzed your <strong>23 scheduled posts</strong> for next week.', delay: 2000 },
     { type: 'message', sender: 'ai', text: 'Found optimization opportunities based on audience behavior and trending data. Predicted <strong>+32% engagement</strong> possible.', delay: 2500 },
     { type: 'action', action: 'showIntelligenceBox', delay: 1500 },
@@ -75,9 +75,9 @@ const FLOW_CONTENT_OPTIMIZER = {
     { type: 'action', action: 'selectCheckboxes', items: ['optimal-times', 'copy-enhance', 'hashtag-update', 'visual-suggest'], delay: 1500 },
     { type: 'action', action: 'executeSelected', delay: 2000 },
     { type: 'message', sender: 'ai', text: 'Optimization complete! 8 posts rescheduled, 23 captions enhanced, hashtags updated, 5 visual suggestions ready.', delay: 2500 },
-    { type: 'navigate', page: 'publisher-calendar.html', delay: 2000 },
+    { type: 'navigate', page: 'publisher-calendar.html', cursorTarget: '[data-nav-id="publisher"]', delay: 2000 },
     { type: 'message', sender: 'ai', text: 'Your optimized content calendar. Monday posts now scheduled for 9:30 AM peak engagement.', delay: 2000 },
-    { type: 'navigate', page: 'content-collection.html', delay: 2500 },
+    { type: 'navigate', page: 'content-collection.html', cursorTarget: '[data-nav-id="content"]', delay: 2500 },
     { type: 'message', sender: 'ai', text: 'Visual improvement suggestions are in your collection. Demo complete!', delay: 2000 }
   ]
 };

@@ -67,20 +67,20 @@ const FLOW_LABUBU_TREND = {
   ],
 
   playbackSteps: [
-    { type: 'navigate', page: 'command-center.html', delay: 1500 },
+    { type: 'navigate', page: 'command-center.html', cursorTarget: '[data-nav-id="command-center"]', delay: 1500 },
     { type: 'message', sender: 'ai', text: 'I detected a trending topic in your region: <strong>Labubu</strong>. Your competitors are already publishing content about this trend.', delay: 2000 },
     { type: 'action', action: 'showIntelligenceBox', delay: 1500 },
     { type: 'message', sender: 'ai', text: 'I suggest creating a campaign with content ideas, a listening query, and an analytics board to track this trend.', delay: 2500 },
     { type: 'action', action: 'selectCheckboxes', items: ['campaign', 'listening', 'analytics'], delay: 1500 },
     { type: 'action', action: 'executeSelected', delay: 2000 },
     { type: 'message', sender: 'ai', text: 'Done! I created all the assets for you. Let me show you the campaign first.', delay: 2000 },
-    { type: 'navigate', page: 'publisher-campaign.html', delay: 2500 },
+    { type: 'navigate', page: 'publisher-campaign.html', cursorTarget: '[data-nav-id="publisher"]', delay: 2500 },
     { type: 'message', sender: 'ai', text: 'Here\'s the Publisher campaign with content ideas ready for your review.', delay: 2000 },
-    { type: 'navigate', page: 'content-collection.html', delay: 2500 },
+    { type: 'navigate', page: 'content-collection.html', cursorTarget: '[data-nav-id="content"]', delay: 2500 },
     { type: 'message', sender: 'ai', text: 'The Collection contains curated content related to the Labubu trend.', delay: 2000 },
-    { type: 'navigate', page: 'settings-listening.html', delay: 2500 },
+    { type: 'navigate', page: 'settings-listening.html', cursorTarget: '[data-nav-id="settings"]', delay: 2500 },
     { type: 'message', sender: 'ai', text: 'I set up a listening query to monitor mentions and sentiment around Labubu.', delay: 2000 },
-    { type: 'navigate', page: 'unified-analytics.html', delay: 2500 },
+    { type: 'navigate', page: 'unified-analytics.html', cursorTarget: '[data-nav-id="unified-analytics"]', delay: 2500 },
     { type: 'message', sender: 'ai', text: 'Finally, here\'s your custom analytics board tracking the trend performance. The demo is complete!', delay: 2000 }
   ]
 };

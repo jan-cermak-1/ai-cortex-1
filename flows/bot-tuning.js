@@ -67,7 +67,7 @@ const FLOW_BOT_TUNING = {
   ],
 
   playbackSteps: [
-    { type: 'navigate', page: 'command-center.html', delay: 1500 },
+    { type: 'navigate', page: 'command-center.html', cursorTarget: '[data-nav-id="command-center"]', delay: 1500 },
     { type: 'message', sender: 'ai', text: 'I analyzed your chatbot performance from this week: <strong>2,847 conversations</strong> handled.', delay: 2000 },
     { type: 'message', sender: 'ai', text: 'Current containment rate: 73% (target: 80%). I identified opportunities for +8% improvement.', delay: 2500 },
     { type: 'action', action: 'showIntelligenceBox', delay: 1500 },
@@ -75,7 +75,7 @@ const FLOW_BOT_TUNING = {
     { type: 'action', action: 'selectCheckboxes', items: ['improve-intents', 'add-responses', 'update-fallback', 'train-entities'], delay: 1500 },
     { type: 'action', action: 'executeSelected', delay: 2000 },
     { type: 'message', sender: 'ai', text: 'Bot optimization complete! 5 intents improved, 12 new responses added, fallback updated, product entities retrained.', delay: 2500 },
-    { type: 'navigate', page: 'bot-overview.html', delay: 2000 },
+    { type: 'navigate', page: 'bot-overview.html', cursorTarget: '[data-nav-id="bot"]', delay: 2000 },
     { type: 'message', sender: 'ai', text: 'Top failed intent "order_status" now has 94% accuracy. Bot is live with updated models.', delay: 2000 },
     { type: 'message', sender: 'ai', text: 'Expected containment improvement: +8%. Monitoring started. Demo complete!', delay: 2000 }
   ]

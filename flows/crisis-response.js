@@ -68,7 +68,7 @@ const FLOW_CRISIS_RESPONSE = {
   ],
 
   playbackSteps: [
-    { type: 'navigate', page: 'command-center.html', delay: 1500 },
+    { type: 'navigate', page: 'command-center.html', cursorTarget: '[data-nav-id="command-center"]', delay: 1500 },
     { type: 'message', sender: 'ai', text: '<strong>URGENT ALERT:</strong> I detected a 340% increase in negative mentions about your brand in the last 2 hours.', delay: 2000 },
     { type: 'message', sender: 'ai', text: 'Primary topic: Product quality complaints about <strong>EcoBottle Pro</strong>. This requires immediate attention.', delay: 2500 },
     { type: 'action', action: 'showIntelligenceBox', delay: 1500 },
@@ -76,11 +76,11 @@ const FLOW_CRISIS_RESPONSE = {
     { type: 'action', action: 'selectCheckboxes', items: ['pause-ads', 'create-response', 'escalate-care', 'monitor-board'], delay: 1500 },
     { type: 'action', action: 'executeSelected', delay: 2000 },
     { type: 'message', sender: 'ai', text: 'Crisis protocol activated. 12 promotional posts paused, 28 mentions escalated to Care team.', delay: 2500 },
-    { type: 'navigate', page: 'publisher-calendar.html', delay: 2000 },
+    { type: 'navigate', page: 'publisher-calendar.html', cursorTarget: '[data-nav-id="publisher"]', delay: 2000 },
     { type: 'message', sender: 'ai', text: 'Here are the paused promotional posts. They will remain on hold until the crisis is resolved.', delay: 2000 },
-    { type: 'navigate', page: 'care-inbox.html', delay: 2500 },
+    { type: 'navigate', page: 'care-inbox.html', cursorTarget: '[data-nav-id="care"]', delay: 2500 },
     { type: 'message', sender: 'ai', text: 'Care team is now handling the escalated mentions. Crisis monitoring board is active.', delay: 2000 },
-    { type: 'navigate', page: 'unified-analytics.html', delay: 2500 },
+    { type: 'navigate', page: 'unified-analytics.html', cursorTarget: '[data-nav-id="unified-analytics"]', delay: 2500 },
     { type: 'message', sender: 'ai', text: 'Real-time crisis monitoring board shows sentiment data. The demo is complete!', delay: 2000 }
   ]
 };

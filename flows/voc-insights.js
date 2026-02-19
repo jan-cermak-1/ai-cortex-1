@@ -67,7 +67,7 @@ const FLOW_VOC_INSIGHTS = {
   ],
 
   playbackSteps: [
-    { type: 'navigate', page: 'command-center.html', delay: 1500 },
+    { type: 'navigate', page: 'command-center.html', cursorTarget: '[data-nav-id="command-center"]', delay: 1500 },
     { type: 'message', sender: 'ai', text: 'I analyzed Q1 Voice of Customer data: <strong>4,287 survey responses</strong> and <strong>18,000+ feedback touchpoints</strong>.', delay: 2000 },
     { type: 'message', sender: 'ai', text: 'Key finding: NPS improved to 42 (up from 38). Top pain point: <strong>checkout process friction</strong>.', delay: 2500 },
     { type: 'action', action: 'showIntelligenceBox', delay: 1500 },
@@ -75,9 +75,9 @@ const FLOW_VOC_INSIGHTS = {
     { type: 'action', action: 'selectCheckboxes', items: ['nps-breakdown', 'theme-analysis', 'journey-mapping', 'action-plan'], delay: 1500 },
     { type: 'action', action: 'executeSelected', delay: 2000 },
     { type: 'message', sender: 'ai', text: 'Analysis complete! NPS breakdown ready, 5 themes analyzed, pain points mapped to journey, Q2 action plan drafted.', delay: 2500 },
-    { type: 'navigate', page: 'unified-analytics.html', delay: 2000 },
+    { type: 'navigate', page: 'unified-analytics.html', cursorTarget: '[data-nav-id="unified-analytics"]', delay: 2000 },
     { type: 'message', sender: 'ai', text: 'Here\'s your NPS segment breakdown and customer journey pain point map.', delay: 2000 },
-    { type: 'navigate', page: 'voc-survey-detail.html', delay: 2500 },
+    { type: 'navigate', page: 'voc-survey-detail.html', cursorTarget: '[data-nav-id="voc"]', delay: 2500 },
     { type: 'message', sender: 'ai', text: 'Promoter segment grew 8% — driven by support satisfaction. Executive deck ready for board meeting. Demo complete!', delay: 2500 }
   ]
 };

@@ -67,7 +67,7 @@ const FLOW_LISTENING_REPORT = {
   ],
 
   playbackSteps: [
-    { type: 'navigate', page: 'command-center.html', delay: 1500 },
+    { type: 'navigate', page: 'command-center.html', cursorTarget: '[data-nav-id="command-center"]', delay: 1500 },
     { type: 'message', sender: 'ai', text: 'I compiled this week\'s brand listening data: <strong>12,456 mentions</strong> across all channels.', delay: 2000 },
     { type: 'message', sender: 'ai', text: 'Key insight: Positive sentiment is up <strong>+12%</strong> vs last week. Ready to generate your stakeholder report.', delay: 2500 },
     { type: 'action', action: 'showIntelligenceBox', delay: 1500 },
@@ -75,7 +75,7 @@ const FLOW_LISTENING_REPORT = {
     { type: 'action', action: 'selectCheckboxes', items: ['exec-summary', 'sentiment-chart', 'topic-breakdown', 'share-voice'], delay: 1500 },
     { type: 'action', action: 'executeSelected', delay: 2000 },
     { type: 'message', sender: 'ai', text: 'Report generated! Executive summary ready, sentiment trends visualized, topics broken down, SOV: 34%.', delay: 2500 },
-    { type: 'navigate', page: 'unified-analytics.html', delay: 2000 },
+    { type: 'navigate', page: 'unified-analytics.html', cursorTarget: '[data-nav-id="unified-analytics"]', delay: 2000 },
     { type: 'message', sender: 'ai', text: 'Here\'s your weekly listening report with all visualizations and metrics.', delay: 2000 },
     { type: 'message', sender: 'ai', text: 'Share of voice increased to 34% (up from 31% last month). Report PDF ready for download. Demo complete!', delay: 2500 }
   ]

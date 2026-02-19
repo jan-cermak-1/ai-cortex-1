@@ -67,7 +67,7 @@ const FLOW_COMPETITOR_ALERT = {
   ],
 
   playbackSteps: [
-    { type: 'navigate', page: 'command-center.html', delay: 1500 },
+    { type: 'navigate', page: 'command-center.html', cursorTarget: '[data-nav-id="command-center"]', delay: 1500 },
     { type: 'message', sender: 'ai', text: '<strong>Competitor Alert:</strong> CompetitorX just launched a major campaign targeting your audience segment.', delay: 2000 },
     { type: 'message', sender: 'ai', text: 'Their <strong>#SummerSavings</strong> campaign is generating +45% engagement spike. I recommend a counter-strategy.', delay: 2500 },
     { type: 'action', action: 'showIntelligenceBox', delay: 1500 },
@@ -75,9 +75,9 @@ const FLOW_COMPETITOR_ALERT = {
     { type: 'action', action: 'selectCheckboxes', items: ['analyze-campaign', 'counter-content', 'boost-budget', 'audience-protect'], delay: 1500 },
     { type: 'action', action: 'executeSelected', delay: 2000 },
     { type: 'message', sender: 'ai', text: 'Competitive response activated! Analysis ready, 6 counter-content ideas generated, $2,500 boost budget recommended.', delay: 2500 },
-    { type: 'navigate', page: 'unified-analytics.html', delay: 2000 },
+    { type: 'navigate', page: 'unified-analytics.html', cursorTarget: '[data-nav-id="unified-analytics"]', delay: 2000 },
     { type: 'message', sender: 'ai', text: 'Here\'s the detailed campaign analysis report with share of voice comparison.', delay: 2000 },
-    { type: 'navigate', page: 'publisher-calendar.html', delay: 2500 },
+    { type: 'navigate', page: 'publisher-calendar.html', cursorTarget: '[data-nav-id="publisher"]', delay: 2500 },
     { type: 'message', sender: 'ai', text: 'Boost recommendations ready. Retargeting audience of 125K high-value users created. Demo complete!', delay: 2000 }
   ]
 };

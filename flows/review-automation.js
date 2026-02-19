@@ -68,7 +68,7 @@ const FLOW_REVIEW_AUTOMATION = {
   ],
 
   playbackSteps: [
-    { type: 'navigate', page: 'command-center.html', delay: 1500 },
+    { type: 'navigate', page: 'command-center.html', cursorTarget: '[data-nav-id="command-center"]', delay: 1500 },
     { type: 'message', sender: 'ai', text: 'I noticed you have <strong>156 unresponded reviews</strong> across your product catalog.', delay: 2000 },
     { type: 'message', sender: 'ai', text: 'Breakdown: 89 positive (4-5 stars), 42 neutral (3 stars), 25 negative (1-2 stars). I can help automate responses.', delay: 2500 },
     { type: 'action', action: 'showIntelligenceBox', delay: 1500 },
@@ -76,9 +76,9 @@ const FLOW_REVIEW_AUTOMATION = {
     { type: 'action', action: 'selectCheckboxes', items: ['auto-positive', 'draft-negative', 'flag-refund', 'sentiment-tag'], delay: 1500 },
     { type: 'action', action: 'executeSelected', delay: 2000 },
     { type: 'message', sender: 'ai', text: 'Automation complete! 89 positive reviews responded, 25 negative drafts ready, 8 flagged for escalation.', delay: 2500 },
-    { type: 'navigate', page: 'reviews-moderate.html', delay: 2000 },
+    { type: 'navigate', page: 'reviews-moderate.html', cursorTarget: '[data-nav-id="rating-reviews"]', delay: 2000 },
     { type: 'message', sender: 'ai', text: 'Review your negative review drafts before publishing. All reviews are now tagged by category.', delay: 2000 },
-    { type: 'navigate', page: 'unified-analytics.html', delay: 2500 },
+    { type: 'navigate', page: 'unified-analytics.html', cursorTarget: '[data-nav-id="unified-analytics"]', delay: 2500 },
     { type: 'message', sender: 'ai', text: 'Analytics shows review sentiment breakdown by category. Your response rate is now at 97%! Demo complete.', delay: 2000 }
   ]
 };

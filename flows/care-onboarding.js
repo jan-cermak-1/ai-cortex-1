@@ -67,7 +67,7 @@ const FLOW_CARE_ONBOARDING = {
   ],
 
   playbackSteps: [
-    { type: 'navigate', page: 'command-center.html', delay: 1500 },
+    { type: 'navigate', page: 'command-center.html', cursorTarget: '[data-nav-id="command-center"]', delay: 1500 },
     { type: 'message', sender: 'ai', text: 'I processed your agent roster file: <strong>care-team-roster.csv</strong>.', delay: 2000 },
     { type: 'message', sender: 'ai', text: 'Found <strong>8 new Care agents</strong> ready for onboarding with channel and skill assignments.', delay: 2500 },
     { type: 'action', action: 'showIntelligenceBox', delay: 1500 },
@@ -75,9 +75,9 @@ const FLOW_CARE_ONBOARDING = {
     { type: 'action', action: 'selectCheckboxes', items: ['create-agents', 'assign-queues', 'setup-schedule', 'enable-macros'], delay: 1500 },
     { type: 'action', action: 'executeSelected', delay: 2000 },
     { type: 'message', sender: 'ai', text: 'Onboarding complete! 8 agent accounts created, queues assigned, schedules configured, 42 macros enabled.', delay: 2500 },
-    { type: 'navigate', page: 'settings-users.html', delay: 2000 },
+    { type: 'navigate', page: 'settings-users.html', cursorTarget: '[data-nav-id="settings"]', delay: 2000 },
     { type: 'message', sender: 'ai', text: 'Here are the newly created agent accounts with their assigned roles.', delay: 2000 },
-    { type: 'navigate', page: 'care-inbox.html', delay: 2500 },
+    { type: 'navigate', page: 'care-inbox.html', cursorTarget: '[data-nav-id="care"]', delay: 2500 },
     { type: 'message', sender: 'ai', text: 'Agents now have inbox access and are ready to handle cases. Team capacity increased by 40%! Demo complete.', delay: 2000 }
   ]
 };

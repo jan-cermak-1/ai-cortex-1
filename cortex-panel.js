@@ -979,6 +979,80 @@ const playbackState = {
   steps: []
 };
 
+// ============================================================
+//  DEMO CURSOR - Visual cursor simulation
+// ============================================================
+
+function createDemoCursor() {
+  let cursor = document.getElementById('demo-cursor');
+  if (cursor) return cursor;
+  
+  cursor = document.createElement('div');
+  cursor.id = 'demo-cursor';
+  cursor.className = 'demo-cursor';
+  cursor.innerHTML = `<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86a.5.5 0 0 1 .35-.15h6.87c.45 0 .67-.53.35-.85L6.35 2.86a.5.5 0 0 0-.85.35Z" fill="#fff" stroke="#000" stroke-width="1.5"/>
+  </svg>`;
+  document.body.appendChild(cursor);
+  return cursor;
+}
+
+function showDemoCursor() {
+  const cursor = createDemoCursor();
+  cursor.classList.add('visible');
+}
+
+function hideDemoCursor() {
+  const cursor = document.getElementById('demo-cursor');
+  if (cursor) {
+    cursor.classList.remove('visible', 'moving');
+  }
+  document.querySelectorAll('.demo-cursor-ripple').forEach(r => r.remove());
+}
+
+function moveCursorTo(x, y, duration = 400) {
+  return new Promise(resolve => {
+    const cursor = createDemoCursor();
+    cursor.classList.add('visible', 'moving');
+    cursor.style.transitionDuration = duration + 'ms';
+    cursor.style.left = x + 'px';
+    cursor.style.top = y + 'px';
+    setTimeout(resolve, duration);
+  });
+}
+
+function showClickRipple(x, y) {
+  const ripple = document.createElement('div');
+  ripple.className = 'demo-cursor-ripple';
+  ripple.style.left = x + 'px';
+  ripple.style.top = y + 'px';
+  document.body.appendChild(ripple);
+  
+  setTimeout(() => ripple.remove(), 600);
+}
+
+async function animateCursorToElement(selector, clickAfter = true) {
+  const element = document.querySelector(selector);
+  if (!element) {
+    console.warn('Cursor target not found:', selector);
+    return false;
+  }
+  
+  const rect = element.getBoundingClientRect();
+  const x = rect.left + rect.width / 2;
+  const y = rect.top + rect.height / 2;
+  
+  showDemoCursor();
+  await moveCursorTo(x, y);
+  
+  if (clickAfter) {
+    showClickRipple(x, y);
+    await new Promise(r => setTimeout(r, 200));
+  }
+  
+  return true;
+}
+
 function startFlowPlayback(flowId) {
   const flow = typeof getFlowById === 'function' ? getFlowById(flowId) : null;
   if (!flow || !flow.data || !flow.data.playbackSteps) {
@@ -1049,6 +1123,7 @@ function stopPlayback() {
     playbackState.timerId = null;
   }
 
+  hideDemoCursor();
   removePlaybackControls();
 }
 
@@ -1057,7 +1132,7 @@ function setPlaybackSpeed(speed) {
   updatePlaybackUI();
 }
 
-function executeCurrentStep() {
+async function executeCurrentStep() {
   if (!playbackState.isPlaying || playbackState.isPaused) return;
   if (playbackState.currentStep >= playbackState.steps.length) {
     stopPlayback();
@@ -1066,13 +1141,20 @@ function executeCurrentStep() {
   }
 
   const step = playbackState.steps[playbackState.currentStep];
-  executeStep(step);
+  await executeStep(step);
   updatePlaybackUI();
 }
 
-function executeStep(step) {
+async function executeStep(step) {
+  if (step.cursorTarget) {
+    await animateCursorToElement(step.cursorTarget);
+  }
+  
   switch (step.type) {
     case 'navigate':
+      if (step.cursorTarget) {
+        await animateCursorToElement(step.cursorTarget);
+      }
       if (typeof navigateTo === 'function') {
         navigateTo(step.page);
       }
@@ -1083,14 +1165,14 @@ function executeStep(step) {
       break;
       
     case 'action':
-      executePlaybackAction(step);
+      await executePlaybackAction(step);
       break;
   }
 
   scheduleNextStep(step.delay || 2000);
 }
 
-function executePlaybackAction(step) {
+async function executePlaybackAction(step) {
   switch (step.action) {
     case 'showIntelligenceBox':
       const area = document.getElementById('cortex-intelligence-area');
@@ -1101,18 +1183,27 @@ function executePlaybackAction(step) {
       
     case 'selectCheckboxes':
       if (step.items && Array.isArray(step.items)) {
-        step.items.forEach(action => {
-          const checkbox = document.querySelector(`.checkbox[data-action="${action}"]`);
+        for (const action of step.items) {
+          const selector = `.checkbox[data-action="${action}"]`;
+          if (step.cursorTarget !== false) {
+            await animateCursorToElement(selector);
+          }
+          const checkbox = document.querySelector(selector);
           if (checkbox && !checkbox.classList.contains('checked')) {
             checkbox.classList.add('checked');
             checkbox.setAttribute('aria-checked', 'true');
           }
-        });
+          await new Promise(r => setTimeout(r, 300));
+        }
         updateExecuteButton();
       }
       break;
       
     case 'executeSelected':
+      const executeBtn = document.querySelector('.intelligence-execute-btn');
+      if (executeBtn && step.cursorTarget !== false) {
+        await animateCursorToElement('.intelligence-execute-btn');
+      }
       if (typeof executeSelected === 'function') {
         executeSelected();
       }

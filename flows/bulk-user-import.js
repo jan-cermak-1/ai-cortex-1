@@ -67,7 +67,7 @@ const FLOW_BULK_USER_IMPORT = {
   ],
 
   playbackSteps: [
-    { type: 'navigate', page: 'command-center.html', delay: 1500 },
+    { type: 'navigate', page: 'command-center.html', cursorTarget: '[data-nav-id="command-center"]', delay: 1500 },
     { type: 'message', sender: 'ai', text: 'I detected an Excel file you uploaded: <strong>users-import-2026.xlsx</strong>. Let me analyze it.', delay: 2000 },
     { type: 'message', sender: 'ai', text: 'Found <strong>47 valid user records</strong> with columns: Name, Email, Department, Role. Ready for import.', delay: 2500 },
     { type: 'action', action: 'showIntelligenceBox', delay: 1500 },
@@ -75,7 +75,7 @@ const FLOW_BULK_USER_IMPORT = {
     { type: 'action', action: 'selectCheckboxes', items: ['import-users', 'create-teams', 'send-invites', 'assign-roles'], delay: 1500 },
     { type: 'action', action: 'executeSelected', delay: 2000 },
     { type: 'message', sender: 'ai', text: 'Import complete! 47 users created, 6 teams organized by department, invitations queued.', delay: 2500 },
-    { type: 'navigate', page: 'settings-users.html', delay: 2000 },
+    { type: 'navigate', page: 'settings-users.html', cursorTarget: '[data-nav-id="settings"]', delay: 2000 },
     { type: 'message', sender: 'ai', text: 'All users are now visible in the User Management panel. The demo is complete!', delay: 2000 }
   ]
 };
