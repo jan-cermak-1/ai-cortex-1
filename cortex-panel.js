@@ -1208,6 +1208,22 @@ async function executePlaybackAction(step) {
         executeSelected();
       }
       break;
+      
+    case 'clickDecisionItem':
+      if (step.cursorTarget) {
+        await animateCursorToElement(step.cursorTarget);
+      }
+      const flowData = getCurrentFlowData();
+      if (flowData && flowData.decisionItems && step.item) {
+        const decisionItem = flowData.decisionItems.find(d => d.key === step.item);
+        if (decisionItem && decisionItem.href) {
+          cortexState.visitedDecisions[step.item] = true;
+          if (typeof navigateTo === 'function') {
+            navigateTo(decisionItem.href);
+          }
+        }
+      }
+      break;
   }
 }
 
