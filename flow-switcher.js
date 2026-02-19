@@ -136,11 +136,17 @@ function selectFlow(flowId) {
 }
 
 function updateFlowSwitcherUI() {
-  const items = document.querySelectorAll('.flow-item');
-  items.forEach(item => {
-    const isActive = item.dataset.flowId === flowSwitcherState.activeFlowId;
-    item.classList.toggle('active', isActive);
-  });
+  const root = document.getElementById('flow-switcher-root');
+  if (!root) return;
+  
+  const wasOpen = flowSwitcherState.isOpen;
+  root.innerHTML = renderFlowSwitcher();
+  flowSwitcherState.isOpen = wasOpen;
+  
+  const switcher = document.querySelector('.flow-switcher');
+  if (switcher) {
+    switcher.classList.toggle('open', wasOpen);
+  }
 }
 
 function initFlowSwitcher() {
