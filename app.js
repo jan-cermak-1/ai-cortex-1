@@ -101,7 +101,9 @@ function executeSelected() {
       });
     }
 
-    addChatMessage('ai', 'Done! I\'ve created all the items based on your selection. You can click on each one to navigate to it.');
+    if (typeof playbackState === 'undefined' || !playbackState.isPlaying) {
+      addChatMessage('ai', 'Done! I\'ve created all the items based on your selection. You can click on each one to navigate to it.');
+    }
   }, 2000);
 }
 

@@ -489,7 +489,7 @@ function onRouteChange(page, config) {
     initDecisionItemListeners();
   }
 
-  if (cortexState.messages.length > 0) {
+  if (cortexState.messages.length > 0 && !playbackState.isPlaying) {
     const title = CORTEX_UI_CONFIG.pageTitles[page] || page;
     addChatMessage('system', `Navigated to ${title}`);
   }
@@ -1200,9 +1200,9 @@ async function executePlaybackAction(step) {
       break;
       
     case 'executeSelected':
-      const executeBtn = document.querySelector('.intelligence-execute-btn');
+      const executeBtn = document.getElementById('execute-btn');
       if (executeBtn && step.cursorTarget !== false) {
-        await animateCursorToElement('.intelligence-execute-btn');
+        await animateCursorToElement('#execute-btn');
       }
       if (typeof executeSelected === 'function') {
         executeSelected();
