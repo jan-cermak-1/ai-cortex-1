@@ -5035,7 +5035,7 @@ input, select, textarea {
 
 .flow-switcher-list {
   flex: 1;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
   padding: var(--space-3);
   padding-right: 0;
@@ -5056,20 +5056,21 @@ input, select, textarea {
 }
 
 .flow-switcher-list::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 
 .flow-switcher-list::-webkit-scrollbar-track {
-  background: transparent;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
 }
 
 .flow-switcher-list::-webkit-scrollbar-thumb {
-  background: var(--color-border-default);
-  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
 }
 
 .flow-switcher-list::-webkit-scrollbar-thumb:hover {
-  background: var(--color-on-layer-tertiary);
+  background: rgba(0, 0, 0, 0.3);
 }
 
 .flow-section {
