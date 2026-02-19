@@ -36,7 +36,7 @@
   --color-border-success-emphasis: #20c54f;
   --color-border-error-emphasis: #da1e28;
   --color-border-warning-emphasis: #f5a623;
-  --color-border-info: #0f62fe;
+  --color-border-info: #56a0ff;
   --color-border-info-emphasis: #0f62fe;
 
   /* ==========================================================
@@ -49,6 +49,10 @@
   --color-button-invisible: rgba(255, 255, 255, 0);
   --color-button-invisible-hover: rgba(0, 0, 0, 0.05);
   --color-button-invisible-active: rgba(0, 0, 0, 0.1);
+  --color-button-invisible-applied: rgba(208, 226, 255, 0.5);
+
+  /* On Layer — Interactive */
+  --color-on-layer-interactive: #003beb;
 
   /* ==========================================================
      COLORS — Status / Semantic

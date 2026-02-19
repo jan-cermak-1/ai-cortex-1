@@ -22,13 +22,20 @@
 
     <!-- Persistent: Cortex AI Panel -->
     <div id="cortex-panel-root"></div>
+
+    <!-- Persistent: Flow Switcher (for demo) -->
+    <div id="flow-switcher-root"></div>
   </div>
 </div>
 
-<!-- Scripts: order matters (router first, then components, then panel, then page logic) -->
+<!-- Scripts: order matters (router first, then config, then flows, then components) -->
 <script src="router.js"></script>
 <script src="main-navigation.js"></script>
+<script src="cortex-config.js"></script>
+<script src="flows/labubu-trend.js"></script>
+<script src="flows/index.js"></script>
 <script src="cortex-panel.js"></script>
+<script src="flow-switcher.js"></script>
 <script src="app.js"></script>
 <script src="drag-drop.js"></script>
 <script>
@@ -54,10 +61,13 @@
     // 2. Initialize persistent Cortex panel
     initCortexPanel();
 
-    // 3. Load initial page content via router
+    // 3. Initialize flow switcher
+    initFlowSwitcher();
+
+    // 4. Load initial page content via router
     initRouter(page);
     navigateTo(page, false).then(function() {
-      // 4. Initialize drag and drop after first page loads
+      // 5. Initialize drag and drop after first page loads
       initDragDrop();
     });
   })();
