@@ -5038,8 +5038,13 @@ input, select, textarea {
   overflow-y: auto;
   overflow-x: hidden;
   padding: var(--space-3);
+  padding-right: 0;
   display: block;
   min-height: 0;
+}
+
+.flow-switcher-list > .flow-section {
+  margin-right: var(--space-3);
 }
 
 .flow-switcher-list > .flow-section {
