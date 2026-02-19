@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reviews Moderation — Cortex AI</title>
+  <script>if(!document.getElementById('flow-switcher-root')){location.href='index.html#'+location.pathname.split('/').pop();}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="soul-tokens.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="app" id="app">
+  <div class="screen active">
+    <div class="main-content">
+      <div class="module-placeholder">
+        <div class="module-placeholder-icon">
+          <svg viewBox="0 0 36 36" fill="currentColor" width="48" height="48"><path fill-rule="evenodd" clip-rule="evenodd" d="M18.8944 3.55279C18.5259 2.81573 17.4741 2.81573 17.1056 3.55279L13.0819 11.5999L4.16424 12.8953C3.34699 13.0139 3.01629 14.0275 3.60588 14.6015L9.93799 20.7556L8.43177 29.6295C8.29148 30.4434 9.15337 31.0629 9.88378 30.6788L18 26.4115L26.1162 30.6788C26.8466 31.0629 27.7085 30.4434 27.5682 29.6295L26.062 20.7556L32.3941 14.6015C32.9837 14.0275 32.653 13.0139 31.8358 12.8953L22.9181 11.5999L18.8944 3.55279ZM15.2918 12.7614L18 7.32917L20.7082 12.7614C20.9365 13.2179 21.3738 13.5339 21.8785 13.6071L27.9033 14.4819L23.5455 18.7167C23.1793 19.0722 23.0137 19.5861 23.103 20.088L24.1848 26.0831L18.8541 23.2812C18.4015 23.043 17.8585 23.043 17.4059 23.2812L12.0752 26.0831L13.157 20.088C13.2463 19.5861 13.0807 19.0722 12.7145 18.7167L8.35666 14.4819L14.3815 13.6071C14.8862 13.5339 15.3235 13.2179 15.2918 12.7614Z"/></svg>
+        </div>
+        <h1 class="module-placeholder-title">Ratings & Reviews</h1>
+        <p class="module-placeholder-description">Review management for eCommerce with moderation, syndication, and response automation.</p>
+        <div class="module-placeholder-meta">
+          <span class="module-placeholder-tag">Commerce</span>
+          <span class="module-placeholder-tag">Reviews</span>
+          <span class="module-placeholder-tag">Moderation</span>
+        </div>
+      </div>
+    </div>
+    <div id="cortex-slot"></div>
+  </div>
+</div>
+
+<script src="components.js"></script>
+<script src="cortex-panel.js"></script>
+<script src="app.js"></script>
+<script>initCortexPanel();</script>
+</body>
+</html>

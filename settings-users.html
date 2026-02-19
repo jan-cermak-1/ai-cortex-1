@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings: Users — Cortex AI</title>
+  <script>if(!document.getElementById('flow-switcher-root')){location.href='index.html#'+location.pathname.split('/').pop();}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="soul-tokens.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="app" id="app">
+  <div class="screen active">
+    <div class="main-content">
+      <div class="module-placeholder">
+        <div class="module-placeholder-icon">
+          <svg viewBox="0 0 36 36" fill="currentColor" width="48" height="48"><path fill-rule="evenodd" clip-rule="evenodd" d="M18 4C14.6863 4 12 6.68629 12 10C12 13.3137 14.6863 16 18 16C21.3137 16 24 13.3137 24 10C24 6.68629 21.3137 4 18 4ZM10 10C10 5.58172 13.5817 2 18 2C22.4183 2 26 5.58172 26 10C26 14.4183 22.4183 18 18 18C13.5817 18 10 14.4183 10 10ZM8 32C8 25.3726 13.3726 20 20 20H16C9.37258 20 4 25.3726 4 32V34H6V32C6 26.4772 10.4772 22 16 22H20C25.5228 22 30 26.4772 30 32V34H32V32C32 25.3726 26.6274 20 20 20H16C22.6274 20 28 25.3726 28 32H8Z"/></svg>
+        </div>
+        <h1 class="module-placeholder-title">User Management</h1>
+        <p class="module-placeholder-description">Manage platform users, roles, permissions, and team assignments.</p>
+        <div class="module-placeholder-meta">
+          <span class="module-placeholder-tag">Settings</span>
+          <span class="module-placeholder-tag">Users</span>
+          <span class="module-placeholder-tag">Permissions</span>
+        </div>
+      </div>
+    </div>
+    <div id="cortex-slot"></div>
+  </div>
+</div>
+
+<script src="components.js"></script>
+<script src="cortex-panel.js"></script>
+<script src="app.js"></script>
+<script>initCortexPanel();</script>
+</body>
+</html>

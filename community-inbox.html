@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Community Inbox — Cortex AI</title>
+  <script>if(!document.getElementById('flow-switcher-root')){location.href='index.html#'+location.pathname.split('/').pop();}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="soul-tokens.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="app" id="app">
+  <div class="screen active">
+    <div class="main-content">
+      <div class="module-placeholder">
+        <div class="module-placeholder-icon">
+          <svg viewBox="0 0 36 36" fill="currentColor" width="48" height="48"><path fill-rule="evenodd" clip-rule="evenodd" d="M18 4C10.268 4 4 10.268 4 18C4 25.732 10.268 32 18 32H28C30.2091 32 32 30.2091 32 28V18C32 10.268 25.732 4 18 4ZM2 18C2 9.16344 9.16344 2 18 2C26.8366 2 34 9.16344 34 18V28C34 31.3137 31.3137 34 28 34H18C9.16344 34 2 26.8366 2 18ZM10 17C10 15.8954 10.8954 15 12 15C13.1046 15 14 15.8954 14 17C14 18.1046 13.1046 19 12 19C10.8954 19 10 18.1046 10 17ZM18 15C16.8954 15 16 15.8954 16 17C16 18.1046 16.8954 19 18 19C19.1046 19 20 18.1046 20 17C20 15.8954 19.1046 15 18 15ZM22 17C22 15.8954 22.8954 15 24 15C25.1046 15 26 15.8954 26 17C26 18.1046 25.1046 19 24 19C22.8954 19 22 18.1046 22 17Z"/></svg>
+        </div>
+        <h1 class="module-placeholder-title">Community Inbox</h1>
+        <p class="module-placeholder-description">Unified social inbox for messages, comments, and reviews across all connected profiles.</p>
+        <div class="module-placeholder-meta">
+          <span class="module-placeholder-tag">Service</span>
+          <span class="module-placeholder-tag">Messages</span>
+          <span class="module-placeholder-tag">Reviews</span>
+        </div>
+      </div>
+    </div>
+    <div id="cortex-slot"></div>
+  </div>
+</div>
+
+<script src="components.js"></script>
+<script src="cortex-panel.js"></script>
+<script src="app.js"></script>
+<script>initCortexPanel();</script>
+</body>
+</html>

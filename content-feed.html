@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Content Feed — Cortex AI</title>
+  <script>if(!document.getElementById('flow-switcher-root')){location.href='index.html#'+location.pathname.split('/').pop();}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="soul-tokens.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="app" id="app">
+  <div class="screen active">
+    <div class="main-content">
+      <div class="module-placeholder">
+        <div class="module-placeholder-icon">
+          <svg viewBox="0 0 36 36" fill="currentColor" width="48" height="48"><path fill-rule="evenodd" clip-rule="evenodd" d="M5 6C4.44772 6 4 6.44772 4 7V11C4 11.5523 4.44772 12 5 12H31C31.5523 12 32 11.5523 32 11V7C32 6.44772 31.5523 6 31 6H5ZM2 7C2 5.34315 3.34315 4 5 4H31C32.6569 4 34 5.34315 34 7V11C34 12.6569 32.6569 14 31 14H5C3.34315 14 2 12.6569 2 11V7ZM5 18C4.44772 18 4 18.4477 4 19V29C4 29.5523 4.44772 30 5 30H15C15.5523 30 16 29.5523 16 29V19C16 18.4477 15.5523 18 15 18H5ZM2 19C2 17.3431 3.34315 16 5 16H15C16.6569 16 18 17.3431 18 19V29C18 30.6569 16.6569 32 15 32H5C3.34315 32 2 30.6569 2 29V19ZM20 19C20 18.4477 20.4477 18 21 18H31C31.5523 18 32 18.4477 32 19C32 19.5523 31.5523 20 31 20H21C20.4477 20 20 19.5523 20 19ZM20 25C20 24.4477 20.4477 24 21 24H31C31.5523 24 32 24.4477 32 25C32 25.5523 31.5523 26 31 26H21C20.4477 26 20 25.5523 20 25Z"/></svg>
+        </div>
+        <h1 class="module-placeholder-title">Content Feed</h1>
+        <p class="module-placeholder-description">Discover competitor content, track brand mentions, and monitor industry trends in real-time.</p>
+        <div class="module-placeholder-meta">
+          <span class="module-placeholder-tag">Marketing</span>
+          <span class="module-placeholder-tag">Listening</span>
+          <span class="module-placeholder-tag">Monitoring</span>
+        </div>
+      </div>
+    </div>
+    <div id="cortex-slot"></div>
+  </div>
+</div>
+
+<script src="components.js"></script>
+<script src="cortex-panel.js"></script>
+<script src="app.js"></script>
+<script>initCortexPanel();</script>
+</body>
+</html>

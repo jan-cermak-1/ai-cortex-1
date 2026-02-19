@@ -12,13 +12,15 @@ const NAV_ITEMS = [
   { id: 'command-center',    icon: 'command-center.svg',    title: 'Command Center',    label: 'COMMAND CENTER',    href: 'command-center.html' },
   { id: 'unified-analytics', icon: 'unified-analytics.svg', title: 'Unified Analytics', label: 'UNIFIED ANALYTICS', href: 'unified-analytics.html' },
   { id: 'publisher',         icon: 'publisher.svg',         title: 'Publisher',         label: 'PUBLISHER',         href: 'publisher-campaign.html' },
-  { id: 'community',         icon: 'community.svg',         title: 'Community',         label: 'COMMUNITY',         href: null },
-  { id: 'care',              icon: 'care.svg',              title: 'Care',              label: 'CARE',              href: null },
+  { id: 'community',         icon: 'community.svg',         title: 'Community',         label: 'COMMUNITY',         href: 'community-inbox.html' },
+  { id: 'care',              icon: 'care.svg',              title: 'Care',              label: 'CARE',              href: 'care-inbox.html' },
   { id: 'content',           icon: 'content.svg',           title: 'Content',           label: 'CONTENT',           href: 'content-collection.html' },
-  { id: 'ugc',               icon: 'ucg.svg',               title: 'UGC',               label: 'UGC',               href: null },
-  { id: 'bot',               icon: 'bot.svg',               title: 'Bot',               label: 'BOT',               href: null },
-  { id: 'rating-reviews',    icon: 'rating-reviews.svg',    title: 'Rating & Reviews',  label: 'RATING & REVIEWS',  href: null },
+  { id: 'ugc',               icon: 'ucg.svg',               title: 'UGC',               label: 'UGC',               href: 'ugc-albums.html' },
+  { id: 'influencers',       icon: 'influencers.svg',       title: 'Influencers',       label: 'INFLUENCERS',       href: null },
+  { id: 'rating-reviews',    icon: 'rating-reviews.svg',    title: 'Ratings & Reviews', label: 'RATINGS & REVIEWS', href: 'reviews-moderate.html' },
+  { id: 'bot',               icon: 'bot.svg',               title: 'Bot',               label: 'BOT',               href: 'bot-overview.html' },
   { id: 'agent',             icon: 'agent.svg',             title: 'Agent',             label: 'AGENT',             href: null },
+  { id: 'voc',               icon: 'community.svg',         title: 'VoC',               label: 'VOC',               href: 'voc-survey-detail.html' },
 ];
 
 /**

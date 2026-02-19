@@ -33,6 +33,15 @@
 <script src="main-navigation.js"></script>
 <script src="cortex-config.js"></script>
 <script src="flows/labubu-trend.js"></script>
+<script src="flows/bulk-user-import.js"></script>
+<script src="flows/crisis-response.js"></script>
+<script src="flows/review-automation.js"></script>
+<script src="flows/care-onboarding.js"></script>
+<script src="flows/content-optimizer.js"></script>
+<script src="flows/competitor-alert.js"></script>
+<script src="flows/bot-tuning.js"></script>
+<script src="flows/listening-report.js"></script>
+<script src="flows/voc-insights.js"></script>
 <script src="flows/index.js"></script>
 <script src="cortex-panel.js"></script>
 <script src="flow-switcher.js"></script>
@@ -43,6 +52,16 @@
     // Determine the initial page from the URL
     var path = location.pathname;
     var page = path.split('/').pop() || 'command-center.html';
+    
+    // Check for hash redirect (from standalone page reload)
+    var hash = location.hash;
+    if (hash && hash.length > 1) {
+      var hashPage = hash.substring(1);
+      if (hashPage.endsWith('.html') && ROUTE_CONFIG[hashPage]) {
+        page = hashPage;
+        history.replaceState(null, '', hashPage);
+      }
+    }
     
     // If we're at index.html or root, default to command-center
     if (!page || page === 'index.html' || page === '') {

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UGC Albums — Cortex AI</title>
+  <script>if(!document.getElementById('flow-switcher-root')){location.href='index.html#'+location.pathname.split('/').pop();}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="soul-tokens.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="app" id="app">
+  <div class="screen active">
+    <div class="main-content">
+      <div class="module-placeholder">
+        <div class="module-placeholder-icon">
+          <svg viewBox="0 0 36 36" fill="currentColor" width="48" height="48"><path fill-rule="evenodd" clip-rule="evenodd" d="M5 6C4.44772 6 4 6.44772 4 7V29C4 29.5523 4.44772 30 5 30H31C31.5523 30 32 29.5523 32 29V7C32 6.44772 31.5523 6 31 6H5ZM2 7C2 5.34315 3.34315 4 5 4H31C32.6569 4 34 5.34315 34 7V29C34 30.6569 32.6569 32 31 32H5C3.34315 32 2 30.6569 2 29V7ZM11 14C12.1046 14 13 13.1046 13 12C13 10.8954 12.1046 10 11 10C9.89543 10 9 10.8954 9 12C9 13.1046 9.89543 14 11 14ZM8 24L12 18L16 22L22 14L28 24H8Z"/></svg>
+        </div>
+        <h1 class="module-placeholder-title">UGC Albums</h1>
+        <p class="module-placeholder-description">Collect, curate, and deploy authentic user-generated content across your digital channels.</p>
+        <div class="module-placeholder-meta">
+          <span class="module-placeholder-tag">Commerce</span>
+          <span class="module-placeholder-tag">UGC</span>
+          <span class="module-placeholder-tag">Curation</span>
+        </div>
+      </div>
+    </div>
+    <div id="cortex-slot"></div>
+  </div>
+</div>
+
+<script src="components.js"></script>
+<script src="cortex-panel.js"></script>
+<script src="app.js"></script>
+<script>initCortexPanel();</script>
+</body>
+</html>

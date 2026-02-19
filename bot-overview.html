@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bot Overview — Cortex AI</title>
+  <script>if(!document.getElementById('flow-switcher-root')){location.href='index.html#'+location.pathname.split('/').pop();}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="soul-tokens.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="app" id="app">
+  <div class="screen active">
+    <div class="main-content">
+      <div class="module-placeholder">
+        <div class="module-placeholder-icon">
+          <svg viewBox="0 0 36 36" fill="currentColor" width="48" height="48"><path fill-rule="evenodd" clip-rule="evenodd" d="M19 4V7.07089C23.0673 7.5094 26.4906 9.93032 28.3293 13.3431L31 12V16H27V14.5359C25.5892 11.6685 22.5259 9.64706 19 9.11144V12H17V9.11144C13.4741 9.64706 10.4108 11.6685 9 14.5359V16H5V12L7.6707 13.3431C9.50942 9.93032 12.9327 7.5094 17 7.07089V4H19ZM5 18H9V20.4641C10.4108 23.3315 13.4741 25.3529 17 25.8886V23H19V25.8886C22.5259 25.3529 25.5892 23.3315 27 20.4641V18H31V23L28.3293 21.6569C26.4906 25.0697 23.0673 27.4906 19 27.9291V31H17V27.9291C12.9327 27.4906 9.50942 25.0697 7.6707 21.6569L5 23V18ZM13 17C14.1046 17 15 16.1046 15 15C15 13.8954 14.1046 13 13 13C11.8954 13 11 13.8954 11 15C11 16.1046 11.8954 17 13 17ZM25 15C25 16.1046 24.1046 17 23 17C21.8954 17 21 16.1046 21 15C21 13.8954 21.8954 13 23 13C24.1046 13 25 13.8954 25 15Z"/></svg>
+        </div>
+        <h1 class="module-placeholder-title">Bot Overview</h1>
+        <p class="module-placeholder-description">Manage AI chatbots for customer self-service across websites, apps, and messaging platforms.</p>
+        <div class="module-placeholder-meta">
+          <span class="module-placeholder-tag">Service</span>
+          <span class="module-placeholder-tag">Chatbot</span>
+          <span class="module-placeholder-tag">NLP</span>
+        </div>
+      </div>
+    </div>
+    <div id="cortex-slot"></div>
+  </div>
+</div>
+
+<script src="components.js"></script>
+<script src="cortex-panel.js"></script>
+<script src="app.js"></script>
+<script>initCortexPanel();</script>
+</body>
+</html>

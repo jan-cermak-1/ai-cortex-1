@@ -141,9 +141,10 @@ function renderCortexInput() {
   const pageTitles = CORTEX_UI_CONFIG.pageTitles;
   const contextLabel = pageTitles[cortexState.currentPage] || 'Command center';
 
-  const attachmentItems = config.attachmentMenu.map(item => 
-    `<div class="attachment-dropdown-item"><img src="${item.icon}" alt="" width="18" height="18">${item.label}</div>`
-  ).join('\n                  ');
+  const attachmentItems = config.attachmentMenu.map(item => {
+    const onclick = item.id === 'upload' ? ' onclick="triggerFileUpload()"' : '';
+    return `<div class="attachment-dropdown-item"${onclick}><img src="${item.icon}" alt="" width="18" height="18">${item.label}</div>`;
+  }).join('\n                  ');
 
   return `
         <div class="cortex-input-area" id="cortex-input-area">
@@ -455,6 +456,9 @@ function switchToFlow(flowId) {
 }
 
 function resetCurrentFlow() {
+  if (playbackState.isPlaying) {
+    stopPlayback();
+  }
   switchToFlow(cortexState.activeFlowId);
 }
 
@@ -575,9 +579,58 @@ function initDecisionItemListeners() {
   // kept for backwards compatibility; inline onclick handles clicks now
 }
 
-function sendChatMessage(text) {
-  addChatMessage('user', text);
-  simulateAIResponse(text);
+async function sendChatMessage(text) {
+  const files = [...fileUploadState.pendingFiles];
+  
+  if (files.length > 0) {
+    const fileNames = files.map(f => f.name).join(', ');
+    addChatMessage('user', `${text}\n<span class="attached-files">📎 ${fileNames}</span>`);
+    
+    const attachmentArea = document.querySelector('.file-attachments');
+    if (attachmentArea) attachmentArea.remove();
+    fileUploadState.pendingFiles = [];
+
+    try {
+      const processedFiles = await Promise.all(files.map(f => processFileForAI(f)));
+      simulateFileProcessingResponse(text, processedFiles);
+    } catch (err) {
+      addChatMessage('ai', 'Sorry, I had trouble processing the attached files. Please try again.');
+    }
+  } else {
+    addChatMessage('user', text);
+    simulateAIResponse(text);
+  }
+}
+
+function simulateFileProcessingResponse(userMessage, processedFiles) {
+  setTimeout(() => {
+    const file = processedFiles[0];
+    const rowCount = file.parsed?.rows?.length || 0;
+    const headers = file.parsed?.headers || [];
+    
+    let response = '';
+    
+    if (file.name.endsWith('.csv') || file.name.endsWith('.xlsx') || file.name.endsWith('.xls')) {
+      if (rowCount > 0) {
+        response = `I've analyzed <strong>${file.name}</strong> containing <strong>${rowCount} rows</strong>.`;
+        if (headers.length > 0) {
+          response += `\n\nColumns found: <em>${headers.slice(0, 5).join(', ')}${headers.length > 5 ? '...' : ''}</em>`;
+        }
+        response += `\n\nWhat would you like me to do with this data?`;
+      } else {
+        response = `I received the file <strong>${file.name}</strong>, but it appears to be empty or I couldn't parse its contents.`;
+      }
+    } else if (file.name.endsWith('.json')) {
+      response = `I've parsed <strong>${file.name}</strong> as JSON with <strong>${rowCount} ${rowCount === 1 ? 'object' : 'objects'}</strong>.`;
+      if (headers.length > 0) {
+        response += `\n\nKeys found: <em>${headers.slice(0, 5).join(', ')}${headers.length > 5 ? '...' : ''}</em>`;
+      }
+    } else {
+      response = `I've received <strong>${file.name}</strong>. How can I help you with this file?`;
+    }
+    
+    addChatMessage('ai', response);
+  }, 1200 + Math.random() * 800);
 }
 
 function generateMoreIdeas(btn) {
@@ -730,4 +783,481 @@ function toggleAttachmentMenu(el, e) {
   const dropdown = el.querySelector('.attachment-dropdown');
   if (dropdown) dropdown.classList.toggle('open');
   if (e) e.stopPropagation();
+}
+
+// ============================================================
+//  FILE UPLOAD HANDLING
+// ============================================================
+
+const fileUploadState = {
+  pendingFiles: [],
+  fileInput: null
+};
+
+function triggerFileUpload() {
+  document.querySelectorAll('.attachment-dropdown.open').forEach(d => d.classList.remove('open'));
+  
+  if (!fileUploadState.fileInput) {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.xlsx,.xls,.csv,.json,.txt';
+    input.multiple = true;
+    input.style.display = 'none';
+    input.addEventListener('change', handleFileSelect);
+    document.body.appendChild(input);
+    fileUploadState.fileInput = input;
+  }
+  fileUploadState.fileInput.value = '';
+  fileUploadState.fileInput.click();
+}
+
+function handleFileSelect(e) {
+  const files = Array.from(e.target.files);
+  if (files.length === 0) return;
+
+  files.forEach(file => {
+    const fileInfo = {
+      name: file.name,
+      size: file.size,
+      type: file.type || getFileTypeFromName(file.name),
+      file: file
+    };
+    fileUploadState.pendingFiles.push(fileInfo);
+    renderFileAttachment(fileInfo);
+  });
+}
+
+function getFileTypeFromName(name) {
+  const ext = name.split('.').pop().toLowerCase();
+  const types = {
+    'xlsx': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    'xls': 'application/vnd.ms-excel',
+    'csv': 'text/csv',
+    'json': 'application/json',
+    'txt': 'text/plain'
+  };
+  return types[ext] || 'application/octet-stream';
+}
+
+function renderFileAttachment(fileInfo) {
+  const inputBox = document.querySelector('.cortex-input-box');
+  if (!inputBox) return;
+
+  let attachmentArea = inputBox.querySelector('.file-attachments');
+  if (!attachmentArea) {
+    attachmentArea = document.createElement('div');
+    attachmentArea.className = 'file-attachments';
+    const contextEl = inputBox.querySelector('.cortex-input-context');
+    if (contextEl) {
+      contextEl.after(attachmentArea);
+    } else {
+      inputBox.prepend(attachmentArea);
+    }
+  }
+
+  const fileId = 'file-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+  const sizeStr = formatFileSize(fileInfo.size);
+  const icon = getFileIcon(fileInfo.name);
+
+  const chip = document.createElement('div');
+  chip.className = 'file-attachment-chip';
+  chip.dataset.fileId = fileId;
+  chip.innerHTML = `
+    <span class="file-icon">${icon}</span>
+    <span class="file-name">${fileInfo.name}</span>
+    <span class="file-size">${sizeStr}</span>
+    <button class="file-remove" onclick="removeFileAttachment('${fileId}')" title="Remove">
+      <svg viewBox="0 0 36 36" fill="currentColor" width="14" height="14"><path fill-rule="evenodd" clip-rule="evenodd" d="M18.0001 16.5859L26.293 8.29297L27.7072 9.70718L19.4143 18.0001L27.7072 26.293L26.293 27.7072L18.0001 19.4143L9.70718 27.7072L8.29297 26.293L16.5859 18.0001L8.29297 9.70718L9.70718 8.29297L18.0001 16.5859Z"/></svg>
+    </button>
+  `;
+  attachmentArea.appendChild(chip);
+  fileInfo.chipId = fileId;
+}
+
+function removeFileAttachment(fileId) {
+  const chip = document.querySelector(`.file-attachment-chip[data-file-id="${fileId}"]`);
+  if (chip) chip.remove();
+  
+  fileUploadState.pendingFiles = fileUploadState.pendingFiles.filter(f => f.chipId !== fileId);
+  
+  const attachmentArea = document.querySelector('.file-attachments');
+  if (attachmentArea && attachmentArea.children.length === 0) {
+    attachmentArea.remove();
+  }
+}
+
+function formatFileSize(bytes) {
+  if (bytes < 1024) return bytes + ' B';
+  if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+  return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+}
+
+function getFileIcon(filename) {
+  const ext = filename.split('.').pop().toLowerCase();
+  const icons = {
+    'xlsx': '<svg viewBox="0 0 36 36" fill="var(--color-success)" width="16" height="16"><path d="M8 4C6.89543 4 6 4.89543 6 6V30C6 31.1046 6.89543 32 8 32H28C29.1046 32 30 31.1046 30 30V12L22 4H8Z"/><path fill="white" d="M13 18L16 23H14L12 20L10 23H8L11 18L8 13H10L12 16L14 13H16L13 18Z"/><path fill="white" d="M18 13H26V15H18V13ZM18 17H26V19H18V17ZM18 21H24V23H18V21Z"/></svg>',
+    'xls': '<svg viewBox="0 0 36 36" fill="var(--color-success)" width="16" height="16"><path d="M8 4C6.89543 4 6 4.89543 6 6V30C6 31.1046 6.89543 32 8 32H28C29.1046 32 30 31.1046 30 30V12L22 4H8Z"/><path fill="white" d="M13 18L16 23H14L12 20L10 23H8L11 18L8 13H10L12 16L14 13H16L13 18Z"/></svg>',
+    'csv': '<svg viewBox="0 0 36 36" fill="var(--color-info)" width="16" height="16"><path d="M8 4C6.89543 4 6 4.89543 6 6V30C6 31.1046 6.89543 32 8 32H28C29.1046 32 30 31.1046 30 30V12L22 4H8Z"/><path fill="white" d="M10 14H26V16H10V14ZM10 18H26V20H10V18ZM10 22H20V24H10V22Z"/></svg>',
+    'json': '<svg viewBox="0 0 36 36" fill="var(--color-warning)" width="16" height="16"><path d="M8 4C6.89543 4 6 4.89543 6 6V30C6 31.1046 6.89543 32 8 32H28C29.1046 32 30 31.1046 30 30V12L22 4H8Z"/><path fill="white" d="M12 16C12 14.8954 12.8954 14 14 14H16V16H14V20H16V22H14C12.8954 22 12 21.1046 12 20V16ZM20 14H22C23.1046 14 24 14.8954 24 16V20C24 21.1046 23.1046 22 22 22H20V20H22V16H20V14Z"/></svg>',
+    'txt': '<svg viewBox="0 0 36 36" fill="var(--color-on-layer-secondary)" width="16" height="16"><path d="M8 4C6.89543 4 6 4.89543 6 6V30C6 31.1046 6.89543 32 8 32H28C29.1046 32 30 31.1046 30 30V12L22 4H8Z"/><path fill="white" d="M10 14H26V16H10V14ZM10 18H26V20H10V18ZM10 22H20V24H10V22Z"/></svg>'
+  };
+  return icons[ext] || icons['txt'];
+}
+
+function processFileForAI(fileInfo) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    const ext = fileInfo.name.split('.').pop().toLowerCase();
+
+    reader.onload = function(e) {
+      const content = e.target.result;
+      let parsed = { raw: content, rows: [], headers: [] };
+
+      if (ext === 'csv') {
+        parsed = parseCSV(content);
+      } else if (ext === 'json') {
+        try {
+          const json = JSON.parse(content);
+          if (Array.isArray(json)) {
+            parsed.rows = json;
+            parsed.headers = json.length > 0 ? Object.keys(json[0]) : [];
+          } else {
+            parsed.rows = [json];
+            parsed.headers = Object.keys(json);
+          }
+        } catch (err) {
+          parsed.error = 'Invalid JSON';
+        }
+      } else if (ext === 'txt') {
+        parsed.rows = content.split('\n').filter(l => l.trim()).map(l => ({ line: l }));
+        parsed.headers = ['line'];
+      }
+
+      resolve({ ...fileInfo, parsed });
+    };
+
+    reader.onerror = () => reject(new Error('Failed to read file'));
+
+    if (['xlsx', 'xls'].includes(ext)) {
+      resolve({ ...fileInfo, parsed: { note: 'Excel files require server-side processing', rows: [], headers: [] } });
+    } else {
+      reader.readAsText(fileInfo.file);
+    }
+  });
+}
+
+function parseCSV(content) {
+  const lines = content.split('\n').filter(l => l.trim());
+  if (lines.length === 0) return { rows: [], headers: [] };
+
+  const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, ''));
+  const rows = [];
+
+  for (let i = 1; i < lines.length; i++) {
+    const values = lines[i].split(',').map(v => v.trim().replace(/^"|"$/g, ''));
+    const row = {};
+    headers.forEach((h, idx) => {
+      row[h] = values[idx] || '';
+    });
+    rows.push(row);
+  }
+
+  return { headers, rows };
+}
+
+// ============================================================
+//  FLOW PLAYBACK ENGINE
+// ============================================================
+
+const playbackState = {
+  isPlaying: false,
+  isPaused: false,
+  currentStep: 0,
+  speed: 1,
+  flowId: null,
+  timerId: null,
+  steps: []
+};
+
+function startFlowPlayback(flowId) {
+  const flow = typeof getFlowById === 'function' ? getFlowById(flowId) : null;
+  if (!flow || !flow.data || !flow.data.playbackSteps) {
+    console.warn('Flow has no playback steps:', flowId);
+    return;
+  }
+
+  stopPlayback();
+
+  playbackState.flowId = flowId;
+  playbackState.steps = flow.data.playbackSteps;
+  playbackState.currentStep = 0;
+  playbackState.isPlaying = true;
+  playbackState.isPaused = false;
+
+  cortexState.activeFlowId = flowId;
+  cortexState.messages = [];
+  cortexState.visitedDecisions = {};
+  
+  if (typeof flowSwitcherState !== 'undefined') {
+    flowSwitcherState.activeFlowId = flowId;
+  }
+
+  const root = document.getElementById('cortex-panel-root');
+  if (root) {
+    root.innerHTML = renderCortexPanelFull();
+    initCortexListeners();
+  }
+
+  renderPlaybackControls();
+  updatePlaybackUI();
+  
+  if (typeof updateFlowSwitcherUI === 'function') {
+    updateFlowSwitcherUI();
+  }
+
+  executeCurrentStep();
+}
+
+function pausePlayback() {
+  if (!playbackState.isPlaying) return;
+  
+  playbackState.isPaused = true;
+  if (playbackState.timerId) {
+    clearTimeout(playbackState.timerId);
+    playbackState.timerId = null;
+  }
+  updatePlaybackUI();
+}
+
+function resumePlayback() {
+  if (!playbackState.isPlaying || !playbackState.isPaused) return;
+  
+  playbackState.isPaused = false;
+  updatePlaybackUI();
+  scheduleNextStep();
+}
+
+function stopPlayback() {
+  playbackState.isPlaying = false;
+  playbackState.isPaused = false;
+  playbackState.currentStep = 0;
+  playbackState.flowId = null;
+  playbackState.steps = [];
+  
+  if (playbackState.timerId) {
+    clearTimeout(playbackState.timerId);
+    playbackState.timerId = null;
+  }
+
+  removePlaybackControls();
+}
+
+function setPlaybackSpeed(speed) {
+  playbackState.speed = speed;
+  updatePlaybackUI();
+}
+
+function executeCurrentStep() {
+  if (!playbackState.isPlaying || playbackState.isPaused) return;
+  if (playbackState.currentStep >= playbackState.steps.length) {
+    stopPlayback();
+    addChatMessage('system', 'Playback completed');
+    return;
+  }
+
+  const step = playbackState.steps[playbackState.currentStep];
+  executeStep(step);
+  updatePlaybackUI();
+}
+
+function executeStep(step) {
+  switch (step.type) {
+    case 'navigate':
+      if (typeof navigateTo === 'function') {
+        navigateTo(step.page);
+      }
+      break;
+      
+    case 'message':
+      addChatMessage(step.sender || 'ai', step.text);
+      break;
+      
+    case 'action':
+      executePlaybackAction(step);
+      break;
+  }
+
+  scheduleNextStep(step.delay || 2000);
+}
+
+function executePlaybackAction(step) {
+  switch (step.action) {
+    case 'showIntelligenceBox':
+      const area = document.getElementById('cortex-intelligence-area');
+      if (area) {
+        area.innerHTML = renderIntelligenceInitial();
+      }
+      break;
+      
+    case 'selectCheckboxes':
+      if (step.items && Array.isArray(step.items)) {
+        step.items.forEach(action => {
+          const checkbox = document.querySelector(`.checkbox[data-action="${action}"]`);
+          if (checkbox && !checkbox.classList.contains('checked')) {
+            checkbox.classList.add('checked');
+            checkbox.setAttribute('aria-checked', 'true');
+          }
+        });
+        updateExecuteButton();
+      }
+      break;
+      
+    case 'executeSelected':
+      if (typeof executeSelected === 'function') {
+        executeSelected();
+      }
+      break;
+  }
+}
+
+function scheduleNextStep(delay) {
+  if (!playbackState.isPlaying || playbackState.isPaused) return;
+  
+  const adjustedDelay = (delay || 2000) / playbackState.speed;
+  
+  playbackState.timerId = setTimeout(() => {
+    playbackState.currentStep++;
+    executeCurrentStep();
+  }, adjustedDelay);
+}
+
+function renderPlaybackControls() {
+  removePlaybackControls();
+  
+  const controlsBar = document.createElement('div');
+  controlsBar.id = 'playback-controls';
+  controlsBar.className = 'playback-controls';
+  controlsBar.innerHTML = `
+    <div class="playback-controls-inner">
+      <button class="playback-btn" id="playback-pause-btn" onclick="togglePlaybackPause()" title="Pause/Resume">
+        <svg class="pause-icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+          <rect x="6" y="4" width="4" height="16" rx="1"/>
+          <rect x="14" y="4" width="4" height="16" rx="1"/>
+        </svg>
+        <svg class="play-icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" style="display:none">
+          <path d="M8 5v14l11-7z"/>
+        </svg>
+      </button>
+      <button class="playback-btn" onclick="stopPlayback()" title="Stop">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+          <rect x="6" y="6" width="12" height="12" rx="1"/>
+        </svg>
+      </button>
+      <div class="playback-divider"></div>
+      <div class="playback-progress">
+        <span id="playback-step-current">1</span>
+        <span class="playback-step-separator">/</span>
+        <span id="playback-step-total">1</span>
+      </div>
+      <div class="playback-divider"></div>
+      <div class="playback-speed">
+        <button class="speed-btn${playbackState.speed === 0.5 ? ' active' : ''}" onclick="setPlaybackSpeed(0.5)">0.5x</button>
+        <button class="speed-btn${playbackState.speed === 1 ? ' active' : ''}" onclick="setPlaybackSpeed(1)">1x</button>
+        <button class="speed-btn${playbackState.speed === 2 ? ' active' : ''}" onclick="setPlaybackSpeed(2)">2x</button>
+      </div>
+    </div>
+  `;
+  
+  document.body.appendChild(controlsBar);
+}
+
+function removePlaybackControls() {
+  const existing = document.getElementById('playback-controls');
+  if (existing) existing.remove();
+}
+
+function updatePlaybackUI() {
+  const pauseBtn = document.getElementById('playback-pause-btn');
+  if (pauseBtn) {
+    const pauseIcon = pauseBtn.querySelector('.pause-icon');
+    const playIcon = pauseBtn.querySelector('.play-icon');
+    if (pauseIcon && playIcon) {
+      pauseIcon.style.display = playbackState.isPaused ? 'none' : '';
+      playIcon.style.display = playbackState.isPaused ? '' : 'none';
+    }
+  }
+
+  const currentEl = document.getElementById('playback-step-current');
+  const totalEl = document.getElementById('playback-step-total');
+  if (currentEl) currentEl.textContent = playbackState.currentStep + 1;
+  if (totalEl) totalEl.textContent = playbackState.steps.length;
+
+  document.querySelectorAll('.playback-speed .speed-btn').forEach(btn => {
+    const speed = parseFloat(btn.textContent);
+    btn.classList.toggle('active', speed === playbackState.speed);
+  });
+
+  document.querySelectorAll('.flow-item').forEach(item => {
+    const flowId = item.dataset.flowId;
+    const isPlayingThis = playbackState.isPlaying && flowId === playbackState.flowId;
+    item.classList.toggle('playing', isPlayingThis);
+  });
+
+  updateFlowPlayButtons();
+}
+
+function updateFlowPlayButtons() {
+  document.querySelectorAll('.flow-play-btn').forEach(btn => {
+    const flowId = btn.dataset.flowId;
+    const isPlayingThis = playbackState.isPlaying && flowId === playbackState.flowId;
+    const isPausedThis = isPlayingThis && playbackState.isPaused;
+    
+    btn.classList.toggle('playing', isPlayingThis && !isPausedThis);
+    btn.classList.toggle('paused', isPausedThis);
+    
+    if (isPlayingThis && !isPausedThis) {
+      btn.title = 'Pause demo';
+      btn.onclick = function(e) { e.stopPropagation(); pausePlayback(); };
+      btn.innerHTML = `<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+        <rect x="6" y="4" width="4" height="16" rx="1"/>
+        <rect x="14" y="4" width="4" height="16" rx="1"/>
+      </svg>`;
+    } else if (isPausedThis) {
+      btn.title = 'Resume demo';
+      btn.onclick = function(e) { e.stopPropagation(); resumePlayback(); };
+      btn.innerHTML = `<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+        <path d="M8 5v14l11-7z"/>
+      </svg>`;
+    } else {
+      btn.title = 'Play demo';
+      btn.onclick = function(e) { e.stopPropagation(); startFlowPlayback(flowId); };
+      btn.innerHTML = `<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+        <path d="M8 5v14l11-7z"/>
+      </svg>`;
+    }
+  });
+  
+  }
+
+function restartFlowPlayback(flowId) {
+  stopPlayback();
+  startFlowPlayback(flowId);
+}
+
+function resetFlowToInitial(flowId) {
+  stopPlayback();
+  switchToFlow(flowId);
+}
+
+function togglePlaybackPause() {
+  if (playbackState.isPaused) {
+    resumePlayback();
+  } else {
+    pausePlayback();
+  }
+}
+
+function hasPlaybackSteps(flowId) {
+  const flow = typeof getFlowById === 'function' ? getFlowById(flowId) : null;
+  return flow && flow.data && flow.data.playbackSteps && flow.data.playbackSteps.length > 0;
 }

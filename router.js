@@ -7,11 +7,20 @@
    ============================================================ */
 
 const ROUTE_CONFIG = {
-  'command-center.html':      { nav: 'command-center',    title: 'Command Center — Cortex AI',      highlight: '',           mode: 'initial' },
+  'command-center.html':      { nav: 'command-center',    title: 'Command Center — Cortex AI',       highlight: '',           mode: 'initial' },
   'unified-analytics.html':   { nav: 'unified-analytics', title: 'Unified Analytics — Cortex AI',    highlight: 'analytics',  mode: 'completed' },
   'publisher-campaign.html':  { nav: 'publisher',         title: 'Publisher Campaign — Cortex AI',   highlight: 'campaign',   mode: 'completed' },
+  'publisher-calendar.html':  { nav: 'publisher',         title: 'Publisher Calendar — Cortex AI',   highlight: 'rescheduled', mode: 'completed' },
   'content-collection.html':  { nav: 'content',           title: 'Content Collection — Cortex AI',   highlight: 'collection', mode: 'completed' },
+  'content-feed.html':        { nav: 'content',           title: 'Content Feed — Cortex AI',         highlight: 'content',    mode: 'initial' },
+  'community-inbox.html':     { nav: 'community',         title: 'Community Inbox — Cortex AI',      highlight: 'response',   mode: 'completed' },
+  'care-inbox.html':          { nav: 'care',              title: 'Care Inbox — Cortex AI',           highlight: 'queues',     mode: 'completed' },
+  'bot-overview.html':        { nav: 'bot',               title: 'Bot Overview — Cortex AI',         highlight: 'intents',    mode: 'completed' },
+  'reviews-moderate.html':    { nav: 'rating-reviews',    title: 'Reviews Moderation — Cortex AI',   highlight: 'positive',   mode: 'initial' },
+  'ugc-albums.html':          { nav: 'ugc',               title: 'UGC Albums — Cortex AI',           highlight: '',           mode: 'initial' },
+  'voc-survey-detail.html':   { nav: 'voc',               title: 'VoC Survey — Cortex AI',           highlight: 'themes',     mode: 'completed' },
   'settings-listening.html':  { nav: 'settings',          title: 'Settings / Listening — Cortex AI', highlight: 'listening',  mode: 'completed' },
+  'settings-users.html':      { nav: 'settings',          title: 'Settings / Users — Cortex AI',     highlight: 'users',      mode: 'initial' },
 };
 
 const PAGE_INIT = {};

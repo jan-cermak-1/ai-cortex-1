@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VoC Survey — Cortex AI</title>
+  <script>if(!document.getElementById('flow-switcher-root')){location.href='index.html#'+location.pathname.split('/').pop();}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="soul-tokens.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="app" id="app">
+  <div class="screen active">
+    <div class="main-content">
+      <div class="module-placeholder">
+        <div class="module-placeholder-icon">
+          <svg viewBox="0 0 36 36" fill="currentColor" width="48" height="48"><path fill-rule="evenodd" clip-rule="evenodd" d="M18 4C10.268 4 4 10.268 4 18C4 25.732 10.268 32 18 32C25.732 32 32 25.732 32 18C32 10.268 25.732 4 18 4ZM2 18C2 9.16344 9.16344 2 18 2C26.8366 2 34 9.16344 34 18C34 26.8366 26.8366 34 18 34C9.16344 34 2 26.8366 2 18ZM12 15C12 13.3431 13.3431 12 15 12H21C22.6569 12 24 13.3431 24 15V21C24 22.6569 22.6569 24 21 24H15C13.3431 24 12 22.6569 12 21V15ZM15 14C14.4477 14 14 14.4477 14 15V21C14 21.5523 14.4477 22 15 22H21C21.5523 22 22 21.5523 22 21V15C22 14.4477 21.5523 14 21 14H15Z"/></svg>
+        </div>
+        <h1 class="module-placeholder-title">Voice of Customer</h1>
+        <p class="module-placeholder-description">Survey management with NPS, CSAT tracking and customer feedback analysis across all touchpoints.</p>
+        <div class="module-placeholder-meta">
+          <span class="module-placeholder-tag">Cross-platform</span>
+          <span class="module-placeholder-tag">NPS</span>
+          <span class="module-placeholder-tag">Surveys</span>
+        </div>
+      </div>
+    </div>
+    <div id="cortex-slot"></div>
+  </div>
+</div>
+
+<script src="components.js"></script>
+<script src="cortex-panel.js"></script>
+<script src="app.js"></script>
+<script>initCortexPanel();</script>
+</body>
+</html>

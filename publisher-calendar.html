@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Publisher Calendar — Cortex AI</title>
+  <script>if(!document.getElementById('flow-switcher-root')){location.href='index.html#'+location.pathname.split('/').pop();}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="soul-tokens.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="app" id="app">
+  <div class="screen active">
+    <div class="main-content">
+      <div class="module-placeholder">
+        <div class="module-placeholder-icon">
+          <svg viewBox="0 0 36 36" fill="currentColor" width="48" height="48"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2V6H24V2H26V6H29C31.2091 6 33 7.79086 33 10V29C33 31.2091 31.2091 33 29 33H7C4.79086 33 3 31.2091 3 29V10C3 7.79086 4.79086 6 7 6H10V2H12ZM24 8H12V10H10V8H7C5.89543 8 5 8.89543 5 10V14H31V10C31 8.89543 30.1046 8 29 8H26V10H24V8ZM31 16H5V29C5 30.1046 5.89543 31 7 31H29C30.1046 31 31 30.1046 31 29V16Z"/></svg>
+        </div>
+        <h1 class="module-placeholder-title">Publisher Calendar</h1>
+        <p class="module-placeholder-description">Visual content calendar for scheduling and managing posts across all social channels.</p>
+        <div class="module-placeholder-meta">
+          <span class="module-placeholder-tag">Marketing</span>
+          <span class="module-placeholder-tag">Calendar</span>
+          <span class="module-placeholder-tag">Scheduling</span>
+        </div>
+      </div>
+    </div>
+    <div id="cortex-slot"></div>
+  </div>
+</div>
+
+<script src="components.js"></script>
+<script src="cortex-panel.js"></script>
+<script src="app.js"></script>
+<script>initCortexPanel();</script>
+</body>
+</html>

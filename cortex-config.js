@@ -58,7 +58,16 @@ const CORTEX_UI_CONFIG = {
     'command-center.html': 'Command center',
     'unified-analytics.html': 'Unified analytics',
     'publisher-campaign.html': 'Publisher campaign',
+    'publisher-calendar.html': 'Publisher calendar',
     'content-collection.html': 'Content collection',
-    'settings-listening.html': 'Settings / Listening'
+    'content-feed.html': 'Content feed',
+    'community-inbox.html': 'Community inbox',
+    'care-inbox.html': 'Care inbox',
+    'bot-overview.html': 'Bot overview',
+    'reviews-moderate.html': 'Reviews moderation',
+    'ugc-albums.html': 'UGC albums',
+    'voc-survey-detail.html': 'VoC survey',
+    'settings-listening.html': 'Settings / Listening',
+    'settings-users.html': 'Settings / Users'
   }
 };
