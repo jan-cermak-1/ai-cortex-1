@@ -869,16 +869,17 @@ input, select, textarea {
   cursor: default;
 }
 
+/* SOUL Secondary (Light): layer-1/2, border-primary */
 .btn-light {
-  background: linear-gradient(to bottom, var(--color-layer-level-1), var(--color-layer-level-2));
-  border: 1px solid var(--color-gray-300);
+  background: var(--color-layer-level-1);
+  border: 1px solid var(--color-border-primary);
   color: var(--color-on-layer-primary);
   font-size: var(--text-button-size);
   font-weight: var(--text-button-weight);
 }
 
 .btn-light:hover {
-  background: linear-gradient(to bottom, var(--color-gray-100), var(--color-gray-200));
+  background: var(--color-layer-level-0);
 }
 
 .btn-invisible {
@@ -1472,7 +1473,7 @@ input, select, textarea {
 .decision-completed {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: var(--space-1);
 }
 
 .decision-completed .decision-header {
@@ -1482,17 +1483,20 @@ input, select, textarea {
   color: var(--color-on-layer-secondary);
 }
 
+/* Decision item — 6 states per Figma Cortex-Q1-Q2 (8057:13354, 13291, 13485, 13372, 13509, 13515) */
 .decision-item {
   display: flex;
   align-items: center;
   gap: var(--space-2);
   min-height: 28px;
   cursor: pointer;
-  transition: opacity 0.15s;
+  color: var(--color-link-secondary);
+  transition: opacity var(--motion-duration-quick-1) var(--motion-easing-ease),
+              background var(--motion-duration-quick-1) var(--motion-easing-ease);
 }
 
 .decision-item:hover {
-  opacity: 0.7;
+  opacity: 1;
 }
 
 .decision-item .check-icon {
@@ -1503,6 +1507,7 @@ input, select, textarea {
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  color: var(--color-on-layer-secondary);
 }
 
 .decision-item .check-icon img {
@@ -1512,15 +1517,24 @@ input, select, textarea {
   object-fit: contain;
 }
 
+/* 1. normal: text underlined, no remove button — Figma Cortex-Q1-Q2 (8057:13357) Link/Body/Medium */
 .decision-item .decision-label {
   font-size: 13px;
   font-weight: 400;
   line-height: 18px;
-  color: var(--color-on-layer-primary);
+  color: var(--color-link-secondary);
   text-decoration: underline;
-  text-decoration-thickness: 4%;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
   cursor: pointer;
   flex: 1;
+  min-width: 0;
+  transition: text-decoration var(--motion-duration-quick-1) var(--motion-easing-ease);
+}
+
+/* 2. hover / 5. visited hover: no underline, remove button visible */
+.decision-item:hover .decision-label {
+  text-decoration: none;
 }
 
 /* Removed item — stays in list, strikethrough, not clickable */
@@ -1537,31 +1551,47 @@ input, select, textarea {
   display: none;
 }
 
-/* Remove button — visible on hover, or when --show-remove for playback */
+/* Remove button — visible on hover (states 2, 3, 5, 6), or when --show-remove for playback */
 .decision-item-remove {
   opacity: 0;
   flex-shrink: 0;
-  width: 24px;
-  height: 24px;
-  padding: 0;
+  width: 30px;
+  min-width: 30px;
+  height: 30px;
+  max-height: 30px;
+  padding: var(--space-2);
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: var(--border-radius-medium);
+  background: var(--color-button-invisible);
   color: var(--color-on-layer-secondary);
-  transition: opacity 0.15s ease, background 0.15s ease;
+  border: none;
+  cursor: pointer;
+  transition: opacity var(--motion-duration-quick-1) var(--motion-easing-ease),
+              background var(--motion-duration-quick-1) var(--motion-easing-ease);
 }
 .decision-item:hover .decision-item-remove,
 .decision-item.decision-item--show-remove .decision-item-remove {
   opacity: 1;
 }
+/* 3. hover on bin / 6. visited hover on bin: remove button has light gray background */
 .decision-item-remove:hover {
-  background: var(--color-layer-hover);
-  color: var(--color-status-error);
+  background: var(--color-button-invisible-hover);
+  color: var(--color-on-layer-secondary);
 }
-.decision-item-remove:focus {
+.decision-item-remove:focus,
+.decision-item-remove:focus-visible {
   outline: var(--focus-ring-width) solid var(--focus-ring-color);
   outline-offset: var(--focus-ring-offset);
+}
+
+.decision-item-remove img {
+  width: 14px;
+  height: 14px;
+  display: block;
+  object-fit: contain;
+  color: inherit;
 }
 
 /* Cortex Chat Input Area */
@@ -1583,6 +1613,17 @@ input, select, textarea {
   flex-direction: column;
   gap: var(--space-2);
   position: relative;
+}
+
+/* Input body — chips + textarea inline, no separating line */
+.cortex-input-body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  flex: 1;
+  min-height: 44px;
 }
 
 /* Figma: Context Container — 28px bar at top of input box */
@@ -4189,8 +4230,8 @@ input, select, textarea {
    SETTINGS SCREEN
    ============================================================ */
 .settings-nav {
-  width: 200px;
-  min-width: 200px;
+  width: 240px;
+  min-width: 240px;
   background: var(--color-layer-level-1);
   border-right: 1px solid var(--color-border-primary);
   padding: var(--space-5) var(--space-4);
@@ -4199,20 +4240,58 @@ input, select, textarea {
   gap: var(--space-1);
 }
 
+/* SOUL: headline-5 for section labels */
 .settings-nav-title {
-  font-size: 10px;
-  font-weight: 700;
+  font-size: var(--text-headline-5-size);
+  font-weight: var(--text-headline-5-weight);
+  line-height: var(--text-headline-5-line-height);
+  letter-spacing: var(--text-headline-5-letter-spacing);
   text-transform: uppercase;
-  letter-spacing: 0.01px;
   color: var(--color-on-layer-secondary);
   padding: var(--space-3) var(--space-4);
   margin-bottom: var(--space-2);
 }
 
+/* Figma: Search in settings */
+.settings-nav-search-wrap {
+  position: relative;
+  margin-bottom: var(--space-2);
+}
+
+.settings-nav-search-icon {
+  position: absolute;
+  left: var(--space-3);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-on-layer-tertiary);
+  pointer-events: none;
+}
+
+.settings-nav-search-input {
+  width: 100%;
+  height: 36px;
+  padding: 0 var(--space-4) 0 36px;
+  color: var(--color-on-layer-primary);
+  background: var(--color-layer-level-0);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--border-radius-medium);
+  transition: border-color var(--motion-duration-quick-1) var(--motion-easing-ease);
+}
+
+.settings-nav-search-input::placeholder {
+  color: var(--color-on-layer-tertiary);
+}
+
+.settings-nav-search-input:focus {
+  outline: none;
+  border-color: var(--color-border-focus-form);
+}
+
+/* SOUL: body-medium for nav items */
 .settings-nav-item {
   padding: var(--space-3) var(--space-4);
-  font-size: 13px;
-  line-height: 18px;
+  font-size: var(--text-body-medium-size);
+  line-height: var(--text-body-medium-line-height);
   border-radius: var(--border-radius-medium);
   cursor: pointer;
   color: var(--color-on-layer-primary);
@@ -4223,8 +4302,9 @@ input, select, textarea {
 }
 
 .settings-nav-item.active {
-  font-weight: 600;
+  font-weight: var(--text-body-medium-bold-weight);
   background: var(--color-layer-level-0);
+  color: var(--color-on-layer-interactive);
 }
 
 .settings-nav-divider {
@@ -4887,23 +4967,29 @@ input, select, textarea {
   background: var(--color-layer-level-0);
 }
 
-/* Chat input field (real input replacing static placeholder) */
+/* Chat input field (real input, inline with file chips in cortex-input-body) */
 .cortex-input-field {
-  width: 100%;
+  flex: 1 1 120px;
+  min-width: 120px;
   border: none;
   outline: none;
   background: transparent;
-  padding: var(--space-4);
+  padding: var(--space-2) 0;
   font-size: 13px;
   line-height: 18px;
   color: var(--color-on-layer-primary);
-  flex: 1 1 auto;
-  min-height: 36px;
+  min-height: 24px;
   resize: none;
   overflow-y: auto;
   max-height: 300px;
   font-family: inherit;
   box-sizing: border-box;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.cortex-input-field::-webkit-scrollbar {
+  display: none;
 }
 
 .cortex-input-field::placeholder {
@@ -5464,32 +5550,90 @@ input, select, textarea {
 }
 
 /* ============================================================
-   FILE ATTACHMENTS IN CORTEX INPUT
+   FILE ATTACHMENTS IN CORTEX INPUT (SOUL Badge style, inline in text area)
    ============================================================ */
 
 .file-attachments {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--spacing-8);
-  padding: var(--spacing-8) var(--spacing-12);
-  border-bottom: 1px solid var(--color-border-primary);
+  align-items: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
 }
 
+.file-attachments:empty {
+  display: none;
+}
+
+/* SOUL Badge — Figma Soul Product Library, Status Success: white bg + colored border + colored text */
 .file-attachment-chip {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: var(--spacing-6);
-  padding: var(--spacing-4) var(--spacing-8);
+  gap: var(--space-1);
+  padding: var(--space-1) var(--space-2) var(--space-1) var(--space-1);
   background: var(--color-layer-level-1);
-  border-radius: var(--border-radius-small);
-  font-size: var(--text-body-small-size);
-  line-height: var(--text-body-small-line-height);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--border-radius-medium);
+  font-size: var(--text-badge-size);
+  font-weight: var(--text-badge-weight);
+  line-height: var(--text-badge-line-height);
+  letter-spacing: var(--text-badge-letter-spacing);
+  min-height: 18px;
   max-width: 200px;
+  color: var(--color-on-layer-primary);
+}
+
+/* XLS: SOUL Badge Success Size L — Figma 9914:76320 (light green bg, green border, larger) */
+.file-attachment-chip--xlsx {
+  padding: var(--space-2) var(--space-3) var(--space-2) var(--space-2);
+  gap: var(--space-2);
+  min-height: 24px;
+  max-width: 240px;
+  background: var(--color-layer-success);
+  border: 1px solid var(--color-border-success-emphasis);
+  border-radius: var(--border-radius-large);
+  color: var(--color-on-layer-primary);
+}
+
+.file-attachment-chip--xlsx .file-icon {
+  color: var(--color-status-success-text);
+}
+
+.file-attachment-chip--xlsx .file-icon svg {
+  fill: currentColor;
+  width: 14px !important;
+  height: 14px !important;
+}
+
+.file-attachment-chip--xlsx .file-name {
+  color: inherit;
+  font-size: var(--text-badge-size);
+}
+
+.file-attachment-chip--xlsx .file-remove {
+  width: 18px;
+  height: 18px;
+  color: var(--color-on-layer-secondary);
+}
+
+.file-attachment-chip--xlsx .file-remove svg {
+  width: 14px !important;
+  height: 14px !important;
+}
+
+.file-attachment-chip--xlsx .file-remove:hover {
+  background: var(--color-layer-hover);
+  color: var(--color-on-layer-primary);
 }
 
 .file-attachment-chip .file-icon {
   display: flex;
   flex-shrink: 0;
+}
+
+.file-attachment-chip .file-icon svg {
+  width: 12px !important;
+  height: 12px !important;
 }
 
 .file-attachment-chip .file-name {
@@ -5501,17 +5645,12 @@ input, select, textarea {
   min-width: 0;
 }
 
-.file-attachment-chip .file-size {
-  color: var(--color-on-layer-secondary);
-  flex-shrink: 0;
-}
-
 .file-attachment-chip .file-remove {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   padding: 0;
   border: none;
   background: transparent;
@@ -5519,19 +5658,893 @@ input, select, textarea {
   cursor: pointer;
   border-radius: var(--border-radius-small);
   flex-shrink: 0;
-  transition: all var(--motion-duration-fast) var(--motion-easing-ease);
+  transition: color var(--motion-duration-quick-1) var(--motion-easing-ease),
+              background var(--motion-duration-quick-1) var(--motion-easing-ease);
 }
 
 .file-attachment-chip .file-remove:hover {
-  background: var(--color-layer-level-2);
+  background: var(--color-layer-hover);
   color: var(--color-on-layer-primary);
 }
 
+.file-attachment-chip .file-remove:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+}
+
+/* Inline with text, same line as input area (SOUL badge style) */
 .chat-message-bubble .attached-files {
-  display: block;
-  margin-top: var(--spacing-4);
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  margin-right: var(--space-2);
+  vertical-align: middle;
+}
+
+/* Chat decision — same as Labubu (uses .decision-item, wrapper for margin) */
+.chat-decision-wrapper {
+  margin-top: var(--space-4);
+}
+
+.chat-message-bubble .role-picker-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-8);
+  margin-top: var(--spacing-12);
+}
+
+.chat-message-bubble .role-option {
+  padding: var(--spacing-6) var(--spacing-12);
   font-size: var(--text-body-small-size);
+  font-weight: 500;
+  color: var(--color-on-button-primary);
+  background: var(--color-button-primary);
+  border: none;
+  border-radius: var(--border-radius-small);
+  cursor: pointer;
+  transition: background var(--motion-duration-fast) var(--motion-easing-ease);
+}
+
+.chat-message-bubble .role-option:hover {
+  background: var(--color-button-primary-hover);
+}
+
+/* ============================================================
+   FINDER MODAL (macOS-style file picker)
+   ============================================================ */
+
+.finder-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.finder-modal.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.finder-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.finder-modal-window {
+  position: relative;
+  width: 640px;
+  max-height: 480px;
+  background: #f5f5f7;
+  border-radius: 10px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.finder-titlebar {
+  height: 38px;
+  display: flex;
+  align-items: center;
+  padding-left: 12px;
+  background: linear-gradient(180deg, #e8e8ed 0%, #d1d1d6 100%);
+  border-bottom: 1px solid #b8b8bd;
+}
+
+.finder-traffic-lights {
+  display: flex;
+  gap: 8px;
+}
+
+.finder-btn {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.finder-btn-close { background: #ff5f57; }
+.finder-btn-minimize { background: #febc2e; }
+.finder-btn-maximize { background: #28c840; }
+
+.finder-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: #f5f5f7;
+  border-bottom: 1px solid #d1d1d6;
+}
+
+.finder-nav-btn {
+  width: 28px;
+  height: 24px;
+  padding: 0;
+  border: 1px solid #b8b8bd;
+  border-radius: 4px;
+  background: #fff;
+  color: #505057;
+  font-size: 12px;
+  cursor: default;
+}
+
+.finder-nav-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.finder-toolbar-title {
+  flex: 1;
+  font-size: 13px;
+  font-weight: 500;
+  color: #1d1d1f;
+  text-align: center;
+}
+
+.finder-view-buttons {
+  display: flex;
+  gap: 2px;
+}
+
+.finder-view-btn {
+  width: 28px;
+  height: 24px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: transparent;
+  color: #505057;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.finder-view-btn:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.finder-view-btn.active {
+  background: rgba(0, 0, 0, 0.08);
+  color: #1d1d1f;
+}
+
+.finder-search-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.finder-search-icon {
+  position: absolute;
+  left: 8px;
+  color: #86868b;
+  pointer-events: none;
+}
+
+.finder-search {
+  width: 140px;
+  height: 24px;
+  padding: 0 8px 0 24px;
+  border: 1px solid #d1d1d6;
+  border-radius: 6px;
+  background: #fff;
+  font-size: 12px;
+  color: #1d1d1f;
+}
+
+.finder-search::placeholder {
+  color: #86868b;
+}
+
+.finder-body {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+.finder-sidebar {
+  width: 180px;
+  padding: 12px 0;
+  border-right: 1px solid #d1d1d6;
+  background: #f5f5f7;
+  flex-shrink: 0;
+}
+
+.finder-sidebar-section {
+  margin-bottom: 16px;
+}
+
+.finder-sidebar-section:last-child {
+  margin-bottom: 0;
+}
+
+.finder-sidebar-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #86868b;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  padding: 0 12px;
+  margin-bottom: 4px;
+}
+
+.finder-sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  font-size: 13px;
+  color: #1d1d1f;
+  cursor: default;
+}
+
+.finder-sidebar-item:hover {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+.finder-sidebar-item.active {
+  background: rgba(0, 113, 227, 0.15);
+  color: #0071e3;
+}
+
+.finder-sidebar-icon {
+  font-size: 14px;
+  width: 18px;
+  text-align: center;
   opacity: 0.8;
+}
+
+.finder-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: #fff;
+}
+
+.finder-list-header {
+  display: flex;
+  align-items: center;
+  padding: 6px 12px;
+  background: #f5f5f7;
+  border-bottom: 1px solid #d1d1d6;
+  font-size: 12px;
+  font-weight: 600;
+  color: #86868b;
+}
+
+.finder-col {
+  flex-shrink: 0;
+}
+
+.finder-col-name { flex: 1; min-width: 0; }
+.finder-col-date { width: 120px; }
+.finder-col-size { width: 70px; }
+.finder-col-kind { width: 130px; }
+
+.finder-list-body {
+  flex: 1;
+  overflow: auto;
+}
+
+.finder-file-row {
+  display: flex;
+  align-items: center;
+  padding: 6px 12px;
+  font-size: 13px;
+  color: #1d1d1f;
+  cursor: pointer;
+  border-bottom: 1px solid transparent;
+}
+
+.finder-file-row:hover {
+  background: rgba(0, 113, 227, 0.08);
+}
+
+.finder-file-row .finder-col-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.finder-file-icon-small {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.finder-file-row .finder-file-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.finder-file-row .finder-col-date,
+.finder-file-row .finder-col-size,
+.finder-file-row .finder-col-kind {
+  color: #86868b;
+  font-size: 12px;
+}
+
+/* ============================================================
+   USERS TABLE (Settings / Users)
+   Based on Emplifi Users management screenshot
+   ============================================================ */
+
+.settings-users-layout {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.users-main-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  background: var(--color-layer-level-0);
+}
+
+/* Figma 736:4942 Header/settings users — 60px, px-36 */
+.users-page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+  padding: 0 var(--space-8);
+  background: var(--color-layer-level-1);
+  border-bottom: 1px solid var(--color-gray-300);
+}
+
+.users-page-header-left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.users-page-headline {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* SOUL: headline-2, on-layer-primary */
+.users-page-title {
+  color: var(--color-on-layer-primary);
+  margin: 0;
+}
+
+/* SOUL: Icon button, tertiary emphasis */
+.users-page-help-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--color-on-layer-tertiary);
+  cursor: pointer;
+  border-radius: var(--border-radius-medium);
+  transition: color var(--motion-duration-quick-1) var(--motion-easing-ease);
+}
+
+.users-page-help-btn:hover {
+  color: var(--color-on-layer-secondary);
+}
+
+.users-page-help-btn img {
+  display: block;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+/* SOUL: vertical divider */
+.users-page-header-divider {
+  width: 1px;
+  height: 18px;
+  background: var(--color-gray-300);
+}
+
+/* SOUL Link: on-layer-interactive, underlined */
+.users-feedback-link {
+  color: var(--color-on-layer-interactive);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+.users-feedback-link:hover {
+  color: var(--color-button-primary-hover);
+}
+
+.users-page-header-right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* Figma: Search 210px */
+.users-search-wrap {
+  position: relative;
+  width: 210px;
+  flex-shrink: 0;
+}
+
+/* Figma: Spacer 18px + vertical divider between Filter and Export */
+.users-header-divider {
+  width: 1px;
+  height: 18px;
+  margin-left: 12px; /* 6px gap + 12px = 18px spacer */
+  background: var(--color-gray-300);
+}
+
+/* SOUL: Filter/Export = btn-invisible, button-label (13px/600) */
+.users-filter-btn,
+.users-export-btn {
+  /* button-label from SOUL */
+}
+
+/* SOUL: Add user = btn-primary, button-label */
+.users-add-btn {
+  /* button-label from SOUL */
+}
+
+/* SOUL: Search icon, on-layer-tertiary (SVG uses currentColor) */
+.users-search-icon {
+  position: absolute;
+  left: var(--space-3);
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  opacity: 0.7;
+  color: var(--color-on-layer-tertiary);
+}
+
+/* SOUL: Button icons inherit from btn */
+.users-page-header-right .btn img {
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+
+/* SOUL TextInput: layer-1 bg, border-primary */
+.users-search-input {
+  width: 100%;
+  height: 36px;
+  padding: 0 var(--space-4) 0 36px;
+  color: var(--color-on-layer-primary);
+  background: var(--color-layer-level-1);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--border-radius-medium);
+  transition: border-color var(--motion-duration-quick-1) var(--motion-easing-ease);
+}
+
+.users-search-input::placeholder {
+  color: var(--color-on-layer-tertiary);
+}
+
+.users-search-input:focus {
+  outline: none;
+  border-color: var(--color-border-focus-form);
+  box-shadow: 0 0 0 1px var(--color-border-focus-form);
+}
+
+/* SOUL: focus ring for keyboard nav */
+.users-search-input:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+}
+
+.users-page-header-right .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* Figma: Filter active indicator (X) */
+.users-filter-active-indicator {
+  display: none;
+  margin-left: var(--space-1);
+  font-size: 14px;
+  color: var(--color-on-layer-secondary);
+}
+
+.users-filter-btn.has-active .users-filter-active-indicator {
+  display: inline;
+}
+
+/* Figma Users phase2: ItemCount toolbar above table */
+.users-toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  background: var(--color-layer-level-1);
+  border-bottom: 1px solid var(--color-border-primary);
+}
+
+.users-toolbar-count {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  cursor: pointer;
+}
+
+.users-toolbar-count-text {
+  color: var(--color-on-layer-secondary);
+}
+
+.users-toolbar-caret {
+  color: var(--color-on-layer-tertiary);
+  padding: var(--space-1);
+}
+
+.users-toolbar-caret:hover {
+  color: var(--color-on-layer-primary);
+}
+
+.users-table-wrap {
+  flex: 1;
+  min-height: 300px;
+  overflow: auto;
+  background: var(--color-layer-level-0);
+  padding: var(--space-6);
+}
+
+/* SOUL DataTable: body-medium typography, 48px row height (Figma Users phase2) */
+.users-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-body-medium-size);
+  line-height: var(--text-body-medium-line-height);
+}
+
+/* SOUL DataTable: 60px row height per Figma design + rounded corners + shadow */
+.users-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: var(--border-radius-large);
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  font-size: var(--text-body-medium-size);
+  font-weight: var(--text-body-medium-weight);
+  line-height: var(--text-body-medium-line-height);
+  color: var(--color-on-layer-primary);
+}
+
+/* SOUL Table Header: 60px height, proper spacing from Figma */
+.users-table th {
+  text-align: left;
+  padding: var(--space-4);
+  background: var(--color-layer-level-1);
+  border-bottom: 1px solid var(--color-border-primary);
+  border-right: 1px solid var(--color-border-primary);
+  font-size: var(--text-body-small-size);
+  font-weight: var(--text-body-small-weight);
+  line-height: var(--text-body-small-line-height);
+  color: var(--color-on-layer-secondary);
+  height: 60px;
+  vertical-align: middle;
+}
+
+.users-table th:last-child {
+  border-right: none;
+}
+
+.users-table th:last-child {
+  border-right: none;
+}
+
+.users-table td {
+  padding: var(--space-4);
+  border-bottom: 1px solid var(--color-border-primary);
+  border-right: 1px solid var(--color-border-primary);
+  vertical-align: middle;
+  height: 60px;
+  font-size: var(--text-body-medium-size);
+  font-weight: var(--text-body-medium-weight);
+  line-height: var(--text-body-medium-line-height);
+}
+
+.users-table td:last-child {
+  border-right: none;
+}
+
+.users-table tbody tr {
+  background: var(--color-layer-level-1);
+}
+
+/* Figma: Zebra striping - alternating row colors */
+.users-table tbody tr:nth-child(odd) {
+  background: var(--color-layer-level-1);
+}
+
+.users-table tbody tr:nth-child(even) {
+  background: var(--color-layer-level-0);
+}
+
+/* SOUL Table: row hover + hover-border (product uses light blue for selected row) */
+.users-table tbody tr:hover {
+  background: #f0f8ff;
+  box-shadow: inset 0 0 0 1px transparent;
+}
+
+.users-table tbody tr.user-row-selected {
+  background: #e8f2ff;
+  box-shadow: inset 0 0 0 1px #b8d9ff;
+}
+
+.users-col-checkbox {
+  width: 48px;
+  padding: var(--space-4);
+}
+
+/* SOUL Checkbox: 18×18, border-primary, focus-form, checked = button-primary */
+.users-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  min-height: 18px;
+  margin: 0;
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--border-radius-medium);
+  background: var(--color-layer-level-1);
+  cursor: pointer;
+  transition: border-color var(--motion-duration-quick-1) var(--motion-easing-ease),
+              background var(--motion-duration-quick-1) var(--motion-easing-ease);
+}
+
+.users-checkbox:hover {
+  border-color: var(--color-on-layer-secondary);
+}
+
+.users-checkbox:focus {
+  outline: none;
+}
+
+.users-checkbox:focus-visible {
+  border-color: var(--color-border-focus-form);
+  box-shadow: 0 0 0 1px var(--color-border-focus-form);
+}
+
+.users-checkbox:checked {
+  background: var(--color-button-primary);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' d='M3 8l3 3 7-7'/%3E%3C/svg%3E");
+  background-size: 12px 12px;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-color: var(--color-button-primary);
+}
+
+/* Indeterminate checkbox style for "select all" header */
+.users-checkbox:indeterminate {
+  background: var(--color-layer-level-1);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Crect x='4' y='8' width='10' height='2' rx='1' fill='%2324242b'/%3E%3C/svg%3E");
+  background-size: 18px 18px;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-color: var(--color-border-default);
+}
+
+.users-col-user {
+  min-width: 300px;
+}
+
+/* SOUL Button: Sortable header button (invisible style) with underline */
+.users-th-sort {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0;
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  font-weight: var(--text-body-small-weight);
+  font-size: var(--text-body-small-size);
+  line-height: var(--text-body-small-line-height);
+  letter-spacing: 0.005px;
+  color: var(--color-on-layer-secondary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color var(--motion-duration-quick-1) var(--motion-easing-ease);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+.users-th-sort:hover {
+  color: var(--color-on-layer-primary);
+}
+
+.users-th-sort-icon {
+  flex-shrink: 0;
+  opacity: 0.7;
+  width: 18px;
+  height: 18px;
+}
+
+.users-col-security {
+  width: 110px;
+}
+
+/* Figma Users phase2: Security badge — light grey, rounded */
+.users-security-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px var(--space-2);
+  font-size: var(--text-body-small-size);
+  font-weight: 600;
+  line-height: var(--text-body-small-line-height);
+  color: var(--color-on-layer-primary);
+  background: var(--color-layer-level-2);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--border-radius-medium);
+}
+
+.users-col-role {
+  width: 130px;
+}
+
+.users-col-groups {
+  width: 160px;
+  font-size: 11px;
+  line-height: 16px;
+  letter-spacing: 0.005px;
+}
+
+.users-col-security .users-th-sort-icon,
+.users-col-role .users-th-sort-icon,
+.users-col-groups .users-th-sort-icon {
+  display: none;
+}
+
+.users-row-actions-btn {
+  padding: var(--space-2);
+  color: var(--color-on-layer-tertiary);
+}
+
+.users-row-actions-btn:hover {
+  color: var(--color-on-layer-primary);
+}
+
+/* User cell: avatar + name + org */
+.users-cell-user {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.users-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--border-radius-full);
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+/* SOUL Avatar: badge-label typography per SOUL system */
+.users-avatar-initials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-badge-size);
+  font-weight: var(--text-badge-weight);
+  line-height: var(--text-badge-line-height);
+}
+
+.users-avatar-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.users-cell-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.users-cell-name {
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--color-on-layer-primary);
+}
+
+.users-cell-org {
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--color-on-layer-tertiary);
+}
+
+.users-cell-email {
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--color-on-layer-secondary);
+}
+
+/* Groups cell: pills + chevron */
+.users-groups-cell {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.users-groups-pills {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+/* Figma Users phase2: Group badge — light grey, rounded, matches SOUL Badge */
+.users-group-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px var(--space-2);
+  font-size: var(--text-body-small-size);
+  font-weight: 600;
+  line-height: var(--text-body-small-line-height);
+  color: var(--color-on-layer-primary);
+  background: var(--color-layer-level-2);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--border-radius-medium);
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.users-group-more {
+  font-size: var(--text-body-small-size);
+  font-weight: var(--text-body-small-bold-weight);
+  color: var(--color-on-layer-secondary);
+}
+
+.users-groups-chevron {
+  flex-shrink: 0;
+  color: var(--color-on-layer-tertiary);
+  cursor: pointer;
 }
 
 /* ============================================================
