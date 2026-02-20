@@ -1121,6 +1121,26 @@ The file `soul-tokens.css` defines SOUL design tokens as CSS custom properties:
 | Typography | Headline, body, helper, button, field, badge size scales |
 | Layout | `--platform-nav-width`, `--cortex-panel-width` |
 
+### HTML/CSS Implementation (this prototype)
+
+This project uses SOUL tokens via `soul-tokens.css` and typography utility classes in `styles.css`:
+
+| Typography Class | SOUL Style | Use |
+|------------------|------------|-----|
+| `.headline-2` | H2 | Section titles |
+| `.headline-3` | H3 | Subsection titles |
+| `.headline-5` | H5 | Small blocks, labels (uppercase) |
+| `.body-medium` | Body Medium | Default text |
+| `.body-small` | Body Small | Compact text |
+| `.helper-text` | Helper | Help text, captions |
+| `.button-label` | Button Label | Button text |
+| `.field-label` | Field Label | Form labels |
+| `.badge-label` | Badge Label | Badge text |
+
+**Spacing guidelines:** Use `--space-2` (6px) for associated elements, `--space-4` (12px) between elements, `--space-6` (24px) for form spacing. See `SOUL-USAGE.md` for component patterns.
+
+**Resources:** [soul.emplifi.io](https://soul.emplifi.io/) | [Storybook](https://soul.dev.emplifi.io/) | Skill: `.cursor/skills/soul-design-system/`
+
 ---
 
 ## 11. AI Layer: Cortex (Prototype Context)

@@ -20,6 +20,8 @@ const cortexState = {
   pageSpecificTabs: [],
   scrollPositions: {},
   visitedDecisions: {},
+  deletedDecisions: {},
+  deletedActivityItems: [],
   activeFlowId: 'labubu-trend'
 };
 
@@ -88,15 +90,23 @@ function renderActivityView() {
   const flowData = getCurrentFlowData();
   
   let activityHtml = '';
-  if (flowData && flowData.activityItems) {
-    activityHtml = flowData.activityItems.map(item => `
-              <div class="activity-item">
+  const items = flowData && flowData.activityItems ? [...flowData.activityItems] : [];
+  const deletedItems = cortexState.deletedActivityItems || [];
+  const merged = [...deletedItems, ...items];
+  
+  if (merged.length > 0) {
+    activityHtml = merged.map(item => {
+      const isDeleted = item.deleted;
+      const textClass = isDeleted ? 'activity-text activity-text--deleted' : 'activity-text';
+      return `
+              <div class="activity-item${isDeleted ? ' activity-item--deleted' : ''}">
                 <div class="activity-dot"></div>
                 <div class="activity-content">
-                  <div class="activity-text">${item.text}</div>
+                  <div class="${textClass}">${item.text}</div>
                   <div class="activity-time">${item.time}</div>
                 </div>
-              </div>`).join('');
+              </div>`;
+    }).join('');
   }
 
   return `
@@ -258,23 +268,30 @@ function renderIntelligenceCompleted(highlight) {
 
   const box = flowData.intelligenceBox;
   const visited = cortexState.visitedDecisions || {};
+  const deleted = cortexState.deletedDecisions || {};
   
   const decisionItems = flowData.decisionItems.map(function(item) {
-    var isCurrent = item.key === highlight;
+    var isDeleted = deleted[item.key];
+    var isCurrent = item.key === highlight && !isDeleted;
     var isVisited = visited[item.key];
-    var cls = 'decision-item' + (isVisited ? ' visited' : '');
-    var icon = isVisited ? 'assets/cortex/decision-done.svg' : 'assets/cortex/decision-pending.svg';
-    var onclick = isCurrent ? '' : ' onclick="visitDecisionItem(this, \'' + item.key + '\', \'' + item.href + '\')"';
-    return '<div class="' + cls + '" role="link" tabindex="0" aria-label="' + item.label + '"' + onclick + '>' +
+    var cls = 'decision-item' + (isVisited ? ' visited' : '') + (isDeleted ? ' decision-item--deleted' : '');
+    var icon = isDeleted ? 'assets/cortex/decision-done.svg' : (isVisited ? 'assets/cortex/decision-done.svg' : 'assets/cortex/decision-pending.svg');
+    var onclick = !isDeleted && !isCurrent ? ' onclick="visitDecisionItem(this, \'' + item.key + '\', \'' + item.href + '\')"' : '';
+    var removeOnclick = !isDeleted ? ' onclick="event.stopPropagation(); removeDecisionItem(\'' + item.key + '\')"' : '';
+    var labelClass = 'decision-label' + (isDeleted ? ' decision-label--deleted' : '');
+    return '<div class="' + cls + '" data-decision-key="' + item.key + '" role="' + (isDeleted ? 'presentation' : 'link') + '" tabindex="' + (isDeleted ? '-1' : '0') + '" aria-label="' + item.label + '"' + onclick + '>' +
       '<div class="check-icon"><img src="' + icon + '" alt=""></div>' +
-      '<span class="decision-label">' + item.label + '</span>' +
+      '<span class="' + labelClass + '">' + item.label + '</span>' +
+      (!isDeleted ? '<button class="decision-item-remove" type="button" title="Remove" aria-label="Remove ' + item.label + '"' + removeOnclick + '>' +
+        '<img src="assets/icons/soul/remove-delete-trash.svg" alt="" width="14" height="14">' +
+      '</button>' : '') +
     '</div>';
   }).join('\n              ');
 
   const descriptionHtml = (box.completedDescription || box.description).map(p => `<p>${p}</p>`).join('\n              ');
 
   return `
-          <div class="intelligence-box no-bg" id="intelligence-box-completed">
+          <div class="intelligence-box intelligence-box-completed" id="intelligence-box-completed">
             <div class="intelligence-box-header">
               <span class="intelligence-box-title">${box.title}</span>
               <div class="intelligence-box-close" role="button" tabindex="0" aria-label="Close intelligence box" onclick="closeIntelligenceBox(this)">
@@ -318,51 +335,92 @@ function renderChatMessage(msg) {
   el.dataset.msgId = msg.id;
 
   if (msg.type === 'ai') {
-    el.innerHTML = `
-      <div class="chat-message-avatar">
-        <img src="${CORTEX_UI_CONFIG.chat.aiAvatar}" alt="AI" width="16" height="16">
-      </div>
-      <div class="chat-message-bubble">${msg.content}</div>`;
+    el.innerHTML = `<div class="chat-message-bubble">${msg.content}</div>`;
   } else if (msg.type === 'user') {
-    el.innerHTML = `
-      <div class="chat-message-bubble">${msg.content}</div>`;
+    el.innerHTML = `<div class="chat-message-bubble">${msg.content}</div>`;
   } else if (msg.type === 'system') {
-    el.innerHTML = `
-      <div class="chat-message-system">${msg.content}</div>`;
+    el.innerHTML = `<div class="chat-message-system">${msg.content}</div>`;
   }
 
-  container.appendChild(el);
+  if (msg.type === 'user') {
+    container.querySelectorAll('.chat-message--user').forEach(function(m) { m.classList.remove('chat-message--latest-user'); });
+    el.classList.add('chat-message--latest-user');
+    container.appendChild(el);
+  } else if (msg.type === 'ai') {
+    container.appendChild(el);
+  } else {
+    container.appendChild(el);
+  }
 }
 
 function scrollChatToBottom() {
-  const messages = document.getElementById('cortex-messages');
-  if (messages) {
-    requestAnimationFrame(() => {
-      messages.scrollTop = messages.scrollHeight;
-    });
-  }
+  const chatMessages = document.getElementById('cortex-chat-messages');
+  if (!chatMessages) return;
+  const doScroll = () => {
+    const lastMsg = chatMessages.lastElementChild;
+    if (lastMsg) {
+      lastMsg.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    } else {
+      const scrollParent = chatMessages.closest('.cortex-messages') || chatMessages.parentElement;
+      if (scrollParent && scrollParent.scrollHeight > scrollParent.clientHeight) {
+        scrollParent.scrollTop = scrollParent.scrollHeight;
+      }
+    }
+  };
+  requestAnimationFrame(() => {
+    requestAnimationFrame(doScroll);
+  });
+  // Delayed scroll for async content (AI responses) - ensures scroll after render
+  setTimeout(doScroll, 100);
 }
 
 function renderAllChatMessages() {
   const container = document.getElementById('cortex-chat-messages');
   if (!container) return;
   container.innerHTML = '';
-  cortexState.messages.forEach(msg => renderChatMessage(msg));
+  var ordered = [];
+  for (var i = 0; i < cortexState.messages.length - 1; i += 2) {
+    ordered.push(cortexState.messages[i], cortexState.messages[i + 1]);
+  }
+  if (cortexState.messages.length % 2 === 1) {
+    ordered.push(cortexState.messages[cortexState.messages.length - 1]);
+  }
+  var latestUser = null;
+  for (var j = ordered.length - 1; j >= 0; j--) {
+    if (ordered[j].type === 'user') { latestUser = ordered[j]; break; }
+  }
+  ordered.forEach(function(msg) {
+    var el = document.createElement('div');
+    el.className = 'chat-message chat-message--' + msg.type;
+    el.dataset.msgId = msg.id;
+    if (msg.type === 'ai') {
+      el.innerHTML = '<div class="chat-message-bubble">' + msg.content + '</div>';
+    } else if (msg.type === 'user') {
+      el.innerHTML = '<div class="chat-message-bubble">' + msg.content + '</div>';
+    } else {
+      el.innerHTML = '<div class="chat-message-system">' + msg.content + '</div>';
+    }
+    if (msg.type === 'user' && msg === latestUser) {
+      el.classList.add('chat-message--latest-user');
+    }
+    container.appendChild(el);
+  });
   scrollChatToBottom();
 }
 
 function simulateAIResponse(userMessage) {
-  const responses = [
-    "I'll look into that for you. Based on the current data, here's what I found...",
-    "Great question! Let me analyze the trends and get back to you with insights.",
-    "I've processed your request. Here are the key findings from your data sources.",
-    "Based on your listening queries and analytics, here's a summary of the relevant data.",
-    "I can help with that. Let me pull up the relevant information from your connected profiles.",
+  var responses = [
+    '<h3 class="chat-response-heading">Summary</h3><p>Based on your listening queries and analytics, here\'s a summary of the relevant data.</p><h3 class="chat-response-heading">Key findings</h3><ul class="chat-response-list"><li>Engagement rate increased by 12% compared to last week</li><li>Top performing content: video posts with 3.2x average reach</li><li>Peak engagement times: Tuesday 9–11 AM, Thursday 2–4 PM</li></ul><h3 class="chat-response-heading">Recommendations</h3><p>Consider scheduling more video content during peak hours. The sentiment analysis shows positive trends in customer feedback.</p>',
+    '<h3 class="chat-response-heading">Analysis complete</h3><p>I\'ve processed your request. Here are the key findings from your data sources.</p><h3 class="chat-response-heading">Overview</h3><p>Your campaign performance shows strong alignment with Q2 objectives. The Labubu trend integration has driven notable engagement.</p><h3 class="chat-response-heading">Next steps</h3><ul class="chat-response-list"><li>Review the content calendar for optimal posting times</li><li>Monitor competitor activity in the trending space</li><li>Export the report for stakeholder review</li></ul>',
+    '<h3 class="chat-response-heading">Here\'s what I found</h3><p>I can help with that. Let me pull up the relevant information from your connected profiles.</p><p>Based on the current data, your social presence is performing well across platforms. The unified analytics show consistent growth in key metrics.</p><h3 class="chat-response-heading">Data breakdown</h3><p>Facebook and Instagram show the highest engagement. TikTok has the fastest growth rate. Consider reallocating budget based on these insights.</p><h3 class="chat-response-heading">Conclusion</h3><p>Great question! The trends suggest focusing on video content and community engagement for the next quarter.</p>',
+    '<h3 class="chat-response-heading">Results</h3><p>I\'ll look into that for you. Based on the current data, here\'s what I found.</p><h3 class="chat-response-heading">Performance metrics</h3><ul class="chat-response-list"><li>Reach: 1.2M impressions (up 18%)</li><li>Engagement: 4.2% average (above benchmark)</li><li>Sentiment: 78% positive across all channels</li></ul><h3 class="chat-response-heading">Insights</h3><p>The listening data indicates strong brand awareness. Competitor share of voice has decreased by 5% in your primary markets.</p><p>Would you like me to generate a detailed report or dive deeper into any specific metric?</p>',
+    '<h3 class="chat-response-heading">Overview</h3><p>Based on your listening queries and analytics, here\'s a summary of the relevant data.</p><h3 class="chat-response-heading">Trends</h3><p>Your content strategy is resonating well with the target audience. The Labubu trend integration has been particularly effective.</p><h3 class="chat-response-heading">Action items</h3><ul class="chat-response-list"><li>Schedule weekly listening report</li><li>Update campaign creative based on top performers</li><li>Share insights with the content team</li></ul><h3 class="chat-response-heading">Additional context</h3><p>Great question! Let me analyze the trends and get back to you with insights. The data suggests maintaining current posting frequency while testing new content formats.</p>'
   ];
-  const response = responses[Math.floor(Math.random() * responses.length)];
-  setTimeout(() => {
+  var response = responses[Math.floor(Math.random() * responses.length)];
+  setTimeout(function() {
+    removeThinkingPlaceholder();
     addChatMessage('ai', response);
-  }, 800 + Math.random() * 1200);
+  }, 1200 + Math.random() * 800);
 }
 
 // ============================================================
@@ -433,6 +491,8 @@ function switchToFlow(flowId) {
   cortexState.activeFlowId = flowId;
   cortexState.messages = [];
   cortexState.visitedDecisions = {};
+  cortexState.deletedDecisions = {};
+  cortexState.deletedActivityItems = [];
   cortexState.mode = flow.data ? flow.data.initialState.mode : 'empty';
 
   const root = document.getElementById('cortex-panel-root');
@@ -480,24 +540,30 @@ function onRouteChange(page, config) {
     return;
   }
 
-  if (config.mode === 'initial') {
+  if (config.mode === 'initial' && cortexState.mode !== 'completed') {
     cortexState.mode = 'initial';
     area.innerHTML = renderIntelligenceInitial();
-  } else {
+  } else if (config.mode === 'completed' || cortexState.mode === 'completed') {
     cortexState.mode = 'completed';
-    area.innerHTML = renderIntelligenceCompleted(config.highlight);
+    area.innerHTML = renderIntelligenceCompleted(config.highlight || '');
     initDecisionItemListeners();
   }
 
-  if (cortexState.messages.length > 0 && !playbackState.isPlaying) {
-    const title = CORTEX_UI_CONFIG.pageTitles[page] || page;
-    addChatMessage('system', `Navigated to ${title}`);
-  }
+  // Navigation no longer adds system messages to chat — user requested to avoid clutter when clicking through
 }
 
 // ============================================================
 //  INIT & INTERACTION
 // ============================================================
+
+function initChatScrollObserver() {
+  const chatMessages = document.getElementById('cortex-chat-messages');
+  if (!chatMessages) return;
+  const observer = new MutationObserver(function() {
+    scrollChatToBottom();
+  });
+  observer.observe(chatMessages, { childList: true });
+}
 
 function initCortexPanel() {
   const root = document.getElementById('cortex-panel-root');
@@ -506,6 +572,7 @@ function initCortexPanel() {
   root.innerHTML = renderCortexPanelFull();
   initCortexListeners();
   renderAllChatMessages();
+  initChatScrollObserver();
 }
 
 function initCortexListeners() {
@@ -575,6 +642,38 @@ function visitDecisionItem(el, key, href) {
   if (typeof navigateTo === 'function') navigateTo(href);
 }
 
+function removeDecisionItem(key) {
+  const flowData = getCurrentFlowData();
+  if (!flowData || !flowData.decisionItems) return;
+  const item = flowData.decisionItems.find(function(i) { return i.key === key; });
+  if (!item) return;
+
+  cortexState.deletedDecisions[key] = true;
+  cortexState.deletedActivityItems.unshift({
+    text: '<strong>You</strong> removed ' + item.label,
+    time: 'just now',
+    deleted: true
+  });
+
+  function updateCortexPanel() {
+    var area = document.getElementById('cortex-intelligence-area');
+    if (area) {
+      area.innerHTML = renderIntelligenceCompleted('');
+      initDecisionItemListeners();
+    }
+    var activityView = document.getElementById('cortex-view-activity');
+    if (activityView) {
+      activityView.outerHTML = renderActivityView();
+    }
+  }
+
+  updateCortexPanel();
+
+  if (typeof navigateTo === 'function') {
+    navigateTo('command-center.html');
+  }
+}
+
 function initDecisionItemListeners() {
   // kept for backwards compatibility; inline onclick handles clicks now
 }
@@ -585,6 +684,7 @@ async function sendChatMessage(text) {
   if (files.length > 0) {
     const fileNames = files.map(f => f.name).join(', ');
     addChatMessage('user', `${text}\n<span class="attached-files">📎 ${fileNames}</span>`);
+    addThinkingPlaceholder();
     
     const attachmentArea = document.querySelector('.file-attachments');
     if (attachmentArea) attachmentArea.remove();
@@ -594,16 +694,33 @@ async function sendChatMessage(text) {
       const processedFiles = await Promise.all(files.map(f => processFileForAI(f)));
       simulateFileProcessingResponse(text, processedFiles);
     } catch (err) {
+      removeThinkingPlaceholder();
       addChatMessage('ai', 'Sorry, I had trouble processing the attached files. Please try again.');
     }
   } else {
     addChatMessage('user', text);
+    addThinkingPlaceholder();
     simulateAIResponse(text);
   }
 }
 
+function addThinkingPlaceholder() {
+  var container = document.getElementById('cortex-chat-messages');
+  if (!container) return;
+  var el = document.createElement('div');
+  el.className = 'chat-message chat-message--thinking';
+  el.id = 'cortex-thinking-placeholder';
+  el.innerHTML = '<div class="chat-message-thinking">Agent is thinking...</div>';
+  container.appendChild(el);
+}
+
+function removeThinkingPlaceholder() {
+  var el = document.getElementById('cortex-thinking-placeholder');
+  if (el) el.remove();
+}
+
 function simulateFileProcessingResponse(userMessage, processedFiles) {
-  setTimeout(() => {
+  setTimeout(function() {
     const file = processedFiles[0];
     const rowCount = file.parsed?.rows?.length || 0;
     const headers = file.parsed?.headers || [];
@@ -629,6 +746,7 @@ function simulateFileProcessingResponse(userMessage, processedFiles) {
       response = `I've received <strong>${file.name}</strong>. How can I help you with this file?`;
     }
     
+    removeThinkingPlaceholder();
     addChatMessage('ai', response);
   }, 1200 + Math.random() * 800);
 }
@@ -1031,7 +1149,7 @@ function showClickRipple(x, y) {
   setTimeout(() => ripple.remove(), 600);
 }
 
-async function animateCursorToElement(selector, clickAfter = true) {
+async function animateCursorToElement(selector, clickAfter = true, offset = 'center') {
   const element = document.querySelector(selector);
   if (!element) {
     console.warn('Cursor target not found:', selector);
@@ -1039,7 +1157,14 @@ async function animateCursorToElement(selector, clickAfter = true) {
   }
   
   const rect = element.getBoundingClientRect();
-  const x = rect.left + rect.width / 2;
+  let x;
+  if (offset === 'start') {
+    x = rect.left + 25;
+  } else if (offset === 'end') {
+    x = rect.right - 25;
+  } else {
+    x = rect.left + rect.width / 2;
+  }
   const y = rect.top + rect.height / 2;
   
   showDemoCursor();
@@ -1071,6 +1196,8 @@ function startFlowPlayback(flowId) {
   cortexState.activeFlowId = flowId;
   cortexState.messages = [];
   cortexState.visitedDecisions = {};
+  cortexState.deletedDecisions = {};
+  cortexState.deletedActivityItems = [];
   
   if (typeof flowSwitcherState !== 'undefined') {
     flowSwitcherState.activeFlowId = flowId;
@@ -1078,6 +1205,7 @@ function startFlowPlayback(flowId) {
 
   const root = document.getElementById('cortex-panel-root');
   if (root) {
+    root.classList.add('playback-active');
     root.innerHTML = renderCortexPanelFull();
     initCortexListeners();
   }
@@ -1117,12 +1245,14 @@ function stopPlayback() {
   playbackState.currentStep = 0;
   playbackState.flowId = null;
   playbackState.steps = [];
-  
+
   if (playbackState.timerId) {
     clearTimeout(playbackState.timerId);
     playbackState.timerId = null;
   }
 
+  const root = document.getElementById('cortex-panel-root');
+  if (root) root.classList.remove('playback-active');
   hideDemoCursor();
   removePlaybackControls();
 }
@@ -1136,7 +1266,6 @@ async function executeCurrentStep() {
   if (!playbackState.isPlaying || playbackState.isPaused) return;
   if (playbackState.currentStep >= playbackState.steps.length) {
     stopPlayback();
-    addChatMessage('system', 'Playback completed');
     return;
   }
 
@@ -1146,8 +1275,8 @@ async function executeCurrentStep() {
 }
 
 async function executeStep(step) {
-  if (step.cursorTarget) {
-    await animateCursorToElement(step.cursorTarget);
+  if (step.cursorTarget && step.type !== 'action') {
+    await animateCursorToElement(step.cursorTarget, true, step.cursorOffset || 'center');
   }
   
   switch (step.type) {
@@ -1174,6 +1303,18 @@ async function executeStep(step) {
 
 async function executePlaybackAction(step) {
   switch (step.action) {
+    case 'positionCursorAtStart': {
+      const panel = document.querySelector('.cortex-panel-wrapper:not(.panel-collapsed)') || document.getElementById('cortex-panel-root');
+      if (panel) {
+        const rect = panel.getBoundingClientRect();
+        const x = rect.left - 8;
+        const y = rect.top + 50;
+        showDemoCursor();
+        await moveCursorTo(x, y, 300);
+      }
+      break;
+    }
+
     case 'showIntelligenceBox':
       const area = document.getElementById('cortex-intelligence-area');
       if (area) {
@@ -1186,7 +1327,7 @@ async function executePlaybackAction(step) {
         for (const action of step.items) {
           const selector = `.checkbox[data-action="${action}"]`;
           if (step.cursorTarget !== false) {
-            await animateCursorToElement(selector);
+            await animateCursorToElement(selector + ' .checkbox-label');
           }
           const checkbox = document.querySelector(selector);
           if (checkbox && !checkbox.classList.contains('checked')) {
@@ -1199,6 +1340,17 @@ async function executePlaybackAction(step) {
       }
       break;
       
+    case 'clickMoreIdeas': {
+      const moreIdeasBtn = document.querySelector('button[onclick*="generateMoreIdeas"]');
+      if (moreIdeasBtn && step.cursorTarget !== false) {
+        await animateCursorToElement('button[onclick*="generateMoreIdeas"]');
+      }
+      if (typeof generateMoreIdeas === 'function' && moreIdeasBtn && !moreIdeasBtn.disabled) {
+        generateMoreIdeas(moreIdeasBtn);
+      }
+      break;
+    }
+
     case 'executeSelected':
       const executeBtn = document.getElementById('execute-btn');
       if (executeBtn && step.cursorTarget !== false) {
@@ -1211,7 +1363,7 @@ async function executePlaybackAction(step) {
       
     case 'clickDecisionItem':
       if (step.cursorTarget) {
-        await animateCursorToElement(step.cursorTarget);
+        await animateCursorToElement(step.cursorTarget, true, step.cursorOffset || 'center');
       }
       const flowData = getCurrentFlowData();
       if (flowData && flowData.decisionItems && step.item) {
@@ -1221,6 +1373,23 @@ async function executePlaybackAction(step) {
           if (typeof navigateTo === 'function') {
             navigateTo(decisionItem.href);
           }
+        }
+      }
+      break;
+
+    case 'deleteDecisionItem':
+      if (step.item) {
+        const itemEl = document.querySelector(`.decision-item[data-decision-key="${step.item}"]`);
+        if (itemEl) {
+          itemEl.classList.add('decision-item--show-remove');
+        }
+        const removeSelector = `.decision-item[data-decision-key="${step.item}"] .decision-item-remove`;
+        await animateCursorToElement(removeSelector);
+        if (itemEl) {
+          itemEl.classList.remove('decision-item--show-remove');
+        }
+        if (typeof removeDecisionItem === 'function') {
+          removeDecisionItem(step.item);
         }
       }
       break;

@@ -1,6 +1,7 @@
 /* ============================================================
    SOUL DESIGN SYSTEM — DESIGN TOKENS
    Source: https://soul.dev.emplifi.io / https://soul.emplifi.io
+   Validated: Soul System MCP (soul_style_get_tokens)
    ============================================================
 
    These CSS custom properties define the canonical SOUL design
@@ -10,6 +11,9 @@
    Usage:
      <link rel="stylesheet" href="soul-tokens.css">
      <link rel="stylesheet" href="styles.css">
+
+   For typography classes, button patterns, and component examples,
+   see SOUL-USAGE.md in the project root.
    ============================================================ */
 
 :root {
@@ -19,7 +23,14 @@
   --color-layer-level-0: #f3f3f5;
   --color-layer-level-1: #ffffff;
   --color-layer-level-2: #f3f3f5;
+  --color-layer-level-3: #e7e7e9;
   --color-layer-hover: rgba(0, 0, 0, 0.05);
+  --color-layer-active: rgba(0, 0, 0, 0.1);
+  /* Semantic layer backgrounds (Soul: info, warning, danger, success) */
+  --color-layer-info: #d0e2ff;
+  --color-layer-warning: #fff8e1;
+  --color-layer-danger: #ffebee;
+  --color-layer-success: #e8f5e9;
 
   /* ==========================================================
      COLORS — On Layer (text / icons on surfaces)
@@ -104,16 +115,30 @@
 
   /* ==========================================================
      COLORS — Overlay
+     Soul: --color-overlay-default for dialogs
      ========================================================== */
   --color-overlay: rgba(0, 0, 0, 0.3);
   --color-overlay-heavy: rgba(0, 0, 0, 0.5);
+  --color-overlay-default: rgba(0, 0, 0, 0.4);
+
+  /* ==========================================================
+     COLORS — Table (Soul: row backgrounds)
+     ========================================================== */
+  --color-table-row-odd: #ffffff;
+  --color-table-row-even: #f3f3f5;
+  --color-table-row-hover: #d0e2ff;
+  --color-table-row-hover-border: #56a0ff;
 
   /* ==========================================================
      COLORS — Link
+     Soul: --color-link-primary, --color-link-secondary, --color-link-tertiary
      ========================================================== */
   --color-link: #0f62fe;
   --color-link-hover: #0353e9;
   --color-link-visited: #8a3ffc;
+  --color-link-primary: #0f62fe;
+  --color-link-secondary: #24242b;
+  --color-link-tertiary: #505057;
 
   /* ==========================================================
      COLORS — On Button (text on filled buttons)
@@ -151,12 +176,27 @@
 
   /* ==========================================================
      COLORS — Platform brand
+     Soul MCP canonical values
      ========================================================== */
   --color-platform-facebook: #0866ff;
   --color-platform-instagram: #d73676;
-  --color-platform-twitter: #24242b;
+  --color-platform-twitter: #242e36;
+  --color-platform-x: #242e36;
   --color-platform-youtube: #ff0000;
   --color-platform-reddit: #ff5700;
+  --color-platform-tiktok: #000000;
+  --color-platform-tiktok-splash: #0bd0ca;
+  --color-platform-snapchat: #e6e300;
+
+  /* ==========================================================
+     FOCUS — Accessibility (SOUL: visible focus for keyboard nav)
+     Soul: --color-border-focus-ring, --color-border-focus-form
+     ========================================================== */
+  --focus-ring-color: var(--color-button-primary);
+  --focus-ring-width: 2px;
+  --focus-ring-offset: 2px;
+  --color-border-focus-ring: #0f62fe;
+  --color-border-focus-form: #56a0ff;
 
   /* ==========================================================
      SPACING
@@ -222,7 +262,9 @@
   --shadow-100: var(--box-shadow-100);
   --shadow-200: var(--box-shadow-200);
   --shadow-300: var(--box-shadow-300);
+  --shadow-400: var(--box-shadow-400);
   --shadow-inner: var(--box-shadow-inner);
+  --shadow-elevation-3: var(--box-shadow-300);
 
   /* ==========================================================
      MOTION — Duration

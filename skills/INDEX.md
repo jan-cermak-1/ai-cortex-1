@@ -28,7 +28,8 @@ skills/
 **I'm a Designer** → Check `soul-design-system/SKILL.md` for UI components  
 **I'm a Developer** → Start with `emplifi-product-reference.md`  
 **I need design tokens** → See `soul-design-system/tokens-reference.md`  
-**I need icons** → Browse `soul-design-system/assets/icons/`
+**I need icons** → Browse `soul-design-system/assets/icons/`  
+**HTML/CSS project usage** → See `SOUL-USAGE.md` (project root)
 
 ## 📖 File Details
 

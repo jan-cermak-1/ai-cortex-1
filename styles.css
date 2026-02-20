@@ -814,6 +814,12 @@ input, select, textarea {
   font-feature-settings: 'zero' 1, 'ss04' 1, 'cv05' 1, 'cv08' 1;
 }
 
+/* SOUL: visible focus for keyboard accessibility */
+.btn:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+}
+
 .btn-m {
   padding: var(--space-3) var(--space-4);
   max-height: 36px;
@@ -1131,8 +1137,15 @@ input, select, textarea {
   color: var(--color-on-layer-tertiary);  /* Figma: #9d9da0 */
 }
 
-.input-field input:focus {
+.input-field input:focus,
+.input-box input:focus {
   border-color: var(--color-button-primary);
+}
+
+.input-field input:focus-visible,
+.input-box input:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
 }
 
 /* --- Select Trigger --- */
@@ -1154,6 +1167,69 @@ input, select, textarea {
   height: 14px;
   margin-left: auto;
 }
+
+.select-trigger:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+}
+
+/* --- Badge utilities (SOUL status) --- */
+.badge-success {
+  background: var(--color-status-success);
+  color: var(--color-badge-text);
+  padding: 2px var(--space-2);
+  border-radius: var(--border-radius-small);
+  font-size: var(--text-badge-size);
+  font-weight: var(--text-badge-weight);
+  line-height: var(--text-badge-line-height);
+  letter-spacing: var(--text-badge-letter-spacing);
+  text-transform: uppercase;
+}
+
+.badge-error {
+  background: var(--color-badge-error);
+  color: var(--color-badge-text);
+  padding: 2px var(--space-2);
+  border-radius: var(--border-radius-small);
+  font-size: var(--text-badge-size);
+  font-weight: var(--text-badge-weight);
+  line-height: var(--text-badge-line-height);
+  letter-spacing: var(--text-badge-letter-spacing);
+  text-transform: uppercase;
+}
+
+.badge-warning {
+  background: var(--color-status-warning);
+  color: var(--color-badge-text);
+  padding: 2px var(--space-2);
+  border-radius: var(--border-radius-small);
+  font-size: var(--text-badge-size);
+  font-weight: var(--text-badge-weight);
+  line-height: var(--text-badge-line-height);
+  letter-spacing: var(--text-badge-letter-spacing);
+  text-transform: uppercase;
+}
+
+.badge-info {
+  background: var(--color-status-info);
+  color: var(--color-badge-text);
+  padding: 2px var(--space-2);
+  border-radius: var(--border-radius-small);
+  font-size: var(--text-badge-size);
+  font-weight: var(--text-badge-weight);
+  line-height: var(--text-badge-line-height);
+  letter-spacing: var(--text-badge-letter-spacing);
+  text-transform: uppercase;
+}
+
+/* --- Platform badge utilities (SOUL) --- */
+.platform-badge-fb { background: var(--color-platform-facebook); color: #fff; }
+.platform-badge-ig { background: var(--color-platform-instagram); color: #fff; }
+.platform-badge-yt { background: var(--color-platform-youtube); color: #fff; }
+.platform-badge-tt { background: var(--color-platform-tiktok); color: #fff; }
+.platform-badge-sc { background: var(--color-platform-snapchat); color: #000; }
+.platform-badge-tw { background: var(--color-platform-twitter); color: #fff; }
+.platform-badge-rd { background: var(--color-platform-reddit); color: #fff; }
 
 /* --- Progress Bar --- */
 .progress-bar {
@@ -1308,6 +1384,13 @@ input, select, textarea {
   border-radius: 0;
 }
 
+/* Completed state: same gray as chat bubbles (--color-layer-level-0) */
+.intelligence-box-completed {
+  background: var(--color-layer-level-0);
+  padding: var(--space-4);
+  border-radius: var(--border-radius-large);
+}
+
 .intelligence-box-header {
   display: flex;
   align-items: center;
@@ -1436,6 +1519,48 @@ input, select, textarea {
   text-decoration: underline;
   text-decoration-thickness: 4%;
   cursor: pointer;
+  flex: 1;
+}
+
+/* Removed item — stays in list, strikethrough, not clickable */
+.decision-item--deleted .decision-label {
+  text-decoration: line-through;
+  color: var(--color-on-layer-tertiary);
+  cursor: default;
+}
+.decision-item--deleted {
+  cursor: default;
+  pointer-events: none;
+}
+.decision-item--deleted .decision-item-remove {
+  display: none;
+}
+
+/* Remove button — visible on hover, or when --show-remove for playback */
+.decision-item-remove {
+  opacity: 0;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--border-radius-medium);
+  color: var(--color-on-layer-secondary);
+  transition: opacity 0.15s ease, background 0.15s ease;
+}
+.decision-item:hover .decision-item-remove,
+.decision-item.decision-item--show-remove .decision-item-remove {
+  opacity: 1;
+}
+.decision-item-remove:hover {
+  background: var(--color-layer-hover);
+  color: var(--color-status-error);
+}
+.decision-item-remove:focus {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
 }
 
 /* Cortex Chat Input Area */
@@ -4576,6 +4701,7 @@ input, select, textarea {
 /* Views container (holds AI Chat, Activity, Notifications) */
 .cortex-views-container {
   flex: 1;
+  min-height: 0;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -4587,6 +4713,7 @@ input, select, textarea {
   display: none;
   flex-direction: column;
   flex: 1;
+  min-height: 0;
   overflow-x: hidden;
   overflow-y: auto;
   padding: var(--space-4);
@@ -4599,36 +4726,62 @@ input, select, textarea {
 /* AI Chat view specifics */
 #cortex-view-ai-chat {
   gap: 0;
+  padding-top: 0;
+  padding-right: 0;  /* scrollbar flush to right edge */
+  padding-bottom: 0;
+  padding-left: 0;
+  height: 100%;
 }
 
 .cortex-messages {
   flex: 1;
+  min-height: 0;
+  width: 100%;
   overflow-x: hidden;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: 0;
+  padding-top: 0;
+  padding-right: 0;
+  padding-left: var(--space-4);
 }
 
 .cortex-intelligence-area {
   flex-shrink: 0;
+  width: 100%;
+  padding: 0;
+}
+
+.cortex-intelligence-area:not(:empty) {
+  padding-top: 12px;
+  padding-right: 12px;
 }
 
 .cortex-chat-messages {
+  flex: 1 1 0;
+  min-height: 0;
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
-  padding-top: var(--space-4);
+  padding-top: 12px;
+  padding-right: 12px;
+  width: 100%;
+  overflow: visible;
+  min-width: 0;
 }
 
 /* ============================================================
-   CHAT MESSAGES
+   CHAT MESSAGES — Cursor-style: plain text on white, no bubbles
    ============================================================ */
 
 .chat-message {
   display: flex;
-  gap: var(--space-2);
+  flex-direction: column;
+  gap: var(--space-1);
   animation: fadeIn 0.3s ease;
+  width: 100%;
+  min-width: 0;
 }
 
 .chat-message--ai {
@@ -4636,48 +4789,42 @@ input, select, textarea {
 }
 
 .chat-message--user {
-  flex-direction: row-reverse;
+  align-items: flex-start;
 }
 
 .chat-message--system {
-  justify-content: center;
-}
-
-.chat-message-avatar {
-  width: 24px;
-  height: 24px;
-  border-radius: var(--border-radius-full);
-  background: linear-gradient(135deg, rgb(144, 255, 238) 5%, rgb(239, 254, 252) 37%, rgb(249, 245, 255) 58%, rgb(240, 231, 255) 79%);
-  display: flex;
   align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.chat-message-avatar img {
-  width: 14px;
-  height: 14px;
 }
 
 .chat-message-bubble {
-  max-width: 85%;
-  padding: var(--space-3) var(--space-4);
-  border-radius: var(--border-radius-large);
+  max-width: 100%;
+  padding: 12px;
   font-size: 13px;
-  line-height: 18px;
+  line-height: 20px;
   word-wrap: break-word;
+  color: var(--color-on-layer-primary);
 }
 
 .chat-message--ai .chat-message-bubble {
-  background: var(--color-layer-level-0);
+  background: transparent;
   color: var(--color-on-layer-primary);
-  border-top-left-radius: var(--border-radius-small);
+}
+
+/* User input — Cursor-style: full-width white box with light shadow */
+.chat-message--user {
+  width: 100%;
 }
 
 .chat-message--user .chat-message-bubble {
-  background: var(--color-button-primary);
-  color: white;
-  border-top-right-radius: var(--border-radius-small);
+  width: 100%;
+  box-sizing: border-box;
+  background: var(--color-layer-level-1);
+  padding: var(--space-3) var(--space-4);
+  padding-right: 0;
+  border-radius: var(--border-radius-medium);
+  border: 1px solid var(--color-border-primary);
+  box-shadow: var(--shadow-100);
+  color: var(--color-on-layer-primary);
 }
 
 .chat-message-system {
@@ -4685,7 +4832,58 @@ input, select, textarea {
   line-height: 16px;
   color: var(--color-on-layer-tertiary);
   text-align: center;
-  padding: var(--space-2) var(--space-4);
+  padding: var(--space-2) 0;
+}
+
+/* Thinking placeholder — Agent is thinking... */
+.chat-message--thinking {
+  padding: var(--space-2) 0;
+}
+
+.chat-message-thinking {
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--color-on-layer-tertiary);
+  font-style: italic;
+}
+
+/* AI response formatting — headings, lists */
+.chat-message--ai .chat-response-heading {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 20px;
+  margin: var(--space-3) 0 var(--space-1);
+  color: var(--color-on-layer-primary);
+}
+
+.chat-message--ai .chat-response-heading:first-child {
+  margin-top: 0;
+}
+
+.chat-message--ai .chat-response-list {
+  margin: var(--space-2) 0;
+  padding-left: var(--space-5);
+}
+
+.chat-message--ai .chat-response-list li {
+  margin-bottom: var(--space-1);
+  line-height: 20px;
+}
+
+.chat-message--ai .chat-message-bubble p {
+  margin: var(--space-2) 0;
+}
+
+.chat-message--ai .chat-message-bubble p:first-child {
+  margin-top: 0;
+}
+
+/* Sticky user message — stays at top when scrolling down through long AI response */
+.chat-message--latest-user {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: var(--color-layer-level-0);
 }
 
 /* Chat input field (real input replacing static placeholder) */
@@ -4752,6 +4950,11 @@ input, select, textarea {
   font-size: 13px;
   line-height: 18px;
   color: var(--color-on-layer-primary);
+}
+
+.activity-text--deleted {
+  text-decoration: line-through;
+  color: var(--color-on-layer-tertiary);
 }
 
 .activity-time {
@@ -5418,6 +5621,11 @@ input, select, textarea {
 @keyframes playback-pulse {
   0%, 100% { opacity: 1; transform: scale(1); }
   50% { opacity: 0.6; transform: scale(1.2); }
+}
+
+/* During playback: hide chat messages only — keep intelligence box + input visible */
+#cortex-panel-root.playback-active .cortex-chat-messages {
+  display: none !important;
 }
 
 .playback-controls {

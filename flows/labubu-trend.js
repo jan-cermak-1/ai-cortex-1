@@ -67,20 +67,25 @@ const FLOW_LABUBU_TREND = {
   ],
 
   playbackSteps: [
-    { type: 'navigate', page: 'command-center.html', cursorTarget: '[data-nav-id="command-center"]', delay: 1500 },
-    { type: 'message', sender: 'ai', text: 'I detected a trending topic in your region: <strong>Labubu</strong>. Your competitors are already publishing content about this trend.', delay: 2000 },
-    { type: 'action', action: 'showIntelligenceBox', delay: 1500 },
-    { type: 'message', sender: 'ai', text: 'I suggest creating a campaign with content ideas, a listening query, and an analytics board to track this trend.', delay: 2500 },
+    // 1. Initial state: intelligence box with checkboxes
+    { type: 'navigate', page: 'command-center.html', delay: 100 },
+    { type: 'action', action: 'showIntelligenceBox', delay: 500 },
+    // 2. Cursor starts at divider, then moves to "More ideas"
+    { type: 'action', action: 'positionCursorAtStart', delay: 800 },
+    { type: 'action', action: 'clickMoreIdeas', delay: 2500 },
+    // 3. When ideas appear: check campaign, listening, analytics, then Execute selected
     { type: 'action', action: 'selectCheckboxes', items: ['campaign', 'listening', 'analytics'], delay: 1500 },
-    { type: 'action', action: 'executeSelected', delay: 2000 },
-    { type: 'message', sender: 'ai', text: 'Done! I created all the assets for you. Let me show you each one.', delay: 2000 },
-    { type: 'action', action: 'clickDecisionItem', item: 'campaign', cursorTarget: '.decision-item:nth-child(2)', delay: 1500 },
-    { type: 'message', sender: 'ai', text: 'Here\'s the Publisher campaign with content ideas ready for your review.', delay: 2000 },
-    { type: 'action', action: 'clickDecisionItem', item: 'collection', cursorTarget: '.decision-item:nth-child(1)', delay: 1500 },
-    { type: 'message', sender: 'ai', text: 'The Collection contains curated content related to the Labubu trend.', delay: 2000 },
-    { type: 'action', action: 'clickDecisionItem', item: 'listening', cursorTarget: '.decision-item:nth-child(3)', delay: 1500 },
-    { type: 'message', sender: 'ai', text: 'I set up a listening query to monitor mentions and sentiment around Labubu.', delay: 2000 },
-    { type: 'action', action: 'clickDecisionItem', item: 'analytics', cursorTarget: '.decision-item:nth-child(4)', delay: 1500 },
-    { type: 'message', sender: 'ai', text: 'Finally, here\'s your custom analytics board tracking the trend performance. The demo is complete!', delay: 2000 }
+    { type: 'action', action: 'executeSelected', delay: 2500 },
+    // 3. Loading (~2s) built into executeSelected, then 4 items appear
+    // 4. Gradually click through all 4 items — click on beginning of each name
+    { type: 'action', action: 'clickDecisionItem', item: 'collection', cursorTarget: '.decision-item[data-decision-key="collection"] .decision-label', cursorOffset: 'start', delay: 1500 },
+    { type: 'action', action: 'clickDecisionItem', item: 'campaign', cursorTarget: '.decision-item[data-decision-key="campaign"] .decision-label', cursorOffset: 'start', delay: 1500 },
+    { type: 'action', action: 'clickDecisionItem', item: 'listening', cursorTarget: '.decision-item[data-decision-key="listening"] .decision-label', cursorOffset: 'start', delay: 1500 },
+    { type: 'action', action: 'clickDecisionItem', item: 'analytics', cursorTarget: '.decision-item[data-decision-key="analytics"] .decision-label', cursorOffset: 'start', delay: 1500 },
+    // 5. Delete items in reverse order (X icon on each)
+    { type: 'action', action: 'deleteDecisionItem', item: 'analytics', delay: 1500 },
+    { type: 'action', action: 'deleteDecisionItem', item: 'listening', delay: 1200 },
+    { type: 'action', action: 'deleteDecisionItem', item: 'campaign', delay: 1200 },
+    { type: 'action', action: 'deleteDecisionItem', item: 'collection', delay: 1500 }
   ]
 };
