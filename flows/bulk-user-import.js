@@ -79,7 +79,9 @@ const FLOW_BULK_USER_IMPORT = {
     { type: 'action', action: 'selectFinderFile', fileName: 'users-import.xlsx', fileSize: 128000, delay: 1500 },
     // 6. Type "add these users" in the chat input
     { type: 'action', action: 'typeInChat', text: 'add these users', delay: 1200 },
-    // 7. Cortex responds: analyzing the file
+    // 7. Move cursor to send button and submit — shows user message with file chip
+    { type: 'action', action: 'submitChat', delay: 800 },
+    // 8. Cortex responds: analyzing the file
     { type: 'message', sender: 'ai', text: 'I detected an Excel file you uploaded: <strong>users-import-2026.xlsx</strong>. Let me analyze it.', delay: 2000 },
     { type: 'message', sender: 'ai', text: 'Found <strong>47 valid user records</strong> with columns: Name, Email, Department, Role. Ready for import.', delay: 2500 },
     // 8. Intelligence box with options

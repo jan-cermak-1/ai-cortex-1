@@ -1654,6 +1654,37 @@ async function executePlaybackAction(step) {
       }
       break;
     }
+
+    case 'submitChat': {
+      const sendBtn = document.getElementById('cortex-send-btn');
+      const inputField = document.getElementById('cortex-input-field');
+      const text = inputField ? inputField.value.trim() : (step.text || '');
+      if (sendBtn) {
+        await animateCursorToElement('#cortex-send-btn');
+        await new Promise(r => setTimeout(r, 200));
+      }
+      if (text) {
+        // During playback: show user message visually (with file chip if attached),
+        // but skip AI auto-response — playback steps control what comes next.
+        const files = [...fileUploadState.pendingFiles];
+        if (files.length > 0) {
+          const fileBadgesHtml = files.map(f => {
+            const ext = (f.name.split('.').pop() || '').toLowerCase();
+            const isXls = ['xlsx', 'xls'].includes(ext);
+            const cls = isXls ? 'file-attachment-chip file-attachment-chip--xlsx' : 'file-attachment-chip';
+            return `<span class="${cls}"><span class="file-icon">${SOUL_ICON_DOCUMENT}</span><span class="file-name">${f.name}</span></span>`;
+          }).join(' ');
+          addChatMessage('user', `<span class="attached-files">${fileBadgesHtml}</span> ${text}`);
+          const attachmentArea = document.getElementById('cortex-file-attachments');
+          if (attachmentArea) attachmentArea.innerHTML = '';
+          fileUploadState.pendingFiles = [];
+        } else {
+          addChatMessage('user', text);
+        }
+        if (inputField) inputField.value = '';
+      }
+      break;
+    }
   }
 }
 
