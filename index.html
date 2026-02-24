@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="soul-tokens.css">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=10">
 </head>
 <body>
 
@@ -42,10 +42,10 @@
 <script src="flows/bot-tuning.js"></script>
 <script src="flows/listening-report.js"></script>
 <script src="flows/voc-insights.js"></script>
-<script src="flows/index.js"></script>
+<script src="flows/index.js?v=4"></script>
 <script src="cortex-panel.js?v=3"></script>
-<script src="flow-switcher.js"></script>
-<script src="app.js"></script>
+<script src="flow-switcher.js?v=4"></script>
+<script src="app.js?v=10"></script>
 <script src="drag-drop.js"></script>
 <script>
   (function() {
@@ -85,7 +85,8 @@
 
     // 4. Load initial page content via router
     initRouter(page);
-    navigateTo(page, false).then(function() {
+    var initialHref = page + (location.search || '');
+    navigateTo(initialHref, false).then(function() {
       // 5. Initialize drag and drop after first page loads
       initDragDrop();
     });

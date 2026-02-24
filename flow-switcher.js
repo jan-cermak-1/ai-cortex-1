@@ -5,10 +5,68 @@
    Allows switching between different demo scenarios.
    ============================================================ */
 
-const flowSwitcherState = {
-  isOpen: true,
-  activeFlowId: 'labubu-trend'
+// Get URL parameters
+const getUrlParams = () => {
+  const params = new URLSearchParams(window.location.search);
+  return params;
 };
+
+// Update URL parameter
+const updateUrlParam = (key, value) => {
+  const params = new URLSearchParams(window.location.search);
+  params.set(key, value);
+  const newUrl = window.location.pathname + '?' + params.toString() + window.location.hash;
+  window.history.replaceState(null, '', newUrl);
+};
+
+// Load state from URL or localStorage, with URL taking priority
+const loadFlowSwitcherState = () => {
+  const urlParams = getUrlParams();
+  
+  // Check URL first
+  if (urlParams.has('flowsOpen')) {
+    const state = {
+      isOpen: urlParams.get('flowsOpen') === 'true',
+      activeFlowId: urlParams.get('activeFlow') || 'labubu-trend'
+    };
+    console.log('📡 Loaded flow switcher state from URL:', state);
+    return state;
+  }
+  
+  // Fall back to localStorage
+  try {
+    const saved = localStorage.getItem('flowSwitcherState');
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      console.log('📂 Loaded flow switcher state from localStorage:', parsed);
+      return parsed;
+    }
+  } catch (e) {
+    console.warn('Failed to load flow switcher state:', e);
+  }
+  
+  return {
+    isOpen: true,
+    activeFlowId: 'labubu-trend'
+  };
+};
+
+// Save state to URL and localStorage
+const saveFlowSwitcherState = (state) => {
+  try {
+    localStorage.setItem('flowSwitcherState', JSON.stringify(state));
+    console.log('💾 Saved flow switcher state to localStorage:', state);
+  } catch (e) {
+    console.warn('Failed to save flow switcher state:', e);
+  }
+  
+  // Also update URL
+  updateUrlParam('flowsOpen', state.isOpen);
+  updateUrlParam('activeFlow', state.activeFlowId);
+  console.log('📡 Updated URL parameters:', { flowsOpen: state.isOpen, activeFlow: state.activeFlowId });
+};
+
+let flowSwitcherState = loadFlowSwitcherState();
 
 function renderFlowItem(flow) {
   const isActive = flow.id === flowSwitcherState.activeFlowId;
@@ -117,6 +175,7 @@ function renderFlowSwitcher() {
 
 function toggleFlowSwitcher() {
   flowSwitcherState.isOpen = !flowSwitcherState.isOpen;
+  saveFlowSwitcherState(flowSwitcherState);
   const switcher = document.querySelector('.flow-switcher');
   if (switcher) {
     switcher.classList.toggle('open', flowSwitcherState.isOpen);
@@ -127,6 +186,7 @@ function selectFlow(flowId) {
   if (flowId === flowSwitcherState.activeFlowId) return;
   
   flowSwitcherState.activeFlowId = flowId;
+  saveFlowSwitcherState(flowSwitcherState);
   
   if (typeof switchToFlow === 'function') {
     switchToFlow(flowId);
@@ -147,6 +207,9 @@ function updateFlowSwitcherUI() {
   if (switcher) {
     switcher.classList.toggle('open', wasOpen);
   }
+  
+  // Save state after updating UI
+  saveFlowSwitcherState(flowSwitcherState);
 }
 
 function initFlowSwitcher() {

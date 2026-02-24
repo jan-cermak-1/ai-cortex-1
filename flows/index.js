@@ -31,9 +31,9 @@ const FLOWS_REGISTRY = [
     id: 'bulk-user-import',
     name: 'Bulk User Import',
     description: 'Import users from Excel with team and role assignment',
-    persona: 'Platform Admin',
+    persona: 'Team Admin',
     startPage: 'command-center.html',
-    source: 'ai',
+    source: 'human',
     data: FLOW_BULK_USER_IMPORT
   },
   {

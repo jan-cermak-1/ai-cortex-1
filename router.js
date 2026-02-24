@@ -36,11 +36,19 @@ function getPageName(href) {
   return filename || 'command-center.html';
 }
 
+function getQueryParams(href) {
+  const idx = href.indexOf('?');
+  if (idx === -1) return {};
+  const search = href.slice(idx + 1);
+  return Object.fromEntries(new URLSearchParams(search));
+}
+
 async function navigateTo(href, pushState = true) {
   const pageName = getPageName(href);
   const config = ROUTE_CONFIG[pageName];
   if (!config) return;
-  if (pageName === currentPage) return;
+  const queryParams = getQueryParams(href);
+  if (pageName === currentPage && Object.keys(queryParams).length === 0) return;
 
   const container = document.getElementById('page-content');
   if (!container) return;
@@ -89,7 +97,10 @@ async function navigateTo(href, pushState = true) {
     currentPage = pageName;
 
     if (pushState) {
-      history.pushState({ page: pageName }, config.title, pageName);
+      const url = Object.keys(queryParams).length > 0
+        ? pageName + '?' + new URLSearchParams(queryParams).toString()
+        : pageName;
+      history.pushState({ page: pageName, queryParams }, config.title, url);
     }
 
     // Update nav active state
@@ -97,9 +108,11 @@ async function navigateTo(href, pushState = true) {
       setActiveNavItem(config.nav);
     }
 
+    window.currentRouteQueryParams = queryParams;
+
     // Notify cortex panel of route change
     window.dispatchEvent(new CustomEvent('route:changed', {
-      detail: { page: pageName, config }
+      detail: { page: pageName, config, queryParams }
     }));
 
     // Run page-specific inline scripts

@@ -44,6 +44,7 @@
      ========================================================== */
   --color-border-primary: rgba(0, 0, 0, 0.2);
   --color-border-secondary: rgba(0, 0, 0, 0.1);
+  --color-border-default: var(--color-border-primary);
   --color-border-success-emphasis: #20c54f;
   --color-border-error-emphasis: #da1e28;
   --color-border-warning-emphasis: #f5a623;
@@ -125,9 +126,9 @@
      COLORS — Table (Soul: row backgrounds)
      ========================================================== */
   --color-table-row-odd: #ffffff;
-  --color-table-row-even: #f3f3f5;
-  --color-table-row-hover: #d0e2ff;
-  --color-table-row-hover-border: #56a0ff;
+  --color-table-row-even: #f9f9fa;
+  --color-table-row-hover: #d5efff;
+  --color-table-row-hover-border: #85c7ff;
 
   /* ==========================================================
      COLORS — Link
@@ -273,6 +274,7 @@
   --motion-duration-instant: 0ms;
   --motion-duration-quick-1: 80ms;
   --motion-duration-quick-2: 120ms;
+  --motion-duration-fast: 80ms; /* alias for quick-1 */
   --motion-duration-moderate-1: 180ms;
   --motion-duration-moderate-2: 270ms;
 

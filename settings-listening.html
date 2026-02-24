@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Settings / Listening — Cortex AI</title>
-  <script>if(!document.getElementById('flow-switcher-root')){location.href='index.html#'+location.pathname.split('/').pop();}</script>
+  <script>if(!document.getElementById('flow-switcher-root')){location.replace('index.html#'+location.pathname.split('/').pop());}</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -26,7 +26,7 @@
       <div class="settings-nav-item">Notifications</div>
       <div class="settings-nav-divider"></div>
       <div class="settings-nav-item">Profiles</div>
-      <div class="settings-nav-item">Users</div>
+      <div class="settings-nav-item" data-href="settings-users.html" role="button" tabindex="0">Users</div>
       <div class="settings-nav-item">User groups</div>
       <div class="settings-nav-item">Roles &amp; Permissions</div>
       <div class="settings-nav-divider"></div>
@@ -57,7 +57,7 @@
     </div>
 
     <!-- Wizard Overlay backdrop (covers entire page, click to close) -->
-    <div id="wizard-backdrop" class="wizard-overlay" onclick="hideWizard()"></div>
+    <div id="wizard-backdrop" class="wizard-overlay"></div>
 
     <!-- Wizard Panel container (above the overlay) -->
     <div id="wizard-container" class="wizard-overlay-container">

@@ -10,6 +10,10 @@
    Flow-specific data is in flows/*.js
    ============================================================ */
 
+/* SOUL icons (assets/icons/soul/Document.svg, Close.svg) — currentColor for badge */
+const SOUL_ICON_DOCUMENT = '<svg viewBox="0 0 36 36" fill="currentColor" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M6 7C6 4.23858 8.23858 2 11 2H21.3431C22.6692 2 23.941 2.52678 24.8787 3.46447L28.5355 7.12132C29.4732 8.059 30 9.33077 30 10.6569V14H28V12H23C21.3431 12 20 10.6569 20 9V4H11C9.34315 4 8 5.34315 8 7V29C8 30.6569 9.34315 32 11 32H26C27.1046 32 28 31.1046 28 30H30C30 32.2091 28.2091 34 26 34H11C8.23858 34 6 31.7614 6 29V7ZM22 4.07278V9C22 9.55228 22.4477 10 23 10H27.9272C27.8037 9.44969 27.5264 8.94065 27.1213 8.53553L23.4645 4.87868C23.0594 4.47357 22.5503 4.19628 22 4.07278ZM18 20C18 18.8954 18.8954 18 20 18H30C31.1046 18 32 18.8954 32 20V24C32 25.1046 31.1046 26 30 26H20C18.8954 26 18 25.1046 18 24V20ZM30 20H20V24H30V20Z"/></svg>';
+const SOUL_ICON_CLOSE = '<svg viewBox="0 0 36 36" fill="currentColor" width="12" height="12" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M18.0001 16.5859L26.293 8.29297L27.7072 9.70718L19.4143 18.0001L27.7072 26.293L26.293 27.7072L18.0001 19.4143L9.70718 27.7072L8.29297 26.293L16.5859 18.0001L8.29297 9.70718L9.70718 8.29297L18.0001 16.5859Z"/></svg>';
+
 // --- Persistent state (survives across route changes) ---
 const cortexState = {
   messages: [],
@@ -168,7 +172,10 @@ function renderCortexInput() {
                 </div>
               </div>
             </div>
-            <textarea class="cortex-input-field" id="cortex-input-field" placeholder="${config.placeholder}" rows="1"></textarea>
+            <div class="cortex-input-body">
+              <div class="file-attachments" id="cortex-file-attachments"></div>
+              <textarea class="cortex-input-field" id="cortex-input-field" placeholder="${config.placeholder}" rows="1"></textarea>
+            </div>
             <div class="cortex-input-footer">
               <div class="attachment-btn" onclick="toggleAttachmentMenu(this, event)">
                 <img src="${config.attachmentIcon}" alt="Attach">
@@ -229,7 +236,7 @@ function renderIntelligenceInitial() {
 
   const box = flowData.intelligenceBox;
   const checkboxes = box.checkboxItems.map(item => `
-              <div class="checkbox" data-action="${item.action}" role="checkbox" tabindex="0" aria-checked="false" aria-label="${item.label}" onclick="toggleCheckbox(this)">
+              <div class="checkbox" data-action="${item.action}" role="checkbox" tabindex="0" aria-checked="false" aria-label="${item.label}">
                 <div class="checkbox-box">
                   <img src="assets/cortex/checkbox-checked.svg" alt="">
                 </div>
@@ -275,7 +282,7 @@ function renderIntelligenceCompleted(highlight) {
     var isCurrent = item.key === highlight && !isDeleted;
     var isVisited = visited[item.key];
     var cls = 'decision-item' + (isVisited ? ' visited' : '') + (isDeleted ? ' decision-item--deleted' : '');
-    var icon = isDeleted ? 'assets/cortex/decision-done.svg' : (isVisited ? 'assets/cortex/decision-done.svg' : 'assets/cortex/decision-pending.svg');
+    var icon = isDeleted ? 'assets/icons/soul/status-done.svg' : (isVisited ? 'assets/icons/soul/status-done.svg' : 'assets/icons/soul/upcoming-permission.svg');
     var onclick = !isDeleted && !isCurrent ? ' onclick="visitDecisionItem(this, \'' + item.key + '\', \'' + item.href + '\')"' : '';
     var removeOnclick = !isDeleted ? ' onclick="event.stopPropagation(); removeDecisionItem(\'' + item.key + '\')"' : '';
     var labelClass = 'decision-label' + (isDeleted ? ' decision-label--deleted' : '');
@@ -351,6 +358,7 @@ function renderChatMessage(msg) {
   } else {
     container.appendChild(el);
   }
+  markChatDecisionLinksVisited();
 }
 
 function scrollChatToBottom() {
@@ -405,6 +413,7 @@ function renderAllChatMessages() {
     }
     container.appendChild(el);
   });
+  markChatDecisionLinksVisited();
   scrollChatToBottom();
 }
 
@@ -526,9 +535,25 @@ function resetCurrentFlow() {
 //  ROUTE CHANGE HANDLER
 // ============================================================
 
+function markChatDecisionLinksVisited() {
+  const page = cortexState.currentPage;
+  if (!page) return;
+  document.querySelectorAll('.decision-item[data-chat-href]').forEach(function(row) {
+    const href = row.getAttribute('data-chat-href');
+    const targetPage = (href || '').split('?')[0];
+    if (targetPage === page) {
+      row.classList.add('visited');
+      const img = row.querySelector('.check-icon img');
+      if (img) img.src = 'assets/cortex/decision-done.svg';
+    }
+  });
+}
+
 function onRouteChange(page, config) {
   cortexState.currentPage = page;
   updateInputContext(page);
+
+  markChatDecisionLinksVisited();
 
   const area = document.getElementById('cortex-intelligence-area');
   if (!area) return;
@@ -536,6 +561,11 @@ function onRouteChange(page, config) {
   const flowData = getCurrentFlowData();
   
   if (!flowData) {
+    area.innerHTML = '';
+    return;
+  }
+
+  if (cortexState.mode === 'empty') {
     area.innerHTML = '';
     return;
   }
@@ -605,6 +635,19 @@ function initCortexListeners() {
   const sendBtn = document.getElementById('cortex-send-btn');
 
   if (inputField) {
+    inputField.addEventListener('focus', function() {
+      if (cortexState.activeFlowId === 'bulk-user-import' &&
+          fileUploadState.pendingFiles.length > 0 &&
+          !this.value.trim()) {
+        const hasXls = fileUploadState.pendingFiles.some(f =>
+          f.name.toLowerCase().endsWith('.xlsx') || f.name.toLowerCase().endsWith('.xls')
+        );
+        if (hasXls) {
+          this.value = 'add this users';
+          autoResizeInput(this);
+        }
+      }
+    });
     inputField.addEventListener('keydown', function(e) {
       if (e.key === 'Enter' && !e.shiftKey && this.value.trim()) {
         e.preventDefault();
@@ -640,6 +683,16 @@ function visitDecisionItem(el, key, href) {
   cortexState.visitedDecisions[key] = true;
   el.classList.add('visited');
   if (typeof navigateTo === 'function') navigateTo(href);
+}
+
+function removeChatDecisionItem(btn, key) {
+  const row = btn && btn.closest ? btn.closest('.decision-item') : null;
+  const wrapper = row && row.parentElement;
+  if (row) row.remove();
+  if (wrapper && wrapper.classList.contains('chat-decision-wrapper') && !wrapper.querySelector('.decision-item')) {
+    wrapper.remove();
+  }
+  cortexState.visitedDecisions[key] = false;
 }
 
 function removeDecisionItem(key) {
@@ -678,16 +731,55 @@ function initDecisionItemListeners() {
   // kept for backwards compatibility; inline onclick handles clicks now
 }
 
+function isRoleChangePrompt(text) {
+  const t = text.toLowerCase();
+  return /change\s+(team\s+)?role|team\s+manager|team\s+lead|care\s+agent/.test(t);
+}
+
+const ROLE_OPTIONS = ['Team Manager', 'Team Lead', 'Care Agent', 'Agent', 'Supervisor'];
+
+function showRolePicker(userPrompt) {
+  const roleOptionsHtml = ROLE_OPTIONS.map(role =>
+    `<button class="role-option" data-role="${role}">${role}</button>`
+  ).join('');
+  const content = `
+    <p>Select the new role for the selected users:</p>
+    <div class="role-picker-options">${roleOptionsHtml}</div>
+  `;
+  addChatMessage('ai', content);
+  setTimeout(function() {
+    document.querySelectorAll('.role-option').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        selectRoleOption(this.dataset.role);
+      });
+    });
+  }, 0);
+}
+
+function selectRoleOption(role) {
+  addChatMessage('ai', "I've updated the role for the selected users to <strong>" + role + "</strong>.");
+}
+
+function isShowUsersPrompt(text) {
+  const t = text.toLowerCase();
+  return /show\s+(list\s+of\s+)?(all\s+)?users\s+I\s+added|list\s+(of\s+)?users\s+I\s+added/.test(t);
+}
+
 async function sendChatMessage(text) {
   const files = [...fileUploadState.pendingFiles];
   
   if (files.length > 0) {
-    const fileNames = files.map(f => f.name).join(', ');
-    addChatMessage('user', `${text}\n<span class="attached-files">📎 ${fileNames}</span>`);
+    const fileBadgesHtml = files.map(f => {
+      const ext = (f.name.split('.').pop() || '').toLowerCase();
+      const isXls = ['xlsx', 'xls'].includes(ext);
+      const cls = isXls ? 'file-attachment-chip file-attachment-chip--xlsx' : 'file-attachment-chip';
+      return `<span class="${cls}"><span class="file-icon">${SOUL_ICON_DOCUMENT}</span><span class="file-name">${f.name}</span></span>`;
+    }).join(' ');
+    addChatMessage('user', `<span class="attached-files">${fileBadgesHtml}</span> ${text}`);
     addThinkingPlaceholder();
     
-    const attachmentArea = document.querySelector('.file-attachments');
-    if (attachmentArea) attachmentArea.remove();
+    const attachmentArea = document.getElementById('cortex-file-attachments');
+    if (attachmentArea) attachmentArea.innerHTML = '';
     fileUploadState.pendingFiles = [];
 
     try {
@@ -700,6 +792,27 @@ async function sendChatMessage(text) {
   } else {
     addChatMessage('user', text);
     addThinkingPlaceholder();
+
+    if (cortexState.activeFlowId === 'bulk-user-import') {
+      if (isShowUsersPrompt(text)) {
+        setTimeout(function() {
+          removeThinkingPlaceholder();
+          addChatMessage('ai', 'Here are the users you recently added.');
+          if (typeof navigateTo === 'function') {
+            navigateTo('settings-users.html?filter=lastAdded');
+          }
+        }, 800);
+        return;
+      }
+      if (isRoleChangePrompt(text)) {
+        setTimeout(function() {
+          removeThinkingPlaceholder();
+          showRolePicker(text);
+        }, 800);
+        return;
+      }
+    }
+
     simulateAIResponse(text);
   }
 }
@@ -727,7 +840,9 @@ function simulateFileProcessingResponse(userMessage, processedFiles) {
     
     let response = '';
     
-    if (file.name.endsWith('.csv') || file.name.endsWith('.xlsx') || file.name.endsWith('.xls')) {
+    if (cortexState.activeFlowId === 'bulk-user-import' && file.name === 'users-import.xlsx') {
+      response = 'I found <strong>65 users</strong>. I added them to the team <strong>Toutique Care UK</strong> and set their default team role to <strong>care agent</strong>. All of them received an invitation email.<div class="chat-decision-wrapper"><div class="decision-item" data-decision-key="settings-users" data-chat-href="settings-users.html" role="link" tabindex="0" aria-label="Settings / Users" onclick="visitDecisionItem(this, \'settings-users\', \'settings-users.html\')"><div class="check-icon"><img src="assets/icons/soul/upcoming-permission.svg" alt="" width="16" height="16"></div><span class="decision-label">Settings / Users</span><button class="decision-item-remove" type="button" title="Remove" aria-label="Remove Settings / Users" onclick="event.stopPropagation(); removeChatDecisionItem(this, \'settings-users\')"><img src="assets/icons/soul/remove-delete-trash.svg" alt="" width="14" height="14"></button></div></div>';
+    } else if (file.name.endsWith('.csv') || file.name.endsWith('.xlsx') || file.name.endsWith('.xls')) {
       if (rowCount > 0) {
         response = `I've analyzed <strong>${file.name}</strong> containing <strong>${rowCount} rows</strong>.`;
         if (headers.length > 0) {
@@ -799,7 +914,6 @@ function generateMoreIdeas(btn) {
       selectAllDiv.setAttribute('tabindex', '0');
       selectAllDiv.setAttribute('aria-checked', 'false');
       selectAllDiv.setAttribute('aria-label', 'Select all');
-      selectAllDiv.setAttribute('onclick', 'toggleSelectAll(this)');
       selectAllDiv.innerHTML =
         '<div class="checkbox-box">' +
           '<img src="assets/cortex/checkbox-checked.svg" alt="">' +
@@ -822,7 +936,6 @@ function generateMoreIdeas(btn) {
       div.setAttribute('tabindex', '0');
       div.setAttribute('aria-checked', 'false');
       div.setAttribute('aria-label', item.label);
-      div.setAttribute('onclick', 'toggleCheckbox(this)');
       div.innerHTML =
         '<div class="checkbox-box">' +
           '<img src="assets/cortex/checkbox-checked.svg" alt="">' +
@@ -915,6 +1028,11 @@ const fileUploadState = {
 function triggerFileUpload() {
   document.querySelectorAll('.attachment-dropdown.open').forEach(d => d.classList.remove('open'));
   
+  if (cortexState.activeFlowId === 'bulk-user-import') {
+    showFinderModal();
+    return;
+  }
+  
   if (!fileUploadState.fileInput) {
     const input = document.createElement('input');
     input.type = 'file';
@@ -927,6 +1045,123 @@ function triggerFileUpload() {
   }
   fileUploadState.fileInput.value = '';
   fileUploadState.fileInput.click();
+}
+
+// ============================================================
+//  FINDER MODAL (macOS-style file picker for bulk-user-import)
+// ============================================================
+
+const FINDER_FILES = [
+  { name: 'report-q1.xlsx', size: 245000, dateModified: 'Today at 11:42', kind: 'Microsoft Excel' },
+  { name: 'users-import.xlsx', size: 128000, dateModified: 'Today at 10:15', kind: 'Microsoft Excel' },
+  { name: 'data-export.xlsx', size: 89000, dateModified: 'Yesterday at 14:22', kind: 'Microsoft Excel' }
+];
+
+function formatFinderSize(bytes) {
+  if (bytes < 1024) return bytes + ' B';
+  if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+  return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+}
+
+function showFinderModal() {
+  let modal = document.getElementById('finder-modal');
+  if (!modal) {
+    modal = document.createElement('div');
+    modal.id = 'finder-modal';
+    modal.className = 'finder-modal';
+    modal.innerHTML = `
+      <div class="finder-modal-backdrop" onclick="hideFinderModal()"></div>
+      <div class="finder-modal-window">
+        <div class="finder-titlebar">
+          <div class="finder-traffic-lights">
+            <span class="finder-btn finder-btn-close"></span>
+            <span class="finder-btn finder-btn-minimize"></span>
+            <span class="finder-btn finder-btn-maximize"></span>
+          </div>
+        </div>
+        <div class="finder-toolbar">
+          <button class="finder-nav-btn" disabled>&#10094;</button>
+          <button class="finder-nav-btn" disabled>&#10095;</button>
+          <span class="finder-toolbar-title">Downloads</span>
+          <div class="finder-view-buttons">
+            <button class="finder-view-btn active" title="Grid view"><svg width="14" height="14" viewBox="0 0 14 14"><rect x="1" y="1" width="5" height="5" rx="1" fill="currentColor"/><rect x="8" y="1" width="5" height="5" rx="1" fill="currentColor"/><rect x="1" y="8" width="5" height="5" rx="1" fill="currentColor"/><rect x="8" y="8" width="5" height="5" rx="1" fill="currentColor"/></svg></button>
+            <button class="finder-view-btn" title="List view"><svg width="14" height="14" viewBox="0 0 14 14"><rect x="1" y="1" width="12" height="2" rx="0.5" fill="currentColor"/><rect x="1" y="6" width="12" height="2" rx="0.5" fill="currentColor"/><rect x="1" y="11" width="12" height="2" rx="0.5" fill="currentColor"/></svg></button>
+          </div>
+          <div class="finder-search-wrap">
+            <svg class="finder-search-icon" width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+            <input type="text" class="finder-search" placeholder="Search" readonly>
+          </div>
+        </div>
+        <div class="finder-body">
+          <div class="finder-sidebar">
+            <div class="finder-sidebar-section">
+              <div class="finder-sidebar-label">Favourites</div>
+              <div class="finder-sidebar-item"><span class="finder-sidebar-icon">&#128340;</span>Recents</div>
+              <div class="finder-sidebar-item"><span class="finder-sidebar-icon">&#128101;</span>Shared</div>
+              <div class="finder-sidebar-item"><span class="finder-sidebar-icon">&#128451;</span>Applications</div>
+              <div class="finder-sidebar-item active"><span class="finder-sidebar-icon">&#8595;</span>Downloads</div>
+              <div class="finder-sidebar-item"><span class="finder-sidebar-icon">&#128187;</span>Desktop</div>
+              <div class="finder-sidebar-item"><span class="finder-sidebar-icon">&#128196;</span>Documents</div>
+            </div>
+            <div class="finder-sidebar-section">
+              <div class="finder-sidebar-label">Locations</div>
+              <div class="finder-sidebar-item"><span class="finder-sidebar-icon">&#9729;</span>iCloud Drive</div>
+              <div class="finder-sidebar-item"><span class="finder-sidebar-icon">&#128193;</span>jancermak</div>
+              <div class="finder-sidebar-item"><span class="finder-sidebar-icon">&#128225;</span>AirDrop</div>
+              <div class="finder-sidebar-item"><span class="finder-sidebar-icon">&#128367;</span>Network</div>
+              <div class="finder-sidebar-item"><span class="finder-sidebar-icon">&#128465;</span>Bin</div>
+            </div>
+            <div class="finder-sidebar-section">
+              <div class="finder-sidebar-label">Tags</div>
+            </div>
+          </div>
+          <div class="finder-main">
+            <div class="finder-list-header">
+              <div class="finder-col finder-col-name">Name</div>
+              <div class="finder-col finder-col-date">Date Modified</div>
+              <div class="finder-col finder-col-size">Size</div>
+              <div class="finder-col finder-col-kind">Kind</div>
+            </div>
+            <div class="finder-list-body">
+              ${FINDER_FILES.map(f => `
+                <div class="finder-file-row" data-name="${f.name}" data-size="${f.size}" onclick="selectFinderFile('${f.name}', ${f.size})">
+                  <div class="finder-col finder-col-name">
+                    <span class="finder-file-icon-small">
+                      <svg viewBox="0 0 36 36" fill="#217346" width="20" height="20"><path d="M8 4C6.89543 4 6 4.89543 6 6V30C6 31.1046 6.89543 32 8 32H28C29.1046 32 30 31.1046 30 30V12L22 4H8Z"/><path fill="white" d="M13 18L16 23H14L12 20L10 23H8L11 18L8 13H10L12 16L14 13H16L13 18Z"/><path fill="white" d="M18 13H26V15H18V13ZM18 17H26V19H18V17ZM18 21H24V23H18V21Z"/></svg>
+                    </span>
+                    <span class="finder-file-name">${f.name}</span>
+                  </div>
+                  <div class="finder-col finder-col-date">${f.dateModified}</div>
+                  <div class="finder-col finder-col-size">${formatFinderSize(f.size)}</div>
+                  <div class="finder-col finder-col-kind">${f.kind}</div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(modal);
+  }
+  modal.classList.add('visible');
+}
+
+function hideFinderModal() {
+  const modal = document.getElementById('finder-modal');
+  if (modal) modal.classList.remove('visible');
+}
+
+function selectFinderFile(fileName, size) {
+  const mockFile = new File([], fileName, { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+  const fileInfo = {
+    name: fileName,
+    size: size || 0,
+    type: mockFile.type,
+    file: mockFile
+  };
+  fileUploadState.pendingFiles.push(fileInfo);
+  renderFileAttachment(fileInfo);
+  hideFinderModal();
 }
 
 function handleFileSelect(e) {
@@ -958,34 +1193,22 @@ function getFileTypeFromName(name) {
 }
 
 function renderFileAttachment(fileInfo) {
-  const inputBox = document.querySelector('.cortex-input-box');
-  if (!inputBox) return;
-
-  let attachmentArea = inputBox.querySelector('.file-attachments');
-  if (!attachmentArea) {
-    attachmentArea = document.createElement('div');
-    attachmentArea.className = 'file-attachments';
-    const contextEl = inputBox.querySelector('.cortex-input-context');
-    if (contextEl) {
-      contextEl.after(attachmentArea);
-    } else {
-      inputBox.prepend(attachmentArea);
-    }
-  }
+  const attachmentArea = document.getElementById('cortex-file-attachments');
+  if (!attachmentArea) return;
 
   const fileId = 'file-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
-  const sizeStr = formatFileSize(fileInfo.size);
   const icon = getFileIcon(fileInfo.name);
+  const ext = (fileInfo.name.split('.').pop() || '').toLowerCase();
+  const typeClass = ['xlsx', 'xls'].includes(ext) ? 'file-attachment-chip--xlsx' : '';
 
   const chip = document.createElement('div');
-  chip.className = 'file-attachment-chip';
+  chip.className = 'file-attachment-chip' + (typeClass ? ' ' + typeClass : '');
   chip.dataset.fileId = fileId;
-  chip.innerHTML = `
+    chip.innerHTML = `
     <span class="file-icon">${icon}</span>
     <span class="file-name">${fileInfo.name}</span>
-    <span class="file-size">${sizeStr}</span>
-    <button class="file-remove" onclick="removeFileAttachment('${fileId}')" title="Remove">
-      <svg viewBox="0 0 36 36" fill="currentColor" width="14" height="14"><path fill-rule="evenodd" clip-rule="evenodd" d="M18.0001 16.5859L26.293 8.29297L27.7072 9.70718L19.4143 18.0001L27.7072 26.293L26.293 27.7072L18.0001 19.4143L9.70718 27.7072L8.29297 26.293L16.5859 18.0001L8.29297 9.70718L9.70718 8.29297L18.0001 16.5859Z"/></svg>
+    <button type="button" class="file-remove" onclick="removeFileAttachment('${fileId}')" title="Remove" aria-label="Remove attachment">
+      ${SOUL_ICON_CLOSE}
     </button>
   `;
   attachmentArea.appendChild(chip);
@@ -997,11 +1220,6 @@ function removeFileAttachment(fileId) {
   if (chip) chip.remove();
   
   fileUploadState.pendingFiles = fileUploadState.pendingFiles.filter(f => f.chipId !== fileId);
-  
-  const attachmentArea = document.querySelector('.file-attachments');
-  if (attachmentArea && attachmentArea.children.length === 0) {
-    attachmentArea.remove();
-  }
 }
 
 function formatFileSize(bytes) {
@@ -1011,15 +1229,7 @@ function formatFileSize(bytes) {
 }
 
 function getFileIcon(filename) {
-  const ext = filename.split('.').pop().toLowerCase();
-  const icons = {
-    'xlsx': '<svg viewBox="0 0 36 36" fill="var(--color-success)" width="16" height="16"><path d="M8 4C6.89543 4 6 4.89543 6 6V30C6 31.1046 6.89543 32 8 32H28C29.1046 32 30 31.1046 30 30V12L22 4H8Z"/><path fill="white" d="M13 18L16 23H14L12 20L10 23H8L11 18L8 13H10L12 16L14 13H16L13 18Z"/><path fill="white" d="M18 13H26V15H18V13ZM18 17H26V19H18V17ZM18 21H24V23H18V21Z"/></svg>',
-    'xls': '<svg viewBox="0 0 36 36" fill="var(--color-success)" width="16" height="16"><path d="M8 4C6.89543 4 6 4.89543 6 6V30C6 31.1046 6.89543 32 8 32H28C29.1046 32 30 31.1046 30 30V12L22 4H8Z"/><path fill="white" d="M13 18L16 23H14L12 20L10 23H8L11 18L8 13H10L12 16L14 13H16L13 18Z"/></svg>',
-    'csv': '<svg viewBox="0 0 36 36" fill="var(--color-info)" width="16" height="16"><path d="M8 4C6.89543 4 6 4.89543 6 6V30C6 31.1046 6.89543 32 8 32H28C29.1046 32 30 31.1046 30 30V12L22 4H8Z"/><path fill="white" d="M10 14H26V16H10V14ZM10 18H26V20H10V18ZM10 22H20V24H10V22Z"/></svg>',
-    'json': '<svg viewBox="0 0 36 36" fill="var(--color-warning)" width="16" height="16"><path d="M8 4C6.89543 4 6 4.89543 6 6V30C6 31.1046 6.89543 32 8 32H28C29.1046 32 30 31.1046 30 30V12L22 4H8Z"/><path fill="white" d="M12 16C12 14.8954 12.8954 14 14 14H16V16H14V20H16V22H14C12.8954 22 12 21.1046 12 20V16ZM20 14H22C23.1046 14 24 14.8954 24 16V20C24 21.1046 23.1046 22 22 22H20V20H22V16H20V14Z"/></svg>',
-    'txt': '<svg viewBox="0 0 36 36" fill="var(--color-on-layer-secondary)" width="16" height="16"><path d="M8 4C6.89543 4 6 4.89543 6 6V30C6 31.1046 6.89543 32 8 32H28C29.1046 32 30 31.1046 30 30V12L22 4H8Z"/><path fill="white" d="M10 14H26V16H10V14ZM10 18H26V20H10V18ZM10 22H20V24H10V22Z"/></svg>'
-  };
-  return icons[ext] || icons['txt'];
+  return SOUL_ICON_DOCUMENT;
 }
 
 function processFileForAI(fileInfo) {

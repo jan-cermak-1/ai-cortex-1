@@ -69,7 +69,7 @@ function renderNav(options = {}) {
               <div class="nav-item-icon"><img src="assets/nav/help.svg" alt="Help"></div>
               <span class="nav-item-label">HELP</span>
             </div>
-            <div class="nav-item${active === 'settings' ? ' active' : ''}" data-nav-id="settings" title="Settings" data-href="settings-listening.html" role="button" tabindex="0">
+            <div class="nav-item${active === 'settings' ? ' active' : ''}" data-nav-id="settings" title="Settings" data-href="settings-users.html" role="button" tabindex="0">
               <div class="nav-item-icon"><img src="assets/nav/settings.svg" alt="Settings"></div>
               <span class="nav-item-label">SETTINGS</span>
             </div>

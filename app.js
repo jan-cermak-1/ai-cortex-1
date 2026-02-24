@@ -205,74 +205,122 @@ function hideWizard() {
 }
 
 // --- Settings / Users page logic ---
-/* Figma Users phase2 (736:4937) — sample data */
 const USERS_TABLE_DATA = (function() {
-  const users = [
-    { name: 'Devon Lane', org: null, org2: null, email: null, auth: 'SSO', role: 'Account user', groups: ['Team A'], groupsMore: 0, avatar: 'DL', selected: true },
-    { name: 'Cody Fisher', org: null, org2: null, email: null, auth: 'SSO', role: 'Account user', groups: ['Team A'], groupsMore: 0, avatar: 'CF' },
-    { name: 'Theresa Webb', org: null, org2: null, email: null, auth: 'SSO', role: 'Account user', groups: ['Team A'], groupsMore: 0, avatar: 'TW' },
-    { name: 'Floyd Miles', org: null, org2: null, email: null, auth: 'SSO', role: 'Account user', groups: ['Team A'], groupsMore: 0, avatar: 'FM' },
-    { name: 'Dianne Russell', org: null, org2: null, email: null, auth: 'SSO', role: 'Account user', groups: ['Team A'], groupsMore: 0, avatar: 'DR' },
-  ];
-  const firstNames = ['Emma','Liam','Olivia','Noah','Ava','Oliver','Sophia','Elijah','Isabella','James','Mia','William','Charlotte','Benjamin','Amelia'];
-  const lastNames = ['Smith','Johnson','Williams','Brown','Jones','Garcia','Miller','Davis','Rodriguez','Martinez','Wilson','Anderson','Taylor','Thomas'];
-  for (let i = 0; i < 15; i++) {
-    const fn = firstNames[i % firstNames.length];
-    const ln = lastNames[Math.floor(i / firstNames.length) % lastNames.length];
-    users.push({
+  const firstNames = ['Jan','Abhiraj','Adam','Adéla','Adil','Adrian','Adrien','Aeri','Ahmed','Akhil','Alaa','Alban','Alberto','Aleksandr','Aleš','Alex','Alexandra','Alice','Amit','Amy','Andrea','Andrew','Angela','Anna','Anton','Anya','Arjun','Ashley','Barbara','Ben','Boris','Brandon','Brian','Camila','Carl','Carlos','Carmen','Carolina','Catherine','Charlie','Chen','Chris','Clara','Claudia','Colin','Connor','Dana','Daniel','David','Dean','Diana','Diego','Dmitri','Elena','Elias','Emily','Emma','Eric','Eva','Faye','Felix','Fiona','Florence','Floyd','Frank','Gabriel','Gina','Grace','Hannah','Hans','Helen','Henry','Hugo','Irene','Isaac','Ivan','Jack','Jacob','James','Jana','Jane','Jason','Jennifer','Jessica','Jiří','Joe','John','Jonathan','Jordan','Josef','Julia','Julian','Juliette','Karen','Karl','Kate','Katrina','Kevin','Kim','Klára','Kyle','Laura','Leon','Liam','Lily','Linda','Lisa','Lucia','Lucie','Luis','Luke','Macy','Maja','Mara','Marco','Marcus','Maria','Marie','Marina','Mark','Martin','Mary','Matt','Maya','Michael','Michelle','Milan','Milo','Monica','Nadia','Nathan','Nicolas','Nina','Noah','Nora','Oliver','Oscar','Pablo','Patricia','Patrick','Paul','Petra','Philip','Rachel','Rafael','Rebecca','Ricardo','Rita','Robert','Robin','Roman','Rosa','Ruby','Ryan','Sam','Samuel','Sandra','Sarah','Scott','Sebastian','Simon','Sofia','Sonia','Sophie','Stefan','Stephanie','Steve','Susan','Tanya','Teresa','Thomas','Tim','Tomas','Tyler','Valentina','Vanessa','Vera','Victoria','Viktor','Vincent','William','Yuki','Zara','Zoe'];
+  const lastNames = ['Čermák','Dayal','Vejrych','Paroulková','Alimullah','Lo','Mauriac','Moreau','Miller','Mohieddin','Vishaka','Zaki','Tapprest','Pellizzato','Mylnikov','Menzel','Bills','Voss','Anderson','Baker','Brown','Campbell','Carter','Chen','Clark','Collins','Cooper','Cruz','Davis','Evans','Fisher','Garcia','González','Green','Hall','Harris','Hill','Howard','Jackson','James','Johnson','Jones','Kim','King','Lee','Lewis','López','Martin','Martinez','Mitchell','Moore','Morris','Murphy','Nelson','Nguyen','Ortiz','Parker','Patel','Perez','Phillips','Reed','Rivera','Roberts','Robinson','Rodriguez','Ross','Russell','Sánchez','Scott','Singh','Smith','Stewart','Sullivan','Taylor','Thomas','Thompson','Torres','Turner','Walker','Wang','Ward','Watson','Webb','White','Williams','Wilson','Wood','Wright','Yang','Young','Zhang'];
+  const roles = ['Account Admin','Account Admin','Account Admin','Account User','Account User','Account Admin','Account Admin','Client (External User)'];
+  const groups = [['Customer Care','Design Team'],['Customer Care','Design Team'],['Customer Care'],['Design Team'],['Social Media','Support'],['Customer Care','Social Media'],[]];
+  const moreVals = [0,0,7,7,7,8,5,3];
+
+  function initials(first, last) {
+    return (first[0] + last[0]).toUpperCase();
+  }
+
+  var data = [];
+  data.push({ name: 'Jan Čermák', org: 'Emplifi', email: 'jan.cermak@emplifi.io', auth: 'SSO', role: 'Account Admin', groups: ['Customer Care', 'Design Team'], groupsMore: 7, avatar: 'JČ', isCurrentUser: true });
+
+  var used = new Set();
+  used.add('jan.cermak@emplifi.io');
+  for (var i = 0; i < 250 && data.length < 200; i++) {
+    var fi = (i * 7 + 3) % firstNames.length;
+    var li = (i * 13 + 5) % lastNames.length;
+    var fn = firstNames[fi];
+    var ln = lastNames[li];
+    var email = fn.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z]/g,'') + '.' + ln.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z]/g,'') + '@emplifi.io';
+    if (used.has(email)) continue;
+    used.add(email);
+    var ri = data.length % roles.length;
+    var gi = data.length % groups.length;
+    var mi = data.length % moreVals.length;
+    data.push({
       name: fn + ' ' + ln,
-      org: null,
-      org2: null,
-      email: null,
-      auth: i % 2 === 0 ? 'SSO' : '-',
-      role: 'Account user',
-      groups: ['Team A'],
-      groupsMore: 0,
-      avatar: (fn[0] + ln[0]).toUpperCase(),
-      selected: false
+      org: data.length % 12 === 0 ? null : 'Emplifi',
+      email: email,
+      auth: data.length % 15 === 0 ? null : 'SSO',
+      role: roles[ri],
+      groups: groups[gi],
+      groupsMore: moreVals[mi],
+      avatar: initials(fn, ln)
     });
   }
-  return users;
+  return data;
 })();
 
 function initSettingsUsers() {
   const tbody = document.getElementById('users-tbody');
   const searchInput = document.getElementById('users-search');
-  const selectAll = document.getElementById('users-select-all');
+  const selectAllCb = document.getElementById('users-select-all');
   if (!tbody) return;
 
   let searchQuery = '';
+  const checkedSet = new Set();
 
-  /* SOUL Avatar colors: semantic layer backgrounds + on-layer text */
-  const avatarColors = ['var(--color-layer-info)', 'var(--color-layer-success)', 'var(--color-layer-warning)', 'var(--color-layer-level-3)'];
-  const avatarColorText = ['var(--color-status-info)', 'var(--color-status-success-text)', 'var(--color-status-warning)', 'var(--color-on-layer-secondary)'];
+  const avatarColors = [
+    { bg: '#dbeafe', text: '#1d4ed8' },
+    { bg: '#dcfce7', text: '#15803d' },
+    { bg: '#fef3c7', text: '#b45309' },
+    { bg: '#f3e8ff', text: '#7e22ce' },
+    { bg: '#fee2e2', text: '#b91c1c' },
+    { bg: '#e0f2fe', text: '#0369a1' },
+  ];
+
+  function avatarColor(u, idx) {
+    const seed = u.avatar ? (u.avatar.charCodeAt(0) + (u.avatar.charCodeAt(1) || 0)) : idx;
+    return avatarColors[seed % avatarColors.length];
+  }
 
   function renderUserCell(u, idx) {
-    const displayName = u.name || u.email || '-';
-    const orgLabel = (u.org || u.org2) ? (u.org2 ? (u.org || '') + ', ' + u.org2 : (u.org || u.org2)) : '';
-    const colorIdx = (u.avatar ? (u.avatar.charCodeAt(0) + (u.avatar.charCodeAt(1) || 0)) : idx) % 4;
+    const c = avatarColor(u, idx);
     const avatarHtml = u.avatar
-      ? '<div class="users-avatar users-avatar-initials" style="background:' + avatarColors[colorIdx] + ';color:' + avatarColorText[colorIdx] + '">' + u.avatar + '</div>'
+      ? '<div class="users-avatar users-avatar-initials" style="background:' + c.bg + ';color:' + c.text + '">' + u.avatar + '</div>'
       : '<div class="users-avatar users-avatar-img"><img src="assets/nav/avatar.png" alt=""></div>';
+    const orgBadge = u.org ? '<span class="users-org-badge">' + u.org.toUpperCase() + '</span>' : '';
+    const youBadge = u.isCurrentUser ? '<span class="users-you-badge">YOU</span>' : '';
+    const displayName = u.name || u.email || '';
+    const showEmail = u.email && u.name && u.name !== u.email;
     return '<div class="users-cell-user">' +
       avatarHtml +
       '<div class="users-cell-info">' +
-        '<span class="users-cell-name">' + (u.name || '') + '</span>' +
-        (orgLabel ? '<span class="users-cell-org">' + orgLabel + '</span>' : '') +
-        (u.email && !u.name ? '<span class="users-cell-email">' + u.email + '</span>' : '') +
+        '<span class="users-cell-name-row"><span class="users-cell-name">' + displayName + '</span>' + orgBadge + youBadge + '</span>' +
+        (showEmail ? '<span class="users-cell-email">' + u.email + '</span>' : '') +
       '</div></div>';
   }
 
   function renderSecurityCell(u) {
-    if (!u.auth || u.auth === '-') return '-';
-    return '<span class="users-security-pill">' + u.auth + '</span>';
+    if (!u.auth) return '<span class="users-security-dash">\u2014</span>';
+    return '<span class="users-security-badge">' + u.auth + '</span>';
   }
 
   function renderGroupsCell(u) {
-    if (!u.groups || u.groups.length === 0) return '-';
-    const pills = u.groups.map(g => '<span class="users-group-pill">' + g + '</span>').join('');
+    if (!u.groups || u.groups.length === 0) return '<span class="users-security-dash">\u2014</span>';
+    const pills = u.groups.map(g =>
+      '<span class="users-group-label"><span class="users-group-label-stripe"></span><span class="users-group-label-text">' + g + '</span></span>'
+    ).join('');
     const more = u.groupsMore > 0 ? '<span class="users-group-more">+' + u.groupsMore + '</span>' : '';
     return '<div class="users-groups-cell"><div class="users-groups-pills">' + pills + more + '</div></div>';
+  }
+
+  function renderRowActions() {
+    return '<button type="button" class="users-row-action-btn" title="Remove user" aria-label="Remove user">' +
+      '<img src="assets/icons/delete.svg" alt="" width="18" height="18">' +
+    '</button>';
+  }
+
+  function updateSelectAllState() {
+    if (!selectAllCb) return;
+    const rows = tbody.querySelectorAll('.user-checkbox');
+    const total = rows.length;
+    const checked = tbody.querySelectorAll('.user-checkbox:checked').length;
+    if (checked === 0) {
+      selectAllCb.checked = false;
+      selectAllCb.indeterminate = false;
+    } else if (checked === total) {
+      selectAllCb.checked = true;
+      selectAllCb.indeterminate = false;
+    } else {
+      selectAllCb.checked = false;
+      selectAllCb.indeterminate = true;
+    }
   }
 
   function renderRows() {
@@ -281,31 +329,57 @@ function initSettingsUsers() {
       : USERS_TABLE_DATA.filter(u => {
           const q = searchQuery.toLowerCase();
           return (u.name && u.name.toLowerCase().includes(q)) ||
-                 (u.email && u.email.toLowerCase().includes(q)) ||
-                 (u.org && u.org.toLowerCase().includes(q));
+                 (u.email && u.email.toLowerCase().includes(q));
         });
 
     tbody.innerHTML = '';
+
+    const countText = document.getElementById('users-count-text');
+    if (countText) {
+      countText.textContent = filtered.length + ' Users';
+    }
+
     filtered.forEach((u, idx) => {
+      const key = u.email || u.name || idx;
+      const isChecked = checkedSet.has(key);
       const tr = document.createElement('tr');
-      tr.className = 'user-row' + (u.selected ? ' user-row-selected' : '');
-      tr.dataset.index = idx;
+      tr.className = 'user-row' + (isChecked ? ' user-row-selected' : '');
+      tr.dataset.key = key;
       tr.setAttribute('role', 'row');
-      const actionsHtml = '';
-      tr.innerHTML = '<td class="users-col-checkbox"><input type="checkbox" class="user-checkbox users-checkbox" aria-label="Select ' + (u.name || u.email || 'user') + '"></td>' +
-        '<td class="users-col-user">' + renderUserCell(u, idx) + '</td>' +
+      tr.innerHTML =
+        '<td class="users-col-checkbox"><input type="checkbox" class="user-checkbox users-checkbox" aria-label="Select ' + (u.name || u.email || 'user') + '"' + (isChecked ? ' checked' : '') + '></td>' +
+        '<td class="users-col-user"><div class="users-col-user-inner">' + renderUserCell(u, idx) + renderRowActions() + '</div></td>' +
         '<td class="users-col-security">' + renderSecurityCell(u) + '</td>' +
         '<td class="users-col-role">' + u.role + '</td>' +
-        '<td class="users-col-groups">' + renderGroupsCell(u) + '</td>';
+        '<td class="users-col-groups users-col-groups-cell">' + renderGroupsCell(u) + '</td>';
       tbody.appendChild(tr);
 
-      tr.addEventListener('click', function(e) {
-        if (e.target.closest('.user-checkbox')) return;
-        tbody.querySelectorAll('.user-row').forEach(r => r.classList.remove('user-row-selected'));
-        tr.classList.add('user-row-selected');
+      const cb = tr.querySelector('.user-checkbox');
+
+      function syncRowSelection() {
+        if (cb.checked) {
+          checkedSet.add(key);
+          tr.classList.add('user-row-selected');
+        } else {
+          checkedSet.delete(key);
+          tr.classList.remove('user-row-selected');
+        }
+        updateSelectAllState();
+      }
+
+      cb.addEventListener('change', function(e) {
+        e.stopPropagation();
+        syncRowSelection();
       });
+
+      cb.addEventListener('click', function(e) {
+        e.stopPropagation();
+        syncRowSelection();
+      });
+
     });
 
+    updateSelectAllState();
   }
 
   if (searchInput) {
@@ -315,26 +389,77 @@ function initSettingsUsers() {
     });
   }
 
-  const toolbarSelect = document.getElementById('users-toolbar-select');
-  if (selectAll) {
-    selectAll.addEventListener('change', function() {
-      const checked = this.checked;
-      tbody.querySelectorAll('.user-checkbox').forEach(cb => { cb.checked = checked; });
-    });
-  }
-  if (toolbarSelect) {
-    toolbarSelect.addEventListener('change', function() {
-      const checked = this.checked;
-      tbody.querySelectorAll('.user-checkbox').forEach(cb => { cb.checked = checked; });
-      if (selectAll) selectAll.checked = checked;
-    });
+  if (selectAllCb) {
+    function applySelectAll() {
+      const rows = tbody.querySelectorAll('.user-row');
+      rows.forEach(tr => {
+        const cb = tr.querySelector('.user-checkbox');
+        if (!cb) return;
+        cb.checked = selectAllCb.checked;
+        const key = tr.dataset.key;
+        if (selectAllCb.checked) {
+          checkedSet.add(key);
+          tr.classList.add('user-row-selected');
+        } else {
+          checkedSet.delete(key);
+          tr.classList.remove('user-row-selected');
+        }
+      });
+    }
+    selectAllCb.addEventListener('change', applySelectAll);
+    selectAllCb.addEventListener('click', applySelectAll);
   }
 
   const filterBtn = document.getElementById('users-filter-btn');
+  const filterBackdrop = document.getElementById('users-filter-backdrop');
+  const filterOverlay = document.getElementById('users-filter-overlay');
+
+  function openFilterPanel() {
+    if (filterBackdrop) filterBackdrop.classList.add('open');
+    if (filterOverlay) filterOverlay.classList.add('open');
+    if (filterBtn) filterBtn.classList.add('has-active');
+  }
+
+  function closeFilterPanel() {
+    if (filterBackdrop) filterBackdrop.classList.remove('open');
+    if (filterOverlay) filterOverlay.classList.remove('open');
+    if (filterBtn) filterBtn.classList.remove('has-active');
+  }
+
   if (filterBtn) {
     filterBtn.addEventListener('click', function() {
-      this.classList.toggle('has-active');
+      var isOpen = filterOverlay && filterOverlay.classList.contains('open');
+      if (isOpen) { closeFilterPanel(); } else { openFilterPanel(); }
     });
+  }
+
+  if (filterBackdrop) filterBackdrop.addEventListener('click', closeFilterPanel);
+
+  var filterClose = document.getElementById('users-filter-close');
+  if (filterClose) filterClose.addEventListener('click', closeFilterPanel);
+
+  var filterCancel = document.getElementById('users-filter-cancel');
+  if (filterCancel) filterCancel.addEventListener('click', closeFilterPanel);
+
+  document.querySelectorAll('.users-filter-chip').forEach(function(chip) {
+    chip.addEventListener('click', function() {
+      this.classList.toggle('active');
+    });
+  });
+
+  var filterApply = document.getElementById('users-filter-apply');
+  if (filterApply) filterApply.addEventListener('click', closeFilterPanel);
+
+  // Keep filter panel snapped to Cortex panel edge (same pattern as listening wizard)
+  var cortexWrapper = document.querySelector('.cortex-panel-wrapper');
+  if (cortexWrapper && filterOverlay && filterBackdrop) {
+    function syncFilterPosition() {
+      var w = cortexWrapper.offsetWidth + 'px';
+      filterOverlay.style.right = w;
+      filterBackdrop.style.right = w;
+    }
+    syncFilterPosition();
+    new ResizeObserver(syncFilterPosition).observe(cortexWrapper);
   }
 
   renderRows();

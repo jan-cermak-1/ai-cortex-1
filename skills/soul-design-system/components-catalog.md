@@ -307,17 +307,19 @@ Comprehensive documentation of all SOUL Design System components organized by ca
 
 ### Badge
 
-**Purpose**: Label, categorize, or show status.
+**Purpose**: Label, categorize, or show status. [Usage](https://soul.emplifi.io/latest/components/components/badge/usage-LV56N6ZG) | [Figma](https://www.figma.com/design/koe4KH5mPdNSlL50c3QJ4E/Soul-Product-Library?node-id=9914-76181)
 
-**3 Types**: Status (process status with colors), Non-actionable (content info), Special (priority, sentiment, AI)
+**3 Types**: Status, Non-actionable, Special
 
-**Sizes**: Small (18px height, default), Medium (24px height)
+**Status Success** (Figma):
+- **Background**: `--color-layer-level-1` (white)
+- **Border**: 1px solid `--color-border-success-emphasis` (green)
+- **Text**: `--color-status-success-text` (green)
+- **Border radius**: `--border-radius-medium` (6px)
+- **Padding**: `var(--space-1)` `var(--space-2)` (3px 6px)
+- **Typography**: 10px, Bold (700), UPPERCASE
 
-**Typography**: 10px, Bold (700), UPPERCASE, Max 20 characters
-
-**Placement**: Inline (widgets, cards), Header (panels, modals), Table (one per row)
-
-**Variants**: Badge, BadgeAI, BadgePPD, BadgePriority, BadgePropagation, BadgeSentiment
+**Sizes**: Small (18px), Medium (24px)
 
 **Storybook**: https://soul.dev.emplifi.io/?path=/docs/components-badge--overview
 
