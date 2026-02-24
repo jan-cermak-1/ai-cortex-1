@@ -1663,41 +1663,37 @@ async function executePlaybackAction(step) {
     }
 
     case 'submitChat': {
-      // Text comes from step.text — never read from input field (avoids stale value bugs).
-      // Cursor moves to input field briefly, then to send button.
-      const inputField = document.getElementById('cortex-input-field');
-      const sendBtn = document.getElementById('cortex-send-btn');
       const text = step.text || '';
+      // Snapshot pending files BEFORE any cursor animation (animations are async
+      // and could in theory interleave with other state changes).
+      const filesToSend = [...fileUploadState.pendingFiles];
 
+      // Move cursor: input area → send button
+      const inputField = document.getElementById('cortex-input-field');
       if (inputField) {
+        inputField.value = '';
         await animateCursorToElement('#cortex-input-field');
         await new Promise(r => setTimeout(r, 400));
-        inputField.value = '';
       }
-      if (sendBtn) {
-        await animateCursorToElement('#cortex-send-btn');
-        await new Promise(r => setTimeout(r, 200));
+      await animateCursorToElement('#cortex-send-btn');
+      await new Promise(r => setTimeout(r, 200));
+
+      // Build and show user message bubble
+      if (filesToSend.length > 0) {
+        const fileBadgesHtml = filesToSend.map(f => {
+          const ext = (f.name.split('.').pop() || '').toLowerCase();
+          const isXls = ['xlsx', 'xls'].includes(ext);
+          const cls = isXls ? 'file-attachment-chip file-attachment-chip--xlsx' : 'file-attachment-chip';
+          return `<span class="${cls}"><span class="file-icon">${SOUL_ICON_DOCUMENT}</span><span class="file-name">${f.name}</span></span>`;
+        }).join(' ');
+        addChatMessage('user', `<span class="attached-files">${fileBadgesHtml}</span>${text ? ' ' + text : ''}`);
+        const attachmentArea = document.getElementById('cortex-file-attachments');
+        if (attachmentArea) attachmentArea.innerHTML = '';
+        fileUploadState.pendingFiles = [];
+      } else if (text) {
+        addChatMessage('user', text);
       }
-      if (text) {
-        // Show user message visually (with file chip if attached),
-        // but skip AI auto-response — playback steps control what comes next.
-        const files = [...fileUploadState.pendingFiles];
-        if (files.length > 0) {
-          const fileBadgesHtml = files.map(f => {
-            const ext = (f.name.split('.').pop() || '').toLowerCase();
-            const isXls = ['xlsx', 'xls'].includes(ext);
-            const cls = isXls ? 'file-attachment-chip file-attachment-chip--xlsx' : 'file-attachment-chip';
-            return `<span class="${cls}"><span class="file-icon">${SOUL_ICON_DOCUMENT}</span><span class="file-name">${f.name}</span></span>`;
-          }).join(' ');
-          addChatMessage('user', `<span class="attached-files">${fileBadgesHtml}</span> ${text}`);
-          const attachmentArea = document.getElementById('cortex-file-attachments');
-          if (attachmentArea) attachmentArea.innerHTML = '';
-          fileUploadState.pendingFiles = [];
-        } else {
-          addChatMessage('user', text);
-        }
-        if (inputField) inputField.value = '';
-      }
+      if (inputField) inputField.value = '';
       break;
     }
   }
