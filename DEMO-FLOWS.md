@@ -1,6 +1,6 @@
 # Demo Flows — Cortex AI
 
-Živá dokumentace všech demo flows. Aktualizovat při každé změně `flows/*.js`.
+Living documentation of all demo flows. Update whenever `flows/*.js` changes.
 
 ---
 
@@ -8,39 +8,39 @@
 
 ### Labubu Trend
 **Persona:** Social Media Manager  
-**Scénář:** Detekce trendu a vytvoření kampaně
+**Scenario:** Trend detection and campaign creation
 
-1. Navigace na Command Center
-2. Zobrazí se intelligence box — Cortex upozorní, že Labubu je trending a konkurenti publikují obsah
-3. Kurzor se přesune na panel Cortex
-4. Klik na "More ideas" — Cortex nabídne rozšíření akcí
-5. Zaškrtnutí 3 akcí: vytvoření kampaně + kolekce, listening query, analytický board
-6. Klik na "Execute selected" — Cortex spustí vykonání
-7. Otevření výsledku: Collection "Labubu" (Content)
-8. Otevření výsledku: Publisher campaign "Labubu" (Publisher)
-9. Otevření výsledku: Listening query "Labubu" (Settings)
-10. Otevření výsledku: Analytics custom board "Labubu" (Unified Analytics)
-11. Smazání výsledku: Analytics board
-12. Smazání výsledku: Listening query
-13. Smazání výsledku: Publisher campaign
-14. Smazání výsledku: Collection
+1. Navigate to Command Center
+2. Intelligence box appears — Cortex alerts that Labubu is trending and competitors are publishing related content
+3. Cursor moves to the Cortex panel
+4. Click "More ideas" — Cortex expands the list of suggested actions
+5. Check 3 actions: create campaign + collection, create listening query, create analytics board
+6. Click "Execute selected" — Cortex starts executing the actions
+7. Open result: Collection "Labubu" (Content)
+8. Open result: Publisher campaign "Labubu" (Publisher)
+9. Open result: Listening query "Labubu" (Settings)
+10. Open result: Analytics custom board "Labubu" (Unified Analytics)
+11. Delete result: Analytics board
+12. Delete result: Listening query
+13. Delete result: Publisher campaign
+14. Delete result: Collection
 
 ---
 
 ### Bulk User Import
 **Persona:** Team Admin  
-**Scénář:** Hromadný import uživatelů z Excel souboru  
-**Stav:** Playback zatím není implementován — kroky jsou připraveny pro fázi 2
+**Scenario:** Bulk import of users from an Excel file  
+**Status:** Playback not yet implemented — steps are prepared for Phase 2
 
-1. Navigace na Command Center
-2. Cortex: detekoval Excel soubor `users-import-2026.xlsx` a analyzuje ho
-3. Cortex: nalezeno 47 platných záznamů (Name, Email, Department, Role)
-4. Zobrazí se intelligence box s možnostmi importu
-5. Cortex: doporučí import, vytvoření týmů, odeslání pozvánek a přiřazení rolí
-6. Zaškrtnutí 4 akcí: import uživatelů, vytvoření týmů, odeslání pozvánek, přiřazení rolí
-7. Klik na "Execute selected"
-8. Cortex: import dokončen — 47 uživatelů, 6 týmů, pozvánky odeslány
-9. Navigace na Settings / Users — zobrazení nově vytvořených účtů
+1. Navigate to Command Center
+2. Cortex: detected Excel file `users-import-2026.xlsx` and is analyzing it
+3. Cortex: found 47 valid records (Name, Email, Department, Role)
+4. Intelligence box appears with import options
+5. Cortex: recommends importing users, creating teams, sending invites, and assigning roles
+6. Check 4 actions: import users, create teams, send invites, assign roles
+7. Click "Execute selected"
+8. Cortex: import complete — 47 users, 6 teams, invitations sent
+9. Navigate to Settings / Users — newly created accounts are visible
 
 ---
 
@@ -48,150 +48,150 @@
 
 ### Crisis Response
 **Persona:** Brand Manager  
-**Scénář:** Reakce na náhlý nárůst negativního sentimentu u produktu EcoBottle Pro
+**Scenario:** Responding to a sudden negative sentiment spike for the EcoBottle Pro product
 
-1. Navigace na Command Center
-2. Cortex URGENT ALERT: 340% nárůst negativních zmínek za poslední 2 hodiny
-3. Cortex: primární téma — stížnosti na kvalitu produktu EcoBottle Pro
-4. Zobrazí se intelligence box s doporučenými akcemi
-5. Cortex: doporučí pozastavit reklamy, napsat reakci, eskalovat do Care, nastavit monitoring
-6. Zaškrtnutí 4 akcí: pauza promo obsahu, draft krizové odpovědi, eskalace do Care, monitorovací board
-7. Klik na "Execute selected"
-8. Cortex: krizový protokol aktivován — 12 postů pozastaveno, 28 zmínek eskalováno
-9. Navigace na Publisher Calendar — zobrazení pozastavených postů
-10. Cortex: posty jsou na hold do vyřešení krize
-11. Navigace na Care Inbox — Care tým vyřizuje eskalované zmínky
-12. Cortex: Care tým aktivní, krizový monitoring board spuštěn
-13. Navigace na Unified Analytics — real-time krizový monitoring board
-14. Cortex: data ukazují stabilizaci sentimentu
+1. Navigate to Command Center
+2. Cortex URGENT ALERT: 340% increase in negative mentions over the last 2 hours
+3. Cortex: primary topic — product quality complaints about EcoBottle Pro
+4. Intelligence box appears with recommended actions
+5. Cortex: recommends pausing ads, drafting a crisis statement, escalating to Care, and setting up monitoring
+6. Check 4 actions: pause promotional content, draft crisis response, escalate to Care, create monitoring board
+7. Click "Execute selected"
+8. Cortex: crisis protocol activated — 12 posts paused, 28 mentions escalated
+9. Navigate to Publisher Calendar — view paused promotional posts
+10. Cortex: posts are on hold until the crisis is resolved
+11. Navigate to Care Inbox — Care team is handling escalated mentions
+12. Cortex: Care team active, crisis monitoring board running
+13. Navigate to Unified Analytics — real-time crisis monitoring board
+14. Cortex: data shows sentiment stabilizing
 
 ---
 
 ### Review Automation
 **Persona:** eCommerce Manager  
-**Scénář:** Automatizace odpovědí na 156 nevyřízených recenzí produktů
+**Scenario:** Automating responses to 156 pending product reviews
 
-1. Navigace na Command Center
-2. Cortex: detekováno 156 nevyřízených recenzí v katalogu produktů
-3. Cortex: rozpad — 89 pozitivních (4–5 hvězd), 42 neutrálních, 25 negativních
-4. Zobrazí se intelligence box s možnostmi automatizace
-5. Cortex: doporučí auto-odpovědi na pozitivní, drafty pro negativní, flagování refundů, tagování
-6. Zaškrtnutí 4 akcí: auto-odpovědi na pozitivní, drafty pro negativní, flagování, tagování
-7. Klik na "Execute selected"
-8. Cortex: automatizace dokončena — 89 odpovědí, 25 draftů, 8 eskalací
-9. Navigace na Ratings & Reviews — přehled draftů negativních odpovědí
-10. Cortex: drafty připraveny ke schválení, všechny recenze otagovány
-11. Navigace na Unified Analytics — přehled sentimentu dle kategorií
-12. Cortex: response rate zvýšen na 97 %
+1. Navigate to Command Center
+2. Cortex: detected 156 unresponded reviews across the product catalog
+3. Cortex: breakdown — 89 positive (4–5 stars), 42 neutral, 25 negative
+4. Intelligence box appears with automation options
+5. Cortex: recommends auto-replies for positive, drafts for negative, flagging refunds, and tagging
+6. Check 4 actions: auto-respond to positive, draft responses for negative, flag refund mentions, tag by category
+7. Click "Execute selected"
+8. Cortex: automation complete — 89 responses sent, 25 drafts ready, 8 escalated
+9. Navigate to Ratings & Reviews — review negative response drafts
+10. Cortex: drafts ready for approval, all reviews tagged by category
+11. Navigate to Unified Analytics — sentiment breakdown by category
+12. Cortex: response rate increased to 97%
 
 ---
 
 ### Care Team Onboarding
 **Persona:** Care Supervisor  
-**Scénář:** Onboarding 8 nových Care agentů z CSV rosteru
+**Scenario:** Onboarding 8 new Care agents from a CSV roster file
 
-1. Navigace na Command Center
-2. Cortex: zpracoval soubor `care-team-roster.csv`
-3. Cortex: nalezeno 8 nových agentů s přiřazením kanálů a dovedností
-4. Zobrazí se intelligence box s kroky onboardingu
-5. Cortex: doporučí vytvoření účtů, přiřazení front, nastavení směn, aktivaci maker
-6. Zaškrtnutí 4 akcí: vytvoření účtů, přiřazení front, nastavení směn, aktivace maker
-7. Klik na "Execute selected"
-8. Cortex: onboarding dokončen — 8 účtů, fronty přiřazeny, směny nastaveny, 42 maker aktivováno
-9. Navigace na Settings / Users — přehled nově vytvořených agentských účtů
-10. Cortex: agenti mají přístup do inboxu
-11. Navigace na Care Inbox — agenti jsou připraveni vyřizovat případy
-12. Cortex: kapacita týmu vzrostla o 40 %
+1. Navigate to Command Center
+2. Cortex: processed file `care-team-roster.csv`
+3. Cortex: found 8 new agents with channel and skill assignments
+4. Intelligence box appears with onboarding steps
+5. Cortex: recommends creating accounts, assigning queues, configuring schedules, enabling macros
+6. Check 4 actions: create agent accounts, assign queues, configure shift schedules, enable macro library
+7. Click "Execute selected"
+8. Cortex: onboarding complete — 8 accounts created, queues assigned, schedules set, 42 macros enabled
+9. Navigate to Settings / Users — newly created agent accounts visible
+10. Cortex: agents have inbox access
+11. Navigate to Care Inbox — agents are ready to handle cases
+12. Cortex: team capacity increased by 40%
 
 ---
 
 ### Content Optimizer
 **Persona:** Content Lead  
-**Scénář:** AI optimalizace 23 naplánovaných postů pro příští týden
+**Scenario:** AI optimization of 23 scheduled posts for next week
 
-1. Navigace na Command Center
-2. Cortex: analyzoval 23 naplánovaných postů pro příští týden
-3. Cortex: nalezeny příležitosti k optimalizaci — predikce +32 % engagement
-4. Zobrazí se intelligence box s návrhy optimalizace
-5. Cortex: doporučí přeplánování časů, vylepšení copywritingu, aktualizaci hashtagů, vizuální návrhy
-6. Zaškrtnutí 4 akcí: optimální časy, vylepšení textů, aktualizace hashtagů, vizuální doporučení
-7. Klik na "Execute selected"
-8. Cortex: optimalizace hotova — 8 postů přeplánováno, 23 textů vylepšeno, 5 vizuálních návrhů
-9. Navigace na Publisher Calendar — optimalizovaný obsah kalendáře (pondělí 9:30 peak)
-10. Cortex: posty přeplánované na nejlepší časy
-11. Navigace na Content Collection — vizuální doporučení ke schválení
-12. Cortex: návrhy připraveny
+1. Navigate to Command Center
+2. Cortex: analyzed 23 scheduled posts for next week
+3. Cortex: optimization opportunities found — predicted +32% engagement improvement
+4. Intelligence box appears with optimization suggestions
+5. Cortex: recommends rescheduling to optimal times, improving copy, updating hashtags, visual suggestions
+6. Check 4 actions: reschedule to optimal times, enhance captions, update hashtags, suggest visual improvements
+7. Click "Execute selected"
+8. Cortex: optimization complete — 8 posts rescheduled, 23 captions enhanced, 5 visual suggestions ready
+9. Navigate to Publisher Calendar — optimized content calendar (Monday peak time 9:30 AM)
+10. Cortex: posts rescheduled to best engagement windows
+11. Navigate to Content Collection — visual improvement suggestions ready for review
+12. Cortex: suggestions prepared
 
 ---
 
 ### Competitor Alert
 **Persona:** Brand Manager  
-**Scénář:** Reakce na spuštění kampaně #SummerSavings od CompetitorX
+**Scenario:** Responding to CompetitorX's #SummerSavings campaign launch
 
-1. Navigace na Command Center
-2. Cortex ALERT: CompetitorX spustil velkou kampaň cílící na stejný segment
-3. Cortex: kampaň #SummerSavings generuje +45 % engagement — doporučena counter-strategie
-4. Zobrazí se intelligence box s doporučenými akcemi
-5. Cortex: doporučí analýzu, counter-content, boost budget, retargeting
-6. Zaškrtnutí 4 akcí: analýza kampaně, counter-content, doporučení boostů, retargeting publika
-7. Klik na "Execute selected"
-8. Cortex: odpověď aktivována — analýza hotova, 6 counter-content nápadů, $2 500 boost doporučen
-9. Navigace na Unified Analytics — detailní analýza kampaně a share of voice
-10. Cortex: přehled srovnání share of voice
-11. Navigace na Publisher Calendar — boost doporučení a retargeting publika 125K uživatelů
-12. Cortex: retargeting audience vytvořena
+1. Navigate to Command Center
+2. Cortex ALERT: CompetitorX launched a major campaign targeting the same audience segment
+3. Cortex: #SummerSavings campaign generating +45% engagement spike — counter-strategy recommended
+4. Intelligence box appears with recommended response actions
+5. Cortex: recommends campaign analysis, counter-content, boost budget, audience retargeting
+6. Check 4 actions: analyze competitor campaign, generate counter-content, recommend paid boosts, set up audience retargeting
+7. Click "Execute selected"
+8. Cortex: response activated — analysis ready, 6 counter-content ideas generated, $2,500 boost budget recommended
+9. Navigate to Unified Analytics — detailed campaign analysis and share of voice comparison
+10. Cortex: share of voice comparison overview
+11. Navigate to Publisher Calendar — boost recommendations and retargeting audience of 125K users
+12. Cortex: retargeting audience created
 
 ---
 
 ### Bot Tuning
 **Persona:** Bot Manager  
-**Scénář:** Zlepšení výkonu chatbota — containment rate z 73 % na 80 %
+**Scenario:** Improving chatbot performance — containment rate from 73% to 80%
 
-1. Navigace na Command Center
-2. Cortex: analyzoval výkon chatbota — 2 847 konverzací tento týden
-3. Cortex: containment rate 73 % (cíl 80 %) — identifikovány příležitosti ke zlepšení o +8 %
-4. Zobrazí se intelligence box s doporučeními
-5. Cortex: doporučí vylepšení intentů, přidání odpovědí, aktualizaci fallbacku, trénink entit
-6. Zaškrtnutí 4 akcí: vylepšení intentů, nové odpovědi, aktualizace fallbacku, trénink entit
-7. Klik na "Execute selected"
-8. Cortex: optimalizace hotova — 5 intentů, 12 odpovědí, fallback, entity model
-9. Navigace na Bot Overview — stav po optimalizaci
-10. Cortex: top intent "order_status" má nově 94 % přesnost, bot je live s novými modely
-11. Cortex: očekávaný nárůst containment rate o +8 %, monitoring spuštěn
+1. Navigate to Command Center
+2. Cortex: analyzed chatbot performance — 2,847 conversations this week
+3. Cortex: containment rate 73% (target: 80%) — +8% improvement opportunities identified
+4. Intelligence box appears with optimization recommendations
+5. Cortex: recommends improving intents, adding responses, updating fallback, training entities
+6. Check 4 actions: improve intent recognition, add missing responses, update fallback flow, train product entity model
+7. Click "Execute selected"
+8. Cortex: optimization complete — 5 intents improved, 12 responses added, fallback updated, entity model retrained
+9. Navigate to Bot Overview — post-optimization status
+10. Cortex: top intent "order_status" now at 94% accuracy, bot is live with updated models
+11. Cortex: expected containment rate improvement +8%, monitoring started
 
 ---
 
 ### Listening Report
 **Persona:** PR Manager  
-**Scénář:** Generování týdenního brand listening reportu pro stakeholdery
+**Scenario:** Generating a weekly brand listening report for stakeholders
 
-1. Navigace na Command Center
-2. Cortex: zkompiloval týdenní data — 12 456 zmínek napříč kanály
-3. Cortex: pozitivní sentiment +12 % vs minulý týden — připraven report pro stakeholdery
-4. Zobrazí se intelligence box s obsahem reportu
-5. Cortex: doporučí executive summary, sentiment vizualizaci, breakdown témat, share of voice
-6. Zaškrtnutí 4 akcí: executive summary, sentiment graf, téma breakdown, share of voice
-7. Klik na "Execute selected"
-8. Cortex: report vygenerován — summary, sentiment trendy, témata, SOV 34 %
-9. Navigace na Unified Analytics — weekly listening report s vizualizacemi
-10. Cortex: přehled dat s grafy
-11. Cortex: share of voice vzrostl na 34 % (z 31 % minulý měsíc), PDF report připraven
+1. Navigate to Command Center
+2. Cortex: compiled weekly brand data — 12,456 mentions across all channels
+3. Cortex: positive sentiment +12% vs last week — stakeholder report ready
+4. Intelligence box appears with report content options
+5. Cortex: recommends executive summary, sentiment visualization, topic breakdown, share of voice
+6. Check 4 actions: generate executive summary, create sentiment trend chart, topic breakdown, calculate share of voice
+7. Click "Execute selected"
+8. Cortex: report generated — summary, sentiment trends, topic breakdown, SOV: 34%
+9. Navigate to Unified Analytics — weekly listening report with all visualizations
+10. Cortex: data overview with charts
+11. Cortex: share of voice increased to 34% (up from 31% last month), PDF report ready for download
 
 ---
 
 ### VoC Insights
 **Persona:** CX Director  
-**Scénář:** Analýza Voice of Customer dat za Q1 pro boardovou prezentaci
+**Scenario:** Analyzing Q1 Voice of Customer data for a board presentation
 
-1. Navigace na Command Center
-2. Cortex: analyzoval Q1 VoC data — 4 287 odpovědí na dotazník, 18 000+ feedback touchpointů
-3. Cortex: NPS vzrostl na 42 (z 38), top pain point: checkout process friction
-4. Zobrazí se intelligence box s analýzami
-5. Cortex: doporučí NPS breakdown, analýzu témat, journey mapping, akční plán pro Q2
-6. Zaškrtnutí 4 akcí: NPS breakdown, analýza témat, journey mapping, akční plán
-7. Klik na "Execute selected"
-8. Cortex: analýza hotova — NPS breakdown, 5 témat, journey mapa, Q2 akční plán
-9. Navigace na Unified Analytics — NPS segment breakdown a customer journey mapa
-10. Cortex: přehled dat a journey pain points
-11. Navigace na VoC Survey Detail — promoter segment vzrostl o 8 %, executive deck připraven
-12. Cortex: deck připraven pro boardové setkání
+1. Navigate to Command Center
+2. Cortex: analyzed Q1 VoC data — 4,287 survey responses and 18,000+ feedback touchpoints
+3. Cortex: NPS improved to 42 (up from 38), top pain point: checkout process friction
+4. Intelligence box appears with analysis options
+5. Cortex: recommends NPS breakdown, theme analysis, journey mapping, Q2 action plan
+6. Check 4 actions: NPS segment breakdown, deep-dive theme analysis, journey pain point mapping, create Q2 action plan
+7. Click "Execute selected"
+8. Cortex: analysis complete — NPS breakdown, 5 themes analyzed, journey map created, Q2 action plan drafted
+9. Navigate to Unified Analytics — NPS segment breakdown and customer journey pain point map
+10. Cortex: data overview and journey pain points
+11. Navigate to VoC Survey Detail — promoter segment grew 8%, executive deck ready for board meeting
+12. Cortex: deck ready for board presentation
