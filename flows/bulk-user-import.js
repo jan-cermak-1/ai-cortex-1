@@ -75,10 +75,8 @@ const FLOW_BULK_USER_IMPORT = {
     { type: 'action', action: 'clickUploadFile', delay: 1000 },
     // 4. Select users-import.xlsx in the Finder modal
     { type: 'action', action: 'selectFinderFile', fileName: 'users-import.xlsx', fileSize: 128000, delay: 1500 },
-    // 5. Type "add these users" in the chat input (clears any existing text first)
-    { type: 'action', action: 'typeInChat', text: 'add these users', delay: 1200 },
-    // 6. Move cursor to send button and submit — shows user message with file chip
-    { type: 'action', action: 'submitChat', delay: 800 },
+    // 5. Cursor moves to input, then to send — shows user message with file chip
+    { type: 'action', action: 'submitChat', text: 'add these users', delay: 1200 },
     // 8. Cortex responds: analyzing the file
     { type: 'message', sender: 'ai', text: 'I detected an Excel file you uploaded: <strong>users-import-2026.xlsx</strong>. Let me analyze it.', delay: 2000 },
     { type: 'message', sender: 'ai', text: 'Found <strong>47 valid user records</strong> with columns: Name, Email, Department, Role. Ready for import.', delay: 2500 },

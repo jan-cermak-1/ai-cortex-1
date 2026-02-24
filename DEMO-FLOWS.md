@@ -35,8 +35,7 @@ Living documentation of all demo flows. Update whenever `flows/*.js` changes.
 2. Click the `+` (attachment) button in the Cortex chatbox
 3. Click "Upload file" in the dropdown — macOS Finder modal opens
 4. Select `users-import.xlsx` from the Finder modal
-5. Type "add these users" in the chat input
-6. Click the send button — message with attached file appears in chat
+5. Click the send button — message "add these users" with attached file appears in chat
 7. Cortex: analyzing the uploaded file — `users-import-2026.xlsx`
 8. Cortex: found 47 valid records (Name, Email, Department, Role)
 9. Intelligence box appears with import options

@@ -1663,15 +1663,23 @@ async function executePlaybackAction(step) {
     }
 
     case 'submitChat': {
-      const sendBtn = document.getElementById('cortex-send-btn');
+      // Text comes from step.text — never read from input field (avoids stale value bugs).
+      // Cursor moves to input field briefly, then to send button.
       const inputField = document.getElementById('cortex-input-field');
-      const text = inputField ? inputField.value.trim() : (step.text || '');
+      const sendBtn = document.getElementById('cortex-send-btn');
+      const text = step.text || '';
+
+      if (inputField) {
+        await animateCursorToElement('#cortex-input-field');
+        await new Promise(r => setTimeout(r, 400));
+        inputField.value = '';
+      }
       if (sendBtn) {
         await animateCursorToElement('#cortex-send-btn');
         await new Promise(r => setTimeout(r, 200));
       }
       if (text) {
-        // During playback: show user message visually (with file chip if attached),
+        // Show user message visually (with file chip if attached),
         // but skip AI auto-response — playback steps control what comes next.
         const files = [...fileUploadState.pendingFiles];
         if (files.length > 0) {
