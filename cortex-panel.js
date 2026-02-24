@@ -1622,26 +1622,29 @@ async function executePlaybackAction(step) {
     }
 
     case 'clickUploadFile': {
+      // Close any open dropdown
+      document.querySelectorAll('.attachment-dropdown.open').forEach(d => d.classList.remove('open'));
+      // Try to animate cursor to menu item if visible, then always show modal
       const uploadItem = document.querySelector('.attachment-dropdown-item[onclick*="triggerFileUpload"]');
       if (uploadItem) {
         await animateCursorToElement('.attachment-dropdown-item[onclick*="triggerFileUpload"]');
-        document.querySelectorAll('.attachment-dropdown.open').forEach(d => d.classList.remove('open'));
-        showFinderModal();
       }
+      showFinderModal();
       break;
     }
 
     case 'selectFinderFile': {
       const fileName = step.fileName || 'users-import.xlsx';
       const fileSize = step.fileSize || 128000;
+      // Make sure finder modal is visible (in case clickUploadFile was skipped/missed)
+      showFinderModal();
+      await new Promise(r => setTimeout(r, 300));
       const fileRow = document.querySelector(`.finder-file-row[data-name="${fileName}"]`);
       if (fileRow) {
         await animateCursorToElement(`.finder-file-row[data-name="${fileName}"]`);
         await new Promise(r => setTimeout(r, 300));
-        selectFinderFile(fileName, fileSize);
-      } else {
-        selectFinderFile(fileName, fileSize);
       }
+      selectFinderFile(fileName, fileSize);
       break;
     }
 
@@ -1664,19 +1667,20 @@ async function executePlaybackAction(step) {
 
     case 'submitChat': {
       const text = step.text || '';
-      // Snapshot pending files BEFORE any cursor animation (animations are async
-      // and could in theory interleave with other state changes).
+      // Snapshot pending files BEFORE any cursor animation
       const filesToSend = [...fileUploadState.pendingFiles];
 
-      // Move cursor: input area → send button
-      const inputField = document.getElementById('cortex-input-field');
-      if (inputField) {
-        inputField.value = '';
-        await animateCursorToElement('#cortex-input-field');
-        await new Promise(r => setTimeout(r, 400));
-      }
-      await animateCursorToElement('#cortex-send-btn');
-      await new Promise(r => setTimeout(r, 200));
+      // Move cursor: input area → send button (wrapped to never throw)
+      try {
+        const inputField = document.getElementById('cortex-input-field');
+        if (inputField) {
+          inputField.value = '';
+          await animateCursorToElement('#cortex-input-field');
+          await new Promise(r => setTimeout(r, 400));
+        }
+        await animateCursorToElement('#cortex-send-btn');
+        await new Promise(r => setTimeout(r, 200));
+      } catch (_) { /* cursor animation failure must not block message */ }
 
       // Build and show user message bubble
       if (filesToSend.length > 0) {
@@ -1693,7 +1697,8 @@ async function executePlaybackAction(step) {
       } else if (text) {
         addChatMessage('user', text);
       }
-      if (inputField) inputField.value = '';
+      const inputField2 = document.getElementById('cortex-input-field');
+      if (inputField2) inputField2.value = '';
       break;
     }
   }
