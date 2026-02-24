@@ -66,8 +66,7 @@ const FLOW_BULK_USER_IMPORT = {
     { icon: 'activity', text: 'Team <strong>"Marketing"</strong> now has 12 members.', time: '10 min ago', unread: false }
   ],
 
-  playbackSteps: [],  /* Phase 2: add play demo after manual flow is done */
-  _playbackStepsTemplate: [
+  playbackSteps: [
     { type: 'navigate', page: 'command-center.html', cursorTarget: '[data-nav-id="command-center"]', delay: 1500 },
     { type: 'message', sender: 'ai', text: 'I detected an Excel file you uploaded: <strong>users-import-2026.xlsx</strong>. Let me analyze it.', delay: 2000 },
     { type: 'message', sender: 'ai', text: 'Found <strong>47 valid user records</strong> with columns: Name, Email, Department, Role. Ready for import.', delay: 2500 },
