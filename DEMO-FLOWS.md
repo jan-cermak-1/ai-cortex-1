@@ -31,15 +31,20 @@ Living documentation of all demo flows. Update whenever `flows/*.js` changes.
 **Persona:** Team Admin  
 **Scenario:** Bulk import of users from an Excel file
 
-1. Navigate to Command Center
-2. Cortex: detected Excel file `users-import-2026.xlsx` and is analyzing it
-3. Cortex: found 47 valid records (Name, Email, Department, Role)
-4. Intelligence box appears with import options
-5. Cortex: recommends importing users, creating teams, sending invites, and assigning roles
-6. Check 4 actions: import users, create teams, send invites, assign roles
-7. Click "Execute selected"
-8. Cortex: import complete — 47 users, 6 teams created by department, invitations queued
-9. Navigate to Settings / Users — all users are now visible in the User Management panel
+1. Navigate to Settings / Users — starting point for the admin
+2. Navigate to Command Center to open Cortex
+3. Click the `+` (attachment) button in the Cortex chatbox
+4. Click "Upload file" in the dropdown — macOS Finder modal opens
+5. Select `users-import.xlsx` from the Finder modal
+6. Type "add these users" in the chat input
+7. Cortex: analyzing the uploaded file — `users-import-2026.xlsx`
+8. Cortex: found 47 valid records (Name, Email, Department, Role)
+9. Intelligence box appears with import options
+10. Cortex: recommends importing users, creating teams, sending invites, and assigning roles
+11. Check 4 actions: import users, create teams, send invites, assign roles
+12. Click "Execute selected"
+13. Cortex: import complete — 47 users, 6 teams created by department, invitations queued
+14. Navigate to Settings / Users — all users are now visible in the User Management panel
 
 ---
 

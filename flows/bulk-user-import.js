@@ -67,13 +67,28 @@ const FLOW_BULK_USER_IMPORT = {
   ],
 
   playbackSteps: [
+    // 1. Navigate to Settings / Users — that's where the admin starts
+    { type: 'navigate', page: 'settings-users.html', cursorTarget: '[data-nav-id="settings"]', delay: 1500 },
+    // 2. Navigate to Command Center to open Cortex
     { type: 'navigate', page: 'command-center.html', cursorTarget: '[data-nav-id="command-center"]', delay: 1500 },
+    // 3. Click + (attachment) button in chatbox
+    { type: 'action', action: 'clickAttachmentBtn', delay: 1200 },
+    // 4. Click "Upload file" in the dropdown — opens Finder modal
+    { type: 'action', action: 'clickUploadFile', delay: 1000 },
+    // 5. Select users-import.xlsx in the Finder modal
+    { type: 'action', action: 'selectFinderFile', fileName: 'users-import.xlsx', fileSize: 128000, delay: 1500 },
+    // 6. Type "add these users" in the chat input
+    { type: 'action', action: 'typeInChat', text: 'add these users', delay: 1200 },
+    // 7. Cortex responds: analyzing the file
     { type: 'message', sender: 'ai', text: 'I detected an Excel file you uploaded: <strong>users-import-2026.xlsx</strong>. Let me analyze it.', delay: 2000 },
     { type: 'message', sender: 'ai', text: 'Found <strong>47 valid user records</strong> with columns: Name, Email, Department, Role. Ready for import.', delay: 2500 },
+    // 8. Intelligence box with options
     { type: 'action', action: 'showIntelligenceBox', delay: 1500 },
     { type: 'message', sender: 'ai', text: 'I can import all users, create teams based on departments, send invites, and assign roles automatically.', delay: 2500 },
+    // 9. Select all checkboxes and execute
     { type: 'action', action: 'selectCheckboxes', items: ['import-users', 'create-teams', 'send-invites', 'assign-roles'], delay: 1500 },
     { type: 'action', action: 'executeSelected', delay: 2000 },
+    // 10. Done — navigate to Settings / Users
     { type: 'message', sender: 'ai', text: 'Import complete! 47 users created, 6 teams organized by department, invitations queued.', delay: 2500 },
     { type: 'navigate', page: 'settings-users.html', cursorTarget: '[data-nav-id="settings"]', delay: 2000 },
     { type: 'message', sender: 'ai', text: 'All users are now visible in the User Management panel. The demo is complete!', delay: 2000 }

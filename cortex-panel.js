@@ -1603,6 +1603,57 @@ async function executePlaybackAction(step) {
         }
       }
       break;
+
+    case 'clickAttachmentBtn': {
+      const attachBtn = document.querySelector('.attachment-btn');
+      if (attachBtn) {
+        await animateCursorToElement('.attachment-btn');
+        const dropdown = attachBtn.querySelector('.attachment-dropdown');
+        if (dropdown) dropdown.classList.add('open');
+      }
+      break;
+    }
+
+    case 'clickUploadFile': {
+      const uploadItem = document.querySelector('.attachment-dropdown-item[onclick*="triggerFileUpload"]');
+      if (uploadItem) {
+        await animateCursorToElement('.attachment-dropdown-item[onclick*="triggerFileUpload"]');
+        document.querySelectorAll('.attachment-dropdown.open').forEach(d => d.classList.remove('open'));
+        showFinderModal();
+      }
+      break;
+    }
+
+    case 'selectFinderFile': {
+      const fileName = step.fileName || 'users-import.xlsx';
+      const fileSize = step.fileSize || 128000;
+      const fileRow = document.querySelector(`.finder-file-row[data-name="${fileName}"]`);
+      if (fileRow) {
+        await animateCursorToElement(`.finder-file-row[data-name="${fileName}"]`);
+        await new Promise(r => setTimeout(r, 300));
+        selectFinderFile(fileName, fileSize);
+      } else {
+        selectFinderFile(fileName, fileSize);
+      }
+      break;
+    }
+
+    case 'typeInChat': {
+      const input = document.getElementById('cortex-input-field');
+      if (input) {
+        await animateCursorToElement('#cortex-input-field');
+        await new Promise(r => setTimeout(r, 200));
+        const text = step.text || '';
+        input.value = '';
+        input.focus();
+        for (let i = 0; i < text.length; i++) {
+          input.value += text[i];
+          await new Promise(r => setTimeout(r, 40 + Math.random() * 40));
+        }
+        input.dispatchEvent(new Event('input'));
+      }
+      break;
+    }
   }
 }
 
