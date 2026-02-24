@@ -1408,6 +1408,9 @@ function startFlowPlayback(flowId) {
   cortexState.visitedDecisions = {};
   cortexState.deletedDecisions = {};
   cortexState.deletedActivityItems = [];
+
+  // Reset file upload state so previous attachments don't bleed into the new playback
+  fileUploadState.pendingFiles = [];
   
   if (typeof flowSwitcherState !== 'undefined') {
     flowSwitcherState.activeFlowId = flowId;
@@ -1419,6 +1422,10 @@ function startFlowPlayback(flowId) {
     root.innerHTML = renderCortexPanelFull();
     initCortexListeners();
   }
+
+  // Clear chat input field
+  const inputField = document.getElementById('cortex-input-field');
+  if (inputField) inputField.value = '';
 
   renderPlaybackControls();
   updatePlaybackUI();

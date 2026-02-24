@@ -67,19 +67,17 @@ const FLOW_BULK_USER_IMPORT = {
   ],
 
   playbackSteps: [
-    // 1. Navigate to Settings / Users — that's where the admin starts
-    { type: 'navigate', page: 'settings-users.html', cursorTarget: '[data-nav-id="settings"]', delay: 1500 },
-    // 2. Navigate to Command Center to open Cortex
-    { type: 'navigate', page: 'command-center.html', cursorTarget: '[data-nav-id="command-center"]', delay: 1500 },
-    // 3. Click + (attachment) button in chatbox
+    // 1. Appear in the center of the page, move into Cortex panel
+    { type: 'action', action: 'positionCursorAtStart', delay: 600 },
+    // 2. Click + (attachment) button in chatbox
     { type: 'action', action: 'clickAttachmentBtn', delay: 1200 },
-    // 4. Click "Upload file" in the dropdown — opens Finder modal
+    // 3. Click "Upload file" in the dropdown — opens Finder modal
     { type: 'action', action: 'clickUploadFile', delay: 1000 },
-    // 5. Select users-import.xlsx in the Finder modal
+    // 4. Select users-import.xlsx in the Finder modal
     { type: 'action', action: 'selectFinderFile', fileName: 'users-import.xlsx', fileSize: 128000, delay: 1500 },
-    // 6. Type "add these users" in the chat input
+    // 5. Type "add these users" in the chat input (clears any existing text first)
     { type: 'action', action: 'typeInChat', text: 'add these users', delay: 1200 },
-    // 7. Move cursor to send button and submit — shows user message with file chip
+    // 6. Move cursor to send button and submit — shows user message with file chip
     { type: 'action', action: 'submitChat', delay: 800 },
     // 8. Cortex responds: analyzing the file
     { type: 'message', sender: 'ai', text: 'I detected an Excel file you uploaded: <strong>users-import-2026.xlsx</strong>. Let me analyze it.', delay: 2000 },
