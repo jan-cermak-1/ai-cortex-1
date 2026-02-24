@@ -67,28 +67,25 @@ const FLOW_BULK_USER_IMPORT = {
   ],
 
   playbackSteps: [
-    // 1. Appear in the center of the page, move into Cortex panel
+    // 1. Cursor appears, moves into Cortex panel chatbox area
     { type: 'action', action: 'positionCursorAtStart', delay: 600 },
-    // 2. Click + (attachment) button in chatbox
+    // 2. Click + (attachment) button → dropdown opens
     { type: 'action', action: 'clickAttachmentBtn', delay: 1200 },
-    // 3. Click "Upload file" in the dropdown — opens Finder modal
+    // 3. Click "Upload file" → Finder modal opens
     { type: 'action', action: 'clickUploadFile', delay: 1000 },
-    // 4. Select users-import.xlsx in the Finder modal
+    // 4. Select users-import.xlsx in Finder
     { type: 'action', action: 'selectFinderFile', fileName: 'users-import.xlsx', fileSize: 128000, delay: 1500 },
-    // 5. Cursor moves to input, then to send — shows user message with file chip
+    // 5. Click send → user bubble appears with green XLS chip + "add these users"
     { type: 'action', action: 'submitChat', text: 'add these users', delay: 1200 },
-    // 8. Cortex responds: analyzing the file
-    { type: 'message', sender: 'ai', text: 'I detected an Excel file you uploaded: <strong>users-import-2026.xlsx</strong>. Let me analyze it.', delay: 2000 },
-    { type: 'message', sender: 'ai', text: 'Found <strong>47 valid user records</strong> with columns: Name, Email, Department, Role. Ready for import.', delay: 2500 },
-    // 8. Intelligence box with options
-    { type: 'action', action: 'showIntelligenceBox', delay: 1500 },
-    { type: 'message', sender: 'ai', text: 'I can import all users, create teams based on departments, send invites, and assign roles automatically.', delay: 2500 },
-    // 9. Select all checkboxes and execute
-    { type: 'action', action: 'selectCheckboxes', items: ['import-users', 'create-teams', 'send-invites', 'assign-roles'], delay: 1500 },
-    { type: 'action', action: 'executeSelected', delay: 2000 },
-    // 10. Done — navigate to Settings / Users
-    { type: 'message', sender: 'ai', text: 'Import complete! 47 users created, 6 teams organized by department, invitations queued.', delay: 2500 },
-    { type: 'navigate', page: 'settings-users.html', cursorTarget: '[data-nav-id="settings"]', delay: 2000 },
-    { type: 'message', sender: 'ai', text: 'All users are now visible in the User Management panel. The demo is complete!', delay: 2000 }
+    // 6. Thinking animation
+    { type: 'action', action: 'showThinking', delay: 2200 },
+    // 7. Intelligence box (grey) with 4 checkboxes — thinking disappears
+    { type: 'action', action: 'showIntelligenceBox', delay: 0 },
+    // 8. Cursor selects all 4 checkboxes one by one
+    { type: 'action', action: 'selectCheckboxes', items: ['import-users', 'create-teams', 'send-invites', 'assign-roles'], delay: 1800 },
+    // 9. Cursor clicks Execute selected → completed state
+    { type: 'action', action: 'executeSelected', delay: 1500 },
+    // 10. After completed box appears, cursor clicks first decision item → Settings/Users
+    { type: 'action', action: 'clickDecisionItem', item: 'users', cursorTarget: '.decision-item[data-decision-key="users"]', delay: 3000 }
   ]
 };

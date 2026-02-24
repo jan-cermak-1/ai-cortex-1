@@ -1532,12 +1532,20 @@ async function executePlaybackAction(step) {
       break;
     }
 
-    case 'showIntelligenceBox':
+    case 'showThinking':
+      addThinkingPlaceholder();
+      break;
+
+    case 'showIntelligenceBox': {
+      // Remove thinking placeholder if present
+      removeThinkingPlaceholder();
       const area = document.getElementById('cortex-intelligence-area');
       if (area) {
         area.innerHTML = renderIntelligenceInitial();
       }
+      scrollChatToBottom();
       break;
+    }
       
     case 'selectCheckboxes':
       if (step.items && Array.isArray(step.items)) {
@@ -1568,23 +1576,39 @@ async function executePlaybackAction(step) {
       break;
     }
 
-    case 'executeSelected':
+    case 'executeSelected': {
       const executeBtn = document.getElementById('execute-btn');
-      if (executeBtn && step.cursorTarget !== false) {
+      // Force-enable the button for playback (checkboxes were set programmatically,
+      // updateExecuteButton may not have fired in all browsers)
+      if (executeBtn) {
+        executeBtn.classList.remove('disabled');
+        executeBtn.disabled = false;
         await animateCursorToElement('#execute-btn');
+        await new Promise(r => setTimeout(r, 300));
       }
       if (typeof executeSelected === 'function') {
         executeSelected();
       }
       break;
+    }
       
-    case 'clickDecisionItem':
-      if (step.cursorTarget) {
-        await animateCursorToElement(step.cursorTarget, true, step.cursorOffset || 'center');
+    case 'clickDecisionItem': {
+      // Wait for the completed box to render (executeSelected has a 2s internal delay)
+      if (step.item) {
+        const targetSel = `.decision-item[data-decision-key="${step.item}"]`;
+        let waited = 0;
+        while (!document.querySelector(targetSel) && waited < 4000) {
+          await new Promise(r => setTimeout(r, 200));
+          waited += 200;
+        }
       }
-      const flowData = getCurrentFlowData();
-      if (flowData && flowData.decisionItems && step.item) {
-        const decisionItem = flowData.decisionItems.find(d => d.key === step.item);
+      if (step.cursorTarget) {
+        try { await animateCursorToElement(step.cursorTarget, true, step.cursorOffset || 'center'); } catch(_) {}
+      }
+      await new Promise(r => setTimeout(r, 400));
+      const flowData2 = getCurrentFlowData();
+      if (flowData2 && flowData2.decisionItems && step.item) {
+        const decisionItem = flowData2.decisionItems.find(d => d.key === step.item);
         if (decisionItem && decisionItem.href) {
           cortexState.visitedDecisions[step.item] = true;
           if (typeof navigateTo === 'function') {
@@ -1593,6 +1617,7 @@ async function executePlaybackAction(step) {
         }
       }
       break;
+    }
 
     case 'deleteDecisionItem':
       if (step.item) {
