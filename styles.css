@@ -5339,6 +5339,9 @@ input, select, textarea {
 .flow-switcher-header {
   padding: var(--space-3) var(--space-4);
   border-bottom: 1px solid var(--color-border-default);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .flow-switcher-title {
@@ -5347,6 +5350,20 @@ input, select, textarea {
   color: var(--color-on-layer-secondary);
   text-transform: uppercase;
   letter-spacing: 0.5px;
+}
+
+.flow-switcher-docs-link {
+  display: flex;
+  align-items: center;
+  color: var(--color-on-layer-tertiary);
+  text-decoration: none;
+  padding: 2px;
+  border-radius: var(--border-radius-small);
+  transition: color var(--motion-duration-quick-1) var(--motion-easing-ease);
+}
+
+.flow-switcher-docs-link:hover {
+  color: var(--color-on-layer-primary);
 }
 
 .flow-switcher-list {
