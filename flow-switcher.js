@@ -134,6 +134,7 @@ function renderFlowSwitcher() {
   
   const humanFlows = flows.filter(f => f.source === 'human');
   const aiFlows = flows.filter(f => f.source === 'ai');
+  const competitorFlows = flows.filter(f => f.source === 'ai-competitor');
   
   const humanSection = humanFlows.length > 0 ? `
     <div class="flow-section human">
@@ -145,6 +146,15 @@ function renderFlowSwitcher() {
     <div class="flow-section ai">
       <div class="flow-section-header">AI Generated</div>
       ${aiFlows.map(renderFlowItem).join('')}
+    </div>` : '';
+
+  const competitorSection = competitorFlows.length > 0 ? `
+    <div class="flow-section ai-competitor">
+      <div class="flow-section-header">
+        AI Generated — Competitor Inspired
+        <span class="flow-section-badge">${competitorFlows.length}</span>
+      </div>
+      ${competitorFlows.map(renderFlowItem).join('')}
     </div>` : '';
 
   return `
@@ -159,6 +169,7 @@ function renderFlowSwitcher() {
         <div class="flow-switcher-list">
           ${humanSection}
           ${aiSection}
+          ${competitorSection}
         </div>
       </div>
       <div class="flow-switcher-buttons">

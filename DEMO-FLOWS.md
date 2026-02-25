@@ -231,8 +231,9 @@ Living documentation of all demo flows. Update whenever `flows/*.js` changes.
 ### Group A: Publisher & Content
 
 #### 1. Instagram Reels Batch
-**Persona:** Social Media Manager | **File:** `flows/instagram-reels-batch.js`  
-Cortex identifies top-performing posts and batch-converts them into Reels with AI captions, optimal scheduling, and hashtags.
+**Persona:** Social Media Manager | 
+**File:** `flows/instagram-reels-batch.js`  
+**Scenario:** Cortex identifies top-performing posts and batch-converts them into Reels with AI captions, optimal scheduling, and hashtags.
 
 #### 2. Approval Bottleneck Fix
 **Persona:** Content Lead | **File:** `flows/approval-flow-bottleneck.js`  
@@ -661,3 +662,447 @@ Reviews 3 contract renewals and identifies $52K annual savings via listening too
 #### 97. Crisis Preparedness Audit
 **Persona:** Communications Director | **File:** `flows/crisis-preparedness-audit.js`  
 Audits and closes 4 critical crisis preparedness gaps — pre-approved dark posts, care escalation protocol, listening expansion, and executive comms playbook.
+
+---
+
+## AI GENERATED — COMPETITOR INSPIRED (Flows 101–200)
+
+*Inspired by competitive analysis of Sprinklr and Sprout Social — translated into Emplifi/Cortex context.*
+
+### Group M: Sprinklr Service AI
+
+#### 101. Contact Driver Discovery
+**Persona:** Bot Manager | **File:** `flows/contact-driver-discovery.js`  
+Cortex analyzed 10,000 Care conversations using unsupervised AI and found 8 recurring customer intents the bot currently cannot handle — causing 23% unnecessary escalations. Recommends creating new bot flows for each.
+
+#### 102. KB Gap Analysis
+**Persona:** Knowledge Manager | **File:** `flows/kb-gap-analysis.js`  
+Cortex analyzed which questions agents couldn't answer using existing KB articles. 23 distinct gaps found — agents searched but found no match in 4,200+ cases last month. Proposes new articles to fill each gap.
+
+#### 103. KB Refinement
+**Persona:** Knowledge Manager | **File:** `flows/kb-refinement.js`  
+Cortex analyzed 340 total KB articles and found 14 duplicates and 8 ambiguous entries — reducing bot containment and agent response quality. Recommends merge and cleanup plan.
+
+#### 104. Statistical Stories
+**Persona:** Care Analytics | **File:** `flows/statistical-stories.js`  
+"Shipping delay" complaints spiked +47% this week vs last month baseline. Root cause: Regional carrier outage in Midwest — 3-day backlog affecting 12,000 orders. Cortex surfaces root cause and recommended response actions.
+
+#### 105. Agent Nudge Setup
+**Persona:** Care Supervisor | **File:** `flows/agent-nudge-setup.js`  
+Configure real-time AI coaching nudges for Care agents — triggered when conversation sentiment turns negative, response time exceeds 3 minutes, or a VIP customer is detected.
+
+#### 106. After-Call Work Autofill
+**Persona:** Care Operations | **File:** `flows/acw-autofill-config.js`  
+Configure AI to auto-fill case disposition forms from conversation transcripts. Saves 4 minutes per case × 80 cases/day = 5+ hours saved daily for the team.
+
+#### 107. Smart Response Training
+**Persona:** Care Manager | **File:** `flows/smart-response-training.js`  
+Cortex analyzed the top 500 best-rated agent responses from the last 6 months, identified patterns, clustered by topic, and built a RAG-powered reply suggestion model.
+
+#### 108. AI-Powered Agent Onboarding
+**Persona:** Care Supervisor | **File:** `flows/care-agent-onboarding-ai.js`  
+6 new Care agents joining next week. Cortex created personalized onboarding plans, configured queues and skills, and enabled AI reply assistance to compensate for lack of social media tone knowledge.
+
+#### 109. AI Quality Management
+**Persona:** Care Director | **File:** `flows/quality-management-ai.js`  
+Enable automated QA scoring for all Care conversations — scoring criteria: tone, resolution, compliance, brand voice. Weekly QA reports generated per agent automatically.
+
+#### 110. Case Routing Automation
+**Persona:** Care Operations | **File:** `flows/case-routing-automation.js`  
+Configure AI to automatically classify and route 12 case types (returns, shipping, billing, complaints, compliments, technical, account, product, warranty, refund, order status, general) without manual tagging.
+
+#### 111. Voice Bot TTS Setup
+**Persona:** Bot Manager | **File:** `flows/voice-bot-tts-setup.js`  
+Configure Text-to-Speech for the voice bot channel. Test 3 voice profiles, select the most natural-sounding one, and deploy to the phone support channel.
+
+#### 112. Dynamic Workflow Builder
+**Persona:** Care Operations | **File:** `flows/dynamic-workflow-builder.js`  
+Build AI-assisted guided workflows for the 5 most complex Care scenarios: product returns, account closures, escalations, billing disputes, and technical issues.
+
+---
+
+### Group N: Sprinklr Insights AI
+
+#### 113. Sentiment Shift Alert
+**Persona:** Brand Analyst | **File:** `flows/sentiment-shift-alert.js`  
+Cortex detected a -18 point sentiment drop across Instagram and X in the past 6 hours — correlated with a PR event. Surfaces 47 affected posts, top negative themes, and recommended immediate response actions.
+
+#### 114. Competitor Benchmark AI
+**Persona:** Brand Strategist | **File:** `flows/competitor-benchmark-ai.js`  
+Cortex ran automated benchmarking vs 5 rivals — comparing engagement rate, share of voice, and content cadence. Surfaces 3 strategic gaps to exploit this quarter.
+
+#### 115. Trend Report Generator
+**Persona:** Research Analyst | **File:** `flows/trend-report-generator.js`  
+Cortex auto-generates a weekly trend intelligence report covering your brand, industry, and top 3 competitors. Translates raw listening data into 5 actionable insights.
+
+#### 116. Campaign Lift Analysis
+**Persona:** Campaign Manager | **File:** `flows/campaign-lift-analysis.js`  
+Post-campaign: Cortex measured lift across 6 weeks — brand mentions +34%, share of voice +8%, sentiment up 12 points. Attribution report links paid + organic to awareness metrics.
+
+#### 117. Custom Taxonomy Builder
+**Persona:** Research Analyst | **File:** `flows/custom-taxonomy-builder.js`  
+Cortex analyzed 50,000 posts to build a custom topic taxonomy for your industry — 8 main themes, 34 subtopics, and smart classification rules configured automatically.
+
+#### 118. Media Monitoring Setup
+**Persona:** PR Manager | **File:** `flows/media-monitoring-setup.js`  
+Cortex sets up real-time media monitoring for a product launch — brand, product, and executive name queries configured. Alerts trigger when coverage exceeds 50 mentions/hour.
+
+#### 119. Influencer Sentiment Scan
+**Persona:** Influencer Manager | **File:** `flows/influencer-sentiment-scan.js`  
+Cortex scanned content from 120 active influencers and detected 4 whose recent posts show negative brand alignment. Recommends review before next campaign activation.
+
+#### 120. Audience Intent Signals
+**Persona:** Brand Strategist | **File:** `flows/audience-intent-signals.js`  
+Cortex identified purchase intent signals in 8,400 brand conversations — segmented by product category. Surfaces 3 high-intent audience clusters ready for retargeting in paid social.
+
+#### 121. Share of Voice Tracker
+**Persona:** Marketing Director | **File:** `flows/share-of-voice-tracker.js`  
+Brand's share of voice dropped from 34% to 27% while Competitor A gained 6 points. Cortex diagnoses the cause and proposes a content response strategy to reclaim reach.
+
+#### 122. Listening Query Optimizer
+**Persona:** Research Analyst | **File:** `flows/listening-query-optimizer.js`  
+Cortex reviewed 23 active listening queries and found 6 returning noisy irrelevant data. Proposes optimized boolean queries reducing noise by 60% while maintaining signal coverage.
+
+---
+
+### Group O: Sprinklr Marketing AI
+
+#### 123. AI Campaign Brief
+**Persona:** Campaign Manager | **File:** `flows/ai-campaign-brief.js`  
+Cortex generates a complete campaign brief from scratch — objective, target personas, channel mix, messaging pillars, creative direction, and KPIs — all based on historical top-performing campaigns.
+
+#### 124. Content Localizer
+**Persona:** Global Marketing Manager | **File:** `flows/content-localizer.js`  
+Cortex localizes a campaign for 7 markets — adapts copy, adjusts visual direction guidelines, and flags 4 culturally sensitive elements. Estimated time saved: 3 days of manual work.
+
+#### 125. Channel Mix Optimizer
+**Persona:** Performance Marketing Manager | **File:** `flows/channel-mix-optimizer.js`  
+Cortex analyzed 6 months of campaign data and recommends reallocating budget: reduce Twitter by 30%, boost Instagram Stories by 20%, test LinkedIn for B2B. Expected +12% ROAS.
+
+#### 126. Ad Creative Rotator
+**Persona:** Paid Social Manager | **File:** `flows/ad-creative-rotator.js`  
+Cortex detected creative fatigue — CTR dropped 35% in 7 days. Auto-generates 4 creative variations from existing brand assets, ready for A/B testing.
+
+#### 127. Compliance Content Shield
+**Persona:** Compliance Manager | **File:** `flows/compliance-content-shield.js`  
+Pre-publish scan across 18 scheduled posts — Cortex flags 3 for regulatory risk (undisclosed partnership, banned health claim, healthcare language) and suggests approved rewrites.
+
+#### 128. Budget Pacing Alert
+**Persona:** Campaign Manager | **File:** `flows/budget-pacing-alert.js`  
+Campaign is 68% through budget but only 41% through the flight period — overpacing by 27 points. Cortex recommends automatic bid adjustments across 4 ad sets to normalize delivery.
+
+#### 129. Content Performance Predictor
+**Persona:** Content Strategist | **File:** `flows/content-performance-predictor.js`  
+Before publishing 5 campaign posts, Cortex scores each for predicted engagement (Low/Medium/High). Recommends optimizing the 2 lowest-scored posts before going live.
+
+#### 130. Multi-Brand Content Sync
+**Persona:** Brand Manager | **File:** `flows/multi-brand-content-sync.js`  
+Cortex identifies 4 content duplicates and 2 conflicting messages across 8 regional brand profiles publishing independently. Proposes a unified content calendar with regional slots.
+
+#### 131. Paid-Organic Amplifier
+**Persona:** Growth Manager | **File:** `flows/paid-organic-amplifier.js`  
+Cortex identifies the top 5 organic posts from the past month and recommends boosting 3 for paid amplification — predicts 10x reach increase with $2,500 incremental budget.
+
+#### 132. Brand Voice Consistency Check
+**Persona:** Brand Manager | **File:** `flows/creative-brand-voice-check.js`  
+Cortex scans all 62 posts published this month and detects 11 that deviate from brand voice guidelines (too formal, too casual, or mixed tone). Proposes AI-rewrites aligned to brand playbook.
+
+---
+
+### Group P: Trellis-Inspired Flows
+
+#### 133. Intelligent Case Triage
+**Persona:** Care Team Lead | **File:** `flows/trellis-case-triage.js`  
+Cortex analyzed 847 unread care messages from the past 12 hours — classified by urgency, sentiment, and intent. 23 critical cases escalated, 340 routed to correct queues, 189 routine cases with macro suggestions.
+
+#### 134. Autonomous Care Resolver
+**Persona:** Care Operations Manager | **File:** `flows/autonomous-care-resolver.js`  
+Cortex identified 34 low-complexity case types (order status, FAQ, password reset) suitable for bot automation. Expected deflection: 28% of total care volume — freeing agents for complex issues.
+
+#### 135. Social Inbox Zero
+**Persona:** Community Manager | **File:** `flows/social-inbox-zero.js`  
+1,247 unread social messages accumulated over the weekend. Cortex categorized, prioritized, and suggested responses for all. 8 urgent brand reputation items flagged for immediate human attention.
+
+#### 136. Smart Escalation Paths
+**Persona:** Care Manager | **File:** `flows/smart-escalation-paths.js`  
+Configure 6 AI-powered escalation rules: VIP customer detection, sentiment cliff detection, repeat contact ID, legal keyword detection, executive mention alerts, and SLA breach prediction.
+
+#### 137. AI Report Builder
+**Persona:** Analytics Manager | **File:** `flows/trellis-report-builder.js`  
+"I need a C-suite social ROI report for Monday." Cortex gathers data from Care, Publishing, and Listening — structures it into a 6-slide executive narrative with key metrics, YoY trends, and recommended actions.
+
+#### 138. Cross-Channel Care View
+**Persona:** Head of CX | **File:** `flows/cross-channel-care-view.js`  
+Cortex correlates care conversations across Instagram, X, Facebook Messenger, and email — creating a unified customer journey view. Identified 156 customers who contacted via 2+ channels in the past 30 days.
+
+#### 139. Proactive Care Triggers
+**Persona:** Care Innovator | **File:** `flows/proactive-care-trigger.js`  
+Cortex identified 12 customers who tweeted product frustration before opening a formal ticket. Configures proactive outreach — auto-reach out with personalized messages before they escalate.
+
+#### 140. AI Review Moderation
+**Persona:** Brand Manager | **File:** `flows/ai-review-moderation.js`  
+4,200 new product reviews accumulated since last month. Cortex classified them into 8 sentiment themes, flagged 47 requiring response, and drafted personalized reply templates for each theme.
+
+#### 141. Shift Handover Summary
+**Persona:** Care Team Lead | **File:** `flows/shift-handover-summary.js`  
+End of shift: Cortex generates a comprehensive handover brief for the incoming team — open cases, escalation status, trending topics, SLA risk items, and priority actions for the next 4 hours.
+
+#### 142. Care Capacity Forecasting
+**Persona:** Care Operations Manager | **File:** `flows/care-capacity-forecasting.js`  
+Cortex analyzed historical care volume patterns and forecasts next week's inbound — expects +45% spike Monday–Tuesday post-promotion. Recommends scheduling 3 extra agents and enabling overflow bot.
+
+---
+
+### Group Q: Sprout AI Assist Flows
+
+#### 143. Caption Optimizer
+**Persona:** Social Media Manager | **File:** `flows/ai-caption-optimizer.js`  
+28 posts scheduled for next week. Cortex scored captions for predicted engagement and rewrote the bottom 8 with platform-native language — casual for TikTok, professional for LinkedIn, visual-first for Instagram.
+
+#### 144. Hashtag Intelligence
+**Persona:** Content Creator | **File:** `flows/hashtag-intelligence.js`  
+Cortex analyzed 90 days of hashtag performance across all platforms. Retires 12 underperforming tags, promotes 6 rising tags, and discovered 4 niche hashtags your audience already uses organically.
+
+#### 145. Best Time to Post
+**Persona:** Social Media Manager | **File:** `flows/best-time-to-post.js`  
+Cortex identifies optimal posting windows per platform from 6-month engagement data: Instagram peaks Wed/Fri 6–7pm, LinkedIn Mon/Thu 8–9am, X is inconsistent — recommends real-time scheduling.
+
+#### 146. Content Repurposer
+**Persona:** Content Strategist | **File:** `flows/content-repurposer.js`  
+Cortex identifies the top 12 blog articles and transforms each into social-ready micro-content: 3 Twitter threads, 4 LinkedIn carousels, 5 Instagram caption series. Publishes all to draft in one action.
+
+#### 147. AI Listening Insights
+**Persona:** Brand Analyst | **File:** `flows/ai-listening-insights.js`  
+Cortex processed 34,000 brand mentions from the past month and distilled them into 7 actionable insight cards: top themes, emerging topics, key influencers, and recommended content opportunities.
+
+#### 148. Engagement Rate Recovery
+**Persona:** Social Media Manager | **File:** `flows/engagement-rate-recovery.js`  
+Instagram engagement rate dropped from 3.2% to 1.8% over 6 weeks. Cortex diagnoses 3 root causes (posting frequency, content mix, caption length) and proposes a recovery content plan.
+
+#### 149. UGC Curation Automation
+**Persona:** Content Manager | **File:** `flows/ugc-curation-automation.js`  
+Cortex scanned 8,400 tagged posts and identified 234 high-quality UGC pieces across 6 product categories. Rights requests sent automatically to 234 creators; 189 approved within 2 days.
+
+#### 150. Social Customer Profiles
+**Persona:** CRM Manager | **File:** `flows/social-customer-profiles.js`  
+Cortex enriches 1,200 care contacts with social data — adds sentiment history, topic interests, influence score, and platform preferences. Syncs enriched profiles back to CRM.
+
+#### 151. Content Pillar AI
+**Persona:** Content Strategist | **File:** `flows/content-pillar-ai.js`  
+Based on the top 100 posts from the past year, Cortex identified 5 content pillars driving 80% of engagement. Recommends adjusting the mix: increase Educational (18%→30%), reduce Promotional (35%→20%).
+
+#### 152. Social ROI Attribution
+**Persona:** CMO | **File:** `flows/social-roi-attribution.js`  
+Cortex builds a social ROI attribution model connecting social engagement to 847 website conversions and $234K revenue last quarter. Breaks down contribution by channel, content type, and campaign.
+
+---
+
+### Group R: Sprout Influencer & Creator AI
+
+#### 153. Creator Discovery AI
+**Persona:** Influencer Marketing Manager | **File:** `flows/creator-discovery-ai.js`  
+Cortex searched 50M+ creator profiles for a campaign brief — found 34 micro-influencers (10K–100K followers) with authentic audience overlap. Audience age matches the 18–34 target at 73%.
+
+#### 154. Influencer Fraud Detection
+**Persona:** Influencer Manager | **File:** `flows/influencer-fraud-detection.js`  
+Before signing 8 new influencer deals, Cortex scanned for fake followers and engagement pods. Flagged 2 profiles (43% fake followers each) and 1 engagement pod member. Estimated savings: ~$18K in wasted budget.
+
+#### 155. Creator Brief Generator
+**Persona:** Influencer Campaign Manager | **File:** `flows/creator-brief-generator.js`  
+Campaign launches in 4 days but briefs aren't ready for 12 creators. Cortex auto-generates personalized creative briefs for each — tailored to content style, past brand work, and audience preferences.
+
+#### 156. Influencer ROI Tracker
+**Persona:** Marketing Analytics Manager | **File:** `flows/influencer-roi-tracker.js`  
+Q1 campaign wrapped. Cortex calculated ROI per influencer: 3 over-performed (CPE $0.12 vs $0.45 benchmark), 5 underperformed. Recommends renewing top 3 and replacing bottom 2 for Q2.
+
+#### 157. UGC Rights Campaign
+**Persona:** Content Manager | **File:** `flows/ugc-rights-campaign.js`  
+New product launch generated 3,400 tagged posts. Cortex selected 156 highest-quality UGC pieces and auto-sent rights request DMs to each creator — tracking approval status in real time.
+
+#### 158. Creator Content Amplifier
+**Persona:** Performance Marketing Manager | **File:** `flows/creator-content-amplifier.js`  
+4 influencer posts went viral (>500K reach each). Cortex recommends whitelisting all 4 for paid amplification — estimates +2.3M incremental reach with $8,000 budget and configures lookalike targeting.
+
+#### 159. Creator Portfolio Audit
+**Persona:** Influencer Director | **File:** `flows/creator-portfolio-audit.js`  
+Creator roster of 87 active influencers hasn't been audited in 12 months. Cortex grades each on current performance, audience health, and brand alignment. Result: 12 offboard, 8 upgrade tier, 4 new categories.
+
+#### 160. Ambassador Program AI
+**Persona:** Community Manager | **File:** `flows/ambassador-program-ai.js`  
+From 180,000 social followers, Cortex identifies the top 20 brand advocates — those who mention you most, have highest authentic reach, and strongest audience alignment. Personalized recruitment messages drafted.
+
+---
+
+### Group S: Sprinklr Enterprise Case Study Flows
+
+#### 161. Enterprise Care Scale
+**Persona:** Head of Digital CX | **File:** `flows/microsoft-scale-care.js`  
+Care team handles 45,000 messages/month across 12 channels. Product launch event incoming. Cortex configures auto-routing, bot containment, and priority queuing to handle a 3x volume surge.
+
+#### 162. Global Social Coordination
+**Persona:** Global Social Media Director | **File:** `flows/samsung-global-social.js`  
+Coordinate 28 regional social teams publishing across 340 social profiles. Cortex detects content conflicts, enforces global brand guidelines, and synchronizes campaign timing across 14 time zones.
+
+#### 163. UGC at Scale
+**Persona:** Digital Content Director | **File:** `flows/mcdonalds-ugc-scale.js`  
+120,000 customer photos posted monthly with brand hashtags. Cortex classifies by product, sentiment, and visual quality — curates top 500 for website galleries, requests rights, and auto-publishes best UGC to brand channels.
+
+#### 164. Creator Network Intelligence
+**Persona:** Creator Marketing VP | **File:** `flows/nike-creator-network.js`  
+Managing 450 creator partnerships globally. Cortex detects 8 creators with early brand misalignment signals, 12 ready for tier upgrade, and 34 high-potential micro-creators to recruit for next season.
+
+#### 165. Enterprise Compliance Shield
+**Persona:** Legal & Compliance Manager | **File:** `flows/disney-compliance-shield.js`  
+180 social media managers across 24 brands publishing daily. Cortex pre-screens all content for legal risk, IP infringement, and regulatory compliance — blocked 34 problematic posts this week before they went live.
+
+#### 166. Multi-Brand Insight Engine
+**Persona:** Global Insights Director | **File:** `flows/unilever-insight-engine.js`  
+Monitor 22 brands across 67 markets in real time. Cortex surfaces cross-brand trends, detects early reputation risks, and identifies cross-sell opportunities by correlating data from multiple brand listening streams.
+
+#### 167. Crisis War Room
+**Persona:** Crisis Communications Director | **File:** `flows/t-mobile-crisis-war-room.js`  
+Network outage affecting 2M customers triggered 340K social posts in 2 hours. Cortex activates crisis war room mode: prioritizes care queue, deploys empathy bot, drafts executive statement, and monitors sentiment recovery.
+
+#### 168. Regulated Content AI
+**Persona:** Healthcare Marketing Compliance | **File:** `flows/pfizer-regulated-content.js`  
+Pharmaceutical content requires multi-layer approval: legal, medical, regulatory. Cortex automates the review workflow — reducing approval cycle from 8 days to 2.5 days.
+
+#### 169. Financial Services Social Compliance
+**Persona:** Financial Services Social Media Manager | **File:** `flows/barclays-financial-social.js`  
+Detect and prevent 12 types of regulated content violations common in financial services. Cortex flags "guaranteed returns" language, unlicensed advice, and non-standard disclaimers before publishing.
+
+#### 170. Holiday Season Scaling
+**Persona:** Retail Social Media Director | **File:** `flows/holiday-season-scaling.js`  
+Black Friday is 3 weeks away. Cortex forecasts 8x care volume spike — prepares 45 FAQ bot flows for holiday queries, pre-schedules 120 promotional posts, and configures escalation rules for high-value cart abandonment.
+
+#### 171. Agency Client Reporting
+**Persona:** Agency Account Manager | **File:** `flows/agency-client-reporting.js`  
+12 client reports due Friday. Cortex pulls data for all 12 accounts, generates branded PDF reports with custom KPIs per client, and drafts personalized insights emails for each account manager.
+
+#### 172. Retail Product Launch
+**Persona:** Brand Launch Manager | **File:** `flows/retail-product-launch.js`  
+New product launches in 72 hours. Cortex activates launch protocol: pre-schedules 34 posts across 8 channels, configures listening alerts, sets care priority rules, and enables launch-specific bot FAQs.
+
+---
+
+### Group T: Sprout Real Customer Flows
+
+#### 173. eCommerce Social Care
+**Persona:** eCommerce Customer Service Manager | **File:** `flows/ecommerce-social-care.js`  
+Cortex connects social care conversations to order data — agents see order status, delivery date, and purchase history while responding on Instagram. Average handle time dropped 40%: from 8.2 min to 4.9 min.
+
+#### 174. Healthcare Patient Care AI
+**Persona:** Patient Experience Manager | **File:** `flows/healthcare-patient-care.js`  
+Route inbound healthcare social messages: non-urgent questions → FAQ bot, appointment requests → scheduling bot, urgent care inquiries → human agent within 5 minutes. HIPAA compliance enforced automatically.
+
+#### 175. Automotive Care AI
+**Persona:** Automotive Digital Marketing Manager | **File:** `flows/automotive-care-ai.js`  
+A 3-day test drive campaign generated 2,400 social DMs and comments. Cortex classifies by intent (847 booking requests, 612 price inquiries, 234 complaints, 707 general interest) and routes each to the right team.
+
+#### 176. B2B Social Selling
+**Persona:** B2B Social Media Manager | **File:** `flows/b2b-social-selling.js`  
+Cortex monitors LinkedIn and identifies 23 warm B2B leads based on intent signals (engaged with 3+ pieces of content, mentioned a competitor, asked industry questions). Routes to Sales with context and suggested outreach.
+
+#### 177. Media Company Social
+**Persona:** Digital Media Manager | **File:** `flows/media-company-social.js`  
+Managing 47 show accounts across 6 platforms. Cortex auto-generates show-specific social content from episode summaries and schedules optimal posting times per audience. Last week: 312 posts from 89 episode summaries.
+
+#### 178. Nonprofit Community AI
+**Persona:** Community Engagement Manager | **File:** `flows/nonprofit-community.js`  
+Annual fundraising campaign live. Cortex monitors 12,000 community conversations — identifies donor friction points, surfaces top 50 most engaged supporters for personal outreach, and optimizes content for emotional resonance.
+
+#### 179. Sports Fan Engagement
+**Persona:** Sports Digital Media Manager | **File:** `flows/sports-team-fan-care.js`  
+Match day generated 45,000 fan interactions. Cortex filters bots and spam, auto-replies to common queries (ticket info, stadium rules, schedules), and flags 340 VIP fans for personal engagement.
+
+#### 180. Restaurant Chain Social AI
+**Persona:** Franchise Social Media Manager | **File:** `flows/restaurant-chain-social.js`  
+340 restaurant locations with social profiles. Cortex detected 12 locations with review scores below 3.8★ and high complaint volume. Surfaces root causes (delivery, quality, service) and auto-routes escalations to franchise ops.
+
+---
+
+### Group U: Emplifi Three-Cloud Differentiator Flows
+
+#### 181. Commerce-Care Bridge
+**Persona:** Head of Digital CX | **File:** `flows/commerce-care-bridge.js`  
+A customer complained on Instagram about a defective product. Cortex bridges Commerce and Care: pulls purchase history, checks return policy, initiates return, and sends proactive response — all automated. Resolution time: 4 minutes.
+
+#### 182. Ratings & Review Response AI
+**Persona:** E-Commerce Manager | **File:** `flows/ratings-review-response-ai.js`  
+1,240 new product reviews across Amazon, Google, and your website this week. Cortex drafts personalized responses for each, calibrating tone by star rating — apologetic for 1★, grateful for 5★. 847 drafts ready for approval.
+
+#### 183. Three-Cloud Campaign
+**Persona:** VP Marketing | **File:** `flows/three-cloud-campaign.js`  
+Launch a campaign across all three Emplifi clouds simultaneously: Social drives awareness, Commerce boosts reviews and social proof, Service deflects support volume with FAQ content. Cortex coordinates timing and measurement.
+
+#### 184. UGC to Commerce
+**Persona:** eCommerce Content Manager | **File:** `flows/ugc-to-commerce.js`  
+Cortex identified 89 top UGC posts featuring products, requested rights, and published them as shoppable content on PDPs and in email campaigns. Estimated +14% conversion lift; 34 rights already approved.
+
+#### 185. Social Proof Engine
+**Persona:** eCommerce Director | **File:** `flows/social-proof-engine.js`  
+Cortex scans the review database for the 3 best quotes per product SKU and creates dynamic social proof widgets for 847 product pages — filtered by recency, rating, and verified purchase status.
+
+#### 186. CX 360° View
+**Persona:** Chief Customer Officer | **File:** `flows/cx-360-view.js`  
+Cortex connects social interactions, care tickets, reviews, and purchase data to build a unified CX score per customer segment. Identified 3 high-churn-risk segments with recommended proactive retention campaigns.
+
+#### 187. Care-to-Commerce Recovery
+**Persona:** Customer Success Manager | **File:** `flows/care-to-commerce-recovery.js`  
+Cortex identified 456 customers who had negative care experiences in the past 30 days and didn't repurchase. Triggers a recovery campaign: personalized offer + dedicated agent follow-up for the top 50 high-value accounts.
+
+#### 188. Review Velocity Alert
+**Persona:** Brand Reputation Manager | **File:** `flows/review-velocity-alert.js`  
+Negative review volume for Product SKU #8847 spiked 340% in 48 hours — potential quality issue. Cortex alerts product, quality, and care teams simultaneously and activates a coordinated crisis response.
+
+#### 189. Influencer Commerce Tie
+**Persona:** Influencer Marketing Manager | **File:** `flows/influencer-commerce-tie.js`  
+Cortex tracked 34 influencer links and coupon codes to 1,240 conversions and $89K revenue. Ranks influencers by actual sales impact — top performer: 340 conversions, $28K, 4.2% of total campaign revenue.
+
+#### 190. Content Hub AI Curation
+**Persona:** Content Operations Manager | **File:** `flows/content-hub-ai-curation.js`  
+Content Hub has 8,400 assets. Cortex tagged all 3,200 untagged assets by AI — detects product, theme, channel suitability, and quality score. Created 12 curated collections for upcoming campaigns.
+
+#### 191. Social Commerce Dashboard
+**Persona:** Social Commerce Manager | **File:** `flows/social-commerce-dashboard.js`  
+Cortex builds a unified Social Commerce view — combining social engagement, link clicks, product views, add-to-carts, and purchases. Identifies top 5 social commerce drivers and 3 conversion blockers.
+
+#### 192. Multi-Cloud ROI Report
+**Persona:** CMO | **File:** `flows/multi-cloud-roi.js`  
+Board meeting needs a comprehensive CX ROI report. Cortex aggregates across all three clouds: social engagement ($340K earned media), care efficiency (23% cost reduction), commerce lift (+$1.2M attributed revenue).
+
+---
+
+### Group V: Future Cortex Agent & Governance Flows
+
+#### 193. Cortex Memory & Learning
+**Persona:** Head of Social Innovation | **File:** `flows/cortex-memory-learning.js`  
+Cortex reviewed its own 90-day performance — learned 14 new brand-specific patterns and improved response suggestion accuracy from 67% to 84%. Brand voice model now powers all AI suggestions across Publisher and Care.
+
+#### 194. AI Governance Setup
+**Persona:** Chief Digital Officer | **File:** `flows/ai-governance-setup.js`  
+Configure enterprise AI governance: approval workflows for AI-generated content, bias detection for AI suggestions, explainability logging for all AI decisions, and human-in-loop requirements per risk level.
+
+#### 195. Cortex Skill Builder
+**Persona:** Social Innovation Manager | **File:** `flows/cortex-skill-builder.js`  
+Train a custom Cortex skill: upload your brand playbook, competitor analysis, and 500 best-performing posts. Cortex creates a proprietary brand intelligence model. Training: 2.4h. Validation accuracy: 91%.
+
+#### 196. Multi-Agent Orchestration
+**Persona:** Digital Operations Director | **File:** `flows/multi-agent-orchestration.js`  
+Set up 5 specialized Cortex sub-agents (Care, Content, Insights, Commerce, Influencer) with a master Orchestrator that coordinates them on complex cross-cloud tasks. First orchestrated task resolved in 3 minutes with zero manual routing.
+
+#### 197. AI Audit Trail
+**Persona:** Compliance Director | **File:** `flows/ai-audit-trail.js`  
+Enable complete AI decision logging — every Cortex recommendation, action, content generated, and human override recorded with timestamp, rationale, and model version. GDPR-compliant audit export. 47,230 decisions logged this month.
+
+#### 198. Predictive Crisis Prevention
+**Persona:** Head of Communications | **File:** `flows/predictive-crisis-prevention.js`  
+Cortex's predictive model detected 6 early warning signals that preceded the last 3 crises. Running continuously, it gave 4-hour advance notice of today's potential issue — enabling proactive response before it went viral.
+
+#### 199. AI Content Moderation
+**Persona:** Trust & Safety Manager | **File:** `flows/ai-content-moderation.js`  
+Configure AI content moderation for community channels — detects hate speech, spam, competitor mentions, and policy violations in real time. Processing 50,000 comments/day with 98.4% classification accuracy.
+
+#### 200. Cortex ROI Dashboard
+**Persona:** VP Digital Strategy | **File:** `flows/cortex-roi-dashboard.js`  
+Cortex calculates its own ROI: 3.2x productivity gain across publishing, 28% care cost reduction, 14% UGC rights acquisition improvement, and $2.1M estimated annualized value. Generates CFO-ready business case for AI investment renewal.

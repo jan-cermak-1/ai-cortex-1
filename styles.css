@@ -5482,6 +5482,31 @@ input, select, textarea {
   background: var(--color-success, #27ae60);
 }
 
+.flow-section.ai-competitor .flow-section-header::before {
+  background: #e67e22;
+}
+
+.flow-section.ai-competitor {
+  border-color: rgba(230, 126, 34, 0.25);
+}
+
+.flow-section.ai-competitor .flow-section-header {
+  background: rgba(230, 126, 34, 0.07);
+  color: var(--color-on-layer-secondary);
+}
+
+.flow-section-badge {
+  margin-left: auto;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--color-on-layer-tertiary);
+  background: var(--color-layer-level-3, rgba(0,0,0,0.08));
+  border-radius: 10px;
+  padding: 1px 6px;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
 .flow-item {
   display: flex;
   align-items: flex-start;
