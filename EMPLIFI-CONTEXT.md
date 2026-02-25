@@ -1185,18 +1185,19 @@ Persistent right-side panel with:
 
 ---
 
-## 12. Extended Documentation (skills2)
+## 12. Extended Documentation
 
-For **roadmap, strategy, and detailed workflows**, see the `skills2/` folder:
+All Emplifi knowledge is consolidated in `.cursor/skills/`:
 
-| Topic | Location |
-|-------|----------|
-| **Positioning, architecture, ROI** | `skills2/emplifi-roadmap-strategy/` |
-| **2024–2026 releases, vision** | `skills2/emplifi-roadmap-strategy/4-RELEASES-2024-2026.md`, `5-VISION-2026.md` |
-| **UA dashboard blueprints** (Social, Care) | `skills2/emplifi-workflow-scenarios/1-UA-DASHBOARDS.md` |
-| **E2E scenarios** (negative tweet, UGC, campaign) | `skills2/emplifi-workflow-scenarios/2-E2E-SCENARIOS.md` |
-| **Listening query examples** | `skills2/emplifi-workflow-scenarios/3-LISTENING-SCENARIOS.md` |
-| **Internal links** (Google Docs, Atlassian) | `skills2/emplifi-roadmap-strategy/6-INTERNAL-LINKS.md` |
+| Skill | Content | Location |
+|-------|---------|----------|
+| **emplifi-senior-pm** | PM framework, module lookup, constraints, roadmap & strategy | `.cursor/skills/emplifi-senior-pm/` |
+| **emplifi-docs** | Condensed docs.emplifi.io: modules, platform config, UI states, workflows | `.cursor/skills/emplifi-docs/` |
+| **soul-design-system** | SOUL tokens, 200+ components, patterns, content guidelines, 1014 icons | `.cursor/skills/soul-design-system/` |
+| **soul-ui-designer** | UI design decisions, component selection, pattern application, accessibility | `.cursor/skills/soul-ui-designer/` |
+
+Raw documentation data from docs.emplifi.io is in `emplifi-knowledge-raw-data/`.
+Raw SOUL documentation data is in `soul-knowledge-raw-data/`.
 
 ### 2024–2026 Timeline (Summary)
 
