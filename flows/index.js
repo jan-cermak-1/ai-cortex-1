@@ -37,6 +37,15 @@ const FLOWS_REGISTRY = [
     data: FLOW_BULK_USER_IMPORT
   },
   {
+    id: 'content-calendar-import',
+    name: 'Content Calendar Import',
+    description: 'Import Excel content calendar into Publisher drafts + Content Hub collection',
+    persona: 'Social Media Manager',
+    startPage: 'command-center.html',
+    source: 'human',
+    data: FLOW_CONTENT_CALENDAR_IMPORT
+  },
+  {
     id: 'crisis-response',
     name: 'Crisis Response',
     description: 'Handle negative sentiment spike with coordinated response',

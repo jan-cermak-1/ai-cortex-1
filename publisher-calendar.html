@@ -10,32 +10,633 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="soul-tokens.css">
   <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Publisher Calendar page styles */
+    .publisher-layout {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      overflow: hidden;
+      background: var(--color-layer-level-0);
+    }
+
+    .publisher-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      height: 56px;
+      background: var(--color-layer-level-1);
+      border-bottom: 1px solid var(--color-border-secondary);
+      flex-shrink: 0;
+      gap: 12px;
+    }
+
+    .publisher-header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .publisher-header-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--color-on-layer-primary);
+      letter-spacing: -0.01em;
+    }
+
+    .publisher-view-tabs {
+      display: flex;
+      gap: 2px;
+      background: var(--color-layer-level-2);
+      border-radius: 6px;
+      padding: 3px;
+    }
+
+    .publisher-view-tab {
+      padding: 4px 12px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--color-on-layer-secondary);
+      border-radius: 4px;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    .publisher-view-tab.active {
+      background: var(--color-layer-level-1);
+      color: var(--color-on-layer-primary);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+
+    .publisher-header-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .publisher-header-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--color-on-layer-secondary);
+      background: var(--color-layer-level-1);
+      border: 1px solid var(--color-border-secondary);
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .publisher-header-btn:hover {
+      background: var(--color-layer-hover);
+    }
+
+    .publisher-header-btn-primary {
+      background: var(--color-button-primary);
+      color: #fff;
+      border-color: transparent;
+    }
+
+    .publisher-header-btn-primary:hover {
+      background: var(--color-button-primary-hover);
+    }
+
+    /* Active filter bar */
+    .publisher-filter-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 24px;
+      background: #f0f6ff;
+      border-bottom: 1px solid #c8deff;
+      flex-shrink: 0;
+    }
+
+    .publisher-filter-bar-label {
+      font-size: 12px;
+      color: var(--color-on-layer-secondary);
+    }
+
+    .publisher-filter-chip {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 10px 3px 8px;
+      font-size: 12px;
+      font-weight: 500;
+      color: #0f62fe;
+      background: #d0e2ff;
+      border: 1px solid #a6c8ff;
+      border-radius: 20px;
+    }
+
+    .publisher-filter-chip svg {
+      color: #0043ce;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .publisher-filter-chip-cortex-icon {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+    }
+
+    /* Calendar grid */
+    .publisher-calendar-wrap {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px 24px 24px;
+    }
+
+    .publisher-week-nav {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .publisher-week-nav-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      border: 1px solid var(--color-border-secondary);
+      background: var(--color-layer-level-1);
+      cursor: pointer;
+      color: var(--color-on-layer-secondary);
+    }
+
+    .publisher-week-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--color-on-layer-primary);
+    }
+
+    .publisher-week-today-btn {
+      padding: 4px 10px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--color-on-layer-secondary);
+      background: var(--color-layer-level-1);
+      border: 1px solid var(--color-border-secondary);
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .publisher-calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 1px;
+      background: var(--color-border-secondary);
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--color-border-secondary);
+    }
+
+    .publisher-cal-day-header {
+      background: var(--color-layer-level-1);
+      padding: 8px 10px 6px;
+      text-align: center;
+    }
+
+    .publisher-cal-day-name {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--color-on-layer-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .publisher-cal-day-num {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--color-on-layer-primary);
+      line-height: 1.2;
+      margin-top: 2px;
+    }
+
+    .publisher-cal-day-num.today {
+      color: #fff;
+      background: var(--color-button-primary);
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 2px auto 0;
+      font-size: 14px;
+    }
+
+    .publisher-cal-day-cell {
+      background: var(--color-layer-level-1);
+      min-height: 140px;
+      padding: 6px;
+      vertical-align: top;
+    }
+
+    .publisher-cal-day-cell.other-month {
+      background: var(--color-layer-level-2);
+    }
+
+    /* Post cards */
+    .pub-post {
+      margin-bottom: 4px;
+      border-radius: 5px;
+      padding: 5px 7px;
+      font-size: 11px;
+      line-height: 1.35;
+      position: relative;
+      cursor: pointer;
+      border-left: 3px solid transparent;
+    }
+
+    .pub-post:hover {
+      filter: brightness(0.96);
+    }
+
+    .pub-post-ig {
+      background: #fce4ec;
+      border-left-color: #e91e63;
+      color: #880e4f;
+    }
+
+    .pub-post-fb {
+      background: #e3f2fd;
+      border-left-color: #1877f2;
+      color: #0d47a1;
+    }
+
+    .pub-post-li {
+      background: #e8f5e9;
+      border-left-color: #0077b5;
+      color: #1b5e20;
+    }
+
+    .pub-post-x {
+      background: #f3e5f5;
+      border-left-color: #000;
+      color: #4a148c;
+    }
+
+    .pub-post-header {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 2px;
+    }
+
+    .pub-post-platform-icon {
+      width: 12px;
+      height: 12px;
+      border-radius: 2px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 8px;
+      font-weight: 700;
+    }
+
+    .pub-post-platform-icon.ig { background: #e91e63; color: #fff; }
+    .pub-post-platform-icon.fb { background: #1877f2; color: #fff; }
+    .pub-post-platform-icon.li { background: #0077b5; color: #fff; }
+    .pub-post-platform-icon.x  { background: #000; color: #fff; }
+
+    .pub-post-time {
+      font-size: 10px;
+      font-weight: 500;
+      opacity: 0.75;
+    }
+
+    .pub-post-text {
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+
+    /* Cortex Import badge on posts */
+    .pub-post-cortex-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      margin-top: 3px;
+      font-size: 9px;
+      font-weight: 600;
+      color: #0f62fe;
+      background: #d0e2ff;
+      border-radius: 3px;
+      padding: 1px 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .pub-post-cortex-badge svg {
+      width: 8px;
+      height: 8px;
+    }
+
+    /* Add post button in cell */
+    .pub-cell-add {
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-on-layer-tertiary);
+      cursor: pointer;
+      margin-top: 2px;
+      opacity: 0;
+      transition: opacity 0.15s;
+    }
+
+    .publisher-cal-day-cell:hover .pub-cell-add {
+      opacity: 1;
+    }
+
+    .pub-cell-add:hover {
+      background: var(--color-layer-hover);
+      color: var(--color-on-layer-primary);
+    }
+  </style>
 </head>
 <body>
 
 <div class="app" id="app">
   <div class="screen active">
-    <div class="main-content">
-      <div class="module-placeholder">
-        <div class="module-placeholder-icon">
-          <svg viewBox="0 0 36 36" fill="currentColor" width="48" height="48"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2V6H24V2H26V6H29C31.2091 6 33 7.79086 33 10V29C33 31.2091 31.2091 33 29 33H7C4.79086 33 3 31.2091 3 29V10C3 7.79086 4.79086 6 7 6H10V2H12ZM24 8H12V10H10V8H7C5.89543 8 5 8.89543 5 10V14H31V10C31 8.89543 30.1046 8 29 8H26V10H24V8ZM31 16H5V29C5 30.1046 5.89543 31 7 31H29C30.1046 31 31 30.1046 31 29V16Z"/></svg>
+    <div id="nav-slot" data-active="publisher"></div>
+
+    <div class="publisher-layout">
+
+      <!-- Header -->
+      <div class="publisher-header">
+        <div class="publisher-header-left">
+          <span class="publisher-header-title">Publisher</span>
+          <div class="publisher-view-tabs">
+            <button class="publisher-view-tab">List</button>
+            <button class="publisher-view-tab active">Calendar</button>
+            <button class="publisher-view-tab">Grid</button>
+          </div>
         </div>
-        <h1 class="module-placeholder-title">Publisher Calendar</h1>
-        <p class="module-placeholder-description">Visual content calendar for scheduling and managing posts across all social channels.</p>
-        <div class="module-placeholder-meta">
-          <span class="module-placeholder-tag">Marketing</span>
-          <span class="module-placeholder-tag">Calendar</span>
-          <span class="module-placeholder-tag">Scheduling</span>
+        <div class="publisher-header-right">
+          <button class="publisher-header-btn">
+            <svg viewBox="0 0 36 36" fill="none" width="14" height="14"><path fill-rule="evenodd" clip-rule="evenodd" d="M8 10.1V4H10V10.1C12.2822 10.5633 14 12.581 14 15C14 17.419 12.2822 19.4367 10 19.9V32H8V19.9C5.71776 19.4367 4 17.419 4 15C4 12.581 5.71776 10.5633 8 10.1ZM17 20.1L17.0001 4H19.0001L19 20.1C21.2822 20.5633 23 22.581 23 25C23 27.419 21.2822 29.4367 19 29.9L19.0001 32L17.0001 32L17 29.9C14.7178 29.4367 13 27.419 13 25C13 22.581 14.7178 20.5633 17 20.1ZM26 6.10002V4H28V6.10002C30.2822 6.56329 32 8.58104 32 11C32 13.419 30.2822 15.4367 28 15.9V32H26V15.9C23.7178 15.4367 22 13.419 22 11C22 8.58104 23.7178 6.56329 26 6.10002Z" fill="currentColor"/></svg>
+            Filter
+          </button>
+          <button class="publisher-header-btn">
+            <svg viewBox="0 0 36 36" fill="none" width="14" height="14"><path fill-rule="evenodd" clip-rule="evenodd" d="M18 4C10.268 4 4 10.268 4 18C4 25.732 10.268 32 18 32C25.732 32 32 25.732 32 18C32 10.268 25.732 4 18 4ZM2 18C2 9.16344 9.16344 2 18 2C26.8366 2 34 9.16344 34 18C34 26.8366 26.8366 34 18 34C9.16344 34 2 26.8366 2 18Z" fill="currentColor"/></svg>
+            All profiles
+          </button>
+          <button class="publisher-header-btn publisher-header-btn-primary">
+            <svg viewBox="0 0 36 36" fill="none" width="14" height="14"><path fill-rule="evenodd" clip-rule="evenodd" d="M17 17V7H19V17H29V19H19V29H17V19H7V17H17Z" fill="white"/></svg>
+            New post
+          </button>
+        </div>
+      </div>
+
+      <!-- Active filter bar — Cortex Import filter -->
+      <div class="publisher-filter-bar">
+        <span class="publisher-filter-bar-label">Active filters:</span>
+        <div class="publisher-filter-chip">
+          <svg class="publisher-filter-chip-cortex-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="#0f62fe"/>
+            <path d="M2 17L12 22L22 17" stroke="#0f62fe" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M2 12L12 17L22 12" stroke="#0f62fe" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Cortex Import — Q2 2026
+          <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </div>
+        <span class="publisher-filter-bar-label" style="margin-left:4px; color: #0f62fe; font-size:11px;">20 posts imported by Cortex AI</span>
+      </div>
+
+      <!-- Calendar -->
+      <div class="publisher-calendar-wrap">
+
+        <!-- Week navigation -->
+        <div class="publisher-week-nav">
+          <button class="publisher-week-nav-btn">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+          </button>
+          <span class="publisher-week-label">March 2026</span>
+          <button class="publisher-week-nav-btn">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+          </button>
+          <button class="publisher-week-today-btn">Today</button>
+        </div>
+
+        <!-- Calendar grid — week view showing Mon–Sun -->
+        <div class="publisher-calendar-grid" id="pub-calendar-grid">
+          <!-- Day headers -->
+          <div class="publisher-cal-day-header">
+            <div class="publisher-cal-day-name">Mon</div>
+            <div class="publisher-cal-day-num">2</div>
+          </div>
+          <div class="publisher-cal-day-header">
+            <div class="publisher-cal-day-name">Tue</div>
+            <div class="publisher-cal-day-num">3</div>
+          </div>
+          <div class="publisher-cal-day-header">
+            <div class="publisher-cal-day-name">Wed</div>
+            <div class="publisher-cal-day-num">4</div>
+          </div>
+          <div class="publisher-cal-day-header">
+            <div class="publisher-cal-day-name">Thu</div>
+            <div class="publisher-cal-day-num">5</div>
+          </div>
+          <div class="publisher-cal-day-header">
+            <div class="publisher-cal-day-name">Fri</div>
+            <div class="publisher-cal-day-num">6</div>
+          </div>
+          <div class="publisher-cal-day-header">
+            <div class="publisher-cal-day-name">Sat</div>
+            <div class="publisher-cal-day-num">7</div>
+          </div>
+          <div class="publisher-cal-day-header">
+            <div class="publisher-cal-day-name">Sun</div>
+            <div class="publisher-cal-day-num">8</div>
+          </div>
+
+          <!-- Day cells with posts -->
+          <!-- Monday -->
+          <div class="publisher-cal-day-cell">
+            <div class="pub-post pub-post-ig">
+              <div class="pub-post-header">
+                <div class="pub-post-platform-icon ig">IG</div>
+                <span class="pub-post-time">9:00</span>
+              </div>
+              <div class="pub-post-text">Spring collection launch 🌸 Discover our new arrivals this season...</div>
+              <div class="pub-post-cortex-badge">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                Cortex
+              </div>
+            </div>
+            <div class="pub-post pub-post-fb">
+              <div class="pub-post-header">
+                <div class="pub-post-platform-icon fb">FB</div>
+                <span class="pub-post-time">11:30</span>
+              </div>
+              <div class="pub-post-text">We're excited to announce our Q2 campaign — Spring Forward!</div>
+              <div class="pub-post-cortex-badge">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                Cortex
+              </div>
+            </div>
+            <div class="pub-cell-add">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M19 13H13v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+            </div>
+          </div>
+
+          <!-- Tuesday -->
+          <div class="publisher-cal-day-cell">
+            <div class="pub-post pub-post-li">
+              <div class="pub-post-header">
+                <div class="pub-post-platform-icon li">LI</div>
+                <span class="pub-post-time">8:00</span>
+              </div>
+              <div class="pub-post-text">How we're approaching sustainable packaging in 2026. Our commitment to...</div>
+              <div class="pub-post-cortex-badge">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                Cortex
+              </div>
+            </div>
+            <div class="pub-post pub-post-x">
+              <div class="pub-post-header">
+                <div class="pub-post-platform-icon x">X</div>
+                <span class="pub-post-time">12:00</span>
+              </div>
+              <div class="pub-post-text">New season, new products. What's your favorite spring trend? 🌿</div>
+              <div class="pub-post-cortex-badge">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                Cortex
+              </div>
+            </div>
+            <div class="pub-cell-add">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M19 13H13v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+            </div>
+          </div>
+
+          <!-- Wednesday -->
+          <div class="publisher-cal-day-cell">
+            <div class="pub-post pub-post-ig">
+              <div class="pub-post-header">
+                <div class="pub-post-platform-icon ig">IG</div>
+                <span class="pub-post-time">10:00</span>
+              </div>
+              <div class="pub-post-text">Behind the scenes: how our team creates your favorite products 👀</div>
+              <div class="pub-post-cortex-badge">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                Cortex
+              </div>
+            </div>
+            <div class="pub-cell-add">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M19 13H13v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+            </div>
+          </div>
+
+          <!-- Thursday -->
+          <div class="publisher-cal-day-cell">
+            <div class="pub-post pub-post-fb">
+              <div class="pub-post-header">
+                <div class="pub-post-platform-icon fb">FB</div>
+                <span class="pub-post-time">9:30</span>
+              </div>
+              <div class="pub-post-text">Customer story: How Sarah transformed her morning routine with...</div>
+              <div class="pub-post-cortex-badge">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                Cortex
+              </div>
+            </div>
+            <div class="pub-post pub-post-li">
+              <div class="pub-post-header">
+                <div class="pub-post-platform-icon li">LI</div>
+                <span class="pub-post-time">14:00</span>
+              </div>
+              <div class="pub-post-text">Industry report: Social engagement trends Q1 2026 — key takeaways</div>
+              <div class="pub-post-cortex-badge">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                Cortex
+              </div>
+            </div>
+            <div class="pub-cell-add">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M19 13H13v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+            </div>
+          </div>
+
+          <!-- Friday -->
+          <div class="publisher-cal-day-cell">
+            <div class="pub-post pub-post-ig">
+              <div class="pub-post-header">
+                <div class="pub-post-platform-icon ig">IG</div>
+                <span class="pub-post-time">11:00</span>
+              </div>
+              <div class="pub-post-text">Friday Feeling ✨ Share your weekend plans with us!</div>
+              <div class="pub-post-cortex-badge">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                Cortex
+              </div>
+            </div>
+            <div class="pub-post pub-post-x">
+              <div class="pub-post-header">
+                <div class="pub-post-platform-icon x">X</div>
+                <span class="pub-post-time">17:00</span>
+              </div>
+              <div class="pub-post-text">Weekly wrap: top moments from our community this week 🔥</div>
+              <div class="pub-post-cortex-badge">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                Cortex
+              </div>
+            </div>
+            <div class="pub-cell-add">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M19 13H13v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+            </div>
+          </div>
+
+          <!-- Saturday -->
+          <div class="publisher-cal-day-cell other-month">
+            <div class="pub-cell-add">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M19 13H13v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+            </div>
+          </div>
+
+          <!-- Sunday -->
+          <div class="publisher-cal-day-cell other-month">
+            <div class="pub-post pub-post-ig">
+              <div class="pub-post-header">
+                <div class="pub-post-platform-icon ig">IG</div>
+                <span class="pub-post-time">15:00</span>
+              </div>
+              <div class="pub-post-text">Sunday Inspiration 🌟 What's motivating you this week?</div>
+              <div class="pub-post-cortex-badge">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                Cortex
+              </div>
+            </div>
+            <div class="pub-cell-add">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M19 13H13v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
-    <div id="cortex-slot"></div>
+
+    <div id="cortex-slot" data-panel-id="publisher" data-highlight="rescheduled"></div>
   </div>
 </div>
 
 <script src="components.js"></script>
 <script src="cortex-panel.js"></script>
 <script src="app.js"></script>
-<script>initCortexPanel();</script>
+<script>
+  initCortexPanel();
+</script>
 </body>
 </html>

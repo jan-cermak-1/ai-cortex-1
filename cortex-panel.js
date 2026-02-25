@@ -365,14 +365,9 @@ function scrollChatToBottom() {
   const chatMessages = document.getElementById('cortex-chat-messages');
   if (!chatMessages) return;
   const doScroll = () => {
-    const lastMsg = chatMessages.lastElementChild;
-    if (lastMsg) {
-      lastMsg.scrollIntoView({ behavior: 'smooth', block: 'end' });
-    } else {
-      const scrollParent = chatMessages.closest('.cortex-messages') || chatMessages.parentElement;
-      if (scrollParent && scrollParent.scrollHeight > scrollParent.clientHeight) {
-        scrollParent.scrollTop = scrollParent.scrollHeight;
-      }
+    const scrollParent = chatMessages.closest('.cortex-messages') || chatMessages.parentElement;
+    if (scrollParent) {
+      scrollParent.scrollTop = scrollParent.scrollHeight;
     }
   };
   requestAnimationFrame(() => {
@@ -570,7 +565,7 @@ function onRouteChange(page, config) {
     return;
   }
 
-  if (config.mode === 'initial' && cortexState.mode !== 'completed') {
+  if (config.mode === 'initial' && cortexState.mode !== 'completed' && cortexState.mode !== 'empty') {
     cortexState.mode = 'initial';
     area.innerHTML = renderIntelligenceInitial();
   } else if (config.mode === 'completed' || cortexState.mode === 'completed') {
@@ -1028,7 +1023,8 @@ const fileUploadState = {
 function triggerFileUpload() {
   document.querySelectorAll('.attachment-dropdown.open').forEach(d => d.classList.remove('open'));
   
-  if (cortexState.activeFlowId === 'bulk-user-import') {
+  const finderFlows = ['bulk-user-import', 'content-calendar-import'];
+  if (finderFlows.includes(cortexState.activeFlowId)) {
     showFinderModal();
     return;
   }
@@ -1053,6 +1049,7 @@ function triggerFileUpload() {
 
 const FINDER_FILES = [
   { name: 'report-q1.xlsx', size: 245000, dateModified: 'Today at 11:42', kind: 'Microsoft Excel' },
+  { name: 'content-calendar-q2.xlsx', size: 94000, dateModified: 'Today at 10:58', kind: 'Microsoft Excel' },
   { name: 'users-import.xlsx', size: 128000, dateModified: 'Today at 10:15', kind: 'Microsoft Excel' },
   { name: 'data-export.xlsx', size: 89000, dateModified: 'Yesterday at 14:22', kind: 'Microsoft Excel' }
 ];

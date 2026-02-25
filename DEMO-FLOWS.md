@@ -47,6 +47,31 @@ Living documentation of all demo flows. Update whenever `flows/*.js` changes.
 
 ---
 
+### Content Calendar Import
+**Persona:** Social Media Manager  
+**Scenario:** Upload an Excel publishing plan and create Publisher drafts + Content Hub collection
+
+1. Cursor appears in the center of the screen and moves into the Cortex panel
+2. Click the `+` (attachment) button in the Cortex chatbox
+3. Click "Upload file" in the dropdown — macOS Finder modal opens
+4. Select `content-calendar-q2.xlsx` from the Finder modal
+5. Click the send button — message "schedule these posts" with attached file appears in chat
+6. Cortex: analyzing the uploaded file — detecting publishing plan structure
+7. Cortex: found 20 posts across Instagram, Facebook, LinkedIn, and X with copy, schedules, and asset links
+8. Intelligence box appears — title: "Content calendar detected"
+9. Cortex: recommends creating post drafts, a Content Hub collection, uploading assets, and linking them to drafts
+10. Check 4 actions: create 20 post drafts, create collection "Q2 Campaign Assets", upload assets from file links, link assets to drafts
+11. Click "Execute selected"
+12. Cortex: import complete — 20 drafts created, collection created, 20 assets uploaded and linked
+13. Two result links appear, each with a delete button:
+    - Publisher Calendar (filtered to show only Cortex-imported posts, badge "Cortex Import — Q2 2026" active)
+    - Content Hub collection "Q2 Campaign Assets"
+14. Click Publisher Calendar → navigates to Publisher Calendar with the Cortex Import filter active
+
+> **Note:** Works with Excel files and Google Sheets — users can also paste a Google Sheet link directly into the chat.
+
+---
+
 ## AI GENERATED
 
 ### Crisis Response
