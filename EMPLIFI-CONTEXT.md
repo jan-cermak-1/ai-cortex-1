@@ -899,6 +899,8 @@ The AI layer powers features across all three clouds:
 | **A/A+ Content Rating** | Content Hub | AI-based quality scoring for content pieces |
 | **AI Query Highlights** | Unified Analytics / Listening | AI-powered analysis highlights in listening boards |
 
+**100x Opportunities:** Emplifi PM team (Anton's table) has catalogued high-impact AI agent opportunities across Analytics, Social, Care, Commerce, Governance. Each follows a structured framework: Pain Points → Desired Outcome → Prompt/Trigger → Context → Agenting Steps → Output. See `100X-OPPORTUNITIES-CONTEXT.md` and skill `emplifi-100x-opportunities-pm` for full catalog and PM decision framework.
+
 ---
 
 ## 9. Integration & Data Architecture (docs.emplifi.io)
@@ -1192,6 +1194,7 @@ All Emplifi knowledge is consolidated in `.cursor/skills/`:
 | Skill | Content | Location |
 |-------|---------|----------|
 | **emplifi-senior-pm** | PM framework, module lookup, constraints, roadmap & strategy | `.cursor/skills/emplifi-senior-pm/` |
+| **emplifi-100x-opportunities-pm** | AI agent opportunities, 100x framework, pain-to-outcome mapping, agent design | `.cursor/skills/emplifi-100x-opportunities-pm/` |
 | **emplifi-docs** | Condensed docs.emplifi.io: modules, platform config, UI states, workflows | `.cursor/skills/emplifi-docs/` |
 | **soul-design-system** | SOUL tokens, 200+ components, patterns, content guidelines, 1014 icons | `.cursor/skills/soul-design-system/` |
 | **soul-ui-designer** | UI design decisions, component selection, pattern application, accessibility | `.cursor/skills/soul-ui-designer/` |

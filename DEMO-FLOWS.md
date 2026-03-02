@@ -226,6 +226,323 @@ Living documentation of all demo flows. Update whenever `flows/*.js` changes.
 
 ---
 
+---
+
+## PMs: 100x Opportunities (from Anton's Excel)
+
+*Source: 100x Opportunities.xlsx — Emplifi PM team. Each flow is an exact mapping from the Excel table.*
+
+**File:** `flows/flows-pm-100x.js` — All 30 flows defined. **Play demo:** Use the Play button (▶) next to each flow in the PMs tab.
+
+### Demo flow structure (all PM flows)
+
+1. Navigate to Command Center
+2. Cortex: [Flow name] — 100x opportunity. [Pain summary]
+3. Cortex: Outcome: [Outcome]. Prompt: "[Prompt]"
+4. Intelligence box appears with recommended agent actions
+5. Cortex: Recommended actions for this agent workflow
+6. Check all recommended actions
+7. Click "Execute selected"
+8. Cortex: [Flow name] — agent workflow executed. [Output summary]
+9. (If output page ≠ Command Center) Navigate to output page
+10. Cortex: Output ready. Demo complete.
+
+---
+
+### 1. 360 Analytics
+**Persona:** VP Marketing  
+**Pain:** Asking team leaders for reports; hoping for consistent data; relying on scarce specialists.  
+**Outcome:** Quick access to team results to adjust strategy without investing team time.  
+**Prompt:** "Execute a 360 analysis of our marketing data and tell me which areas bring good results."  
+**Output:** Unified Analytics Board + Executive Summary (exportable).
+
+| Step | Action |
+|------|--------|
+| 1 | Navigate to Command Center |
+| 2 | Cortex alerts: 360 Analytics — 100x opportunity |
+| 3 | Intelligence box: Build UA Board, Generate exec summary, Compare benchmarks |
+| 4 | Execute selected → Navigate to Unified Analytics |
+| 5 | Output: Board + Executive Summary created |
+
+---
+
+### 2. Dynamic ROI & Marketing Mix Re-Alignment
+**Persona:** VP Marketing / CMO  
+**Pain:** Manual data wrangling; siloed reports; "Should I invest more in ads or content?" takes weeks.  
+**Outcome:** Instantly re-calibrated tracking + data-backed budget allocation.  
+**Prompt:** "Our objective changed to [X]. Re-evaluate cross-channel ROI and recommend budget reallocation."  
+**Output:** Objective vs. ROI Dashboard + Budget Reallocation Proposal + Channel Contribution Breakdown.
+
+---
+
+### 3. Social Media Campaign (Organic)
+**Persona:** Social Media Manager  
+**Pain:** Context switching; adapting copy per platform; researching past BF performance.  
+**Outcome:** Platform-optimized multi-week content calendar from historical winners.  
+**Prompt:** "Draft a cross-platform organic campaign to prepare our customers for next Black Friday."  
+**Output:** Campaign Calendar + Bulk Review view + Creative Brief for design team.
+
+---
+
+### 4. Social Media Schedule
+**Persona:** Social Media Manager  
+**Pain:** Spotting gaps in 100+ profiles; schedules off best times; uneven content across days.  
+**Outcome:** Automatic detection of shortcomings; popup/notification when issues found.  
+**Trigger:** Daily scheduled — check editorial calendar health.  
+**Output:** Schedule health report / notification.
+
+---
+
+### 5. UGC Vetting and Autopermissioning
+**Persona:** Influencer Marketing Manager  
+**Pain:** Going one-by-one through UGC albums; then manually asking for permissions.  
+**Outcome:** Auto-sort by quality; human-like permission comments.  
+**Output:** UGC ready for use with permissions.  
+**Output page:** UGC Albums
+
+---
+
+### 6. The Brand Guardian (Recovery & Action)
+**Persona:** PR Director  
+**Pain:** Finding "why" followers drop — forensic nightmare; scanning 1000+ comments; gut-feel decisions.  
+**Outcome:** Immediate diagnosis + pre-written recovery plan executable in one click.  
+**Trigger:** Net followers for [Account] decrease by >[Threshold] in 4-hour window.  
+**Output:** Diagnosis Report + Action Plan + 3-bullet Stakeholder Briefing.  
+**Output page:** Community Inbox
+
+---
+
+### 7. Intelligent Auto-Labeling for Global Ad Campaigns
+**Persona:** Global Head of Social  
+**Pain:** Manually tagging ads across 130+ accounts; regional formats = inconsistent reporting.  
+**Outcome:** Zero manual tagging; standardized reporting; global control.  
+**Prompt:** "Audit campaigns across all 137 ad accounts and auto-apply standardized labels."  
+**Output:** Global Labeling Rule Engine + Taxonomy Health Dashboard.
+
+---
+
+### 8. Automation Assessment
+**Persona:** Customer Care Director  
+**Pain:** Understanding automation improvement requires deep setup knowledge.  
+**Outcome:** Assessment of abandonment areas + recommended actionable measures.  
+**Prompt:** "Analyse abandonment areas and recommend steps to rectify"  
+**Output:** Automation assessment + rectification plan.  
+**Output page:** Bot Overview
+
+---
+
+### 9. Autonomous Label Governance Agent
+**Persona:** Community Manager  
+**Pain:** Manual, inconsistent labeling; rule-based fails at scale; no intelligent noise filtering.  
+**Outcome:** Eliminate manual labeling; intelligent noise filter; consistent structured data.  
+**Prompt:** "Run autonomous label governance — filter noise, detect risk, ensure complete labeling."  
+**Output:** Labelling setup updated; content labelled with confidence scores.
+
+---
+
+### 10. Autonomous Tier-1 Case Resolver
+**Persona:** Head of Customer Service  
+**Pain:** High volume of repetitive cases (password resets, order status, refunds) handled manually.  
+**Outcome:** Resolve and close repetitive cases autonomously with audit trail.  
+**Prompt:** "Resolve all Tier-1 cases that meet autonomy confidence threshold."  
+**Output:** Cases closed with full audit trail + confidence score.  
+**Output page:** Care Inbox
+
+---
+
+### 11. SLA Breach Prevention Operator
+**Persona:** Contact Center Supervisor  
+**Pain:** Manual SLA monitoring leads to reactive firefighting.  
+**Outcome:** Predict breach risk; reprioritize queue; auto-escalate or notify.  
+**Prompt:** "Detect risk of SLA breach in next 60 minutes."  
+**Output:** Reordered queue + alert + prevention log.  
+**Output page:** Care Inbox
+
+---
+
+### 12. AI Workflow Builder from Plain English
+**Persona:** Operations Manager  
+**Pain:** Workflow configuration requires technical admins and weeks of effort.  
+**Outcome:** Fully configured workflow from natural language input.  
+**Prompt:** "Create workflow for VIP customers with refund auto-approval under $50."  
+**Output:** Draft workflow ready for activation.
+
+---
+
+### 13. Conversation Intelligence Auto-Coach
+**Persona:** Team Lead  
+**Pain:** Manual QA reviews are slow and inconsistent.  
+**Outcome:** Continuous evaluation and coaching insights.  
+**Prompt:** "Analyze last 100 cases for coaching insights."  
+**Output:** Coaching dashboard + feedback summaries.  
+**Output page:** Care Inbox
+
+---
+
+### 14. Autonomous Case Summarization & Handoff
+**Persona:** Contact Center Agent  
+**Pain:** Manual case summaries during shift handoff cause delays and errors.  
+**Outcome:** Handoff-ready structured summary with key facts, open tasks, risks.  
+**Prompt:** "Summarize and prepare handoff for open cases."  
+**Output:** Handoff-ready structured summary.  
+**Output page:** Care Inbox
+
+---
+
+### 15. Self-Healing Knowledge Base
+**Persona:** Knowledge Manager  
+**Pain:** Outdated articles lead to incorrect responses and rework.  
+**Outcome:** Detect low-performing articles; draft improved version.  
+**Prompt:** "Audit KB for outdated or conflicting content."  
+**Output:** Rewritten KB draft (requires editorial approval).
+
+---
+
+### 16. Knowledge Gap Detector
+**Persona:** Head of CS  
+**Pain:** Recurring case types lack proper documentation.  
+**Outcome:** Identify theme → Draft new article → Suggest taxonomy placement.  
+**Prompt:** "Identify top recurring unresolved intents."  
+**Output:** Draft KB article + impact forecast.
+
+---
+
+### 17. Confidence-Based Auto Resolution Engine
+**Persona:** CX Director  
+**Pain:** Low trust in AI automation due to hallucination risk.  
+**Outcome:** Resolve when confidence > 90%; else escalate for review.  
+**Prompt:** "Resolve case if confidence > 90%."  
+**Output:** Closed case or escalated for review.  
+**Output page:** Care Inbox
+
+---
+
+### 18. Continuous Learning Loop Agent
+**Persona:** VP Customer Experience  
+**Pain:** AI does not systematically improve over time.  
+**Outcome:** Compare AI vs human resolutions → Update KB → Adjust thresholds.  
+**Prompt:** "Analyze all resolved cases this month for learning."  
+**Output:** Monthly autonomy improvement report.
+
+---
+
+### 19. Natural Language Reporting Operator
+**Persona:** Operations Director  
+**Pain:** Reporting requires specialists and cross-dataset analysis.  
+**Outcome:** Dashboard + executive summary from plain-language request.  
+**Prompt:** "Generate weekly performance report across queues."  
+**Output:** Dashboard + executive summary document.  
+**Output page:** Unified Analytics
+
+---
+
+### 20. Autonomous Governance Architect
+**Persona:** Platform Admin  
+**Pain:** Governance in workshops/spreadsheets; complex, error-prone; every restructuring = rethinking permissions.  
+**Outcome:** Right people, right access; optimal Teams structure.  
+**Prompt:** "Design optimal Teams structure for our departments, regions, and workflows."  
+**Output:** Access summary + risk assessment + provisioning.  
+**Output page:** Settings / Users
+
+---
+
+### 21. Intelligent Onboarding Concierge
+**Persona:** Team Admin  
+**Pain:** Onboarding manual; under/over-permissioned risks.  
+**Outcome:** New team member has everything on day one.  
+**Prompt:** "Onboard user A as Social Media Manager in X region/brand/department."  
+**Output:** Governance health score + risk dashboard.  
+**Output page:** Settings / Users
+
+---
+
+### 22. Continuous Governance Guardian
+**Persona:** Platform Admin  
+**Pain:** No visibility into governance health; permission creep; compliance reporting manual.  
+**Outcome:** Real-time understanding and automatic correction of risks.  
+**Prompt:** "Evaluate our governance health and fix critical risks."  
+**Output:** Governance health report + remediation actions.  
+**Output page:** Settings / Users
+
+---
+
+### 23. Real-Time Competitive Intelligence & Benchmarking Engine
+**Persona:** Marketing Analyst  
+**Pain:** Dedicated analysts; manual monitoring; quarterly reports outdated; miss viral moments.  
+**Outcome:** Real-time automated monitoring; proactive alerts on content gaps.  
+**Prompt:** "Analyze top 5 competitors over last month; alert on viral campaigns; identify content gaps."  
+**Output:** Competitive Dashboard + Gap Analysis Report.  
+**Output page:** Unified Analytics
+
+---
+
+### 24. Guided Agentic Workspace Architect
+**Persona:** Implementation Manager  
+**Pain:** Manual configuration of fields/labels; messy data architecture from Day 1.  
+**Outcome:** Workspace ready for production in minutes, not weeks.  
+**Trigger:** User logs into fresh instance for first time.  
+**Output:** Configuration Summary + functional workspace shell.
+
+---
+
+### 25. AI Logic Guardrail & Flow Optimizer
+**Persona:** Operations Manager  
+**Pain:** Silent failures; logical paradoxes; high risk of human error.  
+**Outcome:** Error-free automation; real-time Redline alerts.  
+**Trigger:** User adds condition block or attempts to save/activate Flow.  
+**Output:** Inline UI warnings + Quick Fix.
+
+---
+
+### 26. Proactive Workflow Discovery Agent
+**Persona:** Customer Support Agent  
+**Pain:** Repetitive manual tasks; users too busy to realize automation possible.  
+**Outcome:** Work Smarter toast → pre-configured rule ready for one-click activation.  
+**Trigger:** User labels 10 messages with "Refund" manually within 5 minutes.  
+**Output:** Pre-configured Automation Rule ready.
+
+---
+
+### 27. Intelligent Keyword Analyzer
+**Persona:** Marketing Analyst  
+**Pain:** Manual auditing of keyword lists; blind spots; outdated filters.  
+**Outcome:** Top 10 Ghost Keywords + One-Click Apply with projected accuracy lift.  
+**Prompt:** "Analyze the Refund list against last month's transcripts."  
+**Output:** Ghost Keywords + One-Click Apply (+14% coverage).  
+**Output page:** Settings / Listening
+
+---
+
+### 28. Unified Commerce Signal Agent (UCSA)
+**Persona:** VP of Ecommerce  
+**Pain:** Reviews, social, care in silos; no unified customer truth; revenue drops without root cause.  
+**Outcome:** Single intelligence layer; cross-channel risk alert; revenue at risk forecast.  
+**Triggers:** Negative spike in social; 3/2/1-star review surge; care tickets on same issue.  
+**Output:** Cross-Channel Risk Alert + Revenue at Risk Forecast.  
+**Output page:** Reviews Moderate
+
+---
+
+### 29. Conversion-Driving Review Intelligence Agent
+**Persona:** VP of Ecommerce / CRO Lead  
+**Pain:** Star rating ≠ conversion impact; no visibility; generic collection forms.  
+**Outcome:** Conversion-driving attributes; optimized collection template; projected lift.  
+**Triggers:** High traffic, moderate conversion SKU; new product launch.  
+**Output:** Conversion-Driving Attributes report + Optimized template.  
+**Output page:** Reviews Moderate
+
+---
+
+### 30. Revenue Recovery & Objection Intercept Agent (RROIA)
+**Persona:** VP of Ecommerce / CRO Lead  
+**Pain:** High PDP traffic, low conversion; objections in reviews not surfaced; exit intent not contextual.  
+**Outcome:** Real-time objection intercept overlays; revenue recovered attribution.  
+**Triggers:** Dwell + no add-to-cart; user expands 1-3 star reviews; searches "fit"; exit intent.  
+**Output:** Objection intercept overlays + Revenue recovered report.  
+**Output page:** Reviews Moderate
+
+---
+
 ## AI GENERATED — 100 FLOWS
 
 ### Group A: Publisher & Content

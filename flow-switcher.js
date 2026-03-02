@@ -143,11 +143,13 @@ function renderFlowSwitcher() {
   const humanFlows = flows.filter(f => f.source === 'human');
   const aiFlows = flows.filter(f => f.source === 'ai');
   const competitorFlows = flows.filter(f => f.source === 'ai-competitor');
+  const pmFlows = flows.filter(f => f.source === 'pm');
 
   const tabs = [
     { id: 'human', label: 'Curated', count: humanFlows.length, flows: humanFlows },
     { id: 'ai', label: 'AI', count: aiFlows.length, flows: aiFlows },
     { id: 'ai-competitor', label: 'AI Competitors', count: competitorFlows.length, flows: competitorFlows },
+    { id: 'pm', label: 'PMs', count: pmFlows.length, flows: pmFlows },
   ];
 
   const tabsHtml = tabs.map(tab => `
