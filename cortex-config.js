@@ -42,7 +42,8 @@ const CORTEX_UI_CONFIG = {
     ],
     attachmentIcon: 'assets/icons/plus.svg',
     sendIcon: 'assets/cortex/send-arrow.svg',
-    micIcon: 'assets/icons/soul/Microphone.svg'
+    micIcon: 'assets/icons/soul/Microphone.svg',
+    stopIcon: 'assets/icons/soul/Stop.svg'
   },
 
   chat: {

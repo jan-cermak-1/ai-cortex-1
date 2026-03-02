@@ -29,6 +29,19 @@ const cortexState = {
   activeFlowId: 'labubu-trend'
 };
 
+// --- Voice recording state ---
+let voiceRecordingState = {
+  isRecording: false,
+  recognition: null,
+  sendAfterStop: false,
+  simIntervalId: null,
+  simPhrases: [
+    'Analyze', 'engagement', 'on', 'our', 'social', 'networks.',
+    'Compare', 'competitor', 'performance', 'with', 'our', 'content.',
+    'Suggest', 'optimization', 'for', 'next', 'week.'
+  ]
+};
+
 // --- Get current flow data ---
 function getCurrentFlowData() {
   if (typeof getFlowData === 'function') {
@@ -183,9 +196,11 @@ function renderCortexInput() {
                   ${attachmentItems}
                 </div>
               </div>
-              <button type="button" class="cortex-input-action-btn" id="cortex-send-btn" title="Zadávat příkaz hlasem">
-                <img src="${config.micIcon}" alt="Voice input" data-icon="mic">
-              </button>
+              <div class="cortex-footer-actions" id="cortex-footer-actions">
+                <button type="button" class="cortex-input-action-btn" id="cortex-send-btn" title="Zadávat příkaz hlasem">
+                  <img src="${config.micIcon}" alt="Voice input" data-icon="mic">
+                </button>
+              </div>
             </div>
           </div>
           <div class="cortex-input-meta">
@@ -629,21 +644,137 @@ function initCortexListeners() {
   });
 
   const inputField = document.getElementById('cortex-input-field');
-  const sendBtn = document.getElementById('cortex-send-btn');
+
+  function getVoiceWaveHtml() {
+    return `
+      <div class="voice-wave-animation" aria-hidden="true">
+        <span class="voice-wave-bar"></span>
+        <span class="voice-wave-bar"></span>
+        <span class="voice-wave-bar"></span>
+        <span class="voice-wave-bar"></span>
+        <span class="voice-wave-bar"></span>
+      </div>`;
+  }
 
   function updateInputActionButton() {
+    const container = document.getElementById('cortex-footer-actions');
     const field = document.getElementById('cortex-input-field');
-    const btn = document.getElementById('cortex-send-btn');
-    if (!field || !btn) return;
+    if (!container || !field) return;
     const config = CORTEX_UI_CONFIG.input;
     const hasText = field.value.trim().length > 0;
-    const img = btn.querySelector('img');
-    if (img) {
-      img.src = hasText ? config.sendIcon : config.micIcon;
-      img.alt = hasText ? 'Odeslat' : 'Voice input';
-      img.dataset.icon = hasText ? 'send' : 'mic';
+    const isRecording = voiceRecordingState.isRecording;
+
+    if (isRecording) {
+      container.innerHTML = getVoiceWaveHtml() + `
+        <button type="button" class="cortex-input-action-btn cortex-stop-btn" id="cortex-stop-btn" title="Zastavit nahrávání">
+          <img src="${config.stopIcon}" alt="Stop">
+        </button>
+        <button type="button" class="cortex-input-action-btn" id="cortex-send-btn" title="Odeslat">
+          <img src="${config.sendIcon}" alt="Odeslat">
+        </button>`;
+      container.classList.add('recording');
+    } else {
+      const icon = hasText ? config.sendIcon : config.micIcon;
+      const title = hasText ? 'Odeslat' : 'Zadávat příkaz hlasem';
+      const alt = hasText ? 'Odeslat' : 'Voice input';
+      container.innerHTML = `
+        <button type="button" class="cortex-input-action-btn" id="cortex-send-btn" title="${title}">
+          <img src="${icon}" alt="${alt}" data-icon="${hasText ? 'send' : 'mic'}">
+        </button>`;
+      container.classList.remove('recording');
     }
-    btn.title = hasText ? 'Odeslat' : 'Zadávat příkaz hlasem';
+  }
+
+  function startVoiceSimulation() {
+    const field = document.getElementById('cortex-input-field');
+    if (!field) return;
+    const phrases = voiceRecordingState.simPhrases;
+    let phraseIndex = 0;
+    voiceRecordingState.simIntervalId = setInterval(function() {
+      if (!voiceRecordingState.isRecording) return;
+      if (phraseIndex >= phrases.length) {
+        clearInterval(voiceRecordingState.simIntervalId);
+        voiceRecordingState.simIntervalId = null;
+        return;
+      }
+      const word = phrases[phraseIndex];
+      phraseIndex++;
+      field.value += (field.value ? ' ' : '') + word;
+      autoResizeInput(field);
+    }, 600);
+  }
+
+  function startVoiceRecording() {
+    const field = document.getElementById('cortex-input-field');
+    voiceRecordingState.isRecording = true;
+    updateInputActionButton();
+
+    startVoiceSimulation();
+
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (SpeechRecognition) {
+      const recognition = new SpeechRecognition();
+      recognition.continuous = true;
+      recognition.interimResults = true;
+      recognition.lang = (navigator.language || 'en-US').split('-')[0] === 'cs' ? 'cs-CZ' : 'en-US';
+      const startValue = field ? field.value : '';
+      let fullTranscript = '';
+      recognition.onresult = function(event) {
+        let interim = '';
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+          const transcript = event.results[i][0].transcript;
+          if (event.results[i].isFinal) {
+            fullTranscript += transcript;
+          } else {
+            interim += transcript;
+          }
+        }
+        if (field) {
+          field.value = startValue + fullTranscript + interim;
+          autoResizeInput(field);
+        }
+      };
+      recognition.onend = function() {
+        voiceRecordingState.recognition = null;
+      };
+      recognition.onerror = function(e) {
+        if (e.error !== 'aborted') console.warn('Speech recognition error:', e.error);
+        voiceRecordingState.recognition = null;
+      };
+      voiceRecordingState.recognition = recognition;
+      try {
+        recognition.start();
+      } catch (err) {
+        console.warn('Speech recognition start failed:', err);
+      }
+    }
+  }
+
+  function stopVoiceRecording() {
+    if (voiceRecordingState.simIntervalId) {
+      clearInterval(voiceRecordingState.simIntervalId);
+      voiceRecordingState.simIntervalId = null;
+    }
+    if (voiceRecordingState.recognition) {
+      try {
+        voiceRecordingState.recognition.stop();
+      } catch (_) {}
+      voiceRecordingState.recognition = null;
+    }
+    const field = document.getElementById('cortex-input-field');
+    const shouldSend = voiceRecordingState.sendAfterStop;
+    voiceRecordingState.isRecording = false;
+    voiceRecordingState.sendAfterStop = false;
+    updateInputActionButton();
+    if (shouldSend && field) {
+      const text = field.value.trim();
+      if (text) {
+        sendChatMessage(text);
+        field.value = '';
+        autoResizeInput(field);
+      }
+      updateInputActionButton();
+    }
   }
 
   if (inputField) {
@@ -676,16 +807,26 @@ function initCortexListeners() {
     inputField.addEventListener('blur', updateInputActionButton);
   }
 
-  if (sendBtn) {
-    sendBtn.addEventListener('click', function() {
+  const footerActions = document.getElementById('cortex-footer-actions');
+  if (footerActions) {
+    footerActions.addEventListener('click', function(e) {
+      const stopBtn = e.target.closest('#cortex-stop-btn, .cortex-stop-btn');
+      const sendBtn = e.target.closest('#cortex-send-btn');
       const field = document.getElementById('cortex-input-field');
       if (!field) return;
-      if (field.value.trim()) {
-        sendChatMessage(field.value.trim());
-        field.value = '';
-        autoResizeInput(field);
-      } else {
-        /* Voice input — zatím placeholder */
+      if (stopBtn) {
+        stopVoiceRecording();
+      } else if (sendBtn) {
+        if (voiceRecordingState.isRecording) {
+          voiceRecordingState.sendAfterStop = true;
+          stopVoiceRecording();
+        } else if (field.value.trim()) {
+          sendChatMessage(field.value.trim());
+          field.value = '';
+          autoResizeInput(field);
+        } else {
+          startVoiceRecording();
+        }
       }
       updateInputActionButton();
     });
