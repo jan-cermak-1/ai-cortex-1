@@ -68,6 +68,9 @@ const saveFlowSwitcherState = (state) => {
 
 let flowSwitcherState = loadFlowSwitcherState();
 
+// Tab state for the flow switcher sections
+let activeFlowTab = 'human';
+
 function renderFlowItem(flow) {
   const isActive = flow.id === flowSwitcherState.activeFlowId;
   const hasPlayback = flow.data && flow.data.playbackSteps && flow.data.playbackSteps.length > 0;
@@ -129,33 +132,34 @@ function renderFlowItem(flow) {
     </div>`;
 }
 
+function switchFlowTab(tabId) {
+  activeFlowTab = tabId;
+  updateFlowSwitcherUI();
+}
+
 function renderFlowSwitcher() {
   const flows = typeof FLOWS_REGISTRY !== 'undefined' ? FLOWS_REGISTRY : [];
   
   const humanFlows = flows.filter(f => f.source === 'human');
   const aiFlows = flows.filter(f => f.source === 'ai');
   const competitorFlows = flows.filter(f => f.source === 'ai-competitor');
-  
-  const humanSection = humanFlows.length > 0 ? `
-    <div class="flow-section human">
-      <div class="flow-section-header">Human</div>
-      ${humanFlows.map(renderFlowItem).join('')}
-    </div>` : '';
-  
-  const aiSection = aiFlows.length > 0 ? `
-    <div class="flow-section ai">
-      <div class="flow-section-header">AI Generated</div>
-      ${aiFlows.map(renderFlowItem).join('')}
-    </div>` : '';
 
-  const competitorSection = competitorFlows.length > 0 ? `
-    <div class="flow-section ai-competitor">
-      <div class="flow-section-header">
-        AI Generated — Competitor Inspired
-        <span class="flow-section-badge">${competitorFlows.length}</span>
-      </div>
-      ${competitorFlows.map(renderFlowItem).join('')}
-    </div>` : '';
+  const tabs = [
+    { id: 'human', label: 'Curated', count: humanFlows.length, flows: humanFlows },
+    { id: 'ai', label: 'AI', count: aiFlows.length, flows: aiFlows },
+    { id: 'ai-competitor', label: 'AI Competitors', count: competitorFlows.length, flows: competitorFlows },
+  ];
+
+  const tabsHtml = tabs.map(tab => `
+    <button class="flow-tab${activeFlowTab === tab.id ? ' active' : ''}" 
+            data-tab="${tab.id}"
+            onclick="switchFlowTab('${tab.id}')">
+      ${tab.label}
+      <span class="flow-tab-count">${tab.count}</span>
+    </button>`).join('');
+
+  const activeTabData = tabs.find(t => t.id === activeFlowTab) || tabs[0];
+  const tabContentHtml = activeTabData.flows.map(renderFlowItem).join('');
 
   return `
     <div class="flow-switcher${flowSwitcherState.isOpen ? ' open' : ''}">
@@ -166,10 +170,13 @@ function renderFlowSwitcher() {
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
           </a>
         </div>
+        <div class="flow-tabs-bar">
+          ${tabsHtml}
+        </div>
         <div class="flow-switcher-list">
-          ${humanSection}
-          ${aiSection}
-          ${competitorSection}
+          <div class="flow-tab-content">
+            ${tabContentHtml}
+          </div>
         </div>
       </div>
       <div class="flow-switcher-buttons">

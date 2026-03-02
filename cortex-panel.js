@@ -183,7 +183,9 @@ function renderCortexInput() {
                   ${attachmentItems}
                 </div>
               </div>
-              <div class="send-btn" id="cortex-send-btn"><img src="${config.sendIcon}" alt="Send"></div>
+              <button type="button" class="cortex-input-action-btn" id="cortex-send-btn" title="Zadávat příkaz hlasem">
+                <img src="${config.micIcon}" alt="Voice input" data-icon="mic">
+              </button>
             </div>
           </div>
           <div class="cortex-input-meta">
@@ -629,8 +631,24 @@ function initCortexListeners() {
   const inputField = document.getElementById('cortex-input-field');
   const sendBtn = document.getElementById('cortex-send-btn');
 
+  function updateInputActionButton() {
+    const field = document.getElementById('cortex-input-field');
+    const btn = document.getElementById('cortex-send-btn');
+    if (!field || !btn) return;
+    const config = CORTEX_UI_CONFIG.input;
+    const hasText = field.value.trim().length > 0;
+    const img = btn.querySelector('img');
+    if (img) {
+      img.src = hasText ? config.sendIcon : config.micIcon;
+      img.alt = hasText ? 'Odeslat' : 'Voice input';
+      img.dataset.icon = hasText ? 'send' : 'mic';
+    }
+    btn.title = hasText ? 'Odeslat' : 'Zadávat příkaz hlasem';
+  }
+
   if (inputField) {
     inputField.addEventListener('focus', function() {
+      updateInputActionButton();
       if (cortexState.activeFlowId === 'bulk-user-import' &&
           fileUploadState.pendingFiles.length > 0 &&
           !this.value.trim()) {
@@ -653,19 +671,27 @@ function initCortexListeners() {
     });
     inputField.addEventListener('input', function() {
       autoResizeInput(this);
+      updateInputActionButton();
     });
+    inputField.addEventListener('blur', updateInputActionButton);
   }
 
   if (sendBtn) {
     sendBtn.addEventListener('click', function() {
       const field = document.getElementById('cortex-input-field');
-      if (field && field.value.trim()) {
+      if (!field) return;
+      if (field.value.trim()) {
         sendChatMessage(field.value.trim());
         field.value = '';
         autoResizeInput(field);
+      } else {
+        /* Voice input — zatím placeholder */
       }
+      updateInputActionButton();
     });
   }
+
+  updateInputActionButton();
 
   initDecisionItemListeners();
 

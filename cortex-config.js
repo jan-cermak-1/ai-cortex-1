@@ -41,7 +41,8 @@ const CORTEX_UI_CONFIG = {
       { id: 'mention', icon: 'assets/icons/user.svg', label: 'Mention someone' }
     ],
     attachmentIcon: 'assets/icons/plus.svg',
-    sendIcon: 'assets/cortex/send-arrow.svg'
+    sendIcon: 'assets/cortex/send-arrow.svg',
+    micIcon: 'assets/icons/soul/Microphone.svg'
   },
 
   chat: {
