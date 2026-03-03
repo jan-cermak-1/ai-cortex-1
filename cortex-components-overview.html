@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cortex Panel — Přehled komponent</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="soul-tokens.css">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .overview-page {
+      min-height: 100vh;
+      background: var(--color-layer-level-2);
+      padding: 24px;
+      font-family: var(--font-family-sans);
+    }
+    .overview-header {
+      max-width: 1200px;
+      margin: 0 auto 32px;
+    }
+    .overview-header h1 {
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--color-on-layer-primary);
+      margin: 0 0 4px;
+    }
+    .overview-header p {
+      font-size: 14px;
+      color: var(--color-on-layer-secondary);
+      margin: 0;
+    }
+    .component-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 20px;
+    }
+    .component-card {
+      background: var(--color-layer-level-1);
+      border-radius: var(--border-radius-large);
+      border: 1px solid var(--color-border-secondary);
+      overflow: hidden;
+    }
+    .component-card-header {
+      padding: 10px 14px;
+      background: var(--color-layer-level-0);
+      border-bottom: 1px solid var(--color-border-secondary);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--color-on-layer-primary);
+      font-family: monospace;
+    }
+    .component-card-body {
+      padding: 16px;
+    }
+    .component-desc {
+      font-size: 11px;
+      color: var(--color-on-layer-tertiary);
+      margin-top: 10px;
+      line-height: 1.4;
+    }
+    /* Preview containers - isolate real components */
+    .preview-wrap {
+      border: 1px dashed var(--color-border-secondary);
+      border-radius: var(--border-radius-medium);
+      padding: 12px;
+      background: var(--color-layer-level-1);
+    }
+    .preview-wrap.cortex-panel-preview {
+      display: flex;
+      max-height: 420px;
+    }
+    .preview-wrap.cortex-panel-preview .cortex-panel {
+      width: 320px;
+      flex-shrink: 0;
+    }
+    .preview-wrap .cortex-right-bar {
+      flex-shrink: 0;
+    }
+    .preview-wrap .cortex-views-container {
+      min-height: 200px;
+    }
+    .preview-wrap .cortex-messages {
+      min-height: 150px;
+    }
+    .preview-wrap .activity-list,
+    .preview-wrap .notification-list {
+      padding: 0;
+    }
+    .preview-wrap .finder-modal {
+      position: relative;
+      inset: 0;
+    }
+    .preview-wrap .finder-modal.visible .finder-modal-backdrop {
+      opacity: 0.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="overview-page">
+    <header class="overview-header">
+      <h1>Cortex Panel — Přehled komponent</h1>
+      <p>Vizuální přehled všech UI komponent v Cortex AI panelu. Použity skutečné třídy a styly z aplikace.</p>
+    </header>
+
+    <div class="component-grid">
+      <!-- 1. cortex-header -->
+      <div class="component-card">
+        <div class="component-card-header">cortex-header</div>
+        <div class="component-card-body">
+          <div class="preview-wrap">
+            <div class="cortex-header">
+              <div class="cortex-title">
+                <img class="ai-icon" src="assets/cortex/ai-sparkle-filled.svg" alt="" width="18" height="18">
+                <span class="cortex-title-text">Cortex</span>
+              </div>
+              <div class="cortex-header-actions">
+                <div class="header-btn" title="History"><img class="header-btn-icon" src="assets/cortex/33d5f0820a9fe6b4c62e05a1ab23de7241725a64.svg" alt=""></div>
+                <div class="header-btn" title="New chat"><img class="header-btn-icon" src="assets/cortex/aa41e39cb4b9c529bd2b2713c491db00d8b5fd74.svg" alt=""></div>
+              </div>
+            </div>
+          </div>
+          <div class="component-desc">Ikona AI, název Cortex, tlačítka History a New chat</div>
+        </div>
+      </div>
+
+      <!-- 2. intelligence-box initial -->
+      <div class="component-card">
+        <div class="component-card-header">intelligence-box (initial)</div>
+        <div class="component-card-body">
+          <div class="preview-wrap">
+            <div class="intelligence-box">
+              <div class="intelligence-box-header">
+                <span class="intelligence-box-title">Labubu is trending</span>
+                <div class="intelligence-box-close" role="button"><img src="assets/cortex/close-x.svg" alt=""></div>
+              </div>
+              <div class="intelligence-box-description">
+                <p>Cortex alerts that Labubu is trending and competitors are publishing related content.</p>
+              </div>
+              <div class="intelligence-box-actions">
+                <div class="checkbox" data-action="campaign"><div class="checkbox-box"><img src="assets/cortex/checkbox-checked.svg" alt=""></div><span class="checkbox-label">Create campaign + collection</span></div>
+                <div class="checkbox" data-action="listening"><div class="checkbox-box"><img src="assets/cortex/checkbox-checked.svg" alt=""></div><span class="checkbox-label">Create listening query</span></div>
+                <div class="checkbox" data-action="analytics"><div class="checkbox-box"><img src="assets/cortex/checkbox-checked.svg" alt=""></div><span class="checkbox-label">Create analytics board</span></div>
+              </div>
+              <div class="intelligence-box-buttons">
+                <button class="btn btn-s btn-ghost">Execute selected</button>
+                <span class="or-text">or</span>
+                <button class="btn btn-s btn-ghost">More ideas</button>
+              </div>
+              <div class="intelligence-box-footer">Select actions to run in one batch.</div>
+            </div>
+          </div>
+          <div class="component-desc">Checkboxy akcí, Execute selected, More ideas, footer</div>
+        </div>
+      </div>
+
+      <!-- 3. intelligence-box completed -->
+      <div class="component-card">
+        <div class="component-card-header">intelligence-box (completed)</div>
+        <div class="component-card-body">
+          <div class="preview-wrap">
+            <div class="intelligence-box intelligence-box-completed">
+              <div class="intelligence-box-header">
+                <span class="intelligence-box-title">Labubu is trending</span>
+                <div class="intelligence-box-close" role="button"><img src="assets/cortex/close-x.svg" alt=""></div>
+              </div>
+              <div class="intelligence-box-description"><p>Based on your selection, I created the following:</p></div>
+              <div class="decision-completed">
+                <div class="decision-header">Based on your decision I created:</div>
+                <div class="decision-item" role="link" tabindex="0">
+                  <div class="check-icon"><img src="assets/icons/soul/upcoming-permission.svg" alt="" width="16" height="16"></div>
+                  <span class="decision-label">Collection "Labubu"</span>
+                  <button class="decision-item-remove" type="button"><img src="assets/icons/soul/remove-delete-trash.svg" alt="" width="14" height="14"></button>
+                </div>
+                <div class="decision-item visited" role="link" tabindex="0">
+                  <div class="check-icon"><img src="assets/icons/soul/status-done.svg" alt="" width="16" height="16"></div>
+                  <span class="decision-label">Publisher campaign "Labubu"</span>
+                  <button class="decision-item-remove" type="button"><img src="assets/icons/soul/remove-delete-trash.svg" alt="" width="14" height="14"></button>
+                </div>
+                <div class="decision-item decision-item--deleted">
+                  <div class="check-icon"><img src="assets/icons/soul/status-done.svg" alt=""></div>
+                  <span class="decision-label decision-label--deleted">Analytics board "Labubu"</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="component-desc">Decision items: upcoming, visited, deleted stav</div>
+        </div>
+      </div>
+
+      <!-- 4. chat-message user + ai -->
+      <div class="component-card">
+        <div class="component-card-header">chat-message (user / ai)</div>
+        <div class="component-card-body">
+          <div class="preview-wrap">
+            <div class="cortex-chat-messages" style="display: flex; flex-direction: column; gap: 12px;">
+              <div class="chat-message chat-message--user">
+                <div class="chat-message-bubble">Analyze engagement on our social networks</div>
+              </div>
+              <div class="chat-message chat-message--ai">
+                <div class="chat-message-bubble">
+                  <h3 class="chat-response-heading">Summary</h3>
+                  <p>Based on your listening queries, engagement rate increased by 12% compared to last week.</p>
+                  <h3 class="chat-response-heading">Key findings</h3>
+                  <ul class="chat-response-list">
+                    <li>Top performing content: video posts with 3.2x average reach</li>
+                    <li>Peak engagement times: Tuesday 9–11 AM</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="component-desc">User bublina, AI bublina s headings a listem</div>
+        </div>
+      </div>
+
+      <!-- 5. chat-message thinking -->
+      <div class="component-card">
+        <div class="component-card-header">chat-message--thinking</div>
+        <div class="component-card-body">
+          <div class="preview-wrap">
+            <div class="chat-message chat-message--thinking">
+              <div class="chat-message-thinking">Agent is thinking...</div>
+            </div>
+          </div>
+          <div class="component-desc">Placeholder při čekání na AI odpověď</div>
+        </div>
+      </div>
+
+      <!-- 6. chat s attached files -->
+      <div class="component-card">
+        <div class="component-card-header">chat-message + attached-files</div>
+        <div class="component-card-body">
+          <div class="preview-wrap">
+            <div class="chat-message chat-message--user">
+              <div class="chat-message-bubble">
+                <span class="attached-files">
+                  <span class="file-attachment-chip file-attachment-chip--xlsx"><span class="file-icon"><svg viewBox="0 0 36 36" fill="currentColor" width="12" height="12"><path d="M6 7C6 4.23858 8.23858 2 11 2H21.3431C22.6692 2 23.941 2.52678 24.8787 3.46447L28.5355 7.12132C29.4732 8.059 30 9.33077 30 10.6569V14H28V12H23C21.3431 12 20 10.6569 20 9V4H11C9.34315 4 8 5.34315 8 7V29C8 30.6569 9.34315 32 11 32H26C27.1046 32 28 31.1046 28 30H30C30 32.2091 28.2091 34 26 34H11C8.23858 34 6 31.7614 6 29V7Z"/></svg></span><span class="file-name">users-import.xlsx</span></span>
+                </span>
+                add these users
+              </div>
+            </div>
+          </div>
+          <div class="component-desc">Uživatelská zpráva s připojeným souborem (file-attachment-chip)</div>
+        </div>
+      </div>
+
+      <!-- 7. cortex-input-area -->
+      <div class="component-card">
+        <div class="component-card-header">cortex-input-area</div>
+        <div class="component-card-body">
+          <div class="preview-wrap">
+            <div class="cortex-input-area">
+              <div class="cortex-input-box">
+                <div class="cortex-input-context">
+                  <div class="context-label">Context</div>
+                  <div class="context-value">
+                    <span class="context-page-name">Command center</span>
+                    <div class="context-close"><svg viewBox="0 0 36 36" fill="currentColor" width="12" height="12"><path fill-rule="evenodd" clip-rule="evenodd" d="M10.2929 10.2929L18 18L10.2929 25.7071L11.7071 27.1213L19.4142 19.4142L27.1213 27.1213L28.5355 25.7071L20.8284 18L28.5355 10.2929L27.1213 8.87868L19.4142 16.5858L11.7071 8.87868L10.2929 10.2929Z"/></svg></div>
+                  </div>
+                </div>
+                <div class="cortex-input-body">
+                  <div class="file-attachments"></div>
+                  <textarea class="cortex-input-field" placeholder="Write message or type / for more" rows="2"></textarea>
+                </div>
+                <div class="cortex-input-footer">
+                  <div class="attachment-btn">
+                    <img src="assets/icons/plus.svg" alt="">
+                    <div class="attachment-dropdown">
+                      <div class="attachment-dropdown-item"><img src="assets/icons/upload.svg" alt="" width="18" height="18">Upload file</div>
+                      <div class="attachment-dropdown-item"><img src="assets/icons/link.svg" alt="" width="18" height="18">Add a link</div>
+                      <div class="attachment-dropdown-item"><img src="assets/icons/user.svg" alt="" width="18" height="18">Mention someone</div>
+                    </div>
+                  </div>
+                  <div class="cortex-footer-actions">
+                    <button type="button" class="cortex-input-action-btn"><img src="assets/icons/soul/Microphone.svg" alt="" data-icon="mic"></button>
+                  </div>
+                </div>
+              </div>
+              <div class="cortex-input-meta">
+                <span class="cortex-input-powered">Get instant answers powered by Emplifi AI</span>
+              </div>
+            </div>
+          </div>
+          <div class="component-desc">Kontext, textarea, attachment dropdown, mic/send, powered by</div>
+        </div>
+      </div>
+
+      <!-- 8. file-attachment-chip -->
+      <div class="component-card">
+        <div class="component-card-header">file-attachment-chip</div>
+        <div class="component-card-body">
+          <div class="preview-wrap">
+            <div class="file-attachments" style="display: flex; flex-wrap: wrap; gap: 8px;">
+              <div class="file-attachment-chip file-attachment-chip--xlsx">
+                <span class="file-icon"><svg viewBox="0 0 36 36" fill="currentColor" width="12" height="12"><path d="M6 7C6 4.23858 8.23858 2 11 2H21.3431C22.6692 2 23.941 2.52678 24.8787 3.46447L28.5355 7.12132C29.4732 8.059 30 9.33077 30 10.6569V14H28V12H23C21.3431 12 20 10.6569 20 9V4H11C9.34315 4 8 5.34315 8 7V29C8 30.6569 9.34315 32 11 32H26C27.1046 32 28 31.1046 28 30H30C30 32.2091 28.2091 34 26 34H11C8.23858 34 6 31.7614 6 29V7Z"/></svg></span>
+                <span class="file-name">users-import.xlsx</span>
+                <button type="button" class="file-remove" title="Remove"><svg viewBox="0 0 36 36" fill="currentColor" width="14" height="14"><path d="M18 16.5859L26.293 8.29297L27.7072 9.70718L19.4143 18L27.7072 26.293L26.293 27.7072L18 19.4143L9.70718 27.7072L8.29297 26.293L16.5859 18L8.29297 9.70718L9.70718 8.29297L18 16.5859Z"/></svg></button>
+              </div>
+              <div class="file-attachment-chip">
+                <span class="file-icon"><svg viewBox="0 0 36 36" fill="currentColor" width="12" height="12"><path d="M6 7C6 4.23858 8.23858 2 11 2H21.3431C22.6692 2 23.941 2.52678 24.8787 3.46447L28.5355 7.12132C29.4732 8.059 30 9.33077 30 10.6569V14H28V12H23C21.3431 12 20 10.6569 20 9V4H11C9.34315 4 8 5.34315 8 7V29C8 30.6569 9.34315 32 11 32H26C27.1046 32 28 31.1046 28 30H30C30 32.2091 28.2091 34 26 34H11C8.23858 34 6 31.7614 6 29V7Z"/></svg></span>
+                <span class="file-name">report.pdf</span>
+                <button type="button" class="file-remove" title="Remove"><svg viewBox="0 0 36 36" fill="currentColor" width="14" height="14"><path d="M18 16.5859L26.293 8.29297L27.7072 9.70718L19.4143 18L27.7072 26.293L26.293 27.7072L18 19.4143L9.70718 27.7072L8.29297 26.293L16.5859 18L8.29297 9.70718L9.70718 8.29297L18 16.5859Z"/></svg></button>
+              </div>
+            </div>
+          </div>
+          <div class="component-desc">xlsx varianta (zelená), obecná varianta, tlačítko remove</div>
+        </div>
+      </div>
+
+      <!-- 9. voice-wave recording -->
+      <div class="component-card">
+        <div class="component-card-header">voice-wave-animation + recording</div>
+        <div class="component-card-body">
+          <div class="preview-wrap">
+            <div class="cortex-footer-actions recording">
+              <div class="voice-wave-animation" aria-hidden="true">
+                <span class="voice-wave-bar"></span>
+                <span class="voice-wave-bar"></span>
+                <span class="voice-wave-bar"></span>
+                <span class="voice-wave-bar"></span>
+                <span class="voice-wave-bar"></span>
+              </div>
+              <button type="button" class="cortex-input-action-btn cortex-stop-btn"><img src="assets/icons/soul/Stop.svg" alt=""></button>
+              <button type="button" class="cortex-input-action-btn"><img src="assets/cortex/send-arrow.svg" alt=""></button>
+            </div>
+          </div>
+          <div class="component-desc">Animace při hlasovém nahrávání, Stop a Send tlačítka</div>
+        </div>
+      </div>
+
+      <!-- 10. activity-item -->
+      <div class="component-card">
+        <div class="component-card-header">activity-item</div>
+        <div class="component-card-body">
+          <div class="preview-wrap">
+            <div class="activity-list">
+              <div class="activity-item">
+                <div class="activity-dot"></div>
+                <div class="activity-content">
+                  <div class="activity-text">Cortex: analyzing the uploaded file — users-import.xlsx</div>
+                  <div class="activity-time">2 min ago</div>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-dot"></div>
+                <div class="activity-content">
+                  <div class="activity-text">Intelligence box appears with import options</div>
+                  <div class="activity-time">1 min ago</div>
+                </div>
+              </div>
+              <div class="activity-item activity-item--deleted">
+                <div class="activity-dot"></div>
+                <div class="activity-content">
+                  <div class="activity-text activity-text--deleted">You removed Settings / Users</div>
+                  <div class="activity-time">just now</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="component-desc">activity-dot, activity-text, activity-time, deleted stav</div>
+        </div>
+      </div>
+
+      <!-- 11. notification-item -->
+      <div class="component-card">
+        <div class="component-card-header">notification-item</div>
+        <div class="component-card-body">
+          <div class="preview-wrap">
+            <div class="notification-list">
+              <div class="notification-item unread">
+                <div class="notification-icon"><img src="assets/cortex/ai-sparkle-filled.svg" alt="" width="16" height="16"></div>
+                <div class="notification-content">
+                  <div class="notification-text">Labubu is trending — create campaign?</div>
+                  <div class="notification-time">5 min ago</div>
+                </div>
+              </div>
+              <div class="notification-item">
+                <div class="notification-icon"><img src="assets/cortex/activity.svg" alt="" width="16" height="16"></div>
+                <div class="notification-content">
+                  <div class="notification-text">Import complete — 47 users added</div>
+                  <div class="notification-time">1 hour ago</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="component-desc">unread zvýraznění, ikona AI vs activity</div>
+        </div>
+      </div>
+
+      <!-- 12. cortex-right-bar -->
+      <div class="component-card">
+        <div class="component-card-header">cortex-right-bar</div>
+        <div class="component-card-body">
+          <div class="preview-wrap" style="display: flex;">
+            <div class="cortex-right-bar">
+              <div class="cortex-right-bar-header">
+                <div class="toggle-btn"><img class="toggle-icon" src="assets/cortex/toggle-collapse.svg" alt=""></div>
+                <div class="bar-divider"></div>
+              </div>
+              <div class="cortex-right-bar-nav">
+                <div class="bar-btn" title="Notifications"><span class="badge">33</span><img src="assets/cortex/bell.svg" alt=""></div>
+                <div class="bar-btn active" title="Activity"><img src="assets/cortex/activity.svg" alt=""></div>
+              </div>
+              <div class="cortex-right-bar-bottom">
+                <div class="ai-btn active" title="Cortex AI"><img src="assets/cortex/ai-sparkle.svg" alt=""></div>
+              </div>
+            </div>
+          </div>
+          <div class="component-desc">Toggle, Notifications (badge 33), Activity, AI Chat (active)</div>
+        </div>
+      </div>
+
+      <!-- 13. skeleton loading -->
+      <div class="component-card">
+        <div class="component-card-header">intelligence-box-skeleton</div>
+        <div class="component-card-body">
+          <div class="preview-wrap">
+            <div class="intelligence-box-skeleton" style="display:flex;flex-direction:column;gap:6px;padding:6px 0;">
+              <div class="skeleton-row"></div>
+              <div class="skeleton-row"></div>
+              <div class="skeleton-row"></div>
+            </div>
+          </div>
+          <div class="component-desc">Pulzující skeleton při načítání „More ideas“</div>
+        </div>
+      </div>
+
+      <!-- 14. role-picker -->
+      <div class="component-card">
+        <div class="component-card-header">role-picker-options</div>
+        <div class="component-card-body">
+          <div class="preview-wrap">
+            <div class="chat-message chat-message--ai">
+              <div class="chat-message-bubble">
+                <p>Select the new role for the selected users:</p>
+                <div class="role-picker-options">
+                  <button class="role-option" data-role="Team Manager">Team Manager</button>
+                  <button class="role-option" data-role="Team Lead">Team Lead</button>
+                  <button class="role-option" data-role="Care Agent">Care Agent</button>
+                  <button class="role-option" data-role="Agent">Agent</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="component-desc">Výběr role v chat odpovědi (Bulk User Import)</div>
+        </div>
+      </div>
+
+      <!-- 15. chat-decision-wrapper -->
+      <div class="component-card">
+        <div class="component-card-header">chat-decision-wrapper</div>
+        <div class="component-card-body">
+          <div class="preview-wrap">
+            <div class="chat-message chat-message--ai">
+              <div class="chat-message-bubble">
+                <p>I found <strong>65 users</strong>. I added them to the team <strong>Toutique Care UK</strong>.</p>
+                <div class="chat-decision-wrapper">
+                  <div class="decision-item" role="link" tabindex="0">
+                    <div class="check-icon"><img src="assets/icons/soul/upcoming-permission.svg" alt="" width="16" height="16"></div>
+                    <span class="decision-label">Settings / Users</span>
+                    <button class="decision-item-remove" type="button"><img src="assets/icons/soul/remove-delete-trash.svg" alt="" width="14" height="14"></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="component-desc">Decision item vložený do AI odpovědi — odkaz na stránku</div>
+        </div>
+      </div>
+
+      <!-- 16. Finder modal -->
+      <div class="component-card">
+        <div class="component-card-header">finder-modal</div>
+        <div class="component-card-body">
+          <div class="preview-wrap" style="position: relative; height: 280px; overflow: hidden;">
+            <div class="finder-modal visible" style="position: absolute;">
+              <div class="finder-modal-backdrop" style="opacity: 0.3;"></div>
+              <div class="finder-modal-window" style="transform: scale(0.5); transform-origin: top left;">
+                <div class="finder-titlebar">
+                  <div class="finder-traffic-lights">
+                    <span class="finder-btn finder-btn-close"></span>
+                    <span class="finder-btn finder-btn-minimize"></span>
+                    <span class="finder-btn finder-btn-maximize"></span>
+                  </div>
+                </div>
+                <div class="finder-toolbar">
+                  <button class="finder-nav-btn" disabled>‹</button>
+                  <button class="finder-nav-btn" disabled>›</button>
+                  <span class="finder-toolbar-title">Downloads</span>
+                </div>
+                <div class="finder-body" style="min-height: 120px;">
+                  <div class="finder-sidebar">
+                    <div class="finder-sidebar-section">
+                      <div class="finder-sidebar-label">Favourites</div>
+                      <div class="finder-sidebar-item active">Downloads</div>
+                    </div>
+                  </div>
+                  <div class="finder-main">
+                    <div class="finder-list-header">
+                      <div class="finder-col finder-col-name">Name</div>
+                      <div class="finder-col finder-col-date">Date Modified</div>
+                    </div>
+                    <div class="finder-list-body">
+                      <div class="finder-file-row">
+                        <div class="finder-col finder-col-name"><span class="finder-file-name">users-import.xlsx</span></div>
+                        <div class="finder-col finder-col-date">Today, 14:30</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="component-desc">macOS Finder styl — výběr souboru (Bulk Import, Content Calendar)</div>
+        </div>
+      </div>
+
+      <!-- 17. flow-switcher -->
+      <div class="component-card">
+        <div class="component-card-header">flow-switcher</div>
+        <div class="component-card-body">
+          <div class="preview-wrap">
+            <div class="flow-switcher open" style="position: relative;">
+              <div class="flow-switcher-panel" style="width: 260px;">
+                <div class="flow-switcher-header">
+                  <span class="flow-switcher-title">Demo Flows</span>
+                </div>
+                <div class="flow-tabs-bar">
+                  <button class="flow-tab active">Curated <span class="flow-tab-count">3</span></button>
+                  <button class="flow-tab">PMs <span class="flow-tab-count">30</span></button>
+                  <button class="flow-tab">AI <span class="flow-tab-count">9</span></button>
+                </div>
+                <div class="flow-switcher-list">
+                  <div class="flow-item active">
+                    <div class="flow-item-indicator"></div>
+                    <div class="flow-item-content">
+                      <div class="flow-item-header">
+                        <div class="flow-item-name">Labubu Trend</div>
+                        <div class="flow-item-actions">
+                          <button class="flow-restart-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.65 6.35A7.958 7.958 0 0012 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0112 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg></button>
+                          <button class="flow-play-btn"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+                        </div>
+                      </div>
+                      <div class="flow-item-persona">Social Media Manager</div>
+                      <div class="flow-item-description">Trend detection and campaign creation</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="component-desc">flow-item, flow-tab, flow-play-btn, flow-restart-btn</div>
+        </div>
+      </div>
+
+      <!-- 18. Celý panel -->
+      <div class="component-card" style="grid-column: 1 / -1;">
+        <div class="component-card-header">Celý Cortex panel (kompletní struktura)</div>
+        <div class="component-card-body">
+          <div class="preview-wrap cortex-panel-preview">
+            <div class="cortex-panel">
+              <div class="cortex-header">
+                <div class="cortex-title">
+                  <img class="ai-icon" src="assets/cortex/ai-sparkle-filled.svg" alt="" width="18" height="18">
+                  <span class="cortex-title-text">Cortex</span>
+                </div>
+                <div class="cortex-header-actions">
+                  <div class="header-btn"><img class="header-btn-icon" src="assets/cortex/33d5f0820a9fe6b4c62e05a1ab23de7241725a64.svg" alt=""></div>
+                  <div class="header-btn"><img class="header-btn-icon" src="assets/cortex/aa41e39cb4b9c529bd2b2713c491db00d8b5fd74.svg" alt=""></div>
+                </div>
+              </div>
+              <div class="cortex-views-container">
+                <div class="cortex-view active">
+                  <div class="cortex-messages">
+                    <div class="cortex-intelligence-area">
+                      <div class="intelligence-box">
+                        <div class="intelligence-box-header">
+                          <span class="intelligence-box-title">Content calendar detected</span>
+                          <div class="intelligence-box-close"><img src="assets/cortex/close-x.svg" alt=""></div>
+                        </div>
+                        <div class="intelligence-box-description"><p>Found 20 posts across Instagram, Facebook, LinkedIn, and X.</p></div>
+                        <div class="intelligence-box-actions">
+                          <div class="checkbox"><div class="checkbox-box"><img src="assets/cortex/checkbox-checked.svg" alt=""></div><span class="checkbox-label">Create 20 post drafts</span></div>
+                        </div>
+                        <div class="intelligence-box-buttons">
+                          <button class="btn btn-s btn-ghost">Execute selected</button>
+                          <span class="or-text">or</span>
+                          <button class="btn btn-s btn-ghost">More ideas</button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="cortex-chat-messages">
+                      <div class="chat-message chat-message--user"><div class="chat-message-bubble">schedule these posts</div></div>
+                      <div class="chat-message chat-message--ai"><div class="chat-message-bubble"><p>Analyzing the uploaded file...</p></div></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="cortex-input-area">
+                <div class="cortex-input-box">
+                  <div class="cortex-input-context">
+                    <div class="context-label">Context</div>
+                    <div class="context-value"><span class="context-page-name">Publisher calendar</span><div class="context-close"><svg viewBox="0 0 36 36" fill="currentColor" width="12" height="12"><path d="M10.2929 10.2929L18 18L10.2929 25.7071L11.7071 27.1213L19.4142 19.4142L27.1213 27.1213L28.5355 25.7071L20.8284 18L28.5355 10.2929L27.1213 8.87868L19.4142 16.5858L11.7071 8.87868L10.2929 10.2929Z"/></svg></div></div>
+                  </div>
+                  <div class="cortex-input-body">
+                    <div class="file-attachments"></div>
+                    <textarea class="cortex-input-field" placeholder="Write message or type / for more" rows="1"></textarea>
+                  </div>
+                  <div class="cortex-input-footer">
+                    <div class="attachment-btn"><img src="assets/icons/plus.svg" alt=""></div>
+                    <div class="cortex-footer-actions"><button type="button" class="cortex-input-action-btn"><img src="assets/icons/soul/Microphone.svg" alt=""></button></div>
+                  </div>
+                </div>
+                <div class="cortex-input-meta"><span class="cortex-input-powered">Get instant answers powered by Emplifi AI</span></div>
+              </div>
+            </div>
+            <div class="cortex-right-bar">
+              <div class="cortex-right-bar-header">
+                <div class="toggle-btn"><img class="toggle-icon" src="assets/cortex/toggle-collapse.svg" alt=""></div>
+                <div class="bar-divider"></div>
+              </div>
+              <div class="cortex-right-bar-nav">
+                <div class="bar-btn"><span class="badge">33</span><img src="assets/cortex/bell.svg" alt=""></div>
+                <div class="bar-btn"><img src="assets/cortex/activity.svg" alt=""></div>
+              </div>
+              <div class="cortex-right-bar-bottom">
+                <div class="ai-btn active"><img src="assets/cortex/ai-sparkle.svg" alt=""></div>
+              </div>
+            </div>
+          </div>
+          <div class="component-desc">Kompletní Cortex panel: header, intelligence area, chat, input, right bar</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
